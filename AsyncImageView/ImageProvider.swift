@@ -9,26 +9,10 @@
 import Foundation
 import ReactiveCocoa
 
-/// Information required to produce an image
-public protocol RenderDataType: Hashable {
-	var size: CGSize { get }
-}
-
-public protocol RendererType {
-	typealias RenderData: RenderDataType
-
-	func renderImageWithData(data: RenderData) -> UIImage
-}
-
 public protocol ImageProviderType {
 	typealias RenderData: RenderDataType
 
 	func getImageForData(data: RenderData) -> SignalProducer<RenderResult, NoError>
-}
-
-public struct RenderResult {
-	let image: UIImage
-	let cacheHit: Bool
 }
 
 // The initial value is `nil`.

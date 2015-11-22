@@ -25,6 +25,8 @@
 		57BD68D11C0261880077A391 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CE1C0261880077A391 /* ImageProvider.swift */; };
 		57BD68D21C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
 		57BD68D31C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
+		57BD68DC1C0263AF0077A391 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68DB1C0263AF0077A391 /* Renderer.swift */; };
+		57BD68DD1C0263AF0077A391 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68DB1C0263AF0077A391 /* Renderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,7 @@
 		57BD68CB1C02614B0077A391 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		57BD68CE1C0261880077A391 /* ImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		57BD68CF1C0261880077A391 /* TypedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypedCache.swift; sourceTree = "<group>"; };
+		57BD68DB1C0263AF0077A391 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,7 @@
 				57BD68CB1C02614B0077A391 /* AsyncImageView.swift */,
 				57BD68CE1C0261880077A391 /* ImageProvider.swift */,
 				57BD68CF1C0261880077A391 /* TypedCache.swift */,
+				57BD68DB1C0263AF0077A391 /* Renderer.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -394,6 +398,7 @@
 				57BD68D01C0261880077A391 /* ImageProvider.swift in Sources */,
 				57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57BD68D21C0261880077A391 /* TypedCache.swift in Sources */,
+				57BD68DC1C0263AF0077A391 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +417,7 @@
 				57BD68D11C0261880077A391 /* ImageProvider.swift in Sources */,
 				57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57BD68D31C0261880077A391 /* TypedCache.swift in Sources */,
+				57BD68DD1C0263AF0077A391 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

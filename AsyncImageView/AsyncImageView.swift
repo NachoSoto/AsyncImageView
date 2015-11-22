@@ -18,10 +18,6 @@ public protocol ImageViewDataType {
 	func renderDataWithSize(size: CGSize) -> RenderData
 }
 
-private let imageProducerCreationScheduler = QueueScheduler()
-
-private let scheduler = UIScheduler()
-
 /// A UIImageView that can render asynchronously.
 public final class AsyncImageView<
 	RenderData: RenderDataType,
@@ -34,23 +30,31 @@ public final class AsyncImageView<
 	private let requestsSignal: Signal<RenderData, NoError>
 	private let requestsObserver: Signal<RenderData, NoError>.Observer
 
-	public init(initialFrame: CGRect, imageProvider: ImageProvider) {
+	private let imageCreationScheduler: SchedulerType
+
+	public init(
+		initialFrame: CGRect,
+		imageProvider: ImageProvider,
+		imageCreationScheduler: SchedulerType = QueueScheduler())
+	{
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
+		self.imageCreationScheduler = imageCreationScheduler
 
 		super.init(frame: initialFrame)
 
 		self.backgroundColor = nil
 
 		let requestChanges = self.requestsSignal.skipRepeats()
+		let uiScheduler = UIScheduler()
 
 		requestChanges
-			.observeOn(scheduler)
+			.observeOn(uiScheduler)
 			.observeNext { [weak self] _ in self?.resetImage() }
 
 		requestChanges
-			.observeOn(imageProducerCreationScheduler)
+			.observeOn(self.imageCreationScheduler)
 			.flatMap(.Latest, transform: imageProvider.getImageForData)
-			.observeOn(scheduler)
+			.observeOn(uiScheduler)
 			.observeNext { [weak self] in self?.updateImage($0) }
 	}
 

@@ -8,7 +8,15 @@
 
 import Foundation
 
-internal class TypedCache<K: Hashable, V: NSObject> {
+public protocol CacheType {
+	typealias Key: Hashable
+	typealias Value
+
+	func valueForKey(key: Key) -> Value?
+	func setValue(value: Value, forKey key: Key)
+}
+
+internal class TypedCache<K: Hashable, V: NSObject>: CacheType {
 	private let cache: NSCache
 
 	init(cacheName: String) {
@@ -20,11 +28,11 @@ internal class TypedCache<K: Hashable, V: NSObject> {
 		}()
 	}
 
-	func objectForKey(key: K) -> V? {
+	func valueForKey(key: K) -> V? {
 		return cache.objectForKey(CacheKey(value: key)) as! V?
 	}
 
-	func setObject(object: V, forKey key: K) {
+	func setValue(object: V, forKey key: K) {
 		cache.setObject(object, forKey: CacheKey(value: key))
 	}
 }

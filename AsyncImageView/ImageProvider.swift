@@ -69,11 +69,11 @@ public final class ImageProvider<
 	}
 
 	private func cachedOperation(data: RenderData) -> CachedImageRenderOperation? {
-		return cache.objectForKey(data)
+		return cache.valueForKey(data)
 	}
 
 	private func cacheProperty(property: ImageProperty, forData data: RenderData) {
-		cache.setObject(CachedImageRenderOperation(property: property), forKey: data)
+		cache.setValue(CachedImageRenderOperation(property: property), forKey: data)
 	}
 }
 

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "57BD68341C02598F0077A391"
-               BuildableName = "AsyncImageView.framework"
-               BlueprintName = "AsyncImageView-iOS"
+               BlueprintIdentifier = "57BD68741C025DFD0077A391"
+               BuildableName = ".framework"
+               BlueprintName = "AsyncImageView-tvOS"
                ReferencedContainer = "container:AsyncImageView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "57BD683E1C02598F0077A391"
-               BuildableName = "AsyncImageViewTests.xctest"
-               BlueprintName = "AsyncImageViewTests"
-               ReferencedContainer = "container:AsyncImageView.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57BD68341C02598F0077A391"
-            BuildableName = "AsyncImageView.framework"
-            BlueprintName = "AsyncImageView-iOS"
-            ReferencedContainer = "container:AsyncImageView.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57BD68341C02598F0077A391"
-            BuildableName = "AsyncImageView.framework"
-            BlueprintName = "AsyncImageView-iOS"
+            BlueprintIdentifier = "57BD68741C025DFD0077A391"
+            BuildableName = ".framework"
+            BlueprintName = "AsyncImageView-tvOS"
             ReferencedContainer = "container:AsyncImageView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57BD68341C02598F0077A391"
-            BuildableName = "AsyncImageView.framework"
-            BlueprintName = "AsyncImageView-iOS"
+            BlueprintIdentifier = "57BD68741C025DFD0077A391"
+            BuildableName = ".framework"
+            BlueprintName = "AsyncImageView-tvOS"
             ReferencedContainer = "container:AsyncImageView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

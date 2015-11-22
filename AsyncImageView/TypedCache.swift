@@ -1,9 +1,9 @@
 //
 //  TypedCache.swift
-//  ChessWatchApp
+//  AsyncImageView
 //
 //  Created by Nacho Soto on 9/17/15.
-//  Copyright © 2015 Javier Soto. All rights reserved.
+//  Copyright © 2015 Nacho Soto. All rights reserved.
 //
 
 import Foundation

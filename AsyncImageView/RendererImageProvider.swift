@@ -17,9 +17,10 @@ private typealias ImageProperty = AnyProperty<RenderResult?>
 public final class RendererImageProvider<
 	RenderData: RenderDataType,
 	Renderer: RendererType
-	where Renderer.RenderData == RenderData
+	where
+	Renderer.RenderData == RenderData,
+	Renderer.Error == NoError
 >: ImageProviderType {
-	// TODO: make this pluggable so that we can make the cache be on disk.
 	private let cache: TypedCache<RenderData, CachedImageRenderOperation>
 
 	private let renderer: Renderer
@@ -71,7 +72,7 @@ public final class RendererImageProvider<
 }
 
 extension RendererType {
-	private func createProducerForRenderingData(data: RenderData) -> SignalProducer<RenderResult, NoError> {
+	private func createProducerForRenderingData(data: RenderData) -> SignalProducer<RenderResult, Error> {
 		return self.renderImageWithData(data)
 			.flatMap(.Concat) { image in
 				return SignalProducer(values: [

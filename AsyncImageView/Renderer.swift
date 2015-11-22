@@ -21,8 +21,9 @@ public struct RenderResult {
 
 public protocol RendererType {
 	typealias RenderData: RenderDataType
+	typealias Error: ErrorType
 
-	func renderImageWithData(data: RenderData) -> SignalProducer<UIImage, NoError>
+	func renderImageWithData(data: RenderData) -> SignalProducer<UIImage, Error>
 }
 
 public protocol SynchronousRendererType {
@@ -32,8 +33,8 @@ public protocol SynchronousRendererType {
 }
 
 /// A type-erased `RendererType`.
-public final class AnyRenderer<T: RenderDataType>: RendererType {
-	private let renderBlock: (T) -> SignalProducer<UIImage, NoError>
+public final class AnyRenderer<T: RenderDataType, E: ErrorType>: RendererType {
+	private let renderBlock: (T) -> SignalProducer<UIImage, E>
 
 	/// Constructs an `AnyRenderer` with a `SynchronousRendererType`.
 	/// The created `SignalProducer` will simply emit the result 
@@ -52,21 +53,21 @@ public final class AnyRenderer<T: RenderDataType>: RendererType {
 	}
 
 	/// Creates an `AnyRenderer` based on another `RendererType`.
-	public convenience init<R: RendererType where R.RenderData == T>(renderer: R) {
+	public convenience init<R: RendererType where R.RenderData == T, R.Error == E>(renderer: R) {
 		self.init(renderBlock: renderer.renderImageWithData)
 	}
 
-	private init(renderBlock: (T) -> SignalProducer<UIImage, NoError>) {
+	private init(renderBlock: (T) -> SignalProducer<UIImage, E>) {
 		self.renderBlock = renderBlock
 	}
 
-	public func renderImageWithData(data: T) -> SignalProducer<UIImage, NoError> {
+	public func renderImageWithData(data: T) -> SignalProducer<UIImage, E> {
 		return self.renderBlock(data)
 	}
 }
 
 extension SynchronousRendererType {
-	public var asyncRenderer: AnyRenderer<Self.RenderData> {
+	public var asyncRenderer: AnyRenderer<Self.RenderData, NoError> {
 		return AnyRenderer(renderer: self)
 	}
 }

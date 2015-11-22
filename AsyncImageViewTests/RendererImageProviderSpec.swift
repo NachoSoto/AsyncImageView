@@ -14,7 +14,7 @@ import ReactiveCocoa
 
 @testable import AsyncImageView
 
-private typealias ProviderType = RendererImageProvider<TestRenderData, AnyRenderer<TestRenderData>>
+private typealias ProviderType = RendererImageProvider<TestRenderData, AnyRenderer<TestRenderData, NoError>>
 
 class RendererImageProviderSpec: QuickSpec {
 	override func spec() {
@@ -120,7 +120,7 @@ public final class DelayedRenderer<T: RendererType>: RendererType {
 		self.scheduler = scheduler
 	}
 
-	public func renderImageWithData(data: T.RenderData) -> SignalProducer<UIImage, NoError> {
+	public func renderImageWithData(data: T.RenderData) -> SignalProducer<UIImage, T.Error> {
 		return renderer
 			.renderImageWithData(data)
 			.delay(self.delay, onScheduler: self.scheduler)

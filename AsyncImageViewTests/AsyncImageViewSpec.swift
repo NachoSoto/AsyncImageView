@@ -112,25 +112,17 @@ class AsyncImageViewSpec: QuickSpec {
 }
 
 internal final class TestImageProvider: ImageProviderType {
+	private let renderer = TestRenderer()
+
 	var renderedImages: [TestRenderData] = []
 
 	func getImageForData(data: TestRenderData) -> SignalProducer<RenderResult, NoError> {
-		let image = TestImageProvider.imageOfSize(data.size, scale: data.data.rawValue)
+		let image = self.renderer.renderImageWithData(data)
 		let result = RenderResult(image: image, cacheHit: true)
 
 		return SignalProducer(value: result)
 			.on(started: {
 				self.renderedImages.append(data)
 			})
-	}
-
-	private static func imageOfSize(size: CGSize, scale: CGFloat) -> UIImage {
-		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
-
-		UIGraphicsBeginImageContextWithOptions(size, true, scale)
-		let image = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-
-		return image
 	}
 }

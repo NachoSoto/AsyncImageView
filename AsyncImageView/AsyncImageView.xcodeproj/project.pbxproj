@@ -17,6 +17,8 @@
 		57BD68881C025F4D0077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68861C025F4D0077A391 /* Result.framework */; };
 		57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688A1C025F650077A391 /* UIKit.framework */; };
 		57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688E1C025F7B0077A391 /* UIKit.framework */; };
+		57BD68901C0260030077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */; };
+		57BD68911C0260030077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68801C025F2D0077A391 /* Result.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */,
+				57BD68901C0260030077A391 /* ReactiveCocoa.framework in Frameworks */,
+				57BD68911C0260030077A391 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +499,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = AsyncImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -511,6 +516,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = AsyncImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -523,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD685F1C025B9E0077A391 /* iOS-Application.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = AsyncImageViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nachosoto.AsyncImageViewTests;
@@ -534,6 +541,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD685F1C025B9E0077A391 /* iOS-Application.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = AsyncImageViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nachosoto.AsyncImageViewTests;
@@ -549,6 +557,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/tvOS";
 				INFOPLIST_FILE = AsyncImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -565,6 +574,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/tvOS";
 				INFOPLIST_FILE = AsyncImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

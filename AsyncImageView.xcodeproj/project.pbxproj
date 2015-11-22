@@ -11,14 +11,8 @@
 		57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; };
 		57BD68451C02598F0077A391 /* AsyncImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewTests.swift */; };
 		57BD68781C025DFD0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57BD68811C025F2D0077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */; };
-		57BD68821C025F2D0077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68801C025F2D0077A391 /* Result.framework */; };
-		57BD68871C025F4D0077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68851C025F4D0077A391 /* ReactiveCocoa.framework */; };
-		57BD68881C025F4D0077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68861C025F4D0077A391 /* Result.framework */; };
 		57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688A1C025F650077A391 /* UIKit.framework */; };
 		57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688E1C025F7B0077A391 /* UIKit.framework */; };
-		57BD68901C0260030077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */; };
-		57BD68911C0260030077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68801C025F2D0077A391 /* Result.framework */; };
 		57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
 		57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
 		57BD68D01C0261880077A391 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CE1C0261880077A391 /* ImageProvider.swift */; };
@@ -27,6 +21,17 @@
 		57BD68D31C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
 		57BD68DC1C0263AF0077A391 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68DB1C0263AF0077A391 /* Renderer.swift */; };
 		57BD68DD1C0263AF0077A391 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68DB1C0263AF0077A391 /* Renderer.swift */; };
+		57BD68E31C0268930077A391 /* AsyncImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57BD68E61C0269080077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E41C0269080077A391 /* ReactiveCocoa.framework */; };
+		57BD68E71C0269080077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; };
+		57BD68EA1C0269130077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E81C0269130077A391 /* ReactiveCocoa.framework */; };
+		57BD68EB1C0269130077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E91C0269130077A391 /* Result.framework */; };
+		57BD68F81C0269440077A391 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F01C0269280077A391 /* Nimble.framework */; };
+		57BD68F91C0269440077A391 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; };
+		57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F01C0269280077A391 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57BD68FC1C02695F0077A391 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E41C0269080077A391 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +44,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		57BD68E01C02687D0077A391 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				57BD68E31C0268930077A391 /* AsyncImageView.framework in Embed Frameworks */,
+				57BD68FC1C02695F0077A391 /* ReactiveCocoa.framework in Embed Frameworks */,
+				57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */,
+				57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */,
+				57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		57BD68351C02598F0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BD68381C02598F0077A391 /* AsyncImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
@@ -47,10 +70,6 @@
 		57BD68441C02598F0077A391 /* AsyncImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageViewTests.swift; sourceTree = "<group>"; };
 		57BD68461C02598F0077A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57BD687D1C025DFD0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
-		57BD68801C025F2D0077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		57BD68851C025F4D0077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/tvOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
-		57BD68861C025F4D0077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		57BD688A1C025F650077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		57BD688E1C025F7B0077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		57BD68951C02607F0077A391 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
@@ -73,6 +92,12 @@
 		57BD68CE1C0261880077A391 /* ImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		57BD68CF1C0261880077A391 /* TypedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypedCache.swift; sourceTree = "<group>"; };
 		57BD68DB1C0263AF0077A391 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		57BD68E41C0269080077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		57BD68E51C0269080077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		57BD68E81C0269130077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/tvOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		57BD68E91C0269130077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		57BD68F01C0269280077A391 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BD68E71C0269080077A391 /* Result.framework in Frameworks */,
 				57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */,
-				57BD68811C025F2D0077A391 /* ReactiveCocoa.framework in Frameworks */,
-				57BD68821C025F2D0077A391 /* Result.framework in Frameworks */,
+				57BD68E61C0269080077A391 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,8 +116,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */,
-				57BD68901C0260030077A391 /* ReactiveCocoa.framework in Frameworks */,
-				57BD68911C0260030077A391 /* Result.framework in Frameworks */,
+				57BD68F81C0269440077A391 /* Nimble.framework in Frameworks */,
+				57BD68F91C0269440077A391 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,9 +125,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BD68EB1C0269130077A391 /* Result.framework in Frameworks */,
 				57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */,
-				57BD68871C025F4D0077A391 /* ReactiveCocoa.framework in Frameworks */,
-				57BD68881C025F4D0077A391 /* Result.framework in Frameworks */,
+				57BD68EA1C0269130077A391 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,9 +186,11 @@
 		57BD68841C025F410077A391 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				57BD68F01C0269280077A391 /* Nimble.framework */,
+				57BD68F11C0269280077A391 /* Quick.framework */,
+				57BD68E41C0269080077A391 /* ReactiveCocoa.framework */,
+				57BD68E51C0269080077A391 /* Result.framework */,
 				57BD688A1C025F650077A391 /* UIKit.framework */,
-				57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */,
-				57BD68801C025F2D0077A391 /* Result.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -171,9 +198,9 @@
 		57BD68891C025F520077A391 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				57BD68E81C0269130077A391 /* ReactiveCocoa.framework */,
+				57BD68E91C0269130077A391 /* Result.framework */,
 				57BD688E1C025F7B0077A391 /* UIKit.framework */,
-				57BD68851C025F4D0077A391 /* ReactiveCocoa.framework */,
-				57BD68861C025F4D0077A391 /* Result.framework */,
 			);
 			name = tvOS;
 			sourceTree = "<group>";
@@ -300,6 +327,7 @@
 				57BD683B1C02598F0077A391 /* Sources */,
 				57BD683C1C02598F0077A391 /* Frameworks */,
 				57BD683D1C02598F0077A391 /* Resources */,
+				57BD68E01C02687D0077A391 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

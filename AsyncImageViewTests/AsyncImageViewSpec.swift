@@ -95,7 +95,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.data = .A
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
+					expect(imageProvider.renderer.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 
 				it("Only renders once if size does not change") {
@@ -104,7 +104,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
+					expect(imageProvider.renderer.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 			}
 		}
@@ -114,15 +114,10 @@ class AsyncImageViewSpec: QuickSpec {
 internal final class TestImageProvider: ImageProviderType {
 	private let renderer = TestRenderer()
 
-	var renderedImages: [TestRenderData] = []
-
 	func getImageForData(data: TestRenderData) -> SignalProducer<RenderResult, NoError> {
 		let image = self.renderer.renderImageWithData(data)
 		let result = RenderResult(image: image, cacheHit: true)
 
 		return SignalProducer(value: result)
-			.on(started: {
-				self.renderedImages.append(data)
-			})
 	}
 }

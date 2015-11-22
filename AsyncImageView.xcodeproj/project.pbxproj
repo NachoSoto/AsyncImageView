@@ -35,6 +35,7 @@
 		57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 		57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 		57FC1AEA1C0272C100FAD2F3 /* TestRenderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */; };
+		57FC1AEC1C02734200FAD2F3 /* RendererImageProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AEB1C02734200FAD2F3 /* RendererImageProviderSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProvider.swift; sourceTree = "<group>"; };
 		57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderData.swift; sourceTree = "<group>"; };
+		57FC1AEB1C02734200FAD2F3 /* RendererImageProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProviderSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			children = (
 				57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */,
 				57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */,
+				57FC1AEB1C02734200FAD2F3 /* RendererImageProviderSpec.swift */,
 				57BD68461C02598F0077A391 /* Info.plist */,
 			);
 			path = AsyncImageViewTests;
@@ -444,6 +447,7 @@
 			files = (
 				57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */,
 				57FC1AEA1C0272C100FAD2F3 /* TestRenderData.swift in Sources */,
+				57FC1AEC1C02734200FAD2F3 /* RendererImageProviderSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

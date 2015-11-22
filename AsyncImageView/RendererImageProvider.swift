@@ -12,6 +12,8 @@ import ReactiveCocoa
 // The initial value is `nil`.
 private typealias ImageProperty = AnyProperty<UIImage?>
 
+/// ImageProviderType which guarantees that images for a given RenderDataType
+/// are only rendered once, and multicasted to every observer.
 public final class RendererImageProvider<
 	RenderData: RenderDataType,
 	Renderer: RendererType
@@ -28,7 +30,11 @@ public final class RendererImageProvider<
 	}
 
 	public func getImageForData(data: RenderData) -> SignalProducer<RenderResult, NoError> {
-		let property = getPropertyForData(data)
+		return getImageForData(data, scheduler: QueueScheduler())
+	}
+
+	internal func getImageForData(data: RenderData, scheduler: SchedulerType) -> SignalProducer<RenderResult, NoError> {
+		let property = getPropertyForData(data, scheduler: scheduler)
 
 		let image = property.producer
 			.filter { $0 != nil } // Skip initial `nil` value.
@@ -43,18 +49,19 @@ public final class RendererImageProvider<
 		return image.combineLatestWith(cacheHit)
 			.take(1) // Don't wait for more values.
 			.map(RenderResult.init)
-			.startOn(QueueScheduler())
-			.observeOn(UIScheduler())
+			.startOn(scheduler)
 	}
 
-	private func getPropertyForData(data: RenderData) -> ImageProperty {
+	private func getPropertyForData(data: RenderData, scheduler: SchedulerType) -> ImageProperty {
 		if let operation = cachedOperation(data) {
 			return operation.property
 		}
 
 		let property = ImageProperty(
 			initialValue: nil,
-			producer: renderer.createProducerForRenderingData(data).map(Optional.init)
+			producer: renderer.createProducerForRenderingData(data)
+				.startOn(scheduler)
+				.map(Optional.init)
 		)
 		cacheProperty(property, forData: data)
 
@@ -79,8 +86,7 @@ extension RendererType {
 			} else {
 				observer.sendInterrupted()
 			}
-			}
-			.startOn(QueueScheduler())
+		}
 	}
 }
 

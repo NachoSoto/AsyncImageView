@@ -44,7 +44,7 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 			lhs.size == rhs.size)
 }
 
-internal final class TestRenderer: RendererType {
+internal final class TestRenderer: SynchronousRendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
 	func renderImageWithData(data: TestRenderData) -> UIImage {

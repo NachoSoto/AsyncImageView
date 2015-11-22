@@ -19,6 +19,12 @@
 		57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688E1C025F7B0077A391 /* UIKit.framework */; };
 		57BD68901C0260030077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */; };
 		57BD68911C0260030077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68801C025F2D0077A391 /* Result.framework */; };
+		57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
+		57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
+		57BD68D01C0261880077A391 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CE1C0261880077A391 /* ImageProvider.swift */; };
+		57BD68D11C0261880077A391 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CE1C0261880077A391 /* ImageProvider.swift */; };
+		57BD68D21C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
+		57BD68D31C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +67,9 @@
 		57BD68C31C02607F0077A391 /* tvOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Base.xcconfig"; sourceTree = "<group>"; };
 		57BD68C41C02607F0077A391 /* tvOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		57BD68C51C02607F0077A391 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		57BD68CB1C02614B0077A391 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		57BD68CE1C0261880077A391 /* ImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		57BD68CF1C0261880077A391 /* TypedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypedCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +130,7 @@
 		57BD68371C02598F0077A391 /* AsyncImageView */ = {
 			isa = PBXGroup;
 			children = (
+				57BD68D41C02618B0077A391 /* Classes */,
 				57BD68381C02598F0077A391 /* AsyncImageView.h */,
 				57BD683A1C02598F0077A391 /* Info.plist */,
 			);
@@ -227,6 +237,16 @@
 				57BD68C51C02607F0077A391 /* tvOS-StaticLibrary.xcconfig */,
 			);
 			path = tvOS;
+			sourceTree = "<group>";
+		};
+		57BD68D41C02618B0077A391 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				57BD68CB1C02614B0077A391 /* AsyncImageView.swift */,
+				57BD68CE1C0261880077A391 /* ImageProvider.swift */,
+				57BD68CF1C0261880077A391 /* TypedCache.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +391,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BD68D01C0261880077A391 /* ImageProvider.swift in Sources */,
+				57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */,
+				57BD68D21C0261880077A391 /* TypedCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +409,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BD68D11C0261880077A391 /* ImageProvider.swift in Sources */,
+				57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */,
+				57BD68D31C0261880077A391 /* TypedCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +521,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD68B81C02607F0077A391 /* iOS-Framework.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -512,6 +539,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD68B81C02607F0077A391 /* iOS-Framework.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -553,6 +581,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD68C41C02607F0077A391 /* tvOS-Framework.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -570,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD68C41C02607F0077A391 /* tvOS-Framework.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

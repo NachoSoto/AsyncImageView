@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		57BD68391C02598F0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; };
-		57BD68451C02598F0077A391 /* AsyncImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewTests.swift */; };
+		57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */; };
 		57BD68781C025DFD0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688A1C025F650077A391 /* UIKit.framework */; };
 		57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688E1C025F7B0077A391 /* UIKit.framework */; };
@@ -67,7 +67,7 @@
 		57BD68381C02598F0077A391 /* AsyncImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		57BD683A1C02598F0077A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57BD683F1C02598F0077A391 /* AsyncImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57BD68441C02598F0077A391 /* AsyncImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageViewTests.swift; sourceTree = "<group>"; };
+		57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageViewSpec.swift; sourceTree = "<group>"; };
 		57BD68461C02598F0077A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57BD687D1C025DFD0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BD688A1C025F650077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -168,7 +168,7 @@
 		57BD68431C02598F0077A391 /* AsyncImageViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				57BD68441C02598F0077A391 /* AsyncImageViewTests.swift */,
+				57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */,
 				57BD68461C02598F0077A391 /* Info.plist */,
 			);
 			path = AsyncImageViewTests;
@@ -434,7 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57BD68451C02598F0077A391 /* AsyncImageViewTests.swift in Sources */,
+				57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

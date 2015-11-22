@@ -68,21 +68,32 @@ public final class AsyncImageView<
 
 	public override var frame: CGRect {
 		didSet {
-			if let data = data {
-				requestNewImage(frame.size, data: data)
-			}
+			self.requestNewImageIfReady()
 		}
 	}
 
-	public var data: ImageViewData! // TODO: request image too!
+	public var data: ImageViewData! {
+		didSet {
+			self.requestNewImageIfReady()
+		}
+	}
+
+	// MARK: -
 
 	private func resetImage() {
-		// Avoid displaying some stale image
+		// Avoid displaying a stale image.
 		self.image = nil
 	}
 
+	private func requestNewImageIfReady() {
+		if let data = data, size = Optional(self.frame.size)
+			where size.width > 0 && size.height > 0 {
+				self.requestNewImage(size, data: data)
+		}
+	}
+
 	private func requestNewImage(size: CGSize, data: ImageViewData) {
-		dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [weak instance = self, observer = self.requestsObserver] in
+		self.imageCreationScheduler.schedule { [weak instance = self, observer = self.requestsObserver] in
 			if instance != nil {
 				observer.sendNext(data.renderDataWithSize(size))
 			}
@@ -97,7 +108,7 @@ public final class AsyncImageView<
 		} else {
 			UIView.transitionWithView(
 				self,
-				duration: 0.4,
+				duration: fadeAnimationDuration,
 				options: [.CurveEaseOut, .TransitionCrossDissolve],
 				animations: { self.image = result.image },
 				completion: nil
@@ -105,3 +116,7 @@ public final class AsyncImageView<
 		}
 	}
 }
+
+// MARK: - Constants
+
+private let fadeAnimationDuration: NSTimeInterval = 0.4

@@ -12,7 +12,7 @@ import ReactiveCocoa
 
 @testable import AsyncImageView
 
-private typealias ViewType = AsyncImageView<RenderData, Data, TestImageProvider>
+private typealias ViewType = AsyncImageView<TestRenderData, TestData, TestImageProvider>
 
 class AsyncImageViewSpec: QuickSpec {
 	override func spec() {
@@ -95,7 +95,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.data = .A
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderedImages) == [RenderData(data: view.data, size: view.frame.size)]
+					expect(imageProvider.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 
 				it("Only renders once if size does not change") {
@@ -104,47 +104,17 @@ class AsyncImageViewSpec: QuickSpec {
 					view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderedImages) == [RenderData(data: view.data, size: view.frame.size)]
+					expect(imageProvider.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 			}
 		}
 	}
 }
 
-private enum Data: CGFloat, Hashable {
-	case A = 1.0
-	case B = 2.0
-	case C = 3.0
-}
+internal final class TestImageProvider: ImageProviderType {
+	var renderedImages: [TestRenderData] = []
 
-extension Data: ImageViewDataType {
-	var data: Data {
-		return self
-	}
-
-	func renderDataWithSize(size: CGSize) -> RenderData {
-		return RenderData(data: self.data, size: size)
-	}
-}
-
-private struct RenderData: RenderDataType {
-	let data: Data
-	let size: CGSize
-
-	var hashValue: Int {
-		return data.hashValue * size.width.hashValue * size.height.hashValue
-	}
-}
-
-private func ==(lhs: RenderData, rhs: RenderData) -> Bool {
-	return (lhs.data == rhs.data &&
-			lhs.size == rhs.size)
-}
-
-private final class TestImageProvider: ImageProviderType {
-	var renderedImages: [RenderData] = []
-
-	func getImageForData(data: RenderData) -> SignalProducer<RenderResult, NoError> {
+	func getImageForData(data: TestRenderData) -> SignalProducer<RenderResult, NoError> {
 		let image = TestImageProvider.imageOfSize(data.size, scale: data.data.rawValue)
 		let result = RenderResult(image: image, cacheHit: true)
 

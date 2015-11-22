@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 
 // The initial value is `nil`.
-private typealias ImageProperty = AnyProperty<UIImage?>
+private typealias ImageProperty = AnyProperty<RenderResult?>
 
 /// ImageProviderType which guarantees that images for a given RenderDataType
 /// are only rendered once, and multicasted to every observer.
@@ -40,15 +40,8 @@ public final class RendererImageProvider<
 			.filter { $0 != nil } // Skip initial `nil` value.
 			.map { $0! }
 
-		let cacheHit: SignalProducer<Bool, NoError> = SignalProducer(values: [
-			SignalProducer(value: true),
-			SignalProducer(value: false).delay(0.01, onScheduler: QueueScheduler()) // TODO(nacho) STOPSHIP: this isn't very reliable
-			])
-			.flatten(.Concat)
-
-		return image.combineLatestWith(cacheHit)
-			.take(1) // Don't wait for more values.
-			.map(RenderResult.init)
+		return image
+			.take(1)
 			.startOn(scheduler)
 	}
 
@@ -78,15 +71,14 @@ public final class RendererImageProvider<
 }
 
 extension RendererType {
-	private func createProducerForRenderingData(data: RenderData) -> SignalProducer<UIImage, NoError> {
-		return SignalProducer { observer, disposable in
-			if !disposable.disposed {
-				observer.sendNext(self.renderImageWithData(data))
-				observer.sendCompleted()
-			} else {
-				observer.sendInterrupted()
+	private func createProducerForRenderingData(data: RenderData) -> SignalProducer<RenderResult, NoError> {
+		return self.renderImageWithData(data)
+			.flatMap(.Concat) { image in
+				return SignalProducer(values: [
+					RenderResult(image: image, cacheHit: false),
+					RenderResult(image: image, cacheHit: true)
+				])
 			}
-		}
 	}
 }
 

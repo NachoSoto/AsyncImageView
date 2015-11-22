@@ -14,11 +14,14 @@ import ReactiveCocoa
 
 @testable import AsyncImageView
 
-private typealias ProviderType = RendererImageProvider<TestRenderData, TestRenderer>
+private typealias ProviderType = RendererImageProvider<TestRenderData, AnyRenderer<TestRenderData>>
 
 class RendererImageProviderSpec: QuickSpec {
 	override func spec() {
-		fdescribe("RendererImageProvider") {
+		describe("RendererImageProvider") {
+			let data: TestData = .A
+			let size = CGSize(width: 1, height: 1)
+
 			var provider: ProviderType!
 			var renderer: TestRenderer!
 
@@ -26,7 +29,7 @@ class RendererImageProviderSpec: QuickSpec {
 				renderer = TestRenderer()
 				provider = ProviderType(
 					name: "com.nachosoto.provider",
-					renderer: renderer
+					renderer: renderer.asyncRenderer
 				)
 			}
 
@@ -44,17 +47,12 @@ class RendererImageProviderSpec: QuickSpec {
 			}
 
 			it("produces an image") {
-				let data: TestData = .A
-				let size = CGSize(width: 10, height: 10)
 				let result = getImageForData(data, withSize: size)
 
 				verifyImage(result?.image, withSize: size, data: data)
 			}
 
 			it("multicasts rendering") {
-				let data: TestData = .A
-				let size = CGSize(width: 10, height: 10)
-
 				// Get both producers at the same time.
 				let result1 = getProducerForData(data, withSize: size)
 				let result2 = getProducerForData(data, withSize: size)
@@ -65,6 +63,66 @@ class RendererImageProviderSpec: QuickSpec {
 
 				expect(image1!) === image2!
 			}
+
+			context("Cache hit") {
+				var scheduler: TestScheduler!
+
+				let delay: NSTimeInterval = 1
+
+				beforeEach {
+					scheduler = TestScheduler()
+					provider = ProviderType(
+						name: "com.nachosoto.provider",
+						renderer: AnyRenderer(renderer: DelayedRenderer(
+							renderer: renderer.asyncRenderer,
+							delay: delay,
+							scheduler: scheduler
+						))
+					)
+				}
+
+				it("does not cache hit the first time") {
+					let producer = getProducerForData(data, withSize: size)
+					var result: RenderResult?
+
+					producer.startWithNext { result = $0 }
+
+					scheduler.advanceByInterval(delay)
+
+					expect(result).toEventuallyNot(beNil())
+					expect(result?.cacheHit) == false
+				}
+
+				it("is a cache hit the second time the producer is fetched") {
+					let producer = getProducerForData(data, withSize: size)
+					scheduler.advanceByInterval(delay)
+
+					var result: RenderResult?
+					producer.startWithNext { result = $0 }
+
+					expect(result).toEventuallyNot(beNil())
+					expect(result?.cacheHit) == true
+				}
+			}
 		}
+	}
+}
+
+/// `RendererType` decorator which introduces a delay on the resulting image.
+public final class DelayedRenderer<T: RendererType>: RendererType {
+	private let renderer: T
+	private let delay: NSTimeInterval
+	private let scheduler: DateSchedulerType
+
+	public init(renderer: T, delay: NSTimeInterval, scheduler: DateSchedulerType) {
+		self.renderer = renderer
+		self.delay = delay
+		self.scheduler = scheduler
+	}
+
+	public func renderImageWithData(data: T.RenderData) -> SignalProducer<UIImage, NoError> {
+		return renderer
+			.renderImageWithData(data)
+			.delay(self.delay, onScheduler: self.scheduler)
 	}
 }

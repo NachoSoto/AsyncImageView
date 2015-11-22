@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "57BD68341C02598F0077A391"
-               BuildableName = ".framework"
+               BuildableName = "AsyncImageView.framework"
                BlueprintName = "AsyncImageView-iOS"
                ReferencedContainer = "container:AsyncImageView.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "57BD68341C02598F0077A391"
-            BuildableName = ".framework"
+            BuildableName = "AsyncImageView.framework"
             BlueprintName = "AsyncImageView-iOS"
             ReferencedContainer = "container:AsyncImageView.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "57BD68341C02598F0077A391"
-            BuildableName = ".framework"
+            BuildableName = "AsyncImageView.framework"
             BlueprintName = "AsyncImageView-iOS"
             ReferencedContainer = "container:AsyncImageView.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "57BD68341C02598F0077A391"
-            BuildableName = ".framework"
+            BuildableName = "AsyncImageView.framework"
             BlueprintName = "AsyncImageView-iOS"
             ReferencedContainer = "container:AsyncImageView.xcodeproj">
          </BuildableReference>

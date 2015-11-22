@@ -35,7 +35,7 @@ internal struct TestRenderData: RenderDataType {
 	let size: CGSize
 
 	var hashValue: Int {
-		return data.hashValue * size.width.hashValue * size.height.hashValue
+		return data ^^^ size.width ^^^ size.height
 	}
 }
 

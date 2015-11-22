@@ -11,6 +11,12 @@
 		57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; };
 		57BD68451C02598F0077A391 /* AsyncImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewTests.swift */; };
 		57BD68781C025DFD0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57BD68811C025F2D0077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */; };
+		57BD68821C025F2D0077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68801C025F2D0077A391 /* Result.framework */; };
+		57BD68871C025F4D0077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68851C025F4D0077A391 /* ReactiveCocoa.framework */; };
+		57BD68881C025F4D0077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68861C025F4D0077A391 /* Result.framework */; };
+		57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688A1C025F650077A391 /* UIKit.framework */; };
+		57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688E1C025F7B0077A391 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		57BD686D1C025B9E0077A391 /* tvOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		57BD686E1C025B9E0077A391 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		57BD687D1C025DFD0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		57BD68801C025F2D0077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		57BD68851C025F4D0077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/tvOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		57BD68861C025F4D0077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		57BD688A1C025F650077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		57BD688E1C025F7B0077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */,
+				57BD68811C025F2D0077A391 /* ReactiveCocoa.framework in Frameworks */,
+				57BD68821C025F2D0077A391 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */,
+				57BD68871C025F4D0077A391 /* ReactiveCocoa.framework in Frameworks */,
+				57BD68881C025F4D0077A391 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +99,7 @@
 				57BD68371C02598F0077A391 /* AsyncImageView */,
 				57BD68431C02598F0077A391 /* AsyncImageViewTests */,
 				57BD684F1C025B9E0077A391 /* Configuration */,
+				57BD68831C025F350077A391 /* Dependencies */,
 				57BD68361C02598F0077A391 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -175,6 +194,35 @@
 				57BD686E1C025B9E0077A391 /* tvOS-StaticLibrary.xcconfig */,
 			);
 			path = tvOS;
+			sourceTree = "<group>";
+		};
+		57BD68831C025F350077A391 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				57BD68841C025F410077A391 /* iOS */,
+				57BD68891C025F520077A391 /* tvOS */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		57BD68841C025F410077A391 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				57BD688A1C025F650077A391 /* UIKit.framework */,
+				57BD687F1C025F2D0077A391 /* ReactiveCocoa.framework */,
+				57BD68801C025F2D0077A391 /* Result.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		57BD68891C025F520077A391 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				57BD688E1C025F7B0077A391 /* UIKit.framework */,
+				57BD68851C025F4D0077A391 /* ReactiveCocoa.framework */,
+				57BD68861C025F4D0077A391 /* Result.framework */,
+			);
+			name = tvOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

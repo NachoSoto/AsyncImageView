@@ -30,12 +30,7 @@ class AsyncImageViewSpec: QuickSpec {
 			}
 
 			func verifyView() {
-				expect(view.image).toNotEventually(beNil())
-
-				guard let image = view.image else { return }
-
-				expect(image.size) == view.frame.size
-				expect(image.scale) == view.data.rawValue
+				verifyImage(view.image, withSize: view.frame.size, data: view.data)
 			}
 
 			it("has no image initially") {

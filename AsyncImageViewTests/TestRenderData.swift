@@ -9,6 +9,9 @@
 import UIKit
 import ReactiveCocoa
 
+import Quick
+import Nimble
+
 @testable import AsyncImageView
 
 internal enum TestData: CGFloat, Hashable {
@@ -57,4 +60,13 @@ internal final class TestRenderer: RendererType {
 
 		return image
 	}
+}
+
+internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, data: TestData) {
+	expect(expression: image).toNotEventually(beNil())
+
+	guard let image = image() else { return }
+
+	expect(image.size) == size
+	expect(image.scale) == data.rawValue
 }

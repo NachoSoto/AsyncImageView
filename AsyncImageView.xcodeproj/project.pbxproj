@@ -32,6 +32,8 @@
 		57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FC1C02695F0077A391 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E41C0269080077A391 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
+		57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,7 @@
 		57BD68E91C0269130077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		57BD68F01C0269280077A391 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +277,7 @@
 			children = (
 				57BD68CB1C02614B0077A391 /* AsyncImageView.swift */,
 				57BD68CE1C0261880077A391 /* ImageProvider.swift */,
+				57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */,
 				57BD68CF1C0261880077A391 /* TypedCache.swift */,
 				57BD68DB1C0263AF0077A391 /* Renderer.swift */,
 			);
@@ -427,6 +431,7 @@
 				57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57BD68D21C0261880077A391 /* TypedCache.swift in Sources */,
 				57BD68DC1C0263AF0077A391 /* Renderer.swift in Sources */,
+				57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +451,7 @@
 				57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57BD68D31C0261880077A391 /* TypedCache.swift in Sources */,
 				57BD68DD1C0263AF0077A391 /* Renderer.swift in Sources */,
+				57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

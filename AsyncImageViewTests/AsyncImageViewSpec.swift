@@ -95,7 +95,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.data = .A
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderer.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
+					expect(imageProvider.renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 
 				it("Only renders once if size does not change") {
@@ -104,7 +104,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderer.renderedImages) == [TestRenderData(data: view.data, size: view.frame.size)]
+					expect(imageProvider.renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 			}
 		}

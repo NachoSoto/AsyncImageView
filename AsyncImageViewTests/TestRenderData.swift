@@ -42,14 +42,14 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 }
 
 internal final class TestRenderer: RendererType {
-	var renderedImages: [TestRenderData] = []
+	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
 	func renderImageWithData(data: TestRenderData) -> UIImage {
 		let size = data.size
 
 		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
-		self.renderedImages.append(data)
+		self.renderedImages.modify { $0 + [data] }
 
 		UIGraphicsBeginImageContextWithOptions(size, true, data.data.rawValue)
 		let image = UIGraphicsGetImageFromCurrentImageContext()

@@ -36,3 +36,13 @@ public final class FallbackRenderer<T: RenderDataType, E1: ErrorType, E2: ErrorT
 	}
 }
 
+infix operator ??? { associativity left precedence 160 }
+
+/// Allows creating FallbackRenderers with: `renderer1 ??? renderer2 ??? renderer3`.
+public func ???<
+	R1: RendererType, R2: RendererType
+	where
+	R1.RenderData == R2.RenderData
+	>(primaryRenderer: R1, fallbackRenderer: R2) -> FallbackRenderer<R1.RenderData, R1.Error, R2.Error> {
+	return FallbackRenderer(primaryRenderer: primaryRenderer, fallbackRenderer: fallbackRenderer)
+}

@@ -11,12 +11,12 @@ import UIKit
 
 import ReactiveCocoa
 
-public protocol RemoteImageData: RenderDataType {
+public protocol RemoteRenderDataType: RenderDataType {
 	var imageURL: NSURL { get }
 }
 
 /// `RendererType` which downloads images.
-public final class RemoteImageRenderer<T: RemoteImageData>: RendererType {
+public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 	private let screenScale: CGFloat
 	private let session: NSURLSession
 

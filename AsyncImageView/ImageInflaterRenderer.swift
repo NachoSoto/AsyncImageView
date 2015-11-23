@@ -29,7 +29,7 @@ public final class ImageInflaterRenderer<T: RenderDataType, E: ErrorType>: Rende
 }
 
 extension UIImage {
-	private func inflate(withSize size: CGSize, scale: CGFloat) -> UIImage {
+	internal func inflate(withSize size: CGSize, scale: CGFloat) -> UIImage {
 		let renderSize = CGSize(
 			width: size.width * scale,
 			height: size.height * scale

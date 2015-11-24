@@ -32,6 +32,16 @@ private func testCache<T: CacheType where T.Value: Equatable>(cacheCreator cache
 
 		expect(cache.valueForKey(key)) == value
 	}
+
+	it("can remove a value") {
+		let key = keyCreator()
+		let value = valueCreator()
+
+		cache.setValue(value, forKey: key)
+		cache.setValue(nil, forKey: key)
+
+		expect(cache.valueForKey(key)).to(beNil())
+	}
 }
 
 class InMemoryCacheSpec: QuickSpec {

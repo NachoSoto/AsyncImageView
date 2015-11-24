@@ -13,7 +13,7 @@ public protocol CacheType {
 	typealias Value
 
 	func valueForKey(key: Key) -> Value?
-	func setValue(value: Value, forKey key: Key)
+	func setValue(value: Value?, forKey key: Key)
 }
 
 public final class InMemoryCache<K: Hashable, V>: CacheType {
@@ -32,8 +32,15 @@ public final class InMemoryCache<K: Hashable, V>: CacheType {
 		return (cache.objectForKey(CacheKey(value: key)) as! CacheValue<V>?)?.value
 	}
 
-	public func setValue(value: V, forKey key: K) {
-		cache.setObject(CacheValue(value: value), forKey: CacheKey(value: key))
+	public func setValue(value: V?, forKey key: K) {
+		let key = CacheKey(value: key)
+
+		if let value = value.map(CacheValue.init) {
+			cache.setObject(value, forKey: key)
+		} else {
+			cache.removeObjectForKey(key)
+		}
+		
 	}
 }
 

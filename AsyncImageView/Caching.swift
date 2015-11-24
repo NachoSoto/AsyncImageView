@@ -16,7 +16,7 @@ public protocol CacheType {
 	func setValue(value: Value, forKey key: Key)
 }
 
-internal class InMemoryCache<K: Hashable, V: NSObject>: CacheType {
+internal class InMemoryCache<K: Hashable, V>: CacheType {
 	private let cache: NSCache
 
 	init(cacheName: String) {
@@ -29,11 +29,20 @@ internal class InMemoryCache<K: Hashable, V: NSObject>: CacheType {
 	}
 
 	func valueForKey(key: K) -> V? {
-		return cache.objectForKey(CacheKey(value: key)) as! V?
+		return (cache.objectForKey(CacheKey(value: key)) as! CacheValue<V>?)?.value
 	}
 
-	func setValue(object: V, forKey key: K) {
-		cache.setObject(object, forKey: CacheKey(value: key))
+	func setValue(value: V, forKey key: K) {
+		cache.setObject(CacheValue(value: value), forKey: CacheKey(value: key))
+	}
+}
+
+
+private final class CacheValue<V>: NSObject {
+	private let value: V
+
+	init(value: V) {
+		self.value = value
 	}
 }
 

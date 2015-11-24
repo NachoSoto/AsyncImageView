@@ -33,6 +33,8 @@
 		57F5C5911C051ABB00753642 /* CachingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C5901C051ABB00753642 /* CachingSpec.swift */; };
 		57F5C5961C051FFB00753642 /* RandomKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F5C5951C051FFB00753642 /* RandomKit.framework */; };
 		57F5C5971C05200500753642 /* RandomKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57F5C5951C051FFB00753642 /* RandomKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57F5C59B1C052A6000753642 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
+		57F5C59C1C052A6000753642 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
 		57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 		57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 		57FC1AEA1C0272C100FAD2F3 /* TestRenderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */; };
@@ -117,6 +119,7 @@
 		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		57F5C5901C051ABB00753642 /* CachingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingSpec.swift; sourceTree = "<group>"; };
 		57F5C5951C051FFB00753642 /* RandomKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RandomKit.framework; path = Carthage/Build/iOS/RandomKit.framework; sourceTree = "<group>"; };
+		57F5C59A1C052A6000753642 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProvider.swift; sourceTree = "<group>"; };
 		57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderData.swift; sourceTree = "<group>"; };
 		57FC1AEB1C02734200FAD2F3 /* RendererImageProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProviderSpec.swift; sourceTree = "<group>"; };
@@ -311,6 +314,7 @@
 				57BD68CF1C0261880077A391 /* Caching.swift */,
 				57FC1AED1C0283D600FAD2F3 /* Hashing.swift */,
 				57FC1AF01C028C5300FAD2F3 /* Renderers */,
+				57F5C59A1C052A6000753642 /* Extensions.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -477,6 +481,7 @@
 				57BD68D21C0261880077A391 /* Caching.swift in Sources */,
 				57FC1B061C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
+				57F5C59B1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B021C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				57FC1B0A1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 				57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */,
@@ -505,6 +510,7 @@
 				57BD68D31C0261880077A391 /* Caching.swift in Sources */,
 				57FC1B071C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
+				57F5C59C1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B031C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				57FC1B0B1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 				57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */,

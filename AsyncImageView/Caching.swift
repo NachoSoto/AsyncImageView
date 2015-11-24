@@ -12,10 +12,14 @@ public protocol CacheType {
 	typealias Key: Hashable
 	typealias Value
 
+	/// Retrieves the value for this key.
 	func valueForKey(key: Key) -> Value?
+
+	/// Sets a value for a key. If `value` is `nil`, it will be removed.
 	func setValue(value: Value?, forKey key: Key)
 }
 
+/// `CacheType` backed by `NSCache`.
 public final class InMemoryCache<K: Hashable, V>: CacheType {
 	private let cache: NSCache
 

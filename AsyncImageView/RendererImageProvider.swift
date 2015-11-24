@@ -21,7 +21,7 @@ public final class RendererImageProvider<
 	Renderer.RenderData == RenderData,
 	Renderer.Error == NoError
 >: ImageProviderType {
-	private let cache: InMemoryCache<RenderData, CachedImageRenderOperation>
+	private let cache: InMemoryCache<RenderData, ImageProperty>
 
 	private let renderer: Renderer
 
@@ -48,7 +48,7 @@ public final class RendererImageProvider<
 
 	private func getPropertyForData(data: RenderData, scheduler: SchedulerType) -> ImageProperty {
 		if let operation = cachedOperation(data) {
-			return operation.property
+			return operation
 		}
 
 		let property = ImageProperty(
@@ -62,12 +62,12 @@ public final class RendererImageProvider<
 		return property
 	}
 
-	private func cachedOperation(data: RenderData) -> CachedImageRenderOperation? {
+	private func cachedOperation(data: RenderData) -> ImageProperty? {
 		return cache.valueForKey(data)
 	}
 
 	private func cacheProperty(property: ImageProperty, forData data: RenderData) {
-		cache.setValue(CachedImageRenderOperation(property: property), forKey: data)
+		cache.setValue(property, forKey: data)
 	}
 }
 
@@ -80,13 +80,5 @@ extension RendererType {
 					RenderResult(image: image, cacheHit: true)
 				])
 			}
-	}
-}
-
-private final class CachedImageRenderOperation: NSObject {
-	private let property: ImageProperty
-
-	init(property: ImageProperty) {
-		self.property = property
 	}
 }

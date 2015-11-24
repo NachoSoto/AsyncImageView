@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol CacheType {
-	typealias Key: Hashable
+	typealias Key
 	typealias Value
 
 	/// Retrieves the value for this key.

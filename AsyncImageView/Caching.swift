@@ -19,6 +19,8 @@ public protocol CacheType {
 	func setValue(value: Value?, forKey key: Key)
 }
 
+// MARK: -
+
 /// `CacheType` backed by `NSCache`.
 public final class InMemoryCache<K: Hashable, V>: CacheType {
 	private let cache: NSCache
@@ -44,10 +46,8 @@ public final class InMemoryCache<K: Hashable, V>: CacheType {
 		} else {
 			cache.removeObjectForKey(key)
 		}
-		
 	}
 }
-
 
 private final class CacheValue<V>: NSObject {
 	private let value: V
@@ -78,5 +78,53 @@ private final class CacheKey<K: Hashable>: NSObject {
 
 	private override var hash: Int {
 		return self.cachedHash
+	}
+}
+
+// MARK: -
+
+/// Represents the key for a value that can be persisted on disk.
+public protocol DataFileType {
+	var uniqueFilename: String { get }
+}
+
+/// Represents a value that can be persisted on disk.
+public protocol NSDataConvertible {
+	/// Creates an instance of the receiver from `NSData`, if possible.
+	init?(data: NSData)
+
+	/// Encodes the receiver in `NSData`. Returns `nil` if failed.
+	var data: NSData? { get }
+}
+
+/// `CacheType` backed by files on disk.
+public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
+	private let rootDirectory: NSURL
+	private let fileManager = NSFileManager.defaultManager()
+
+	public init(rootDirectory: NSURL) {
+		self.rootDirectory = rootDirectory
+	}
+
+	public func valueForKey(key: K) -> V? {
+		return NSData(contentsOfURL: self.filePathForKey(key))
+			.flatMap(V.init)
+	}
+
+	public func setValue(value: V?, forKey key: K) {
+		let url = self.filePathForKey(key)
+
+		if let data = value.flatMap({ $0.data }) {
+			data.writeToURL(url, atomically: true)
+		} else if self.fileManager.fileExistsAtPath(url.path!) {
+			try! self.fileManager.removeItemAtURL(url)
+		}
+	}
+
+	private func filePathForKey(key: K) -> NSURL {
+		return self.rootDirectory.URLByAppendingPathComponent(
+			key.uniqueFilename,
+			isDirectory: false
+		)
 	}
 }

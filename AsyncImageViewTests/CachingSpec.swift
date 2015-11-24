@@ -68,3 +68,38 @@ class InMemoryCacheSpec: QuickSpec {
 		}
 	}
 }
+
+class DiskCacheSpec: QuickSpec {
+	override func spec() {
+		describe("DiskCache") {
+			testCache(
+				cacheCreator: {
+					DiskCache(rootDirectory: NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true))
+				},
+				keyCreator: String.random,
+				valueCreator: String.random
+			)
+		}
+	}
+}
+
+extension String: DataFileType {
+	public var uniqueFilename: String {
+		return self
+	}
+}
+
+extension String: NSDataConvertible {
+	public init?(data: NSData) {
+		self.init(data: data, encoding: String.encoding)
+	}
+
+	public var data: NSData? {
+		return (self as NSString).dataUsingEncoding(String.encoding)
+	}
+
+	private static var encoding: UInt {
+		return NSUTF8StringEncoding
+	}
+}
+

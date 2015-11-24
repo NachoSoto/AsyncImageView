@@ -21,12 +21,12 @@ public final class RendererImageProvider<
 	Renderer.RenderData == RenderData,
 	Renderer.Error == NoError
 >: ImageProviderType {
-	private let cache: TypedCache<RenderData, CachedImageRenderOperation>
+	private let cache: InMemoryCache<RenderData, CachedImageRenderOperation>
 
 	private let renderer: Renderer
 
 	public init(name: String, renderer: Renderer) {
-		self.cache = TypedCache(cacheName: name)
+		self.cache = InMemoryCache(cacheName: name)
 		self.renderer = renderer
 	}
 

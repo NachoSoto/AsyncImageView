@@ -17,8 +17,8 @@
 		57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
 		57BD68D01C0261880077A391 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CE1C0261880077A391 /* ImageProvider.swift */; };
 		57BD68D11C0261880077A391 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CE1C0261880077A391 /* ImageProvider.swift */; };
-		57BD68D21C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
-		57BD68D31C0261880077A391 /* TypedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* TypedCache.swift */; };
+		57BD68D21C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
+		57BD68D31C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
 		57BD68E31C0268930077A391 /* AsyncImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68E61C0269080077A391 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E41C0269080077A391 /* ReactiveCocoa.framework */; };
 		57BD68E71C0269080077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; };
@@ -104,7 +104,7 @@
 		57BD68C51C02607F0077A391 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		57BD68CB1C02614B0077A391 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		57BD68CE1C0261880077A391 /* ImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
-		57BD68CF1C0261880077A391 /* TypedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypedCache.swift; sourceTree = "<group>"; };
+		57BD68CF1C0261880077A391 /* Caching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		57BD68E41C0269080077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		57BD68E51C0269080077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		57BD68E81C0269130077A391 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/tvOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 				57BD68CB1C02614B0077A391 /* AsyncImageView.swift */,
 				57BD68CE1C0261880077A391 /* ImageProvider.swift */,
 				57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */,
-				57BD68CF1C0261880077A391 /* TypedCache.swift */,
+				57BD68CF1C0261880077A391 /* Caching.swift */,
 				57FC1AED1C0283D600FAD2F3 /* Hashing.swift */,
 				57FC1AF01C028C5300FAD2F3 /* Renderers */,
 			);
@@ -465,7 +465,7 @@
 				57FC1B081C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */,
 				57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57FC1AEE1C0283D600FAD2F3 /* Hashing.swift in Sources */,
-				57BD68D21C0261880077A391 /* TypedCache.swift in Sources */,
+				57BD68D21C0261880077A391 /* Caching.swift in Sources */,
 				57FC1B061C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57FC1B021C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
@@ -492,7 +492,7 @@
 				57FC1B091C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */,
 				57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57FC1AEF1C0283D600FAD2F3 /* Hashing.swift in Sources */,
-				57BD68D31C0261880077A391 /* TypedCache.swift in Sources */,
+				57BD68D31C0261880077A391 /* Caching.swift in Sources */,
 				57FC1B071C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57FC1B031C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,

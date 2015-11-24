@@ -1,5 +1,5 @@
 //
-//  TypedCache.swift
+//  Caching.swift
 //  AsyncImageView
 //
 //  Created by Nacho Soto on 9/17/15.
@@ -16,7 +16,7 @@ public protocol CacheType {
 	func setValue(value: Value, forKey key: Key)
 }
 
-internal class TypedCache<K: Hashable, V: NSObject>: CacheType {
+internal class InMemoryCache<K: Hashable, V: NSObject>: CacheType {
 	private let cache: NSCache
 
 	init(cacheName: String) {

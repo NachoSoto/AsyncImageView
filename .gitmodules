@@ -13,3 +13,6 @@
 [submodule "Carthage/Checkouts/ReactiveCocoa"]
 	path = Carthage/Checkouts/ReactiveCocoa
 	url = https://github.com/ReactiveCocoa/ReactiveCocoa.git
+[submodule "Carthage/Checkouts/RandomKit"]
+	path = Carthage/Checkouts/RandomKit
+	url = https://github.com/nvzqz/RandomKit.git

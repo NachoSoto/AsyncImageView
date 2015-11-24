@@ -30,6 +30,8 @@
 		57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FC1C02695F0077A391 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E41C0269080077A391 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57F5C5961C051FFB00753642 /* RandomKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F5C5951C051FFB00753642 /* RandomKit.framework */; };
+		57F5C5971C05200500753642 /* RandomKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57F5C5951C051FFB00753642 /* RandomKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 		57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */; };
 		57FC1AEA1C0272C100FAD2F3 /* TestRenderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */; };
@@ -69,6 +71,7 @@
 				57BD68FC1C02695F0077A391 /* ReactiveCocoa.framework in Embed Frameworks */,
 				57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */,
 				57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */,
+				57F5C5971C05200500753642 /* RandomKit.framework in Embed Frameworks */,
 				57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -111,6 +114,7 @@
 		57BD68E91C0269130077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		57BD68F01C0269280077A391 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		57F5C5951C051FFB00753642 /* RandomKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RandomKit.framework; path = Carthage/Build/iOS/RandomKit.framework; sourceTree = "<group>"; };
 		57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProvider.swift; sourceTree = "<group>"; };
 		57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderData.swift; sourceTree = "<group>"; };
 		57FC1AEB1C02734200FAD2F3 /* RendererImageProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererImageProviderSpec.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57F5C5961C051FFB00753642 /* RandomKit.framework in Frameworks */,
 				57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */,
 				57BD68F81C0269440077A391 /* Nimble.framework in Frameworks */,
 				57BD68F91C0269440077A391 /* Quick.framework in Frameworks */,
@@ -210,6 +215,7 @@
 		57BD68841C025F410077A391 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				57F5C5951C051FFB00753642 /* RandomKit.framework */,
 				57BD68F01C0269280077A391 /* Nimble.framework */,
 				57BD68F11C0269280077A391 /* Quick.framework */,
 				57BD68E41C0269080077A391 /* ReactiveCocoa.framework */,

@@ -33,6 +33,19 @@ private func testCache<T: CacheType where T.Value: Equatable>(cacheCreator cache
 		expect(cache.valueForKey(key)) == value
 	}
 
+	it("values don't override") {
+		let key1 = keyCreator()
+		let key2 = keyCreator()
+		let value1 = valueCreator()
+		let value2 = valueCreator()
+
+		cache.setValue(value1, forKey: key1)
+		cache.setValue(value2, forKey: key2)
+
+		expect(cache.valueForKey(key1)) == value1
+		expect(cache.valueForKey(key2)) == value2
+	}
+
 	it("can remove a value") {
 		let key = keyCreator()
 		let value = valueCreator()

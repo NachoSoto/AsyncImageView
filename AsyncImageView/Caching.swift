@@ -16,10 +16,10 @@ public protocol CacheType {
 	func setValue(value: Value, forKey key: Key)
 }
 
-internal class InMemoryCache<K: Hashable, V>: CacheType {
+public final class InMemoryCache<K: Hashable, V>: CacheType {
 	private let cache: NSCache
 
-	init(cacheName: String) {
+	public init(cacheName: String) {
 		self.cache = {
 			let cache = NSCache()
 			cache.name = cacheName
@@ -28,11 +28,11 @@ internal class InMemoryCache<K: Hashable, V>: CacheType {
 		}()
 	}
 
-	func valueForKey(key: K) -> V? {
+	public func valueForKey(key: K) -> V? {
 		return (cache.objectForKey(CacheKey(value: key)) as! CacheValue<V>?)?.value
 	}
 
-	func setValue(value: V, forKey key: K) {
+	public func setValue(value: V, forKey key: K) {
 		cache.setObject(CacheValue(value: value), forKey: CacheKey(value: key))
 	}
 }

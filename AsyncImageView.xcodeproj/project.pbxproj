@@ -51,6 +51,8 @@
 		57FC1B091C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */; };
 		57FC1B0A1C0293CE00FAD2F3 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B011C0293CE00FAD2F3 /* Renderer.swift */; };
 		57FC1B0B1C0293CE00FAD2F3 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B011C0293CE00FAD2F3 /* Renderer.swift */; };
+		57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */; };
+		57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +131,7 @@
 		57FC1AFF1C0293CE00FAD2F3 /* ImageInflaterRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageInflaterRenderer.swift; path = Renderers/ImageInflaterRenderer.swift; sourceTree = "<group>"; };
 		57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteImageRenderer.swift; path = Renderers/RemoteImageRenderer.swift; sourceTree = "<group>"; };
 		57FC1B011C0293CE00FAD2F3 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Renderer.swift; path = Renderers/Renderer.swift; sourceTree = "<group>"; };
+		57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CacheRenderer.swift; path = Renderers/CacheRenderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +330,7 @@
 				57FC1AFF1C0293CE00FAD2F3 /* ImageInflaterRenderer.swift */,
 				57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */,
 				57FC1B011C0293CE00FAD2F3 /* Renderer.swift */,
+				57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */,
 			);
 			name = Renderers;
 			sourceTree = "<group>";
@@ -482,6 +486,7 @@
 				57FC1B061C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59B1C052A6000753642 /* Extensions.swift in Sources */,
+				57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
 				57FC1B021C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				57FC1B0A1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 				57FC1AE71C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */,
@@ -511,6 +516,7 @@
 				57FC1B071C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59C1C052A6000753642 /* Extensions.swift in Sources */,
+				57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
 				57FC1B031C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				57FC1B0B1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 				57FC1AE81C0271B800FAD2F3 /* RendererImageProvider.swift in Sources */,

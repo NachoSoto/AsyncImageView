@@ -26,6 +26,7 @@ public final class AnyRenderer<T: RenderDataType, E: ErrorType>: RendererType {
 					observer.sendInterrupted()
 				}
 			}
+				.startOn(QueueScheduler())
 		}
 	}
 

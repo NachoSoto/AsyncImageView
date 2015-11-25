@@ -42,3 +42,11 @@ where C.Key == R.RenderData, C.Value == UIImage>: RendererType {
 private enum CacheRendererError: ErrorType {
 	case ImageNotFound
 }
+
+extension RendererType {
+	/// Surrounds this renderer with a layer of caching.
+	public func withCache<C: CacheType where C.Key == Self.RenderData, C.Value == UIImage>
+		(cache: C) -> AnyRenderer<Self.RenderData, Self.Error> {
+			return AnyRenderer(renderer: CacheRenderer(renderer: self, cache: cache))
+	}
+}

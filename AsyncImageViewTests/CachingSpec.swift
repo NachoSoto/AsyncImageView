@@ -62,8 +62,8 @@ class InMemoryCacheSpec: QuickSpec {
 		describe("InMemoryCache") {
 			testCache(
 				cacheCreator: { InMemoryCache(cacheName: "test") },
-				keyCreator: String.random,
-				valueCreator: String.random
+				keyCreator: String.randomReadableString,
+				valueCreator: String.randomReadableString
 			)
 		}
 	}
@@ -76,8 +76,8 @@ class DiskCacheSpec: QuickSpec {
 				cacheCreator: {
 					DiskCache(rootDirectory: NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true))
 				},
-				keyCreator: String.random,
-				valueCreator: String.random
+				keyCreator: String.randomReadableString,
+				valueCreator: String.randomReadableString
 			)
 		}
 	}
@@ -103,3 +103,10 @@ extension String: NSDataConvertible {
 	}
 }
 
+private let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+extension String {
+	private static func randomReadableString() -> String {
+		return self.random(15, NSCharacterSet(charactersInString: alphabet))
+	}
+}

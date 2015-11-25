@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode7.1
+before_install:
+- gem install scan
+script:
+- scan -s 'AsyncImageView-iOS'
+

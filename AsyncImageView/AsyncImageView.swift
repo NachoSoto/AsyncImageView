@@ -44,14 +44,12 @@ public final class AsyncImageView<
 
 		self.backgroundColor = nil
 
-		let requestChanges = self.requestsSignal.skipRepeats()
 		let uiScheduler = UIScheduler()
 
-		requestChanges
+		self.requestsSignal
+			.skipRepeats()
 			.observeOn(uiScheduler)
-			.observeNext { [weak self] _ in self?.resetImage() }
-
-		requestChanges
+			.on(next: { [weak self] _ in self?.resetImage() })
 			.observeOn(self.imageCreationScheduler)
 			.flatMap(.Latest, transform: imageProvider.getImageForData)
 			.observeOn(uiScheduler)
@@ -120,3 +118,13 @@ public final class AsyncImageView<
 // MARK: - Constants
 
 private let fadeAnimationDuration: NSTimeInterval = 0.4
+
+private extension SignalType {
+	// TODO: remove once https://github.com/ReactiveCocoa/ReactiveCocoa/pull/2572 is merged.
+	func on(next next: (Value) -> ()) -> Signal<Value, Error> {
+		return self.map {
+			next($0)
+			return $0
+		}
+	}
+}

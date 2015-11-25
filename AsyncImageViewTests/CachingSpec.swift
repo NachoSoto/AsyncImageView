@@ -73,8 +73,11 @@ class DiskCacheSpec: QuickSpec {
 	override func spec() {
 		describe("DiskCache") {
 			testCache(
-				cacheCreator: {
-					DiskCache(rootDirectory: NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true))
+				cacheCreator: { () -> DiskCache<String, String> in
+					let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+						.URLByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString, isDirectory: true)
+
+					return DiskCache(rootDirectory: directory)
 				},
 				keyCreator: String.randomReadableString,
 				valueCreator: String.randomReadableString

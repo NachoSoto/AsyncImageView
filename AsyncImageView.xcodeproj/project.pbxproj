@@ -316,8 +316,8 @@
 				57FC1AE61C0271B800FAD2F3 /* RendererImageProvider.swift */,
 				57BD68CF1C0261880077A391 /* Caching.swift */,
 				57FC1AED1C0283D600FAD2F3 /* Hashing.swift */,
-				57FC1AF01C028C5300FAD2F3 /* Renderers */,
 				57F5C59A1C052A6000753642 /* Extensions.swift */,
+				57FC1AF01C028C5300FAD2F3 /* Renderers */,
 			);
 			name = Classes;
 			sourceTree = "<group>";

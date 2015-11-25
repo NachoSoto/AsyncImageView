@@ -114,8 +114,10 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	public func setValue(value: V?, forKey key: K) {
 		let url = self.filePathForKey(key)
 
+		self.guaranteeDirectoryExists(url.URLByDeletingLastPathComponent!)
+
 		if let data = value.flatMap({ $0.data }) {
-			data.writeToURL(url, atomically: true)
+			try! data.writeToURL(url, options: .DataWritingAtomic)
 		} else if self.fileManager.fileExistsAtPath(url.path!) {
 			try! self.fileManager.removeItemAtURL(url)
 		}
@@ -126,5 +128,9 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 			key.uniqueFilename,
 			isDirectory: false
 		)
+	}
+
+	private func guaranteeDirectoryExists(url: NSURL) {
+		try! self.fileManager.createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
 	}
 }

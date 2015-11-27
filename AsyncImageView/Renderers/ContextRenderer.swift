@@ -12,16 +12,16 @@ import ReactiveCocoa
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
-	public typealias ContextRenderingBlock = (context: CGContextRef, data: Data) -> ()
+	public typealias Block = (context: CGContextRef, data: Data) -> ()
 
 	private let scale: CGFloat
 	private let opaque: Bool
-	private let renderingBlock: ContextRenderingBlock
+	private let renderingBlock: Block
 
 	/// - opaque: A Boolean flag indicating whether the bitmap is opaque. 
 	/// If you know the bitmap is fully opaque, specify YES to ignore the 
 	/// alpha channel and optimize the bitmap’s storage.
-	public init(scale: CGFloat, opaque: Bool, renderingBlock: ContextRenderingBlock) {
+	public init(scale: CGFloat, opaque: Bool, renderingBlock: Block) {
 		self.scale = scale
 		self.opaque = opaque
 		self.renderingBlock = renderingBlock

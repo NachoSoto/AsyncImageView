@@ -17,11 +17,9 @@ public protocol RemoteRenderDataType: RenderDataType {
 
 /// `RendererType` which downloads images.
 public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
-	private let screenScale: CGFloat
 	private let session: NSURLSession
 
-	public init(screenScale: CGFloat, session: NSURLSession = NSURLSession.sharedSession()) {
-		self.screenScale = screenScale
+	public init(session: NSURLSession = NSURLSession.sharedSession()) {
 		self.session = session
 	}
 
@@ -35,9 +33,6 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 				} else {
 					return SignalProducer(error: .DecodingError)
 				}
-			}
-			.map { [scale = self.screenScale] image in
-				return image.inflate(withSize: data.size, scale: scale)
 			}
 	}
 }

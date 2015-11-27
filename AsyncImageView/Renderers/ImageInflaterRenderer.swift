@@ -10,19 +10,24 @@ import UIKit
 import ReactiveCocoa
 
 /// `RendererType` decorator that inflates images.
-public final class ImageInflaterRenderer<T: RenderDataType, E: ErrorType>: RendererType {
+public final class ImageInflaterRenderer<
+	Data: RenderDataType, Result: RenderResultType, Error: ErrorType
+>: RendererType {
 	private let screenScale: CGFloat
-	private let renderBlock: (T) -> SignalProducer<UIImage, E>
+	private let renderBlock: (Data) -> SignalProducer<Result, Error>
 
-	public init<R: RendererType where R.RenderData == T, R.Error == E>(renderer: R, screenScale: CGFloat) {
+	public init<
+		Renderer: RendererType where Renderer.RenderData == Data, Renderer.Result == Result, Renderer.Error == Error
+		>(renderer: Renderer, screenScale: CGFloat)
+	{
 		self.screenScale = screenScale
 		self.renderBlock = renderer.renderImageWithData
 	}
 
-	public func renderImageWithData(data: T) -> SignalProducer<UIImage, E> {
+	public func renderImageWithData(data: Data) -> SignalProducer<UIImage, Error> {
 		return renderBlock(data)
-			.map { [scale = self.screenScale] image in
-				return image.inflate(withSize: data.size, scale: scale)
+			.map { [scale = self.screenScale] result in
+				return result.image.inflate(withSize: data.size, scale: scale)
 			}
 			.startOn(QueueScheduler())
 	}
@@ -51,7 +56,7 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(screenScale: CGFloat) -> AnyRenderer<Self.RenderData, Self.Error> {
+	public func inflatedWithScale(screenScale: CGFloat) -> AnyRenderer<Self.RenderData, UIImage, Self.Error> {
 		return AnyRenderer(renderer: ImageInflaterRenderer(renderer: self, screenScale: screenScale))
 	}
 }

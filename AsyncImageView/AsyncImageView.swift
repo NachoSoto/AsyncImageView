@@ -22,10 +22,11 @@ public protocol ImageViewDataType {
 public final class AsyncImageView<
 	RenderData: RenderDataType,
 	ImageViewData: ImageViewDataType,
-	ImageProvider: ImageProviderType
+	Renderer: RendererType
 	where
 	ImageViewData.RenderData == RenderData,
-	ImageProvider.RenderData == RenderData
+	Renderer.RenderData == RenderData,
+	Renderer.Error == NoError
 >: UIImageView {
 	private let requestsSignal: Signal<RenderData, NoError>
 	private let requestsObserver: Signal<RenderData, NoError>.Observer
@@ -34,7 +35,7 @@ public final class AsyncImageView<
 
 	public init(
 		initialFrame: CGRect,
-		imageProvider: ImageProvider,
+		renderer: Renderer,
 		imageCreationScheduler: SchedulerType = QueueScheduler())
 	{
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
@@ -51,7 +52,7 @@ public final class AsyncImageView<
 			.observeOn(uiScheduler)
 			.on(next: { [weak self] _ in self?.resetImage() })
 			.observeOn(self.imageCreationScheduler)
-			.flatMap(.Latest, transform: imageProvider.getImageForData)
+			.flatMap(.Latest, transform: renderer.renderImageWithData)
 			.observeOn(uiScheduler)
 			.observeNext { [weak self] in self?.updateImage($0) }
 	}
@@ -100,7 +101,7 @@ public final class AsyncImageView<
 
 	// MARK: -
 
-	private func updateImage(result: RenderResult) {
+	private func updateImage(result: Renderer.Result) {
 		if result.cacheHit {
 			self.image = result.image
 		} else {

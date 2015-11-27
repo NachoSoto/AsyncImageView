@@ -10,6 +10,8 @@
 		570993FE1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
 		570993FF1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
 		570994011C08F7D90010B340 /* MulticastedRendererSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */; };
+		570994051C0903BF0010B340 /* LocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994041C0903BF0010B340 /* LocalImageRenderer.swift */; };
+		570994061C0903BF0010B340 /* LocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994041C0903BF0010B340 /* LocalImageRenderer.swift */; };
 		57BD68391C02598F0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; };
 		57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */; };
@@ -85,6 +87,7 @@
 /* Begin PBXFileReference section */
 		570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MulticastedRenderer.swift; path = Renderers/MulticastedRenderer.swift; sourceTree = "<group>"; };
 		570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastedRendererSpec.swift; sourceTree = "<group>"; };
+		570994041C0903BF0010B340 /* LocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalImageRenderer.swift; path = Renderers/LocalImageRenderer.swift; sourceTree = "<group>"; };
 		57BD68351C02598F0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BD68381C02598F0077A391 /* AsyncImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		57BD683A1C02598F0077A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 				57FC1AFD1C0293CE00FAD2F3 /* AnyRenderer.swift */,
 				57FC1AFE1C0293CE00FAD2F3 /* FallbackRenderer.swift */,
 				57FC1AFF1C0293CE00FAD2F3 /* ImageInflaterRenderer.swift */,
+				570994041C0903BF0010B340 /* LocalImageRenderer.swift */,
 				57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */,
 				57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */,
 				570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */,
@@ -474,6 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				570994051C0903BF0010B340 /* LocalImageRenderer.swift in Sources */,
 				57FC1B081C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */,
 				57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57FC1AEE1C0283D600FAD2F3 /* Hashing.swift in Sources */,
@@ -503,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				570994061C0903BF0010B340 /* LocalImageRenderer.swift in Sources */,
 				57FC1B091C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */,
 				57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57FC1AEF1C0283D600FAD2F3 /* Hashing.swift in Sources */,

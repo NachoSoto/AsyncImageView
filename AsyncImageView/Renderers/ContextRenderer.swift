@@ -1,4 +1,4 @@
-//
+	//
 //  ContextRenderer.swift
 //  AsyncImageView
 //
@@ -10,10 +10,10 @@ import UIKit
 import CoreGraphics
 import ReactiveCocoa
 
-public typealias ContextRenderingBlock = (CGContextRef) -> ()
-
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
+	public typealias ContextRenderingBlock = (context: CGContextRef, data: Data) -> ()
+
 	private let scale: CGFloat
 	private let opaque: Bool
 	private let renderingBlock: ContextRenderingBlock
@@ -30,7 +30,7 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
 	public func renderImageWithData(data: Data) -> UIImage {
 		UIGraphicsBeginImageContextWithOptions(data.size, self.opaque, self.scale)
 
-		self.renderingBlock(UIGraphicsGetCurrentContext()!)
+		self.renderingBlock(context: UIGraphicsGetCurrentContext()!, data: data)
 
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()

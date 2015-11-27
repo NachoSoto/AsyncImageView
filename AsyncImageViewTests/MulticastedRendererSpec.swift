@@ -38,7 +38,7 @@ class MulticastedRendererSpec: QuickSpec {
 				}
 
 				beforeEach {
-					innerRenderer = AnyRenderer(renderer: TestRenderer())
+					innerRenderer = AnyRenderer(TestRenderer())
 					renderer = RenderType(
 						renderer: innerRenderer,
 						name: "com.nachosoto.renderer"
@@ -91,9 +91,9 @@ class MulticastedRendererSpec: QuickSpec {
 					scheduler = TestScheduler()
 
 					cacheHitRenderer = CacheHitRenderer()
-					innerRenderer = AnyRenderer(renderer: cacheHitRenderer)
+					innerRenderer = AnyRenderer(cacheHitRenderer)
 
-					let delayedTestRenderer: InnerRendererType = AnyRenderer(renderer: DelayedRenderer(
+					let delayedTestRenderer: InnerRendererType = AnyRenderer(DelayedRenderer(
 						renderer: innerRenderer,
 						delay: delay,
 						scheduler: scheduler

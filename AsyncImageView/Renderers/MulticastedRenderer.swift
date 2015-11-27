@@ -22,11 +22,11 @@ public final class MulticastedRenderer<
 	Renderer.Error == NoError
 >: RendererType {
 	private let renderer: Renderer
-	private let cache: InMemoryCache<RenderData, ImageProperty>
+	private let cache: Atomic<InMemoryCache<RenderData, ImageProperty>>
 
 	public init(renderer: Renderer, name: String) {
 		self.renderer = renderer
-		self.cache = InMemoryCache(cacheName: name)
+		self.cache = Atomic(InMemoryCache(cacheName: name))
 	}
 
 	public func renderImageWithData(data: RenderData) -> SignalProducer<RenderResult, NoError> {
@@ -39,26 +39,20 @@ public final class MulticastedRenderer<
  	}
 
 	private func getPropertyForData(data: RenderData) -> ImageProperty {
-		if let operation = cachedOperation(data) {
-			return operation
+		return self.cache.withValue { (cache) -> ImageProperty in
+			if let property = cache.valueForKey(data) {
+				return property
+			}
+
+			let property = ImageProperty(
+				initialValue: nil,
+				producer: renderer.createProducerForRenderingData(data)
+					.map(Optional.init)
+			)
+			cache.setValue(property, forKey: data)
+
+			return property
 		}
-
-		let property = ImageProperty(
-			initialValue: nil,
-			producer: renderer.createProducerForRenderingData(data)
-				.map(Optional.init)
-		)
-		cacheProperty(property, forData: data)
-
-		return property
-	}
-
-	private func cachedOperation(data: RenderData) -> ImageProperty? {
-		return cache.valueForKey(data)
-	}
-
-	private func cacheProperty(property: ImageProperty, forData data: RenderData) {
-		cache.setValue(property, forKey: data)
 	}
 }
 

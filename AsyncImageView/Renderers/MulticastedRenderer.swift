@@ -12,7 +12,7 @@ import ReactiveCocoa
 // The initial value is `nil`.
 private typealias ImageProperty = AnyProperty<RenderResult?>
 
-/// `ImageRendererType` which guarantees that images for a given `RenderDataType`
+/// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
 	RenderData: RenderDataType,

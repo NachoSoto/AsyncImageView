@@ -14,68 +14,90 @@ import ReactiveCocoa
 
 import AsyncImageView
 
-private typealias InnerRendererType = AnyRenderer<TestRenderData, UIImage, NoError>
-private typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
-
 class MulticastedRendererSpec: QuickSpec {
 	override func spec() {
 		describe("MulticastedRenderer") {
 			let data: TestData = .A
 			let size = CGSize(width: 1, height: 1)
 
-			var testRenderer: TestRenderer!
-			var renderer: RenderType!
+			context("General tests") {
+				typealias InnerRendererType = AnyRenderer<TestRenderData, UIImage, NoError>
+				typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
 
-			beforeEach {
-				testRenderer = TestRenderer()
-				renderer = RenderType(
-					renderer: AnyRenderer(renderer: testRenderer),
-					name: "com.nachosoto.renderer"
-				)
-			}
+				var innerRenderer: InnerRendererType!
+				var renderer: RenderType!
 
+				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<RenderResult, NoError> {
+					return renderer.renderImageWithData(data.renderDataWithSize(size))
+				}
 
-			func getProducerForData(data: TestData, withSize size: CGSize) -> SignalProducer<RenderResult, NoError> {
-				return renderer.renderImageWithData(data.renderDataWithSize(size))
-			}
+				func getImageForData(data: TestData, _ size: CGSize) -> RenderResult? {
+					return getProducerForData(data, size)
+						.single()?
+						.value
+				}
 
-			func getImageForData(data: TestData, withSize size: CGSize) -> RenderResult? {
-				return getProducerForData(data, withSize: size)
-					.single()?
-					.value
-			}
+				beforeEach {
+					innerRenderer = AnyRenderer(renderer: TestRenderer())
+					renderer = RenderType(
+						renderer: innerRenderer,
+						name: "com.nachosoto.renderer"
+					)
+				}
 
-			it("produces an image") {
-				let result = getImageForData(data, withSize: size)
+				it("produces an image") {
+					let result = getImageForData(data, size)
 
-				verifyImage(result?.image, withSize: size, data: data)
-			}
+					verifyImage(result?.image, withSize: size, data: data)
+				}
 
-			it("multicasts rendering") {
-				// Get both producers at the same time.
-				let result1 = getProducerForData(data, withSize: size)
-				let result2 = getProducerForData(data, withSize: size)
+				it("multicasts rendering") {
+					// Get both producers at the same time.
+					let result1 = getProducerForData(data, size)
+					let result2 = getProducerForData(data, size)
 
-				// Starting the producers should yield the same image.
-				let image1 = result1.single()?.value?.image
-				let image2 = result2.single()?.value?.image
+					// Starting the producers should yield the same image.
+					let image1 = result1.single()?.value?.image
+					let image2 = result2.single()?.value?.image
 
-				expect(image1!) === image2!
+					expect(image1!) === image2!
+				}
 			}
 
 			context("Cache hit") {
-				var scheduler: TestScheduler!
+				typealias InnerRendererType = AnyRenderer<TestRenderData, RenderResult, NoError>
+				typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
 
+				var scheduler: TestScheduler!
 				let delay: NSTimeInterval = 1
+
+				var innerRenderer: InnerRendererType!
+				var renderer: RenderType!
+
+				var cacheHitRenderer: CacheHitRenderer!
+
+
+				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<RenderResult, NoError> {
+					return renderer.renderImageWithData(data.renderDataWithSize(size))
+				}
+
+				func getImageForData(data: TestData, _ size: CGSize) -> RenderResult? {
+					return getProducerForData(data, size)
+						.single()?
+						.value
+				}
 
 				beforeEach {
 					scheduler = TestScheduler()
 
+					cacheHitRenderer = CacheHitRenderer()
+					innerRenderer = AnyRenderer(renderer: cacheHitRenderer)
+
 					let delayedTestRenderer: InnerRendererType = AnyRenderer(renderer: DelayedRenderer(
-						renderer: testRenderer,
+						renderer: innerRenderer,
 						delay: delay,
 						scheduler: scheduler
-					))
+						))
 
 					renderer = RenderType(
 						renderer: delayedTestRenderer,
@@ -84,7 +106,9 @@ class MulticastedRendererSpec: QuickSpec {
 				}
 
 				it("does not cache hit the first time") {
-					let producer = getProducerForData(data, withSize: size)
+					cacheHitRenderer.shouldCacheHit = false
+
+					let producer = getProducerForData(data, size)
 					var result: RenderResult?
 
 					producer.startWithNext { result = $0 }
@@ -95,8 +119,22 @@ class MulticastedRendererSpec: QuickSpec {
 					expect(result?.cacheHit) == false
 				}
 
+				it("cache hit the first time if the inner renderer was a hit") {
+					cacheHitRenderer.shouldCacheHit = true
+
+					let producer = getProducerForData(data, size)
+					var result: RenderResult?
+
+					producer.startWithNext { result = $0 }
+
+					scheduler.advanceByInterval(delay)
+
+					expect(result).toEventuallyNot(beNil())
+					expect(result?.cacheHit) == true
+				}
+
 				it("is a cache hit the second time the producer is fetched") {
-					let producer = getProducerForData(data, withSize: size)
+					let producer = getProducerForData(data, size)
 					scheduler.advanceByInterval(delay)
 
 					var result: RenderResult?
@@ -110,19 +148,37 @@ class MulticastedRendererSpec: QuickSpec {
 	}
 }
 
+/// `RendererType` decorator that returns `RenderResult` values with
+/// `cacheHit` set to whatever the value of `shouldCacheHit` is at a given time.
+private final class CacheHitRenderer: RendererType {
+	var shouldCacheHit: Bool = false
+
+	private let testRenderer = TestRenderer()
+
+	func renderImageWithData(data: TestRenderData) ->  SignalProducer<RenderResult, NoError> {
+		return testRenderer.renderImageWithData(data)
+			.map {
+				return RenderResult(
+					image: $0.image,
+					cacheHit: self.shouldCacheHit
+				)
+		}
+	}
+}
+
 /// `RendererType` decorator which introduces a delay on the resulting image.
-public final class DelayedRenderer<T: RendererType>: RendererType {
+private final class DelayedRenderer<T: RendererType>: RendererType {
 	private let renderer: T
 	private let delay: NSTimeInterval
 	private let scheduler: DateSchedulerType
 
-	public init(renderer: T, delay: NSTimeInterval, scheduler: DateSchedulerType) {
+	init(renderer: T, delay: NSTimeInterval, scheduler: DateSchedulerType) {
 		self.renderer = renderer
 		self.delay = delay
 		self.scheduler = scheduler
 	}
 
-	public func renderImageWithData(data: T.RenderData) -> SignalProducer<T.Result, T.Error> {
+	func renderImageWithData(data: T.RenderData) -> SignalProducer<T.Result, T.Error> {
 		return renderer
 			.renderImageWithData(data)
 			.delay(self.delay, onScheduler: self.scheduler)

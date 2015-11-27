@@ -17,16 +17,16 @@ public protocol ImageViewDataType {
 
 /// A UIImageView that can render asynchronously.
 public final class AsyncImageView<
-	RenderData: RenderDataType,
+	Data: RenderDataType,
 	ImageViewData: ImageViewDataType,
 	Renderer: RendererType
 	where
-	ImageViewData.RenderData == RenderData,
-	Renderer.RenderData == RenderData,
+	ImageViewData.RenderData == Data,
+	Renderer.Data == Data,
 	Renderer.Error == NoError
 >: UIImageView {
-	private let requestsSignal: Signal<RenderData, NoError>
-	private let requestsObserver: Signal<RenderData, NoError>.Observer
+	private let requestsSignal: Signal<Data, NoError>
+	private let requestsObserver: Signal<Data, NoError>.Observer
 
 	private let imageCreationScheduler: SchedulerType
 

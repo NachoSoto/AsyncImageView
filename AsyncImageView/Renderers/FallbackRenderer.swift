@@ -17,8 +17,8 @@ public final class FallbackRenderer<Data: RenderDataType, Result: RenderResultTy
 	public init<
 		R1: RendererType, R2: RendererType
 		where
-		R1.RenderData == Data,
-		R2.RenderData == Data,
+		R1.Data == Data,
+		R2.Data == Data,
 		R1.Result == Result,
 		R2.Result == Result,
 		R1.Error == E1,
@@ -48,8 +48,8 @@ public func ???<
 	where
 	R1.Result == Result,
 	R2.Result == Result,
-	R1.RenderData == R2.RenderData
-	>(primaryRenderer: R1, fallbackRenderer: R2) -> FallbackRenderer<R1.RenderData, Result, R1.Error, R2.Error>
+	R1.Data == R2.Data
+	>(primaryRenderer: R1, fallbackRenderer: R2) -> FallbackRenderer<R1.Data, Result, R1.Error, R2.Error>
 {
 	return FallbackRenderer(primaryRenderer: primaryRenderer, fallbackRenderer: fallbackRenderer)
 }

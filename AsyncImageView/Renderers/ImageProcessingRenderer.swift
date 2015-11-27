@@ -21,7 +21,7 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 		self.processingBlock = processingBlock
 	}
 
-	public func renderImageWithData(data: Renderer.RenderData) -> SignalProducer<UIImage, Renderer.Error> {
+	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
 		return self.renderer.renderImageWithData(data)
 			.observeOn(QueueScheduler())
 			.map { $0.image }

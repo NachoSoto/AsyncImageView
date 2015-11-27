@@ -15,7 +15,7 @@ public final class CacheRenderer<
 	Renderer: RendererType,
 	Cache: CacheType
 	where
-	Cache.Key == Renderer.RenderData,
+	Cache.Key == Renderer.Data,
 	Cache.Value == UIImage
 >: RendererType {
 	private let renderer: Renderer
@@ -28,7 +28,7 @@ public final class CacheRenderer<
 
 	/// Returns an image from the cache if found,
 	/// otherwise it invokes the decorated `renderer` and caches the result.
-	public func renderImageWithData(data: Renderer.RenderData) -> SignalProducer<RenderResult, Renderer.Error> {
+	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<RenderResult, Renderer.Error> {
 		return SignalProducer
 			.attempt { [cache = self.cache] in
 				return createResult(
@@ -52,7 +52,7 @@ extension RendererType {
 	/// Surrounds this renderer with a layer of caching.
 	public func withCache<
 		Cache: CacheType
-		where Cache.Key == Self.RenderData, Cache.Value == UIImage
+		where Cache.Key == Self.Data, Cache.Value == UIImage
 		>(cache: Cache) -> CacheRenderer<Self, Cache>
 	{
 		return CacheRenderer(renderer: self, cache: cache)

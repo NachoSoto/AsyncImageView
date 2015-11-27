@@ -39,17 +39,17 @@ public final class FallbackRenderer<Data: RenderDataType, Result: RenderResultTy
 	}
 }
 
-infix operator ??? { associativity left precedence 160 }
-
-/// Allows creating FallbackRenderers with: `renderer1 ??? renderer2 ??? renderer3`.
-public func ???<
-	R1: RendererType, R2: RendererType,
-	Result: RenderResultType
-	where
-	R1.Result == Result,
-	R2.Result == Result,
-	R1.Data == R2.Data
-	>(primaryRenderer: R1, fallbackRenderer: R2) -> FallbackRenderer<R1.Data, Result, R1.Error, R2.Error>
-{
-	return FallbackRenderer(primaryRenderer: primaryRenderer, fallbackRenderer: fallbackRenderer)
+extension RendererType {
+	/// Surrounds this renderer with a layer of caching.
+	public func fallback<
+		Other: RendererType
+		where
+		Self.Result == Result,
+		Other.Result == Result,
+		Self.Data == Other.Data,
+		Self.Result == Other.Result
+		>(fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.Result, Self.Error, Other.Error>
+	{
+		return FallbackRenderer(primaryRenderer: self, fallbackRenderer: fallbackRenderer)
+	}
 }

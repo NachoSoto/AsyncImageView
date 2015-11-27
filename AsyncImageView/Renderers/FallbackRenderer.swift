@@ -10,17 +10,23 @@ import UIKit
 import ReactiveCocoa
 
 /// `RendererType` decorator that will fall back from one `RendererType` to another.
-public final class FallbackRenderer<Data: RenderDataType, Result: RenderResultType, E1: ErrorType, E2: ErrorType>: RendererType {
-	private let primaryRenderer: AnyRenderer<Data, Result, E1>
-	private let fallbackRenderer: AnyRenderer<Data, Result, E2>
+public final class FallbackRenderer<
+	Data: RenderDataType,
+	RR1: RenderResultType,
+	RR2: RenderResultType,
+	E1: ErrorType,
+	E2: ErrorType
+>: RendererType {
+	private let primaryRenderer: AnyRenderer<Data, RR1, E1>
+	private let fallbackRenderer: AnyRenderer<Data, RR2, E2>
 
 	public init<
 		R1: RendererType, R2: RendererType
 		where
 		R1.Data == Data,
 		R2.Data == Data,
-		R1.Result == Result,
-		R2.Result == Result,
+		R1.Result == RR1,
+		R2.Result == RR2,
 		R1.Error == E1,
 		R2.Error == E2
 		>(primaryRenderer: R1, fallbackRenderer: R2)
@@ -31,10 +37,14 @@ public final class FallbackRenderer<Data: RenderDataType, Result: RenderResultTy
 
 	/// The resulting `SignalProducer` will emit images created by the primary
 	/// renderer. If that emits an error, the fallback Renderer will be used.
-	public func renderImageWithData(data: Data) -> SignalProducer<Result, E2> {
-		return self.primaryRenderer.renderImageWithData(data)
+	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, E2> {
+		return self.primaryRenderer
+			.renderImageWithData(data)
+			.map { $0.asResult }
 			.flatMapError { [fallback = self.fallbackRenderer] _ in
-				return fallback.renderImageWithData(data)
+				return fallback
+					.renderImageWithData(data)
+					.map { $0.asResult }
 			}
 	}
 }
@@ -44,12 +54,24 @@ extension RendererType {
 	public func fallback<
 		Other: RendererType
 		where
-		Self.Result == Result,
-		Other.Result == Result,
-		Self.Data == Other.Data,
-		Self.Result == Other.Result
-		>(fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.Result, Self.Error, Other.Error>
+		Self.Data == Other.Data
+		>(fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.Result, Other.Result, Self.Error, Other.Error>
 	{
 		return FallbackRenderer(primaryRenderer: self, fallbackRenderer: fallbackRenderer)
+	}
+}
+
+extension RenderResultType {
+	private var asResult: RenderResult {
+		return RenderResult(
+			image: self.image,
+			cacheHit: self.cacheHit
+		)
+	}
+}
+
+extension RenderResult {
+	private var asResult: RenderResult {
+		return self
 	}
 }

@@ -9,14 +9,14 @@
 import UIKit
 import ReactiveCocoa
 
-public typealias ImageProcessingBlock = (UIImage) -> UIImage
-
 /// `RendererType` decorator that applies processing to every emitted image.
 public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType {
-	private let renderer: Renderer
-	private let processingBlock: ImageProcessingBlock
+	public typealias Block = (image: UIImage, data: Renderer.Data) -> UIImage
 
-	public init(renderer: Renderer, processingBlock: ImageProcessingBlock) {
+	private let renderer: Renderer
+	private let processingBlock: Block
+
+	public init(renderer: Renderer, processingBlock: Block) {
 		self.renderer = renderer
 		self.processingBlock = processingBlock
 	}
@@ -25,13 +25,15 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 		return self.renderer.renderImageWithData(data)
 			.observeOn(QueueScheduler())
 			.map { $0.image }
-			.map(self.processingBlock)
+			.map { [block = self.processingBlock] image in
+				block(image: image, data: data)
+			}
 	}
 }
 
 extension RendererType {
 	/// Decorates this `RendererType` by applying the given block to every generated image.
-	public func processedWithBlock(block: ImageProcessingBlock) -> ImageProcessingRenderer<Self> {
+	public func processedWithBlock(block: ImageProcessingRenderer<Self>.Block) -> ImageProcessingRenderer<Self> {
 		return ImageProcessingRenderer(renderer: self, processingBlock: block)
 	}
 }

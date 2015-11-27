@@ -14,16 +14,34 @@ public protocol RenderDataType: Hashable {
 	var size: CGSize { get }
 }
 
-public struct RenderResult {
-	let image: UIImage
-	let cacheHit: Bool
+public protocol RenderResultType {
+	var image: UIImage { get }
+	var cacheHit: Bool { get }
+}
+
+public struct RenderResult: RenderResultType {
+	public let image: UIImage
+	public let cacheHit: Bool
+}
+
+extension UIImage: RenderResultType {
+	public var image: UIImage {
+		return self
+	}
+
+	public var cacheHit: Bool {
+		// A raw UIImage created by a `RendererType` is implicitly not cached.
+		return false
+	}
 }
 
 public protocol RendererType {
 	typealias RenderData: RenderDataType
+
+	typealias Result: RenderResultType
 	typealias Error: ErrorType
 
-	func renderImageWithData(data: RenderData) -> SignalProducer<UIImage, Error>
+	func renderImageWithData(data: RenderData) -> SignalProducer<Result, Error>
 }
 
 public protocol SynchronousRendererType {

@@ -62,6 +62,13 @@ public final class MulticastedRenderer<
 	}
 }
 
+extension RendererType where Error == NoError {
+	/// Multicasts the results of this `RendererType`.
+	public func multicasted(name: String = "com.asyncimageview.multicasting") -> MulticastedRenderer<Self.RenderData, Self> {
+		return MulticastedRenderer(renderer: self, name: name)
+	}
+}
+
 extension RendererType {
 	private func createProducerForRenderingData(data: RenderData) -> SignalProducer<RenderResult, Error> {
 		return self.renderImageWithData(data)

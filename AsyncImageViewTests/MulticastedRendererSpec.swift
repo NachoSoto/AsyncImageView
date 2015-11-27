@@ -105,9 +105,7 @@ class MulticastedRendererSpec: QuickSpec {
 					)
 				}
 
-				it("does not cache hit the first time") {
-					cacheHitRenderer.shouldCacheHit = false
-
+				func getCacheHitValue() -> Bool {
 					let producer = getProducerForData(data, size)
 					var result: RenderResult?
 
@@ -116,21 +114,20 @@ class MulticastedRendererSpec: QuickSpec {
 					scheduler.advanceByInterval(delay)
 
 					expect(result).toEventuallyNot(beNil())
-					expect(result?.cacheHit) == false
+
+					return result!.cacheHit
+				}
+
+				it("does not cache hit the first time") {
+					cacheHitRenderer.shouldCacheHit = false
+
+					expect(getCacheHitValue()) == false
 				}
 
 				it("cache hit the first time if the inner renderer was a hit") {
 					cacheHitRenderer.shouldCacheHit = true
 
-					let producer = getProducerForData(data, size)
-					var result: RenderResult?
-
-					producer.startWithNext { result = $0 }
-
-					scheduler.advanceByInterval(delay)
-
-					expect(result).toEventuallyNot(beNil())
-					expect(result?.cacheHit) == true
+					expect(getCacheHitValue()) == true
 				}
 
 				it("is a cache hit the second time the producer is fetched") {

@@ -22,6 +22,11 @@ public protocol RenderResultType {
 public struct RenderResult: RenderResultType {
 	public let image: UIImage
 	public let cacheHit: Bool
+
+	public init(image: UIImage, cacheHit: Bool) {
+		self.image = image
+		self.cacheHit = cacheHit
+	}
 }
 
 extension UIImage: RenderResultType {

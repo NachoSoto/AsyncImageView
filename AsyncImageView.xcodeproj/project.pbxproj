@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570993FE1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
+		570993FF1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
+		570994011C08F7D90010B340 /* MulticastedRendererSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */; };
 		57BD68391C02598F0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; };
 		57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */; };
@@ -80,6 +83,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MulticastedRenderer.swift; path = Renderers/MulticastedRenderer.swift; sourceTree = "<group>"; };
+		570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastedRendererSpec.swift; sourceTree = "<group>"; };
 		57BD68351C02598F0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BD68381C02598F0077A391 /* AsyncImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		57BD683A1C02598F0077A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -198,6 +203,7 @@
 				57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */,
 				57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */,
 				57F5C5901C051ABB00753642 /* CachingSpec.swift */,
+				570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */,
 				57BD68461C02598F0077A391 /* Info.plist */,
 			);
 			path = AsyncImageViewTests;
@@ -314,12 +320,13 @@
 		57FC1AF01C028C5300FAD2F3 /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
+				57FC1B011C0293CE00FAD2F3 /* Renderer.swift */,
 				57FC1AFD1C0293CE00FAD2F3 /* AnyRenderer.swift */,
 				57FC1AFE1C0293CE00FAD2F3 /* FallbackRenderer.swift */,
 				57FC1AFF1C0293CE00FAD2F3 /* ImageInflaterRenderer.swift */,
 				57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */,
-				57FC1B011C0293CE00FAD2F3 /* Renderer.swift */,
 				57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */,
+				570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */,
 			);
 			name = Renderers;
 			sourceTree = "<group>";
@@ -476,6 +483,7 @@
 				57F5C59B1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
 				57FC1B021C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
+				570993FE1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */,
 				57FC1B0A1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57F5C5911C051ABB00753642 /* CachingSpec.swift in Sources */,
+				570994011C08F7D90010B340 /* MulticastedRendererSpec.swift in Sources */,
 				57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */,
 				57FC1AEA1C0272C100FAD2F3 /* TestRenderData.swift in Sources */,
 			);
@@ -503,6 +512,7 @@
 				57F5C59C1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
 				57FC1B031C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
+				570993FF1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */,
 				57FC1B0B1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

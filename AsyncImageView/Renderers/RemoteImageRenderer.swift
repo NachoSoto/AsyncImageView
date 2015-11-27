@@ -16,6 +16,10 @@ public protocol RemoteRenderDataType: RenderDataType {
 }
 
 /// `RendererType` which downloads images.
+///
+/// Note that this Renderer will ignore `RenderDataType.size` and instead
+/// download the original image.
+/// Consider chaining this with `ImageInflaterRenderer`.
 public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 	private let session: NSURLSession
 

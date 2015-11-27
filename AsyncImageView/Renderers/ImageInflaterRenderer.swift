@@ -56,7 +56,7 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(screenScale: CGFloat) -> AnyRenderer<Self.RenderData, UIImage, Self.Error> {
-		return AnyRenderer(renderer: ImageInflaterRenderer(renderer: self, screenScale: screenScale))
+	public func inflatedWithScale(screenScale: CGFloat) -> ImageInflaterRenderer<Self.RenderData, Self.Result, Self.Error> {
+		return ImageInflaterRenderer(renderer: self, screenScale: screenScale)
 	}
 }

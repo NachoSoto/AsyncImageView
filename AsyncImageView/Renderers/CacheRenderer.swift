@@ -48,6 +48,17 @@ public final class CacheRenderer<
 	}
 }
 
+extension RendererType {
+	/// Surrounds this renderer with a layer of caching.
+	public func withCache<
+		Cache: CacheType
+		where Cache.Key == Self.RenderData, Cache.Value == UIImage
+		>(cache: Cache) -> CacheRenderer<Self, Cache>
+	{
+		return CacheRenderer(renderer: self, cache: cache)
+	}
+}
+
 private enum CacheRendererError: ErrorType {
 	case ImageNotFound
 }
@@ -55,17 +66,6 @@ private enum CacheRendererError: ErrorType {
 // Wrapping initializer to work around `Result` ambiguity.
 private func createResult<T, Error: ErrorType>(value: T?, @autoclosure failWith: () -> Error) -> Result<T, Error> {
 	return Result(value, failWith: failWith)
-}
-
-extension RendererType {
-	/// Surrounds this renderer with a layer of caching.
-	public func withCache<
-		Cache: CacheType
-		where Cache.Key == Self.RenderData, Cache.Value == UIImage
-		>(cache: Cache) -> AnyRenderer<Self.RenderData, RenderResult, Self.Error>
-	{
-		return AnyRenderer(renderer: CacheRenderer(renderer: self, cache: cache))
-	}
 }
 
 extension UIImage {

@@ -49,3 +49,9 @@ extension UIImage {
 		return UIImage(CGImage: CGBitmapContextCreateImage(bitmapContext)!)
 	}
 }
+
+extension RendererType {
+	public func inflatedWithScale(screenScale: CGFloat) -> AnyRenderer<Self.RenderData, Self.Error> {
+		return AnyRenderer(renderer: ImageInflaterRenderer(renderer: self, screenScale: screenScale))
+	}
+}

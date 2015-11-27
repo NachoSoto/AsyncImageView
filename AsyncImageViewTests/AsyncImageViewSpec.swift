@@ -110,9 +110,7 @@ internal final class TestImageProvider: ImageProviderType {
 	private let renderer = TestRenderer()
 
 	func getImageForData(data: TestRenderData) -> SignalProducer<RenderResult, NoError> {
-		let image = self.renderer.renderImageWithData(data)
-		let result = RenderResult(image: image, cacheHit: true)
-
-		return SignalProducer(value: result)
+		return self.renderer.renderImageWithData(data)
+			.map { RenderResult(image: $0, cacheHit: true) }
 	}
 }

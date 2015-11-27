@@ -29,7 +29,7 @@ class RendererImageProviderSpec: QuickSpec {
 				renderer = TestRenderer()
 				provider = ProviderType(
 					name: "com.nachosoto.provider",
-					renderer: renderer.asyncRenderer
+					renderer: AnyRenderer(renderer: renderer)
 				)
 			}
 
@@ -74,7 +74,7 @@ class RendererImageProviderSpec: QuickSpec {
 					provider = ProviderType(
 						name: "com.nachosoto.provider",
 						renderer: AnyRenderer(renderer: DelayedRenderer(
-							renderer: renderer.asyncRenderer,
+							renderer: renderer,
 							delay: delay,
 							scheduler: scheduler
 						))

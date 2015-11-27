@@ -44,21 +44,28 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 			lhs.size == rhs.size)
 }
 
-internal final class TestRenderer: SynchronousRendererType {
+internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
-	func renderImageWithData(data: TestRenderData) -> UIImage {
+	func renderImageWithData(data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
 		let size = data.size
-
 		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
-		self.renderedImages.modify { $0 + [data] }
+		return SignalProducer { observer, disposable in
+			if !disposable.disposed {
+				UIGraphicsBeginImageContextWithOptions(size, true, data.data.rawValue)
+				let image = UIGraphicsGetImageFromCurrentImageContext()
+				UIGraphicsEndImageContext()
 
-		UIGraphicsBeginImageContextWithOptions(size, true, data.data.rawValue)
-		let image = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-
-		return image
+				observer.sendNext(image)
+				observer.sendCompleted()
+			} else {
+				observer.sendInterrupted()
+			}
+		}
+			.on(started: {
+				self.renderedImages.modify { $0 + [data] }
+			})
 	}
 }
 

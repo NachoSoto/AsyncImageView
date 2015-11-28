@@ -11,31 +11,51 @@ import ReactiveCocoa
 import Result
 
 /// Decorates a `RendererType` to introduce a layer of caching.
-public final class CacheRenderer<R: RendererType, C: CacheType
-where C.Key == R.RenderData, C.Value == UIImage>: RendererType {
-	private let renderer: R
-	private let cache: C
+public final class CacheRenderer<
+	Renderer: RendererType,
+	Cache: CacheType
+	where
+	Cache.Key == Renderer.RenderData,
+	Cache.Value == UIImage
+>: RendererType {
+	private let renderer: Renderer
+	private let cache: Cache
 
-	public init(renderer: R, cache: C) {
+	public init(renderer: Renderer, cache: Cache) {
 		self.renderer = renderer
 		self.cache = cache
 	}
 
 	/// Returns an image from the cache if found,
 	/// otherwise it invokes the decorated `renderer` and caches the result.
-	public func renderImageWithData(data: R.RenderData) -> SignalProducer<UIImage, R.Error> {
+	public func renderImageWithData(data: Renderer.RenderData) -> SignalProducer<RenderResult, Renderer.Error> {
 		return SignalProducer
 			.attempt { [cache = self.cache] in
-				return Result(cache.valueForKey(data), failWith: CacheRendererError.ImageNotFound)
+				return createResult(
+					cache.valueForKey(data)?.asCacheHit,
+					failWith: CacheRendererError.ImageNotFound
+				)
 			}
 			.startOn(QueueScheduler())
 			.flatMapError { [renderer = self.renderer] _ in
 				return renderer
 					.renderImageWithData(data)
-					.on(next: { [cache = self.cache] image in
-						cache.setValue(image, forKey: data)
+					.on(next: { [cache = self.cache] result in
+						cache.setValue(result.image, forKey: data)
 					})
+					.map { $0.image.asCacheMiss }
 			}
+	}
+}
+
+extension RendererType {
+	/// Surrounds this renderer with a layer of caching.
+	public func withCache<
+		Cache: CacheType
+		where Cache.Key == Self.RenderData, Cache.Value == UIImage
+		>(cache: Cache) -> CacheRenderer<Self, Cache>
+	{
+		return CacheRenderer(renderer: self, cache: cache)
 	}
 }
 
@@ -43,10 +63,23 @@ private enum CacheRendererError: ErrorType {
 	case ImageNotFound
 }
 
-extension RendererType {
-	/// Surrounds this renderer with a layer of caching.
-	public func withCache<C: CacheType where C.Key == Self.RenderData, C.Value == UIImage>
-		(cache: C) -> AnyRenderer<Self.RenderData, Self.Error> {
-			return AnyRenderer(renderer: CacheRenderer(renderer: self, cache: cache))
+// Wrapping initializer to work around `Result` ambiguity.
+private func createResult<T, Error: ErrorType>(value: T?, @autoclosure failWith: () -> Error) -> Result<T, Error> {
+	return Result(value, failWith: failWith)
+}
+
+extension UIImage {
+	private var asCacheHit: RenderResult {
+		return RenderResult(
+			image: self,
+			cacheHit: true
+		)
+	}
+
+	private var asCacheMiss: RenderResult {
+		return RenderResult(
+			image: self,
+			cacheHit: false
+		)
 	}
 }

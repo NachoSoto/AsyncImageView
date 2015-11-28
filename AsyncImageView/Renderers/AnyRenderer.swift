@@ -10,17 +10,38 @@ import UIKit
 import ReactiveCocoa
 
 /// A type-erased `RendererType`.
-public final class AnyRenderer<T: RenderDataType, E: ErrorType>: RendererType {
-	private let renderBlock: (T) -> SignalProducer<UIImage, E>
+public final class AnyRenderer<
+	Data: RenderDataType, Result: RenderResultType, Error: ErrorType
+>: RendererType {
+	private let renderBlock: (Data) -> SignalProducer<Result, Error>
 
+	/// Creates an `AnyRenderer` based on another `RendererType`.
+	public convenience init<
+		R: RendererType
+		where R.RenderData == Data, R.Result == Result, R.Error == Error
+		>(renderer: R)
+	{
+		self.init(renderBlock: renderer.renderImageWithData)
+	}
+
+	private init(renderBlock: (Data) -> SignalProducer<Result, Error>) {
+		self.renderBlock = renderBlock
+	}
+
+	public func renderImageWithData(data: Data) -> SignalProducer<Result, Error> {
+		return self.renderBlock(data)
+	}
+}
+
+extension SynchronousRendererType {
 	/// Constructs an `AnyRenderer` with a `SynchronousRendererType`.
 	/// The created `SignalProducer` will simply emit the result
 	/// of `renderImageWithData`.
-	public convenience init<R: SynchronousRendererType where R.RenderData == T>(renderer: R) {
-		self.init { data in
+	public var asyncRenderer: AnyRenderer<Self.RenderData, UIImage, NoError> {
+		return AnyRenderer { data in
 			return SignalProducer { observer, disposable in
 				if !disposable.disposed {
-					observer.sendNext(renderer.renderImageWithData(data))
+					observer.sendNext(self.renderImageWithData(data))
 					observer.sendCompleted()
 				} else {
 					observer.sendInterrupted()
@@ -28,24 +49,5 @@ public final class AnyRenderer<T: RenderDataType, E: ErrorType>: RendererType {
 			}
 				.startOn(QueueScheduler())
 		}
-	}
-
-	/// Creates an `AnyRenderer` based on another `RendererType`.
-	public convenience init<R: RendererType where R.RenderData == T, R.Error == E>(renderer: R) {
-		self.init(renderBlock: renderer.renderImageWithData)
-	}
-
-	private init(renderBlock: (T) -> SignalProducer<UIImage, E>) {
-		self.renderBlock = renderBlock
-	}
-
-	public func renderImageWithData(data: T) -> SignalProducer<UIImage, E> {
-		return self.renderBlock(data)
-	}
-}
-
-extension SynchronousRendererType {
-	public var asyncRenderer: AnyRenderer<Self.RenderData, NoError> {
-		return AnyRenderer(renderer: self)
 	}
 }

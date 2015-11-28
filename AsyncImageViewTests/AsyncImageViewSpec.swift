@@ -12,19 +12,19 @@ import ReactiveCocoa
 
 @testable import AsyncImageView
 
-private typealias ViewType = AsyncImageView<TestRenderData, TestData, TestImageProvider>
+private typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer>
 
 class AsyncImageViewSpec: QuickSpec {
 	override func spec() {
 		describe("AsyncImageView") {
 			var view: ViewType!
-			var imageProvider: TestImageProvider!
+			var renderer: TestRenderer!
 
 			beforeEach {
-				imageProvider = TestImageProvider()
+				renderer = TestRenderer()
 				view = ViewType(
 					initialFrame: CGRectZero,
-					imageProvider: imageProvider,
+					renderer: renderer,
 					imageCreationScheduler: ImmediateScheduler()
 				)
 			}
@@ -90,7 +90,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.data = .A
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+					expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 
 				it("Only renders once if size does not change") {
@@ -99,18 +99,9 @@ class AsyncImageViewSpec: QuickSpec {
 					view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 					expect(view.image).toNotEventually(beNil())
-					expect(imageProvider.renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+					expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
 				}
 			}
 		}
-	}
-}
-
-internal final class TestImageProvider: ImageProviderType {
-	private let renderer = TestRenderer()
-
-	func getImageForData(data: TestRenderData) -> SignalProducer<RenderResult, NoError> {
-		return self.renderer.renderImageWithData(data)
-			.map { RenderResult(image: $0, cacheHit: true) }
 	}
 }

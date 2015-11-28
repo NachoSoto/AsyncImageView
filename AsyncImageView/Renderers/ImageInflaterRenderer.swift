@@ -62,3 +62,31 @@ extension RendererType {
 		return ImageInflaterRenderer(renderer: self, screenScale: screenScale)
 	}
 }
+
+internal struct InflaterSizeCalculator {
+	static func drawingRectForRenderingImageOfSize(imageSize imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
+		if (imageSize == canvasSize ||
+			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat(FLT_EPSILON)) {
+				return CGRect(origin: CGPointZero, size: canvasSize)
+		} else {
+			let destScale = max(
+				canvasSize.width / imageSize.width,
+				canvasSize.height / imageSize.height
+			)
+
+			let newWidth = imageSize.width * destScale
+			let newHeight = imageSize.height * destScale
+
+			let dWidth = ((canvasSize.width - newWidth) / 2.0)
+			let dHeight = ((canvasSize.height - newHeight) / 2.0)
+
+			return CGRectMake(dWidth, dHeight, newWidth, newHeight)
+		}
+	}
+}
+
+private extension CGSize {
+	var aspectRatio: CGFloat {
+		return self.width / self.height
+	}
+}

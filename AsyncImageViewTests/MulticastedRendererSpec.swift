@@ -175,7 +175,7 @@ private final class DelayedRenderer<T: RendererType>: RendererType {
 		self.scheduler = scheduler
 	}
 
-	func renderImageWithData(data: T.RenderData) -> SignalProducer<T.Result, T.Error> {
+	func renderImageWithData(data: T.Data) -> SignalProducer<T.Result, T.Error> {
 		return renderer
 			.renderImageWithData(data)
 			.delay(self.delay, onScheduler: self.scheduler)

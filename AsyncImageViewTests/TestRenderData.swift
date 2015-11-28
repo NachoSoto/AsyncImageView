@@ -51,18 +51,13 @@ internal final class TestRenderer: RendererType {
 		let size = data.size
 		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
-		return SignalProducer { observer, disposable in
-			if !disposable.disposed {
-				UIGraphicsBeginImageContextWithOptions(size, true, data.data.rawValue)
-				let image = UIGraphicsGetImageFromCurrentImageContext()
-				UIGraphicsEndImageContext()
-
-				observer.sendNext(image)
-				observer.sendCompleted()
-			} else {
-				observer.sendInterrupted()
-			}
+		let renderer = ContextRenderer<TestRenderData>(scale: data.data.rawValue, opaque: true) { _ in
+			// nothing to render
 		}
+
+		return renderer
+			.asyncRenderer(ImmediateScheduler())
+			.renderImageWithData(data)
 			.on(started: {
 				self.renderedImages.modify { $0 + [data] }
 			})

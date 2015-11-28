@@ -72,21 +72,43 @@ class InMemoryCacheSpec: QuickSpec {
 class DiskCacheSpec: QuickSpec {
 	override func spec() {
 		describe("DiskCache") {
+			let directoryCreator = {
+				return NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+					.URLByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString, isDirectory: true)
+			}
+
 			testCache(
 				cacheCreator: { () -> DiskCache<String, String> in
-					let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-						.URLByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString, isDirectory: true)
-
-					return DiskCache(rootDirectory: directory)
+					return DiskCache(rootDirectory: directoryCreator())
 				},
 				keyCreator: String.randomReadableString,
 				valueCreator: String.randomReadableString
 			)
+
+			it("saves files in subdirectory") {
+				func readFile(url: NSURL) -> String? {
+					return NSData(contentsOfURL: url)
+						.flatMap { NSString(data: $0, encoding: String.encoding) as String? }
+				}
+
+				let directory = directoryCreator()
+				let cache = DiskCache<String, String>(rootDirectory: directory)
+
+				cache.setValue("hello", forKey: "word")
+				cache.setValue("hi", forKey: "apple")
+
+				expect(readFile(directory.URLByAppendingPathComponent("4").URLByAppendingPathComponent("word"))) == "hello"
+				expect(readFile(directory.URLByAppendingPathComponent("5").URLByAppendingPathComponent("apple"))) == "hi"
+			}
 		}
 	}
 }
 
 extension String: DataFileType {
+	public var subdirectory: String? {
+		return "\(self.characters.count)"
+	}
+
 	public var uniqueFilename: String {
 		return self
 	}
@@ -110,6 +132,6 @@ private let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123
 
 extension String {
 	private static func randomReadableString() -> String {
-		return self.random(15, NSCharacterSet(charactersInString: alphabet))
+		return self.random(UInt(Int.random(1...15)), NSCharacterSet(charactersInString: alphabet))
 	}
 }

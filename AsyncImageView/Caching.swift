@@ -85,6 +85,10 @@ private final class CacheKey<K: Hashable>: NSObject {
 
 /// Represents the key for a value that can be persisted on disk.
 public protocol DataFileType {
+	/// Optionally provide a subdirectory for this value.
+	var subdirectory: String? { get }
+
+	/// The string that can uniquely reference this value.
 	var uniqueFilename: String { get }
 }
 
@@ -101,6 +105,15 @@ public protocol NSDataConvertible {
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private let rootDirectory: NSURL
 	private let fileManager = NSFileManager.defaultManager()
+
+	public static func onCacheSubdirectory(directoryName: String) -> DiskCache {
+		let url = try! NSFileManager()
+			.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+			.URLByAppendingPathComponent("AsyncImageView", isDirectory: true)
+			.URLByAppendingPathComponent(directoryName, isDirectory: true)
+
+		return DiskCache(rootDirectory: url)
+	}
 
 	public init(rootDirectory: NSURL) {
 		self.rootDirectory = rootDirectory
@@ -124,10 +137,14 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	}
 
 	private func filePathForKey(key: K) -> NSURL {
-		return self.rootDirectory.URLByAppendingPathComponent(
-			key.uniqueFilename,
-			isDirectory: false
-		)
+		if let subdirectory = key.subdirectory {
+			return self.rootDirectory
+				.URLByAppendingPathComponent(subdirectory, isDirectory: true)
+				.URLByAppendingPathComponent(key.uniqueFilename, isDirectory: false)
+		} else {
+			return self.rootDirectory
+				.URLByAppendingPathComponent(key.uniqueFilename, isDirectory: false)
+		}
 	}
 
 	private func guaranteeDirectoryExists(url: NSURL) {

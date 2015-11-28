@@ -17,7 +17,7 @@ public final class ImageInflaterRenderer<
 	private let renderBlock: (Data) -> SignalProducer<Result, Error>
 
 	public init<
-		Renderer: RendererType where Renderer.RenderData == Data, Renderer.Result == Result, Renderer.Error == Error
+		Renderer: RendererType where Renderer.Data == Data, Renderer.Result == Result, Renderer.Error == Error
 		>(renderer: Renderer, screenScale: CGFloat)
 	{
 		self.screenScale = screenScale
@@ -58,7 +58,7 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(screenScale: CGFloat) -> ImageInflaterRenderer<Self.RenderData, Self.Result, Self.Error> {
+	public func inflatedWithScale(screenScale: CGFloat) -> ImageInflaterRenderer<Self.Data, Self.Result, Self.Error> {
 		return ImageInflaterRenderer(renderer: self, screenScale: screenScale)
 	}
 }

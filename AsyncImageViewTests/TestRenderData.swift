@@ -47,20 +47,23 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
-	func renderImageWithData(data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
-		let size = data.size
-		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
-
-		let renderer = ContextRenderer<TestRenderData>(scale: data.data.rawValue, opaque: true) { _ in
-			// nothing to render
-		}
-
-		return renderer
+	func renderImageWithData(data: TestRenderData) -> SignalProducer<UIImage, NoError> {
+		return TestRenderer
+			.rendererForData(data)
 			.asyncRenderer(ImmediateScheduler())
 			.renderImageWithData(data)
 			.on(started: {
 				self.renderedImages.modify { $0 + [data] }
 			})
+	}
+
+	static func rendererForData(data: TestRenderData) -> ContextRenderer<TestRenderData> {
+		let size = data.size
+		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
+
+		return ContextRenderer<TestRenderData>(scale: data.data.rawValue, opaque: true) { _ in
+			// nothing to render
+		}
 	}
 }
 

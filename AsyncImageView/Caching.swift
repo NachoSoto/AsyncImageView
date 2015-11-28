@@ -109,7 +109,8 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	public static func onCacheSubdirectory(directoryName: String) -> DiskCache {
 		let url = try! NSFileManager()
 			.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-			.URLByAppendingPathComponent(directoryName)
+			.URLByAppendingPathComponent("AsyncImageView", isDirectory: true)
+			.URLByAppendingPathComponent(directoryName, isDirectory: true)
 
 		return DiskCache(rootDirectory: url)
 	}

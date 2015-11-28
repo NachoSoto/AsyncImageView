@@ -53,3 +53,17 @@ extension SynchronousRendererType {
 		}
 	}
 }
+
+extension RendererType {
+	/// Creates a new `RendererType` that maps the data necessary
+	/// to produce images, by applying the given block.
+	///
+	/// This is useful when you want to compose two renderers 
+	/// with different `RenderDataType`s.
+	public func mapData<NewData: RenderDataType>(mapper: (NewData) -> Self.Data)
+		-> AnyRenderer<NewData, Self.RenderResult, Self.Error> {
+			return AnyRenderer { data in
+				return self.renderImageWithData(mapper(data))
+			}
+	}
+}

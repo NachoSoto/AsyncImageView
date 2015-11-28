@@ -65,10 +65,6 @@ internal final class TestRenderer: RendererType {
 }
 
 internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, data: TestData) {
-	expect(expression: image).toNotEventually(beNil())
-
-	guard let image = image() else { return }
-
-	expect(image.size) == size
-	expect(image.scale) == data.rawValue
+	expect(image()?.size).toEventually(equal(size))
+	expect(image()?.scale).toEventually(equal(data.rawValue))
 }

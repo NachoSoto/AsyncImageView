@@ -19,7 +19,7 @@ public final class AnyRenderer<
 	public convenience init<
 		R: RendererType
 		where R.RenderData == Data, R.Result == Result, R.Error == Error
-		>(renderer: R)
+		>(_ renderer: R)
 	{
 		self.init(renderBlock: renderer.renderImageWithData)
 	}

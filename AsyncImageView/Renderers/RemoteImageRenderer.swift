@@ -6,7 +6,6 @@
 //  Copyright © 2015 Nacho Soto. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 import ReactiveCocoa

@@ -35,6 +35,8 @@ public final class ImageInflaterRenderer<
 
 extension UIImage {
 	internal func inflate(withSize size: CGSize, scale: CGFloat) -> UIImage {
+		assert(size.width > 0 && size.height > 0, "Invalid size: (\(size.width)x\(size.height))")
+
 		let renderSize = CGSize(
 			width: size.width * scale,
 			height: size.height * scale

@@ -25,8 +25,8 @@ public final class FallbackRenderer<Data: RenderDataType, Result: RenderResultTy
 		R2.Error == E2
 		>(primaryRenderer: R1, fallbackRenderer: R2)
 	{
-		self.primaryRenderer = AnyRenderer(renderer: primaryRenderer)
-		self.fallbackRenderer = AnyRenderer(renderer: fallbackRenderer)
+		self.primaryRenderer = AnyRenderer(primaryRenderer)
+		self.fallbackRenderer = AnyRenderer(fallbackRenderer)
 	}
 
 	/// The resulting `SignalProducer` will emit images created by the primary

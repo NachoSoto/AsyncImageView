@@ -98,7 +98,7 @@ public final class AsyncImageView<
 
 	// MARK: -
 
-	private func updateImage(result: Renderer.Result) {
+	private func updateImage(result: Renderer.RenderResult) {
 		if result.cacheHit {
 			self.image = result.image
 		} else {

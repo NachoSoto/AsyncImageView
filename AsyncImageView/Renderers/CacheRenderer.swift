@@ -28,10 +28,10 @@ public final class CacheRenderer<
 
 	/// Returns an image from the cache if found,
 	/// otherwise it invokes the decorated `renderer` and caches the result.
-	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<RenderResult, Renderer.Error> {
+	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
 		return SignalProducer
 			.attempt { [cache = self.cache] in
-				return createResult(
+				return Result(
 					cache.valueForKey(data)?.asCacheHit,
 					failWith: CacheRendererError.ImageNotFound
 				)
@@ -63,21 +63,16 @@ private enum CacheRendererError: ErrorType {
 	case ImageNotFound
 }
 
-// Wrapping initializer to work around `Result` ambiguity.
-private func createResult<T, Error: ErrorType>(value: T?, @autoclosure failWith: () -> Error) -> Result<T, Error> {
-	return Result(value, failWith: failWith)
-}
-
 extension UIImage {
-	private var asCacheHit: RenderResult {
-		return RenderResult(
+	private var asCacheHit: ImageResult {
+		return ImageResult(
 			image: self,
 			cacheHit: true
 		)
 	}
 
-	private var asCacheMiss: RenderResult {
-		return RenderResult(
+	private var asCacheMiss: ImageResult {
+		return ImageResult(
 			image: self,
 			cacheHit: false
 		)

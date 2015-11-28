@@ -26,13 +26,7 @@ public final class LocalImageRenderer<T: LocalRenderDataType>: RendererType {
 
 	public func renderImageWithData(data: T) -> SignalProducer<UIImage, NoError> {
 		return SignalProducer
-			.attempt { data.image.asResult }
+			.attempt { Result(data.image) }
 			.startOn(QueueScheduler())
-	}
-}
-
-extension UIImage {
-	private var asResult: Result<UIImage, NoError> {
-		return Result(self)
 	}
 }

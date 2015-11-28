@@ -10,7 +10,7 @@ import UIKit
 import ReactiveCocoa
 
 // The initial value is `nil`.
-private typealias ImageProperty = AnyProperty<RenderResult?>
+private typealias ImageProperty = AnyProperty<ImageResult?>
 
 /// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.
@@ -29,7 +29,7 @@ public final class MulticastedRenderer<
 		self.cache = Atomic(InMemoryCache(cacheName: name))
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, NoError> {
+	public func renderImageWithData(data: Data) -> SignalProducer<ImageResult, NoError> {
 		let property = getPropertyForData(data)
 
 		return property.producer
@@ -64,12 +64,12 @@ extension RendererType where Error == NoError {
 }
 
 extension RendererType {
-	private func createProducerForRenderingData(data: Data) -> SignalProducer<RenderResult, Error> {
+	private func createProducerForRenderingData(data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderImageWithData(data)
 			.flatMap(.Concat) { result in
 				return SignalProducer(values: [
-					RenderResult(image: result.image, cacheHit: result.cacheHit),
-					RenderResult(image: result.image, cacheHit: true)
+					ImageResult(image: result.image, cacheHit: result.cacheHit),
+					ImageResult(image: result.image, cacheHit: true)
 				])
 		}
 	}

@@ -27,11 +27,11 @@ class MulticastedRendererSpec: QuickSpec {
 				var innerRenderer: InnerRendererType!
 				var renderer: RenderType!
 
-				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<RenderResult, NoError> {
+				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
 
-				func getImageForData(data: TestData, _ size: CGSize) -> RenderResult? {
+				func getImageForData(data: TestData, _ size: CGSize) -> ImageResult? {
 					return getProducerForData(data, size)
 						.single()?
 						.value
@@ -65,7 +65,7 @@ class MulticastedRendererSpec: QuickSpec {
 			}
 
 			context("Cache hit") {
-				typealias InnerRendererType = AnyRenderer<TestRenderData, RenderResult, NoError>
+				typealias InnerRendererType = AnyRenderer<TestRenderData, ImageResult, NoError>
 				typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
 
 				var scheduler: TestScheduler!
@@ -77,11 +77,11 @@ class MulticastedRendererSpec: QuickSpec {
 				var cacheHitRenderer: CacheHitRenderer!
 
 
-				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<RenderResult, NoError> {
+				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
 
-				func getImageForData(data: TestData, _ size: CGSize) -> RenderResult? {
+				func getImageForData(data: TestData, _ size: CGSize) -> ImageResult? {
 					return getProducerForData(data, size)
 						.single()?
 						.value
@@ -107,7 +107,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 				func getCacheHitValue() -> Bool {
 					let producer = getProducerForData(data, size)
-					var result: RenderResult?
+					var result: ImageResult?
 
 					producer.startWithNext { result = $0 }
 
@@ -134,7 +134,7 @@ class MulticastedRendererSpec: QuickSpec {
 					let producer = getProducerForData(data, size)
 					scheduler.advanceByInterval(delay)
 
-					var result: RenderResult?
+					var result: ImageResult?
 					producer.startWithNext { result = $0 }
 
 					expect(result).toEventuallyNot(beNil())
@@ -152,7 +152,7 @@ private final class CacheHitRenderer: RendererType {
 
 	private let testRenderer = TestRenderer()
 
-	func renderImageWithData(data: TestRenderData) ->  SignalProducer<RenderResult, NoError> {
+	func renderImageWithData(data: TestRenderData) ->  SignalProducer<ImageResult, NoError> {
 		return testRenderer.renderImageWithData(data)
 			.map {
 				return RenderResult(
@@ -175,7 +175,7 @@ private final class DelayedRenderer<T: RendererType>: RendererType {
 		self.scheduler = scheduler
 	}
 
-	func renderImageWithData(data: T.Data) -> SignalProducer<T.Result, T.Error> {
+	func renderImageWithData(data: T.Data) -> SignalProducer<T.RenderResult, T.Error> {
 		return renderer
 			.renderImageWithData(data)
 			.delay(self.delay, onScheduler: self.scheduler)

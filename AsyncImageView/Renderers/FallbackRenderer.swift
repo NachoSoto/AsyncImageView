@@ -25,8 +25,8 @@ public final class FallbackRenderer<
 		where
 		R1.Data == Data,
 		R2.Data == Data,
-		R1.Result == RR1,
-		R2.Result == RR2,
+		R1.RenderResult == RR1,
+		R2.RenderResult == RR2,
 		R1.Error == E1,
 		R2.Error == E2
 		>(primaryRenderer: R1, fallbackRenderer: R2)
@@ -37,7 +37,7 @@ public final class FallbackRenderer<
 
 	/// The resulting `SignalProducer` will emit images created by the primary
 	/// renderer. If that emits an error, the fallback Renderer will be used.
-	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, E2> {
+	public func renderImageWithData(data: Data) -> SignalProducer<ImageResult, E2> {
 		return self.primaryRenderer
 			.renderImageWithData(data)
 			.map { $0.asResult }
@@ -55,23 +55,23 @@ extension RendererType {
 		Other: RendererType
 		where
 		Self.Data == Other.Data
-		>(fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.Result, Other.Result, Self.Error, Other.Error>
+		>(fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
 	{
 		return FallbackRenderer(primaryRenderer: self, fallbackRenderer: fallbackRenderer)
 	}
 }
 
 extension RenderResultType {
-	private var asResult: RenderResult {
-		return RenderResult(
+	private var asResult: ImageResult {
+		return ImageResult(
 			image: self.image,
 			cacheHit: self.cacheHit
 		)
 	}
 }
 
-extension RenderResult {
-	private var asResult: RenderResult {
+extension ImageResult {
+	private var asResult: ImageResult {
 		return self
 	}
 }

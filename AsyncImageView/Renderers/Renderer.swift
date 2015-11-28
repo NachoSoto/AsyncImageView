@@ -19,7 +19,7 @@ public protocol RenderResultType {
 	var cacheHit: Bool { get }
 }
 
-public struct RenderResult: RenderResultType {
+public struct ImageResult: RenderResultType {
 	public let image: UIImage
 	public let cacheHit: Bool
 
@@ -43,10 +43,10 @@ extension UIImage: RenderResultType {
 public protocol RendererType {
 	typealias Data: RenderDataType
 
-	typealias Result: RenderResultType
+	typealias RenderResult: RenderResultType
 	typealias Error: ErrorType
 
-	func renderImageWithData(data: Data) -> SignalProducer<Result, Error>
+	func renderImageWithData(data: Data) -> SignalProducer<RenderResult, Error>
 }
 
 public protocol SynchronousRendererType {

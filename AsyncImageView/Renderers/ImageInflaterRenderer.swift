@@ -11,13 +11,13 @@ import ReactiveCocoa
 
 /// `RendererType` decorator that inflates images.
 public final class ImageInflaterRenderer<
-	Data: RenderDataType, Result: RenderResultType, Error: ErrorType
+	Data: RenderDataType, RenderResult: RenderResultType, Error: ErrorType
 >: RendererType {
 	private let screenScale: CGFloat
-	private let renderBlock: (Data) -> SignalProducer<Result, Error>
+	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
 	public init<
-		Renderer: RendererType where Renderer.Data == Data, Renderer.Result == Result, Renderer.Error == Error
+		Renderer: RendererType where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error
 		>(renderer: Renderer, screenScale: CGFloat)
 	{
 		self.screenScale = screenScale
@@ -58,7 +58,7 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(screenScale: CGFloat) -> ImageInflaterRenderer<Self.Data, Self.Result, Self.Error> {
+	public func inflatedWithScale(screenScale: CGFloat) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
 		return ImageInflaterRenderer(renderer: self, screenScale: screenScale)
 	}
 }

@@ -11,24 +11,26 @@ import ReactiveCocoa
 
 /// A type-erased `RendererType`.
 public final class AnyRenderer<
-	Data: RenderDataType, Result: RenderResultType, Error: ErrorType
+	Data: RenderDataType,
+	RenderResult: RenderResultType,
+	Error: ErrorType
 >: RendererType {
-	private let renderBlock: (Data) -> SignalProducer<Result, Error>
+	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
 	/// Creates an `AnyRenderer` based on another `RendererType`.
 	public convenience init<
 		R: RendererType
-		where R.Data == Data, R.Result == Result, R.Error == Error
+		where R.Data == Data, R.RenderResult == RenderResult, R.Error == Error
 		>(_ renderer: R)
 	{
 		self.init(renderBlock: renderer.renderImageWithData)
 	}
 
-	private init(renderBlock: (Data) -> SignalProducer<Result, Error>) {
+	private init(renderBlock: (Data) -> SignalProducer<RenderResult, Error>) {
 		self.renderBlock = renderBlock
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<Result, Error> {
+	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, Error> {
 		return self.renderBlock(data)
 	}
 }

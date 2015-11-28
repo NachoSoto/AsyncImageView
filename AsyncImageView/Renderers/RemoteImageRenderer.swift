@@ -9,6 +9,7 @@
 import UIKit
 
 import ReactiveCocoa
+import Result
 
 public protocol RemoteRenderDataType: RenderDataType {
 	var imageURL: NSURL { get }
@@ -39,13 +40,15 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 				}
 			}
 			.observeOn(QueueScheduler())
-			.flatMap(.Merge) { data -> SignalProducer<UIImage, RemoteImageRendererError> in
-				if let image = UIImage(data: data) {
-					return SignalProducer(value: image)
-				} else {
-					return SignalProducer(error: .DecodingError)
+			.flatMap(.Merge) { data in
+				return SignalProducer
+					.attempt {
+						return Result(
+							UIImage(data: data),
+							failWith: RemoteImageRendererError.DecodingError
+						)
 				}
-			}
+		}
 	}
 }
 

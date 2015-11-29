@@ -12,6 +12,6 @@ extension UIImage: NSDataConvertible {
 	// init(data:) is already implemented by UIImage.
 
 	public var data: NSData? {
-		return UIImageJPEGRepresentation(self, 1)
+		return UIImagePNGRepresentation(self)
 	}
 }

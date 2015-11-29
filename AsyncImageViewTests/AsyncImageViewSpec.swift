@@ -12,96 +12,250 @@ import ReactiveCocoa
 
 @testable import AsyncImageView
 
-private typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer>
-
 class AsyncImageViewSpec: QuickSpec {
 	override func spec() {
 		describe("AsyncImageView") {
-			var view: ViewType!
-			var renderer: TestRenderer!
+			context("No placeholder") {
+				typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer, TestRenderer>
 
-			beforeEach {
-				renderer = TestRenderer()
-				view = ViewType(
-					initialFrame: CGRectZero,
-					renderer: renderer,
-					imageCreationScheduler: ImmediateScheduler()
-				)
-			}
+				var view: ViewType!
+				var renderer: TestRenderer!
 
-			func verifyView() {
-				verifyImage(view.image, withSize: view.frame.size, data: view.data)
-			}
+				beforeEach {
+					renderer = TestRenderer()
+					view = ViewType(
+						initialFrame: CGRectZero,
+						renderer: renderer,
+						placeholderRenderer: nil,
+						imageCreationScheduler: ImmediateScheduler()
+					)
+				}
 
-			it("has no image initially") {
-				expect(view.image).to(beNil())
-			}
+				func verifyView() {
+					verifyImage(view.image, withSize: view.frame.size, data: view.data)
+				}
 
-			context("Updating image") {
-				it("Does not render image if size is not set yet") {
-					view.data = .A
-
+				it("has no image initially") {
 					expect(view.image).to(beNil())
 				}
 
-				it("Updates image when setting data") {
-					view.frame.size = CGSize(width: 10, height: 10)
-					view.data = .A
+				context("Updating image") {
+					it("does not render image if size is not set yet") {
+						view.data = .A
 
-					verifyView()
+						expect(view.image).to(beNil())
+					}
+
+					it("updates image when setting data") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .A
+
+						verifyView()
+					}
+
+					it("updates image when updating data") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .A
+						view.data = .B
+
+						verifyView()
+					}
+
+					it("updates image when setting frame") {
+						view.data = .C
+						view.frame.size = CGSize(width: 10, height: 10)
+
+						verifyView()
+					}
+
+					it("updates image when updating frame") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .C
+
+						view.frame.size = CGSize(width: 15, height: 15)
+
+						verifyView()
+					}
+
+					it("resets image when updating data") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .C
+						verifyView()
+
+						view.data = .A
+
+						expect(view.image).to(beNil()) // image should be reset immediately
+						verifyView() // and updated when rendering finishes
+					}
+
+					it("resets image when updating frame") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .C
+						verifyView()
+
+						view.frame.size = CGSize(width: 15, height: 15)
+
+						expect(view.image).to(beNil()) // image should be reset immediately
+						verifyView() // and updated when rendering finishes
+					}
 				}
 
-				it("Updates image when updating data") {
-					view.frame.size = CGSize(width: 10, height: 10)
-					view.data = .A
-					view.data = .B
+				context("Not updating image if nothing changed") {
+					it("does not attempt to render anything is size is not ready") {
+						view.data = .A
+						view.frame.size = CGSize(width: 10, height: 0)
 
-					verifyView()
-				}
+						expect(view.image).toEventually(beNil())
+					}
 
-				it("Updates image when setting frame") {
-					view.data = .C
-					view.frame.size = CGSize(width: 10, height: 10)
+					it("only renders once if data does not change") {
+						view.data = .A
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .A
 
-					verifyView()
-				}
+						expect(view.image).toNotEventually(beNil())
+						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+					}
 
-				it("Updates image when updating frame") {
-					view.frame.size = CGSize(width: 10, height: 10)
-					view.data = .C
+					it("only renders once if size does not change") {
+						view.data = .A
+						view.frame = CGRect(origin: CGPointZero, size: CGSize(width: 10, height: 10))
+						view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
-					view.frame.size = CGSize(width: 15, height: 15)
-					
-					verifyView()
+						expect(view.image).toNotEventually(beNil())
+						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+					}
 				}
 			}
 
-			context("Not updating image if nothing changed") {
-				it("Does not attempt to render anything is size is not ready") {
-					view.data = .A
-					view.frame.size = CGSize(width: 10, height: 0)
+			context("Placeholder renderer") {
+				typealias ViewType = AsyncImageView<TestRenderData, TestData, ManualRenderer, ManualRenderer>
 
-					expect(view.image).toEventually(beNil())
+				var view: ViewType!
+				var placeholderRenderer: ManualRenderer!
+				var renderer: ManualRenderer!
+
+				beforeEach {
+					placeholderRenderer = ManualRenderer()
+					renderer = ManualRenderer()
+					view = ViewType(
+						initialFrame: CGRectZero,
+						renderer: renderer,
+						placeholderRenderer: placeholderRenderer,
+						imageCreationScheduler: ImmediateScheduler()
+					)
 				}
 
-				it("Only renders once if data does not change") {
-					view.data = .A
-					view.frame.size = CGSize(width: 10, height: 10)
-					view.data = .A
-
-					expect(view.image).toNotEventually(beNil())
-					expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+				func verifyRealImage() {
+					verifyImage(view.image, withSize: view.frame.size, data: view.data)
 				}
 
-				it("Only renders once if size does not change") {
-					view.data = .A
-					view.frame = CGRect(origin: CGPointZero, size: CGSize(width: 10, height: 10))
-					view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
+				func verifyPlaceholder() {
+					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data.placeholderScale)
+				}
 
-					expect(view.image).toNotEventually(beNil())
-					expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+				it("has no image initially") {
+					expect(view.image).to(beNil())
+				}
+
+				it("sets placeholder image if emitted first") {
+					view.frame.size = CGSize(width: 1, height: 1)
+
+					let data: TestData = .A
+					let renderData = data.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(renderData)
+					renderer.addRenderSignal(renderData)
+
+					view.data = data
+					expect(view.image).to(beNil())
+
+					placeholderRenderer.emitImageForData(renderData, scale: data.placeholderScale)
+					verifyPlaceholder()
+
+					renderer.emitImageForData(renderData, scale: data.rawValue)
+					verifyRealImage()
+				}
+
+				it("does not clear placeholder image when updating data") {
+					view.frame.size = CGSize(width: 1, height: 1)
+
+					let originalData: TestData = .A
+					let originalRenderData = originalData.renderDataWithSize(view.frame.size)
+
+					let updatedData: TestData = .B
+					let updatedRenderData = updatedData.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(originalRenderData)
+					placeholderRenderer.addRenderSignal(updatedRenderData)
+					renderer.addRenderSignal(originalRenderData)
+					renderer.addRenderSignal(updatedRenderData)
+
+					view.data = originalData
+
+					placeholderRenderer.emitImageForData(originalRenderData, scale: originalData.placeholderScale)
+					verifyPlaceholder()
+
+					view.data = updatedData
+					verifyImage(view.image, withSize: view.frame.size, expectedScale: originalData.placeholderScale)
+				}
+
+				it("sets placeholder image when updating data") {
+					view.frame.size = CGSize(width: 1, height: 1)
+
+					let originalData: TestData = .A
+					let originalRenderData = originalData.renderDataWithSize(view.frame.size)
+
+					let updatedData: TestData = .B
+					let updatedRenderData = updatedData.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(originalRenderData)
+					placeholderRenderer.addRenderSignal(updatedRenderData)
+					renderer.addRenderSignal(originalRenderData)
+					renderer.addRenderSignal(updatedRenderData)
+
+					view.data = originalData
+
+					renderer.emitImageForData(originalRenderData, scale: originalData.rawValue)
+					verifyRealImage()
+
+					view.data = updatedData
+
+					placeholderRenderer.emitImageForData(updatedRenderData, scale: updatedData.placeholderScale)
+					verifyPlaceholder()
 				}
 			}
 		}
+	}
+}
+
+private final class ManualRenderer: RendererType {
+	var signals: [TestRenderData : (signal: Signal<UIImage, NoError>, observer: Signal<UIImage, NoError>.Observer)] = [:]
+
+	func addRenderSignal(data: TestRenderData) {
+		signals[data] = Signal<UIImage, NoError>.pipe()
+	}
+
+	func emitImageForData(data: TestRenderData, scale: CGFloat) {
+		let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
+		let observer = signals[data]!.observer
+
+		observer.sendNext(image)
+		observer.sendCompleted()
+	}
+
+	func renderImageWithData(data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
+		guard let signal = signals[data]?.signal else {
+			XCTFail("Signal not created for \(data)")
+			return .empty
+		}
+
+		return SignalProducer(signal: signal)
+	}
+}
+
+private extension TestData {
+	var placeholderScale: CGFloat {
+		return self.rawValue * 5
 	}
 }

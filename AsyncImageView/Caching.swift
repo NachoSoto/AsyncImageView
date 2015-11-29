@@ -105,6 +105,7 @@ public protocol NSDataConvertible {
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private let rootDirectory: NSURL
 	private let fileManager = NSFileManager.defaultManager()
+	private let lock: NSLock
 
 	public static func onCacheSubdirectory(directoryName: String) -> DiskCache {
 		let url = try! NSFileManager()
@@ -117,23 +118,35 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 
 	public init(rootDirectory: NSURL) {
 		self.rootDirectory = rootDirectory
+		self.lock = NSLock()
+		self.lock.name = "DiskCache.\(rootDirectory.absoluteString)"
 	}
 
 	public func valueForKey(key: K) -> V? {
-		return NSData(contentsOfURL: self.filePathForKey(key))
+		return withLock { NSData(contentsOfURL: self.filePathForKey(key)) }
 			.flatMap(V.init)
 	}
 
 	public func setValue(value: V?, forKey key: K) {
 		let url = self.filePathForKey(key)
 
-		self.guaranteeDirectoryExists(url.URLByDeletingLastPathComponent!)
+		self.withLock {
+			self.guaranteeDirectoryExists(url.URLByDeletingLastPathComponent!)
 
-		if let data = value.flatMap({ $0.data }) {
-			try! data.writeToURL(url, options: .DataWritingAtomic)
-		} else if self.fileManager.fileExistsAtPath(url.path!) {
-			try! self.fileManager.removeItemAtURL(url)
+			if let data = value.flatMap({ $0.data }) {
+				try! data.writeToURL(url, options: .DataWritingAtomic)
+			} else if self.fileManager.fileExistsAtPath(url.path!) {
+				try! self.fileManager.removeItemAtURL(url)
+			}
 		}
+	}
+
+	private func withLock<T>(block: () -> T) -> T {
+		self.lock.lock()
+		let result = block()
+		self.lock.unlock()
+
+		return result
 	}
 
 	private func filePathForKey(key: K) -> NSURL {

@@ -59,6 +59,16 @@ extension RendererType {
 	}
 }
 
+extension RenderDataType where Self: DataFileType {
+	/// The default subdirectory for `RenderDataType`s that
+	/// implement `DataFileType` is its size.
+	///
+	/// This can be overriden to return `nil`.
+	public var subdirectory: String? {
+		return "\(self.size.width)x\(self.size.height)"
+	}
+}
+
 private enum CacheRendererError: ErrorType {
 	case ImageNotFound
 }
@@ -78,3 +88,4 @@ extension UIImage {
 		)
 	}
 }
+

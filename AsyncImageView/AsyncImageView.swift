@@ -38,6 +38,7 @@ public final class AsyncImageView<
 		initialFrame: CGRect,
 		renderer: Renderer,
 		placeholderRenderer: PlaceholderRenderer? = nil,
+		uiScheduler: SchedulerType = UIScheduler(),
 		imageCreationScheduler: SchedulerType = QueueScheduler())
 	{
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
@@ -46,8 +47,6 @@ public final class AsyncImageView<
 		super.init(frame: initialFrame)
 
 		self.backgroundColor = nil
-
-		let uiScheduler = UIScheduler()
 
 		self.requestsSignal
 			.skipRepeats()
@@ -58,7 +57,7 @@ public final class AsyncImageView<
 				}
 			})
 			.observeOn(self.imageCreationScheduler)
-			.flatMap(.Latest) { (data: Data) -> SignalProducer<Renderer.RenderResult, NoError> in
+			.flatMap(.Latest) { data -> SignalProducer<Renderer.RenderResult, NoError> in
 				if let placeholderRenderer = placeholderRenderer {
 					return placeholderRenderer
 						.renderImageWithData(data)

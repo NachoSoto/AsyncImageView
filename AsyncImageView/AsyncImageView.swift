@@ -37,7 +37,7 @@ public final class AsyncImageView<
 	public init(
 		initialFrame: CGRect,
 		renderer: Renderer,
-		placeholderRenderer: PlaceholderRenderer?,
+		placeholderRenderer: PlaceholderRenderer? = nil,
 		imageCreationScheduler: SchedulerType = QueueScheduler())
 	{
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()

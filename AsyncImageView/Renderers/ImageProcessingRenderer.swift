@@ -14,16 +14,18 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 	public typealias Block = (image: UIImage, data: Renderer.Data) -> UIImage
 
 	private let renderer: Renderer
+	private let scheduler: SchedulerType
 	private let processingBlock: Block
 
-	public init(renderer: Renderer, processingBlock: Block) {
+	public init(renderer: Renderer, processingBlock: Block, scheduler: SchedulerType = QueueScheduler()) {
 		self.renderer = renderer
+		self.scheduler = scheduler
 		self.processingBlock = processingBlock
 	}
 
 	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
 		return self.renderer.renderImageWithData(data)
-			.observeOn(QueueScheduler())
+			.observeOn(self.scheduler)
 			.map { $0.image }
 			.map { [block = self.processingBlock] image in
 				block(image: image, data: data)

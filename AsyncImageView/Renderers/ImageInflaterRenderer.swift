@@ -53,7 +53,11 @@ extension UIImage {
 		guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
 		CGContextDrawImage(bitmapContext, CGRect(origin: CGPointZero, size: renderSize), imageRef)
 
-		return UIImage(CGImage: CGBitmapContextCreateImage(bitmapContext)!)
+		return UIImage(
+			CGImage: CGBitmapContextCreateImage(bitmapContext)!,
+			scale: scale,
+			orientation: self.imageOrientation
+		)
 	}
 }
 

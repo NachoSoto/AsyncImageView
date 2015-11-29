@@ -43,6 +43,14 @@ extension UIImage {
 			width: size.width * scale,
 			height: size.height * scale
 		)
+		let imageSize = CGSize(
+			width: self.size.width * self.scale,
+			height: self.size.height * self.scale
+		)
+		let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
+			imageSize: imageSize,
+			inSize: renderSize
+		)
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
 		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast
@@ -54,7 +62,7 @@ extension UIImage {
 		let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo)
 
 		guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
-		CGContextDrawImage(bitmapContext, CGRect(origin: CGPointZero, size: renderSize), imageRef)
+		CGContextDrawImage(bitmapContext, outputFrame, imageRef)
 
 		return UIImage(
 			CGImage: CGBitmapContextCreateImage(bitmapContext)!,

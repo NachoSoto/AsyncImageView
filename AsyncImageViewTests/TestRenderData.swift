@@ -49,7 +49,7 @@ internal final class TestRenderer: RendererType {
 
 	func renderImageWithData(data: TestRenderData) -> SignalProducer<UIImage, NoError> {
 		return TestRenderer
-			.rendererForData(data)
+			.rendererForSize(data.size, scale: data.data.rawValue)
 			.asyncRenderer(ImmediateScheduler())
 			.renderImageWithData(data)
 			.on(started: {
@@ -57,17 +57,20 @@ internal final class TestRenderer: RendererType {
 			})
 	}
 
-	static func rendererForData(data: TestRenderData) -> ContextRenderer<TestRenderData> {
-		let size = data.size
+	static func rendererForSize(size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
 		assert(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
-		return ContextRenderer<TestRenderData>(scale: data.data.rawValue, opaque: true) { _ in
+		return ContextRenderer<TestRenderData>(scale: scale, opaque: true) { _ in
 			// nothing to render
 		}
 	}
 }
 
 internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, data: TestData) {
+	verifyImage(image, withSize: size, expectedScale: data.rawValue)
+}
+
+internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {
 	expect(image()?.size).toEventually(equal(size))
-	expect(image()?.scale).toEventually(equal(data.rawValue))
+	expect(image()?.scale).toEventually(equal(expectedScale))
 }

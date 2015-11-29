@@ -16,7 +16,7 @@ class AsyncImageViewSpec: QuickSpec {
 	override func spec() {
 		describe("AsyncImageView") {
 			context("No placeholder") {
-				typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer>
+				typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer, TestRenderer>
 
 				var view: ViewType!
 				var renderer: TestRenderer!
@@ -26,6 +26,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view = ViewType(
 						initialFrame: CGRectZero,
 						renderer: renderer,
+						placeholderRenderer: nil,
 						imageCreationScheduler: ImmediateScheduler()
 					)
 				}
@@ -128,7 +129,7 @@ class AsyncImageViewSpec: QuickSpec {
 			}
 
 			context("Placeholder renderer") {
-				typealias ViewType = AsyncImageView<TestRenderData, TestData, ManualRenderer>
+				typealias ViewType = AsyncImageView<TestRenderData, TestData, ManualRenderer, ManualRenderer>
 
 				var view: ViewType!
 				var placeholderRenderer: ManualRenderer!
@@ -140,6 +141,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view = ViewType(
 						initialFrame: CGRectZero,
 						renderer: renderer,
+						placeholderRenderer: placeholderRenderer,
 						imageCreationScheduler: ImmediateScheduler()
 					)
 				}

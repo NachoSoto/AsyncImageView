@@ -59,7 +59,9 @@ extension UIImage {
 		let imageWidth = Int(renderSize.width)
 		let imageHeight = Int(renderSize.height)
 
-		let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo)
+		guard let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo) else {
+			fatalError("Error creating bitmap context")
+		}
 
 		guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
 		CGContextDrawImage(bitmapContext, outputFrame, imageRef)

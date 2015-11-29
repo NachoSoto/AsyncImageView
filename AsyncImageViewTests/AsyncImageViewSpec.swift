@@ -126,6 +126,134 @@ class AsyncImageViewSpec: QuickSpec {
 					}
 				}
 			}
+
+			context("Placeholder renderer") {
+				typealias ViewType = AsyncImageView<TestRenderData, TestData, ManualRenderer>
+
+				var view: ViewType!
+				var placeholderRenderer: ManualRenderer!
+				var renderer: ManualRenderer!
+
+				beforeEach {
+					placeholderRenderer = ManualRenderer()
+					renderer = ManualRenderer()
+					view = ViewType(
+						initialFrame: CGRectZero,
+						renderer: renderer,
+						imageCreationScheduler: ImmediateScheduler()
+					)
+				}
+
+				func verifyRealImage() {
+					verifyImage(view.image, withSize: view.frame.size, data: view.data)
+				}
+
+				func verifyPlaceholder() {
+					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data.placeholderScale)
+				}
+
+				it("has no image initially") {
+					expect(view.image).to(beNil())
+				}
+
+				it("sets placeholder image if emitted first") {
+					view.frame.size = CGSize(width: 1, height: 1)
+
+					let data: TestData = .A
+					let renderData = data.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(renderData)
+					renderer.addRenderSignal(renderData)
+
+					view.data = data
+					expect(view.image).to(beNil())
+
+					placeholderRenderer.emitImageForData(renderData, scale: data.placeholderScale)
+					verifyPlaceholder()
+
+					renderer.emitImageForData(renderData, scale: data.rawValue)
+					verifyRealImage()
+				}
+
+				it("does not clear placeholder image when updating data") {
+					view.frame.size = CGSize(width: 1, height: 1)
+
+					let originalData: TestData = .A
+					let originalRenderData = originalData.renderDataWithSize(view.frame.size)
+
+					let updatedData: TestData = .B
+					let updatedRenderData = updatedData.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(originalRenderData)
+					placeholderRenderer.addRenderSignal(updatedRenderData)
+					renderer.addRenderSignal(originalRenderData)
+					renderer.addRenderSignal(updatedRenderData)
+
+					view.data = originalData
+
+					placeholderRenderer.emitImageForData(originalRenderData, scale: originalData.placeholderScale)
+					verifyPlaceholder()
+
+					view.data = updatedData
+					verifyImage(view.image, withSize: view.frame.size, expectedScale: originalData.placeholderScale)
+				}
+
+				it("sets placeholder image when updating data") {
+					view.frame.size = CGSize(width: 1, height: 1)
+
+					let originalData: TestData = .A
+					let originalRenderData = originalData.renderDataWithSize(view.frame.size)
+
+					let updatedData: TestData = .B
+					let updatedRenderData = updatedData.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(originalRenderData)
+					placeholderRenderer.addRenderSignal(updatedRenderData)
+					renderer.addRenderSignal(originalRenderData)
+					renderer.addRenderSignal(updatedRenderData)
+
+					view.data = originalData
+
+					renderer.emitImageForData(originalRenderData, scale: originalData.rawValue)
+					verifyRealImage()
+
+					view.data = updatedData
+
+					placeholderRenderer.emitImageForData(updatedRenderData, scale: updatedData.placeholderScale)
+					verifyPlaceholder()
+				}
+			}
 		}
+	}
+}
+
+private final class ManualRenderer: RendererType {
+	var signals: [TestRenderData : (signal: Signal<UIImage, NoError>, observer: Signal<UIImage, NoError>.Observer)] = [:]
+
+	func addRenderSignal(data: TestRenderData) {
+		signals[data] = Signal<UIImage, NoError>.pipe()
+	}
+
+	func emitImageForData(data: TestRenderData, scale: CGFloat) {
+		let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
+		let observer = signals[data]!.observer
+
+		observer.sendNext(image)
+		observer.sendCompleted()
+	}
+
+	func renderImageWithData(data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
+		guard let signal = signals[data]?.signal else {
+			XCTFail("Signal not created for \(data)")
+			return .empty
+		}
+
+		return SignalProducer(signal: signal)
+	}
+}
+
+private extension TestData {
+	var placeholderScale: CGFloat {
+		return self.rawValue * 5
 	}
 }

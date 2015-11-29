@@ -68,7 +68,7 @@ extension RendererType {
 		return self.renderImageWithData(data)
 			.flatMap(.Concat) { result in
 				return SignalProducer(values: [
-					ImageResult(image: result.image, cacheHit: result.cacheHit),
+					ImageResult(image: result.image, cacheHit: false),
 					ImageResult(image: result.image, cacheHit: true)
 				])
 		}

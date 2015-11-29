@@ -124,10 +124,11 @@ class MulticastedRendererSpec: QuickSpec {
 					expect(getCacheHitValue()) == false
 				}
 
-				it("cache hit the first time if the inner renderer was a hit") {
+				it("does not cache hit the first time even if inner renderer was a hit") {
 					cacheHitRenderer.shouldCacheHit = true
 
-					expect(getCacheHitValue()) == true
+					// We asume that the underlying renderer took longer than a simple Property lookup
+					expect(getCacheHitValue()) == false
 				}
 
 				it("is a cache hit the second time the producer is fetched") {

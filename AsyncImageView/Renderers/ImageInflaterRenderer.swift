@@ -14,27 +14,29 @@ public final class ImageInflaterRenderer<
 	Data: RenderDataType, RenderResult: RenderResultType, Error: ErrorType
 >: RendererType {
 	private let screenScale: CGFloat
+	private let opaque: Bool
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
 	public init<
 		Renderer: RendererType where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error
-		>(renderer: Renderer, screenScale: CGFloat)
+		>(renderer: Renderer, screenScale: CGFloat, opaque: Bool)
 	{
 		self.screenScale = screenScale
+		self.opaque = opaque
 		self.renderBlock = renderer.renderImageWithData
 	}
 
 	public func renderImageWithData(data: Data) -> SignalProducer<UIImage, Error> {
-		return renderBlock(data)
+		return self.renderBlock(data)
 			.map { [scale = self.screenScale] result in
-				return result.image.inflate(withSize: data.size, scale: scale)
+				return result.image.inflate(withSize: data.size, scale: scale, opaque: self.opaque)
 			}
 			.startOn(QueueScheduler())
 	}
 }
 
 extension UIImage {
-	internal func inflate(withSize size: CGSize, scale: CGFloat) -> UIImage {
+	internal func inflate(withSize size: CGSize, scale: CGFloat, opaque: Bool) -> UIImage {
 		assert(size.width > 0 && size.height > 0, "Invalid size: (\(size.width)x\(size.height))")
 
 		let renderSize = CGSize(
@@ -43,7 +45,8 @@ extension UIImage {
 		)
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
-		let bitmapInfo = CGImageAlphaInfo.PremultipliedLast.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
+		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast
+		let bitmapInfo = alphaInfo.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
 
 		let imageWidth = Int(renderSize.width)
 		let imageHeight = Int(renderSize.height)
@@ -62,8 +65,8 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(screenScale: CGFloat) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
-		return ImageInflaterRenderer(renderer: self, screenScale: screenScale)
+	public func inflatedWithScale(screenScale: CGFloat, opaque: Bool) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
+		return ImageInflaterRenderer(renderer: self, screenScale: screenScale, opaque: opaque)
 	}
 }
 

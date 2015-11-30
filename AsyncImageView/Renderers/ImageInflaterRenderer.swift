@@ -37,18 +37,12 @@ public final class ImageInflaterRenderer<
 
 extension UIImage {
 	internal func inflate(withSize size: CGSize, scale: CGFloat, opaque: Bool) -> UIImage {
-		let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
-			imageSize: self.size * self.scale,
-			inSize: size * scale
-		)
-
 		return self.processImageWithBitmapContext(
 			withSize: size,
 			scale: scale,
 			opaque: opaque,
-			renderingBlock: { image, context in
-				guard let imageRef = image.CGImage else { fatalError("Unable to get a CGImage from \(image).") }
-				CGContextDrawImage(context, outputFrame, imageRef)
+			renderingBlock: { _, _, _, imageDrawing in
+				imageDrawing()
 			}
 		)
 	}
@@ -57,7 +51,7 @@ extension UIImage {
 		withSize size: CGSize,
 		scale: CGFloat,
 		opaque: Bool,
-		@noescape renderingBlock: (UIImage, CGContextRef) -> ())
+		@noescape renderingBlock: (image: UIImage, context: CGContextRef, contextSize: CGSize, imageDrawing: () -> ()) -> ())
 		-> UIImage
 	{
 		assert(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
@@ -66,14 +60,29 @@ extension UIImage {
 		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast
 		let bitmapInfo = alphaInfo.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
 
-		let imageWidth = Int(size.width * scale)
-		let imageHeight = Int(size.height * scale)
+		let contextSize = size * scale
+
+		let imageWidth = Int(contextSize.width)
+		let imageHeight = Int(contextSize.height)
 
 		guard let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo) else {
 			fatalError("Error creating bitmap context")
 		}
 
-		renderingBlock(self, bitmapContext)
+		renderingBlock(
+			image: self,
+			context: bitmapContext,
+			contextSize: contextSize,
+			imageDrawing: {
+				let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
+					imageSize: self.size * self.scale,
+					inSize: contextSize
+				)
+
+				guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
+				CGContextDrawImage(bitmapContext, outputFrame, imageRef)
+			}
+		)
 
 		return UIImage(
 			CGImage: CGBitmapContextCreateImage(bitmapContext)!,

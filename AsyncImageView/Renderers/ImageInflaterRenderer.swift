@@ -37,34 +37,43 @@ public final class ImageInflaterRenderer<
 
 extension UIImage {
 	internal func inflate(withSize size: CGSize, scale: CGFloat, opaque: Bool) -> UIImage {
-		assert(size.width > 0 && size.height > 0, "Invalid size: (\(size.width)x\(size.height))")
-
-		let renderSize = CGSize(
-			width: size.width * scale,
-			height: size.height * scale
-		)
-		let imageSize = CGSize(
-			width: self.size.width * self.scale,
-			height: self.size.height * self.scale
-		)
 		let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
-			imageSize: imageSize,
-			inSize: renderSize
+			imageSize: self.size * self.scale,
+			inSize: size * scale
 		)
+
+		return self.processImageWithBitmapContext(
+			withSize: size,
+			scale: scale,
+			opaque: opaque,
+			renderingBlock: { image, context in
+				guard let imageRef = image.CGImage else { fatalError("Unable to get a CGImage from \(image).") }
+				CGContextDrawImage(context, outputFrame, imageRef)
+			}
+		)
+	}
+
+	internal func processImageWithBitmapContext(
+		withSize size: CGSize,
+		scale: CGFloat,
+		opaque: Bool,
+		@noescape renderingBlock: (UIImage, CGContextRef) -> ())
+		-> UIImage
+	{
+		assert(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
 		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast
 		let bitmapInfo = alphaInfo.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
 
-		let imageWidth = Int(renderSize.width)
-		let imageHeight = Int(renderSize.height)
+		let imageWidth = Int(size.width * scale)
+		let imageHeight = Int(size.height * scale)
 
 		guard let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo) else {
 			fatalError("Error creating bitmap context")
 		}
 
-		guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
-		CGContextDrawImage(bitmapContext, outputFrame, imageRef)
+		renderingBlock(self, bitmapContext)
 
 		return UIImage(
 			CGImage: CGBitmapContextCreateImage(bitmapContext)!,
@@ -106,4 +115,11 @@ private extension CGSize {
 	var aspectRatio: CGFloat {
 		return self.width / self.height
 	}
+}
+
+private func *(lhs: CGSize, rhs: CGFloat) -> CGSize {
+	return CGSize(
+		width: lhs.width * rhs,
+		height: lhs.height * rhs
+	)
 }

@@ -32,7 +32,7 @@ class AsyncImageViewSpec: QuickSpec {
 				}
 
 				func verifyView() {
-					verifyImage(view.image, withSize: view.frame.size, data: view.data)
+					verifyImage(view.image, withSize: view.frame.size, data: view.data!)
 				}
 
 				it("has no image initially") {
@@ -114,7 +114,7 @@ class AsyncImageViewSpec: QuickSpec {
 						view.data = .A
 
 						expect(view.image).toNotEventually(beNil())
-						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data!, size: view.frame.size)]
 					}
 
 					it("only renders once if size does not change") {
@@ -123,7 +123,7 @@ class AsyncImageViewSpec: QuickSpec {
 						view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 						expect(view.image).toNotEventually(beNil())
-						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data!, size: view.frame.size)]
 					}
 				}
 			}
@@ -147,11 +147,11 @@ class AsyncImageViewSpec: QuickSpec {
 				}
 
 				func verifyRealImage() {
-					verifyImage(view.image, withSize: view.frame.size, data: view.data)
+					verifyImage(view.image, withSize: view.frame.size, data: view.data!)
 				}
 
 				func verifyPlaceholder() {
-					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data.placeholderScale)
+					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data!.placeholderScale)
 				}
 
 				it("has no image initially") {

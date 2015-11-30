@@ -29,8 +29,8 @@ public final class AsyncImageView<
 	PlaceholderRenderer.Error == NoError,
 	Renderer.RenderResult == PlaceholderRenderer.RenderResult
 >: UIImageView {
-	private let requestsSignal: Signal<Data, NoError>
-	private let requestsObserver: Signal<Data, NoError>.Observer
+	private let requestsSignal: Signal<Data?, NoError>
+	private let requestsObserver: Signal<Data?, NoError>.Observer
 
 	private let imageCreationScheduler: SchedulerType
 
@@ -49,21 +49,26 @@ public final class AsyncImageView<
 		self.backgroundColor = nil
 
 		self.requestsSignal
-			.skipRepeats()
+			.skipRepeats(==)
 			.observeOn(uiScheduler)
-			.on(next: { [weak self] _ in
-				if let strongSelf = self where placeholderRenderer == nil {
-					strongSelf.resetImage()
+			.on(next: { [weak self] in
+				if let strongSelf = self
+					where placeholderRenderer == nil || $0 == nil {
+						strongSelf.resetImage()
 				}
 			})
 			.observeOn(self.imageCreationScheduler)
 			.flatMap(.Latest) { data -> SignalProducer<Renderer.RenderResult, NoError> in
-				if let placeholderRenderer = placeholderRenderer {
-					return placeholderRenderer
-						.renderImageWithData(data)
-						.takeUntilReplacement(renderer.renderImageWithData(data))
+				if let data = data {
+					if let placeholderRenderer = placeholderRenderer {
+						return placeholderRenderer
+							.renderImageWithData(data)
+							.takeUntilReplacement(renderer.renderImageWithData(data))
+					} else {
+						return renderer.renderImageWithData(data)
+					}
 				} else {
-					return renderer.renderImageWithData(data)
+					return .empty
 				}
 			}
 			.observeOn(uiScheduler)
@@ -84,7 +89,7 @@ public final class AsyncImageView<
 		}
 	}
 
-	public var data: ImageViewData! {
+	public var data: ImageViewData? {
 		didSet {
 			self.requestNewImageIfReady()
 		}
@@ -98,16 +103,15 @@ public final class AsyncImageView<
 	}
 
 	private func requestNewImageIfReady() {
-		if let data = data, size = Optional(self.frame.size)
-			where size.width > 0 && size.height > 0 {
-				self.requestNewImage(size, data: data)
+		if self.bounds.size.width > 0 && self.bounds.size.height > 0 {
+			self.requestNewImage(self.bounds.size, data: self.data)
 		}
 	}
 
-	private func requestNewImage(size: CGSize, data: ImageViewData) {
+	private func requestNewImage(size: CGSize, data: ImageViewData?) {
 		self.imageCreationScheduler.schedule { [weak instance = self, observer = self.requestsObserver] in
 			if instance != nil {
-				observer.sendNext(data.renderDataWithSize(size))
+				observer.sendNext(data?.renderDataWithSize(size))
 			}
 		}
 	}

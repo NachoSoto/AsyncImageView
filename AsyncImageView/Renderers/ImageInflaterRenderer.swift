@@ -37,34 +37,52 @@ public final class ImageInflaterRenderer<
 
 extension UIImage {
 	internal func inflate(withSize size: CGSize, scale: CGFloat, opaque: Bool) -> UIImage {
-		assert(size.width > 0 && size.height > 0, "Invalid size: (\(size.width)x\(size.height))")
+		return self.processImageWithBitmapContext(
+			withSize: size,
+			scale: scale,
+			opaque: opaque,
+			renderingBlock: { _, _, _, imageDrawing in
+				imageDrawing()
+			}
+		)
+	}
 
-		let renderSize = CGSize(
-			width: size.width * scale,
-			height: size.height * scale
-		)
-		let imageSize = CGSize(
-			width: self.size.width * self.scale,
-			height: self.size.height * self.scale
-		)
-		let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
-			imageSize: imageSize,
-			inSize: renderSize
-		)
+	internal func processImageWithBitmapContext(
+		withSize size: CGSize,
+		scale: CGFloat,
+		opaque: Bool,
+		@noescape renderingBlock: (image: UIImage, context: CGContextRef, contextSize: CGSize, imageDrawing: () -> ()) -> ())
+		-> UIImage
+	{
+		assert(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
 		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast
 		let bitmapInfo = alphaInfo.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
 
-		let imageWidth = Int(renderSize.width)
-		let imageHeight = Int(renderSize.height)
+		let contextSize = size * scale
+
+		let imageWidth = Int(contextSize.width)
+		let imageHeight = Int(contextSize.height)
 
 		guard let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo) else {
 			fatalError("Error creating bitmap context")
 		}
 
-		guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
-		CGContextDrawImage(bitmapContext, outputFrame, imageRef)
+		renderingBlock(
+			image: self,
+			context: bitmapContext,
+			contextSize: contextSize,
+			imageDrawing: {
+				let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
+					imageSize: self.size * self.scale,
+					inSize: contextSize
+				)
+
+				guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
+				CGContextDrawImage(bitmapContext, outputFrame, imageRef)
+			}
+		)
 
 		return UIImage(
 			CGImage: CGBitmapContextCreateImage(bitmapContext)!,
@@ -106,4 +124,11 @@ private extension CGSize {
 	var aspectRatio: CGFloat {
 		return self.width / self.height
 	}
+}
+
+private func *(lhs: CGSize, rhs: CGFloat) -> CGSize {
+	return CGSize(
+		width: lhs.width * rhs,
+		height: lhs.height * rhs
+	)
 }

@@ -11,31 +11,47 @@ import ReactiveCocoa
 
 /// `RendererType` decorator that applies processing to every emitted image.
 public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType {
-	public typealias Block = (image: UIImage, data: Renderer.Data) -> UIImage
+	public typealias Block = (image: UIImage, context: CGContextRef, contextSize: CGSize, imageDrawingBlock: () -> ()) -> ()
 
 	private let renderer: Renderer
-	private let schedulerCreator: () -> SchedulerType
-	private let processingBlock: Block
+	private let scale: CGFloat
+	private let opaque: Bool
+	private let renderingBlock: Block
 
-	public init(renderer: Renderer, processingBlock: Block, schedulerCreator: () -> SchedulerType = { QueueScheduler() }) {
-		self.renderer = renderer
-		self.schedulerCreator = schedulerCreator
-		self.processingBlock = processingBlock
+	private let schedulerCreator: () -> SchedulerType
+
+	public init(
+		renderer: Renderer,
+		scale: CGFloat,
+		opaque: Bool,
+		renderingBlock: Block,
+		schedulerCreator: () -> SchedulerType = { QueueScheduler() }) {
+			self.renderer = renderer
+			self.scale = scale
+			self.opaque = opaque
+			self.renderingBlock = renderingBlock
+
+			self.schedulerCreator = schedulerCreator
 	}
 
 	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
 		return self.renderer.renderImageWithData(data)
 			.observeOn(self.schedulerCreator())
 			.map { $0.image }
-			.map { [block = self.processingBlock] image in
-				block(image: image, data: data)
+			.map { [scale = self.scale, opaque = self.opaque, block = self.renderingBlock] image in
+				image.processImageWithBitmapContext(
+					withSize: data.size,
+					scale: scale,
+					opaque: opaque,
+					renderingBlock: block
+				)
 			}
 	}
 }
 
 extension RendererType {
 	/// Decorates this `RendererType` by applying the given block to every generated image.
-	public func processedWithBlock(block: ImageProcessingRenderer<Self>.Block) -> ImageProcessingRenderer<Self> {
-		return ImageProcessingRenderer(renderer: self, processingBlock: block)
+	public func processedWithScale(scale scale: CGFloat, opaque: Bool, renderingBlock block: ImageProcessingRenderer<Self>.Block) -> ImageProcessingRenderer<Self> {
+		return ImageProcessingRenderer(renderer: self, scale: scale, opaque: opaque, renderingBlock: block)
 	}
 }

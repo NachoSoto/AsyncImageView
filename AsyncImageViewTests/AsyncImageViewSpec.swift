@@ -98,6 +98,16 @@ class AsyncImageViewSpec: QuickSpec {
 						expect(view.image).to(beNil()) // image should be reset immediately
 						verifyView() // and updated when rendering finishes
 					}
+
+					it("resets image when setting data to nil") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .C
+
+						verifyView()
+
+						view.data = nil
+						expect(view.image).to(beNil()) // image should be reset immediately
+					}
 				}
 
 				context("Not updating image if nothing changed") {
@@ -114,7 +124,7 @@ class AsyncImageViewSpec: QuickSpec {
 						view.data = .A
 
 						expect(view.image).toNotEventually(beNil())
-						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data!, size: view.frame.size)]
 					}
 
 					it("only renders once if size does not change") {
@@ -123,7 +133,7 @@ class AsyncImageViewSpec: QuickSpec {
 						view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 						expect(view.image).toNotEventually(beNil())
-						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data, size: view.frame.size)]
+						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data!, size: view.frame.size)]
 					}
 				}
 			}
@@ -147,11 +157,11 @@ class AsyncImageViewSpec: QuickSpec {
 				}
 
 				func verifyRealImage() {
-					verifyImage(view.image, withSize: view.frame.size, data: view.data)
+					verifyImage(view.image, withSize: view.frame.size, data: view.data!)
 				}
 
 				func verifyPlaceholder() {
-					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data.placeholderScale)
+					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data!.placeholderScale)
 				}
 
 				it("has no image initially") {
@@ -223,6 +233,24 @@ class AsyncImageViewSpec: QuickSpec {
 
 					placeholderRenderer.emitImageForData(updatedRenderData, scale: updatedData.placeholderScale)
 					verifyPlaceholder()
+				}
+
+				it("resets image when setting data to nil") {
+					view.frame.size = CGSize(width: 10, height: 10)
+
+					let data: TestData = .A
+					let renderData = data.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(renderData)
+					renderer.addRenderSignal(renderData)
+
+					view.data = data
+
+					renderer.emitImageForData(renderData, scale: data.rawValue)
+					verifyRealImage()
+
+					view.data = nil
+					expect(view.image).to(beNil()) // image should be reset immediately
 				}
 			}
 		}

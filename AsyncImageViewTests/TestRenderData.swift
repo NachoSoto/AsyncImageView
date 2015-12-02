@@ -66,8 +66,12 @@ internal final class TestRenderer: RendererType {
 	}
 }
 
-internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, data: TestData) {
-	verifyImage(image, withSize: size, expectedScale: data.rawValue)
+internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, data: TestData?) {
+	if let data = data {
+		verifyImage(image, withSize: size, expectedScale: data.rawValue)
+	} else {
+		expect(image()).toEventually(beNil())
+	}
 }
 
 internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {

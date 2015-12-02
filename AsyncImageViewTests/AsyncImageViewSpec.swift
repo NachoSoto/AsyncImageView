@@ -32,7 +32,7 @@ class AsyncImageViewSpec: QuickSpec {
 				}
 
 				func verifyView() {
-					verifyImage(view.image, withSize: view.frame.size, data: view.data!)
+					verifyImage(view.image, withSize: view.frame.size, data: view.data)
 				}
 
 				it("has no image initially") {
@@ -97,6 +97,16 @@ class AsyncImageViewSpec: QuickSpec {
 
 						expect(view.image).to(beNil()) // image should be reset immediately
 						verifyView() // and updated when rendering finishes
+					}
+
+					it("resets image when setting data to nil") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .C
+
+						verifyView()
+
+						view.data = nil
+						expect(view.image).to(beNil()) // image should be reset immediately
 					}
 				}
 
@@ -223,6 +233,24 @@ class AsyncImageViewSpec: QuickSpec {
 
 					placeholderRenderer.emitImageForData(updatedRenderData, scale: updatedData.placeholderScale)
 					verifyPlaceholder()
+				}
+
+				it("resets image when setting data to nil") {
+					view.frame.size = CGSize(width: 10, height: 10)
+
+					let data: TestData = .A
+					let renderData = data.renderDataWithSize(view.frame.size)
+
+					placeholderRenderer.addRenderSignal(renderData)
+					renderer.addRenderSignal(renderData)
+
+					view.data = data
+
+					renderer.emitImageForData(renderData, scale: data.rawValue)
+					verifyRealImage()
+
+					view.data = nil
+					expect(view.image).to(beNil()) // image should be reset immediately
 				}
 			}
 		}

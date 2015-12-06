@@ -39,10 +39,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 				beforeEach {
 					innerRenderer = AnyRenderer(TestRenderer())
-					renderer = RenderType(
-						renderer: innerRenderer,
-						name: "com.nachosoto.renderer"
-					)
+					renderer = RenderType(renderer: innerRenderer)
 				}
 
 				it("produces an image") {
@@ -99,10 +96,7 @@ class MulticastedRendererSpec: QuickSpec {
 						scheduler: scheduler
 						))
 
-					renderer = RenderType(
-						renderer: delayedTestRenderer,
-						name: "com.nachosoto.renderer"
-					)
+					renderer = RenderType(renderer: delayedTestRenderer)
 				}
 
 				func getCacheHitValue() -> Bool {

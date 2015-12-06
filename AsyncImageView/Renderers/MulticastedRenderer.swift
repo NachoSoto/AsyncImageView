@@ -22,11 +22,19 @@ public final class MulticastedRenderer<
 	Renderer.Error == NoError
 >: RendererType {
 	private let renderer: Renderer
-	private let cache: Atomic<InMemoryCache<Data, ImageProperty>>
+	private let cache: Atomic<[Data : ImageProperty]>
 
-	public init(renderer: Renderer, name: String) {
+	private let memoryWarningDisposable: Disposable
+
+	public init(renderer: Renderer) {
 		self.renderer = renderer
-		self.cache = Atomic(InMemoryCache(cacheName: name))
+		self.cache = Atomic([:])
+
+		self.memoryWarningDisposable = MulticastedRenderer.clearCacheOnMemoryWarning(self.cache)
+	}
+
+	deinit {
+		self.memoryWarningDisposable.dispose()
 	}
 
 	public func renderImageWithData(data: Data) -> SignalProducer<ImageResult, NoError> {
@@ -39,27 +47,43 @@ public final class MulticastedRenderer<
  	}
 
 	private func getPropertyForData(data: Data) -> ImageProperty {
-		return self.cache.withValue { (cache) -> ImageProperty in
-			if let property = cache.valueForKey(data) {
-				return property
+		var result: ImageProperty!
+
+		self.cache.modify { cache in
+			var mutableCache = cache
+
+			if let property = cache[data] {
+				result = property
+				return cache
 			}
 
-			let property = ImageProperty(
+			result = ImageProperty(
 				initialValue: nil,
 				producer: renderer.createProducerForRenderingData(data)
 					.map(Optional.init)
 			)
-			cache.setValue(property, forKey: data)
 
-			return property
+			mutableCache[data] = result
+			return mutableCache
 		}
+
+		return result
+	}
+
+	private static func clearCacheOnMemoryWarning(cache: Atomic<[Data : ImageProperty]>) -> Disposable {
+		return NSNotificationCenter.defaultCenter()
+			.rac_notifications(UIApplicationDidReceiveMemoryWarningNotification, object: nil)
+			.observeOn(QueueScheduler())
+			.startWithNext { _ in
+				cache.modify { _ in [:] }
+			}
 	}
 }
 
 extension RendererType where Error == NoError {
 	/// Multicasts the results of this `RendererType`.
-	public func multicasted(name: String = "com.asyncimageview.multicasting") -> MulticastedRenderer<Self.Data, Self> {
-		return MulticastedRenderer(renderer: self, name: name)
+	public func multicasted() -> MulticastedRenderer<Self.Data, Self> {
+		return MulticastedRenderer(renderer: self)
 	}
 }
 

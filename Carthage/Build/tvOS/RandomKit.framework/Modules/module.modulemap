@@ -1,0 +1,10 @@
+framework module RandomKit {
+  umbrella header "RandomKit.h"
+
+  export *
+  module * { export * }
+}
+
+module RandomKit.Swift {
+    header "RandomKit-Swift.h"
+}

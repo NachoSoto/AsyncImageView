@@ -30,8 +30,14 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 	public func renderImageWithData(data: T) -> SignalProducer<UIImage, RemoteImageRendererError> {
 		return self.session.rac_dataWithRequest(NSURLRequest(URL: data.imageURL))
 			.mapError(RemoteImageRendererError.LoadingError)
+			.attemptMap { (data, response) in
+				Result(
+					(response as? NSHTTPURLResponse).map { (data, $0) },
+					failWith: .InvalidResponse
+				)
+			}
 			.flatMap(.Merge) { (data, response) -> SignalProducer<NSData, RemoteImageRendererError> in
-				let statusCode = (response as! NSHTTPURLResponse).statusCode
+				let statusCode = response.statusCode
 
 				if statusCode >= 200 && statusCode < 300 {
 					return SignalProducer(value: data)
@@ -54,6 +60,7 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 
 public enum RemoteImageRendererError: ErrorType {
 	case LoadingError(originalError: NSError)
+	case InvalidResponse
 	case InvalidStatusCode(statusCode: Int)
 	case DecodingError
 }

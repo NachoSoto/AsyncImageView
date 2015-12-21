@@ -136,13 +136,3 @@ public final class AsyncImageView<
 // MARK: - Constants
 
 private let fadeAnimationDuration: NSTimeInterval = 0.4
-
-private extension SignalType {
-	// TODO: remove once https://github.com/ReactiveCocoa/ReactiveCocoa/pull/2572 is merged.
-	func on(next next: (Value) -> ()) -> Signal<Value, Error> {
-		return self.map {
-			next($0)
-			return $0
-		}
-	}
-}

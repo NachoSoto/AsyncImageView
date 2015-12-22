@@ -101,20 +101,22 @@ public protocol NSDataConvertible {
 	var data: NSData? { get }
 }
 
+/// Returns the directory where all `DiskCache` caches are stored
+/// by default.
+public func diskCacheDefaultCacheDirectory() -> NSURL {
+	return try! NSFileManager()
+		.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+		.URLByAppendingPathComponent("AsyncImageView", isDirectory: true)
+}
+
 /// `CacheType` backed by files on disk.
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private let rootDirectory: NSURL
 	private let fileManager = NSFileManager.defaultManager()
 	private let lock: NSLock
 
-	public static var defaultCacheDirectory: NSURL {
-		return try! NSFileManager()
-			.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-			.URLByAppendingPathComponent("AsyncImageView", isDirectory: true)
-	}
-
 	public static func onCacheSubdirectory(directoryName: String) -> DiskCache {
-		let url = self.defaultCacheDirectory
+		let url = diskCacheDefaultCacheDirectory()
 			.URLByAppendingPathComponent(directoryName, isDirectory: true)
 
 		return DiskCache(rootDirectory: url)

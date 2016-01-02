@@ -98,3 +98,95 @@ extension RendererType {
 		}
 	}
 }
+
+extension SignalProducerType {
+	public func replayLazily(capacity: Int = Int.max) -> SignalProducer<Value, Error> {
+//		precondition(capacity >= 0, "Invalid capacity: \(capacity)")
+//
+//		let state: Atomic<BufferState<Value, Error>?> = Atomic(nil)
+//
+//		let bufferingObserver: Signal<Value, Error>.Observer = Observer { event in
+//			state.modify { state in
+//				var mutableState = state!
+//
+//				if let value = event.value {
+//					mutableState.addValue(value, upToCapacity: capacity)
+//				} else {
+//					mutableState.terminationEvent = event
+//				}
+//
+//				return mutableState
+//			}
+//		}
+//
+//		return SignalProducer { observer, disposable in
+//			state.modify { value in
+//				if value == nil {
+//					// Only start for the first subscription.
+//					disposable += self.start(bufferingObserver)
+//
+//					return BufferState()
+//				} else {
+//					return value
+//				}
+//			}
+//		}
+
+		var producer: SignalProducer<Value, Error>?
+		var producerObserver: SignalProducer<Value, Error>.ProducedSignal.Observer?
+
+		let lock = NSLock()
+		lock.name = "org.reactivecocoa.ReactiveCocoa.SignalProducer.replayLazily"
+
+		return SignalProducer { observer, disposable in
+			let initializedProducer: SignalProducer<Value, Error>
+			let initializedObserver: SignalProducer<Value, Error>.ProducedSignal.Observer
+			let shouldStartUnderlyingProducer: Bool
+
+			lock.lock()
+			if let producer = producer, producerObserver = producerObserver {
+				(initializedProducer, initializedObserver) = (producer, producerObserver)
+				shouldStartUnderlyingProducer = false
+			} else {
+				let (producerTemp, observerTemp) = SignalProducer<Value, Error>.buffer(capacity)
+
+				(producer, producerObserver) = (producerTemp, observerTemp)
+				(initializedProducer, initializedObserver) = (producerTemp, observerTemp)
+				shouldStartUnderlyingProducer = true
+			}
+			lock.unlock()
+
+			disposable += initializedProducer.start(observer)
+
+			if shouldStartUnderlyingProducer {
+				self.start(initializedObserver)
+			}
+		}
+	}
+}
+
+// TODO: remove
+private struct BufferState<Value, Error: ErrorType> {
+	// All values in the buffer.
+	var values: [Value] = []
+
+	// Any terminating event sent to the buffer.
+	//
+	// This will be nil if termination has not occurred.
+	var terminationEvent: Event<Value, Error>?
+
+	// The observers currently attached to the buffered producer, or nil if the
+	// producer was terminated.
+	var observers: Bag<Signal<Value, Error>.Observer>? = Bag()
+
+	// Appends a new value to the buffer, trimming it down to the given capacity
+	// if necessary.
+	mutating func addValue(value: Value, upToCapacity capacity: Int) {
+		values.append(value)
+
+		let overflow = values.count - capacity
+		if overflow > 0 {
+			values.removeRange(0..<overflow)
+		}
+	}
+}

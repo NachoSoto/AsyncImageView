@@ -65,8 +65,12 @@ extension RenderDataType where Self: DataFileType {
 	///
 	/// This can be overriden to return `nil`.
 	public var subdirectory: String? {
-		return "\(self.size.width)x\(self.size.height)"
+		return subdirectoryForSize(self.size)
 	}
+}
+
+internal func subdirectoryForSize(size: CGSize) -> String {
+	return String(format: "%.2fx%.2f", size.width, size.height)
 }
 
 private enum CacheRendererError: ErrorType {

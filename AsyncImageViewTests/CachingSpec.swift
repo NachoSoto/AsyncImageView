@@ -104,6 +104,18 @@ class DiskCacheSpec: QuickSpec {
 	}
 }
 
+class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
+	override func spec() {
+		it("works with integer sizes") {
+			expect(subdirectoryForSize(CGSize(width: 15.0, height: 10.0))) == "15.00x10.00"
+		}
+
+		it("has limited precision") {
+			expect(subdirectoryForSize(CGSize(width: 15.1245, height: 10.6123))) == "15.12x10.61"
+		}
+	}
+}
+
 extension String: DataFileType {
 	public var subdirectory: String? {
 		return "\(self.characters.count)"

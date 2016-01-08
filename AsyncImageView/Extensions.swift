@@ -15,3 +15,20 @@ extension UIImage: NSDataConvertible {
 		return UIImagePNGRepresentation(self)
 	}
 }
+
+extension ImageResult: NSDataConvertible {
+	public init?(data: NSData) {
+		if let image = UIImage(data: data) {
+			self.init(
+				image: image,
+				cacheHit: false
+			)
+		} else {
+			return nil
+		}
+	}
+
+	public var data: NSData? {
+		return self.image.data
+	}
+}

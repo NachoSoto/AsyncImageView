@@ -79,15 +79,15 @@ private enum CacheRendererError: ErrorType {
 	case ImageNotFound
 }
 
-extension UIImage {
-	private var asCacheHit: ImageResult {
+private extension UIImage {
+	var asCacheHit: ImageResult {
 		return ImageResult(
 			image: self,
 			cacheHit: true
 		)
 	}
 
-	private var asCacheMiss: ImageResult {
+	var asCacheMiss: ImageResult {
 		return ImageResult(
 			image: self,
 			cacheHit: false

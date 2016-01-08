@@ -16,7 +16,7 @@ public final class CacheRenderer<
 	Cache: CacheType
 	where
 	Cache.Key == Renderer.Data,
-	Cache.Value == UIImage
+	Cache.Value == Renderer.RenderResult
 >: RendererType {
 	private let renderer: Renderer
 	private let cache: Cache
@@ -32,7 +32,7 @@ public final class CacheRenderer<
 		return SignalProducer
 			.attempt { [cache = self.cache] in
 				return Result(
-					cache.valueForKey(data)?.asCacheHit,
+					cache.valueForKey(data)?.image.asCacheHit,
 					failWith: CacheRendererError.ImageNotFound
 				)
 			}
@@ -41,7 +41,7 @@ public final class CacheRenderer<
 				return renderer
 					.renderImageWithData(data)
 					.on(next: { [cache = self.cache] result in
-						cache.setValue(result.image, forKey: data)
+						cache.setValue(result, forKey: data)
 					})
 					.map { $0.image.asCacheMiss }
 			}
@@ -52,7 +52,9 @@ extension RendererType {
 	/// Surrounds this renderer with a layer of caching.
 	public func withCache<
 		Cache: CacheType
-		where Cache.Key == Self.Data, Cache.Value == UIImage
+		where
+		Cache.Key == Self.Data,
+		Cache.Value == Self.RenderResult
 		>(cache: Cache) -> CacheRenderer<Self, Cache>
 	{
 		return CacheRenderer(renderer: self, cache: cache)

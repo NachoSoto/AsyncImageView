@@ -145,6 +145,10 @@ SWIFT_CLASS("_TtC13ReactiveCocoa15DynamicProperty")
 @end
 
 
+@interface NSObject (SWIFT_EXTENSION(ReactiveCocoa))
+@end
+
+
 @interface NSURLSession (SWIFT_EXTENSION(ReactiveCocoa))
 @end
 

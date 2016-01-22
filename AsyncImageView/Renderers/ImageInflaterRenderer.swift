@@ -54,7 +54,7 @@ extension UIImage {
 		@noescape renderingBlock: (image: UIImage, context: CGContextRef, contextSize: CGSize, imageDrawing: () -> ()) -> ())
 		-> UIImage
 	{
-		assert(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
+		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
 		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast

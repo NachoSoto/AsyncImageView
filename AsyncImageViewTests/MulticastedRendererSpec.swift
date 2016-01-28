@@ -54,10 +54,10 @@ class MulticastedRendererSpec: QuickSpec {
 					let result2 = getProducerForData(data, size)
 
 					// Starting the producers should yield the same image.
-					let image1 = result1.single()?.value?.image
-					let image2 = result2.single()?.value?.image
+					guard let image1 = result1.single()?.value?.image else { XCTFail("Failed to produce image"); return }
+					guard let image2 = result2.single()?.value?.image else { XCTFail("Failed to produce image"); return }
 
-					expect(image1!) === image2!
+					expect(image1) === image2
 				}
 			}
 

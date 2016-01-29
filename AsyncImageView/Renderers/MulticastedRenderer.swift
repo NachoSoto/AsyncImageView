@@ -9,9 +9,6 @@
 import UIKit
 import ReactiveCocoa
 
-// The initial value is `nil`.
-private typealias ImageProperty = AnyProperty<ImageResult?>
-
 /// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
@@ -22,7 +19,7 @@ public final class MulticastedRenderer<
 	Renderer.Error == NoError
 >: RendererType {
 	private let renderer: Renderer
-	private let cache: Atomic<[Data : ImageProperty]>
+	private let cache: Atomic<[Data : SignalProducer<ImageResult, NoError>]>
 
 	private let memoryWarningDisposable: Disposable
 
@@ -38,39 +35,32 @@ public final class MulticastedRenderer<
 	}
 
 	public func renderImageWithData(data: Data) -> SignalProducer<ImageResult, NoError> {
-		let property = getPropertyForData(data)
-
-		return property.producer
-			.filter { $0 != nil } // Skip initial `nil` value.
-			.map { $0! }
-			.take(1)
- 	}
-
-	private func getPropertyForData(data: Data) -> ImageProperty {
-		var result: ImageProperty!
+		var result: SignalProducer<ImageResult, NoError>!
 
 		self.cache.modify { cache in
 			var mutableCache = cache
 
-			if let property = cache[data] {
-				result = property
+			if let signal = cache[data] {
+				result = signal
 				return cache
 			}
 
-			result = ImageProperty(
-				initialValue: nil,
-				producer: renderer.createProducerForRenderingData(data)
-					.map(Optional.init)
-			)
+			result = self.createSignalForData(data)
 
 			mutableCache[data] = result
 			return mutableCache
 		}
 
 		return result
+ 	}
+
+	private func createSignalForData(data: Data) -> SignalProducer<ImageResult, NoError> {
+		return self.renderer
+			.createProducerForRenderingData(data)
+			.replayLazily(1)
 	}
 
-	private static func clearCacheOnMemoryWarning(cache: Atomic<[Data : ImageProperty]>) -> Disposable {
+	private static func clearCacheOnMemoryWarning(cache: Atomic<[Data : SignalProducer<ImageResult, NoError>]>) -> Disposable {
 		return NSNotificationCenter.defaultCenter()
 			.rac_notifications(UIApplicationDidReceiveMemoryWarningNotification, object: nil)
 			.observeOn(QueueScheduler())

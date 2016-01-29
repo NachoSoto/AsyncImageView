@@ -33,7 +33,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 				func getImageForData(data: TestData, _ size: CGSize) -> ImageResult? {
 					return getProducerForData(data, size)
-						.single()?
+						.first()?
 						.value
 				}
 
@@ -54,8 +54,8 @@ class MulticastedRendererSpec: QuickSpec {
 					let result2 = getProducerForData(data, size)
 
 					// Starting the producers should yield the same image.
-					guard let image1 = result1.single()?.value?.image else { XCTFail("Failed to produce image"); return }
-					guard let image2 = result2.single()?.value?.image else { XCTFail("Failed to produce image"); return }
+					guard let image1 = result1.first()?.value?.image else { XCTFail("Failed to produce image"); return }
+					guard let image2 = result2.first()?.value?.image else { XCTFail("Failed to produce image"); return }
 
 					expect(image1) === image2
 				}
@@ -72,7 +72,6 @@ class MulticastedRendererSpec: QuickSpec {
 				var renderer: RenderType!
 
 				var cacheHitRenderer: CacheHitRenderer!
-
 
 				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
@@ -94,7 +93,7 @@ class MulticastedRendererSpec: QuickSpec {
 						renderer: innerRenderer,
 						delay: delay,
 						scheduler: scheduler
-						))
+					))
 
 					renderer = RenderType(renderer: delayedTestRenderer)
 				}
@@ -103,7 +102,9 @@ class MulticastedRendererSpec: QuickSpec {
 					let producer = getProducerForData(data, size)
 					var result: ImageResult?
 
-					producer.startWithNext { result = $0 }
+					producer
+						.take(1)
+						.startWithNext { result = $0 }
 
 					scheduler.advanceByInterval(delay)
 
@@ -127,7 +128,10 @@ class MulticastedRendererSpec: QuickSpec {
 
 				it("is a cache hit the second time the producer is fetched") {
 					let producer = getProducerForData(data, size)
+
+					let disposable = producer.start()
 					scheduler.advanceByInterval(delay)
+					disposable.dispose()
 
 					var result: ImageResult?
 					producer.startWithNext { result = $0 }

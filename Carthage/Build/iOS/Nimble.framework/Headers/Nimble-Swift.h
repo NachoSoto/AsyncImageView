@@ -119,10 +119,6 @@ SWIFT_PROTOCOL("_TtP6Nimble13NMBCollection_")
 @end
 
 
-
-/// Protocol for types to support beLessThan(), beLessThanOrEqualTo(), beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
-///
-/// Types that conform to Swift's Comparable protocol will work implicitly too
 SWIFT_PROTOCOL("_TtP6Nimble13NMBComparable_")
 @protocol NMBComparable
 - (NSComparisonResult)NMB_compare:(id <NMBComparable> __null_unspecified)otherObject;
@@ -194,6 +190,11 @@ SWIFT_CLASS("_TtC6Nimble14NMBObjCMatcher")
 
 @interface NMBObjCMatcher (SWIFT_EXTENSION(Nimble))
 + (NMBObjCMatcher * __nonnull)haveCountMatcher:(NSNumber * __nonnull)expected;
+@end
+
+
+@interface NMBObjCMatcher (SWIFT_EXTENSION(Nimble))
++ (NMBObjCMatcher * __nonnull)satisfyAnyOfMatcher:(NSArray<NMBObjCMatcher *> * __nonnull)matchers;
 @end
 
 

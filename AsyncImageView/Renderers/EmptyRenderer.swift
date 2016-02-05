@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 import ReactiveCocoa
+import Result
 
 /// `RendererType` which does not generate any images.
 ///

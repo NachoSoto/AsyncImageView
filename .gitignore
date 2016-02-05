@@ -18,3 +18,5 @@ DerivedData
 test_output
 
 Carthage/Checkouts
+Carthage/Build/watchOS
+Carthage/Build/Mac

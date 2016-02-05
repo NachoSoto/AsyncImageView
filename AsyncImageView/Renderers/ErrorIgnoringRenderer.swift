@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 import ReactiveCocoa
+import Result
 
 /// `RendererType` decorator that ignores errors from a renderer.
 /// Note: it's recommended to use `FallbackRenderer` instead, but this is useful,

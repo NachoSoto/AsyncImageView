@@ -8,7 +8,9 @@
 
 import Quick
 import Nimble
+
 import ReactiveCocoa
+import Result
 
 @testable import AsyncImageView
 

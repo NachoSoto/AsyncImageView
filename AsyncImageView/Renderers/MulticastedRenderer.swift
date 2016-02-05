@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 import ReactiveCocoa
+import Result
 
 /// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.

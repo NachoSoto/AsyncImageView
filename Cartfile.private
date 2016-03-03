@@ -1,4 +1,4 @@
-github "jspahrsummers/xcconfigs" "ec5753493605deed7358dec5f9260f503d3ed650"
 github "Quick/Quick" "master"
 github "Quick/Nimble" "master"
 github "nvzqz/RandomKit" ~> 1.6
+github "jspahrsummers/xcconfigs" "d78854b22b9567e7f30d748bdd4966c86bcc93a5"

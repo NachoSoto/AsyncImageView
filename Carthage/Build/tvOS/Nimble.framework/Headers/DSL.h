@@ -53,6 +53,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beIdenticalTo(id expectedInstance);
 NIMBLE_SHORT(id<NMBMatcher> beIdenticalTo(id expectedInstance),
              NMB_beIdenticalTo(expectedInstance));
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_be(id expectedInstance);
+NIMBLE_SHORT(id<NMBMatcher> be(id expectedInstance),
+             NMB_be(expectedInstance));
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue);
 NIMBLE_SHORT(id<NMBMatcher> beLessThan(NSNumber *expectedValue),
              NMB_beLessThan(expectedValue));
@@ -106,6 +110,12 @@ NIMBLE_SHORT(id<NMBMatcher> match(id expectedValue),
 NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id matcher);
 NIMBLE_SHORT(id<NMBMatcher> allPass(id matcher),
              NMB_allPass(matcher));
+
+NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithMatchers(id matchers);
+#define NMB_satisfyAnyOf(...) NMB_satisfyAnyOfWithMatchers(@[__VA_ARGS__])
+#ifndef NIMBLE_DISABLE_SHORT_SYNTAX
+#define satisfyAnyOf(...) NMB_satisfyAnyOf(__VA_ARGS__)
+#endif
 
 // In order to preserve breakpoint behavior despite using macros to fill in __FILE__ and __LINE__,
 // define a builder that populates __FILE__ and __LINE__, and returns a block that takes timeout

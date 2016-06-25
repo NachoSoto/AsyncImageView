@@ -9,8 +9,8 @@
 import Foundation
 
 public protocol CacheType {
-	typealias Key
-	typealias Value
+	associatedtype Key
+	associatedtype Value
 
 	/// Retrieves the value for this key.
 	func valueForKey(key: Key) -> Value?

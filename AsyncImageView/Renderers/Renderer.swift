@@ -41,16 +41,16 @@ extension UIImage: RenderResultType {
 }
 
 public protocol RendererType {
-	typealias Data: RenderDataType
+	associatedtype Data: RenderDataType
 
-	typealias RenderResult: RenderResultType
-	typealias Error: ErrorType
+	associatedtype RenderResult: RenderResultType
+	associatedtype Error: ErrorType
 
 	func renderImageWithData(data: Data) -> SignalProducer<RenderResult, Error>
 }
 
 public protocol SynchronousRendererType {
-	typealias Data: RenderDataType
+	associatedtype Data: RenderDataType
 
 	func renderImageWithData(data: Data) -> UIImage
 }

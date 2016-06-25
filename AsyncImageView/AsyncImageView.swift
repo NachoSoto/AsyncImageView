@@ -12,7 +12,7 @@ import ReactiveCocoa
 import Result
 
 public protocol ImageViewDataType {
-	typealias RenderData: RenderDataType
+	associatedtype RenderData: RenderDataType
 
 	func renderDataWithSize(size: CGSize) -> RenderData
 }

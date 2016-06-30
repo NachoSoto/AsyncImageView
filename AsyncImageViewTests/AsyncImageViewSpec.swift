@@ -26,7 +26,7 @@ class AsyncImageViewSpec: QuickSpec {
 				beforeEach {
 					renderer = TestRenderer()
 					view = ViewType(
-						initialFrame: CGRectZero,
+						initialFrame: .zero,
 						renderer: renderer,
 						placeholderRenderer: nil,
 						imageCreationScheduler: ImmediateScheduler()
@@ -43,28 +43,28 @@ class AsyncImageViewSpec: QuickSpec {
 
 				context("Updating image") {
 					it("does not render image if size is not set yet") {
-						view.data = .A
+						view.data = .a
 
 						expect(view.image).to(beNil())
 					}
 
 					it("updates image when setting data") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .A
+						view.data = .a
 
 						verifyView()
 					}
 
 					it("updates image when updating data") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .A
-						view.data = .B
+						view.data = .a
+						view.data = .b
 
 						verifyView()
 					}
 
 					it("updates image when setting frame") {
-						view.data = .C
+						view.data = .c
 						view.frame.size = CGSize(width: 10, height: 10)
 
 						verifyView()
@@ -72,7 +72,7 @@ class AsyncImageViewSpec: QuickSpec {
 
 					it("updates image when updating frame") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .C
+						view.data = .c
 
 						view.frame.size = CGSize(width: 15, height: 15)
 
@@ -81,7 +81,7 @@ class AsyncImageViewSpec: QuickSpec {
 
 					it("updates image when updating bounds") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .C
+						view.data = .c
 
 						view.bounds.size = CGSize(width: 15, height: 15)
 
@@ -90,10 +90,10 @@ class AsyncImageViewSpec: QuickSpec {
 
 					it("resets image when updating data") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .C
+						view.data = .c
 						verifyView()
 
-						view.data = .A
+						view.data = .a
 
 						expect(view.image).to(beNil()) // image should be reset immediately
 						verifyView() // and updated when rendering finishes
@@ -101,7 +101,7 @@ class AsyncImageViewSpec: QuickSpec {
 
 					it("resets image when updating frame") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .C
+						view.data = .c
 						verifyView()
 
 						view.frame.size = CGSize(width: 15, height: 15)
@@ -112,7 +112,7 @@ class AsyncImageViewSpec: QuickSpec {
 
 					it("resets image when setting data to nil") {
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .C
+						view.data = .c
 
 						verifyView()
 
@@ -123,24 +123,24 @@ class AsyncImageViewSpec: QuickSpec {
 
 				context("Not updating image if nothing changed") {
 					it("does not attempt to render anything is size is not ready") {
-						view.data = .A
+						view.data = .a
 						view.frame.size = CGSize(width: 10, height: 0)
 
 						expect(view.image).toEventually(beNil())
 					}
 
 					it("only renders once if data does not change") {
-						view.data = .A
+						view.data = .a
 						view.frame.size = CGSize(width: 10, height: 10)
-						view.data = .A
+						view.data = .a
 
 						expect(view.image).toNotEventually(beNil())
 						expect(renderer.renderedImages.value) == [TestRenderData(data: view.data!, size: view.frame.size)]
 					}
 
 					it("only renders once if size does not change") {
-						view.data = .A
-						view.frame = CGRect(origin: CGPointZero, size: CGSize(width: 10, height: 10))
+						view.data = .a
+						view.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 10, height: 10))
 						view.frame = CGRect(origin: CGPoint(x: 1, y: 0), size: CGSize(width: 10, height: 10))
 
 						expect(view.image).toNotEventually(beNil())
@@ -160,7 +160,7 @@ class AsyncImageViewSpec: QuickSpec {
 					placeholderRenderer = ManualRenderer()
 					renderer = ManualRenderer()
 					view = ViewType(
-						initialFrame: CGRectZero,
+						initialFrame: CGRect.zero,
 						renderer: renderer,
 						placeholderRenderer: placeholderRenderer,
 						imageCreationScheduler: ImmediateScheduler()
@@ -182,7 +182,7 @@ class AsyncImageViewSpec: QuickSpec {
 				it("sets placeholder image if emitted first") {
 					view.frame.size = CGSize(width: 1, height: 1)
 
-					let data: TestData = .A
+					let data: TestData = .a
 					let renderData = data.renderDataWithSize(view.frame.size)
 
 					placeholderRenderer.addRenderSignal(renderData)
@@ -201,10 +201,10 @@ class AsyncImageViewSpec: QuickSpec {
 				it("does not clear placeholder image when updating data") {
 					view.frame.size = CGSize(width: 1, height: 1)
 
-					let originalData: TestData = .A
+					let originalData: TestData = .a
 					let originalRenderData = originalData.renderDataWithSize(view.frame.size)
 
-					let updatedData: TestData = .B
+					let updatedData: TestData = .b
 					let updatedRenderData = updatedData.renderDataWithSize(view.frame.size)
 
 					placeholderRenderer.addRenderSignal(originalRenderData)
@@ -224,10 +224,10 @@ class AsyncImageViewSpec: QuickSpec {
 				it("sets placeholder image when updating data") {
 					view.frame.size = CGSize(width: 1, height: 1)
 
-					let originalData: TestData = .A
+					let originalData: TestData = .a
 					let originalRenderData = originalData.renderDataWithSize(view.frame.size)
 
-					let updatedData: TestData = .B
+					let updatedData: TestData = .b
 					let updatedRenderData = updatedData.renderDataWithSize(view.frame.size)
 
 					placeholderRenderer.addRenderSignal(originalRenderData)
@@ -249,7 +249,7 @@ class AsyncImageViewSpec: QuickSpec {
 				it("resets image when setting data to nil") {
 					view.frame.size = CGSize(width: 10, height: 10)
 
-					let data: TestData = .A
+					let data: TestData = .a
 					let renderData = data.renderDataWithSize(view.frame.size)
 
 					placeholderRenderer.addRenderSignal(renderData)
@@ -271,11 +271,11 @@ class AsyncImageViewSpec: QuickSpec {
 private final class ManualRenderer: RendererType {
 	var signals: [TestRenderData : (signal: Signal<UIImage, NoError>, observer: Signal<UIImage, NoError>.Observer)] = [:]
 
-	func addRenderSignal(data: TestRenderData) {
+	func addRenderSignal(_ data: TestRenderData) {
 		signals[data] = Signal<UIImage, NoError>.pipe()
 	}
 
-	func emitImageForData(data: TestRenderData, scale: CGFloat) {
+	func emitImageForData(_ data: TestRenderData, scale: CGFloat) {
 		let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
 		let observer = signals[data]!.observer
 
@@ -283,7 +283,7 @@ private final class ManualRenderer: RendererType {
 		observer.sendCompleted()
 	}
 
-	func renderImageWithData(data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
+	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
 		guard let signal = signals[data]?.signal else {
 			XCTFail("Signal not created for \(data)")
 			return .empty

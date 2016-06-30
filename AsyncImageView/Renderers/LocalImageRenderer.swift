@@ -20,15 +20,15 @@ public protocol LocalRenderDataType: RenderDataType {
 /// Note that this Renderer will ignore `RenderDataType.size`.
 /// Consider chaining this with `ImageInflaterRenderer`.
 public final class LocalImageRenderer<T: LocalRenderDataType>: RendererType {
-	private let scheduler: SchedulerType
+	private let scheduler: SchedulerProtocol
 
-	public init(scheduler: SchedulerType = QueueScheduler()) {
+	public init(scheduler: SchedulerProtocol = QueueScheduler()) {
 		self.scheduler = scheduler
 	}
 
-	public func renderImageWithData(data: T) -> SignalProducer<UIImage, NoError> {
+	public func renderImageWithData(_ data: T) -> SignalProducer<UIImage, NoError> {
 		return SignalProducer
 			.attempt { Result(data.image) }
-			.startOn(self.scheduler)
+			.start(on: self.scheduler)
 	}
 }

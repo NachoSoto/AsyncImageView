@@ -21,7 +21,7 @@ public final class ErrorIgnoringRenderer<Renderer: RendererType>: RendererType {
 		self.renderer = renderer
 	}
 
-	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<Renderer.RenderResult, NoError> {
+	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<Renderer.RenderResult, NoError> {
 		return self.renderer
 			.renderImageWithData(data)
 			.flatMapError { _ in

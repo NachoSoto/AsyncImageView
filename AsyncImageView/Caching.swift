@@ -13,38 +13,40 @@ public protocol CacheType {
 	associatedtype Value
 
 	/// Retrieves the value for this key.
-	func valueForKey(key: Key) -> Value?
+	func valueForKey(_ key: Key) -> Value?
 
 	/// Sets a value for a key. If `value` is `nil`, it will be removed.
-	func setValue(value: Value?, forKey key: Key)
+	func setValue(_ value: Value?, forKey key: Key)
 }
 
 // MARK: -
 
 /// `CacheType` backed by `NSCache`.
 public final class InMemoryCache<K: Hashable, V>: CacheType {
-	private let cache: NSCache
+	private typealias NativeCacheType = Cache<CacheKey<K>, CacheValue<V>>
+
+	private let cache: NativeCacheType
 
 	public init(cacheName: String) {
 		self.cache = {
-			let cache = NSCache()
+			let cache = NativeCacheType()
 			cache.name = cacheName
 
 			return cache
 		}()
 	}
 
-	public func valueForKey(key: K) -> V? {
-		return (cache.objectForKey(CacheKey(value: key)) as! CacheValue<V>?)?.value
+	public func valueForKey(_ key: K) -> V? {
+		return cache.object(forKey: CacheKey(value: key))?.value
 	}
 
-	public func setValue(value: V?, forKey key: K) {
+	public func setValue(_ value: V?, forKey key: K) {
 		let key = CacheKey(value: key)
 
 		if let value = value.map(CacheValue.init) {
 			cache.setObject(value, forKey: key)
 		} else {
-			cache.removeObjectForKey(key)
+			cache.removeObject(forKey: key)
 		}
 	}
 }
@@ -68,7 +70,7 @@ private final class CacheKey<K: Hashable>: NSObject {
 		super.init()
 	}
 
-	private override func isEqual(object: AnyObject?) -> Bool {
+	private override func isEqual(_ object: AnyObject?) -> Bool {
 		if let otherData = object as? CacheKey<K> {
 			return otherData.value == self.value
 		} else {
@@ -95,59 +97,59 @@ public protocol DataFileType {
 /// Represents a value that can be persisted on disk.
 public protocol NSDataConvertible {
 	/// Creates an instance of the receiver from `NSData`, if possible.
-	init?(data: NSData)
+	init?(data: Data)
 
 	/// Encodes the receiver in `NSData`. Returns `nil` if failed.
-	var data: NSData? { get }
+	var data: Data? { get }
 }
 
 /// Returns the directory where all `DiskCache` caches are stored
 /// by default.
-public func diskCacheDefaultCacheDirectory() -> NSURL {
-	return try! NSFileManager()
-		.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-		.URLByAppendingPathComponent("AsyncImageView", isDirectory: true)
+public func diskCacheDefaultCacheDirectory() -> URL {
+	return try! FileManager()
+		.urlForDirectory(.cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+		.appendingPathComponent("AsyncImageView", isDirectory: true)
 }
 
 /// `CacheType` backed by files on disk.
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
-	private let rootDirectory: NSURL
-	private let fileManager = NSFileManager.defaultManager()
-	private let lock: NSLock
+	private let rootDirectory: URL
+	private let fileManager = FileManager.default()
+	private let lock: Lock
 
-	public static func onCacheSubdirectory(directoryName: String) -> DiskCache {
-		let url = diskCacheDefaultCacheDirectory()
-			.URLByAppendingPathComponent(directoryName, isDirectory: true)
+	public static func onCacheSubdirectory(_ directoryName: String) -> DiskCache {
+		let url = try! diskCacheDefaultCacheDirectory()
+			.appendingPathComponent(directoryName, isDirectory: true)
 
 		return DiskCache(rootDirectory: url)
 	}
 
-	public init(rootDirectory: NSURL) {
+	public init(rootDirectory: URL) {
 		self.rootDirectory = rootDirectory
-		self.lock = NSLock()
+		self.lock = Lock()
 		self.lock.name = "DiskCache.\(rootDirectory.absoluteString)"
 	}
 
-	public func valueForKey(key: K) -> V? {
-		return withLock { NSData(contentsOfURL: self.filePathForKey(key)) }
+	public func valueForKey(_ key: K) -> V? {
+		return withLock { (try? Data(contentsOf: self.filePathForKey(key))) }
 			.flatMap(V.init)
 	}
 
-	public func setValue(value: V?, forKey key: K) {
+	public func setValue(_ value: V?, forKey key: K) {
 		let url = self.filePathForKey(key)
 
 		self.withLock {
-			self.guaranteeDirectoryExists(url.URLByDeletingLastPathComponent!)
+			self.guaranteeDirectoryExists(try! url.deletingLastPathComponent())
 
 			if let data = value.flatMap({ $0.data }) {
-				try! data.writeToURL(url, options: .DataWritingAtomic)
-			} else if self.fileManager.fileExistsAtPath(url.path!) {
-				try! self.fileManager.removeItemAtURL(url)
+				try! data.write(to: url, options: .dataWritingAtomic)
+			} else if self.fileManager.fileExists(atPath: url.path!) {
+				try! self.fileManager.removeItem(at: url)
 			}
 		}
 	}
 
-	private func withLock<T>(block: () -> T) -> T {
+	private func withLock<T>(_ block: () -> T) -> T {
 		self.lock.lock()
 		let result = block()
 		self.lock.unlock()
@@ -155,18 +157,18 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 		return result
 	}
 
-	private func filePathForKey(key: K) -> NSURL {
+	private func filePathForKey(_ key: K) -> URL {
 		if let subdirectory = key.subdirectory {
-			return self.rootDirectory
-				.URLByAppendingPathComponent(subdirectory, isDirectory: true)
-				.URLByAppendingPathComponent(key.uniqueFilename, isDirectory: false)
+			return try! self.rootDirectory
+				.appendingPathComponent(subdirectory, isDirectory: true)
+				.appendingPathComponent(key.uniqueFilename, isDirectory: false)
 		} else {
-			return self.rootDirectory
-				.URLByAppendingPathComponent(key.uniqueFilename, isDirectory: false)
+			return try! self.rootDirectory
+				.appendingPathComponent(key.uniqueFilename, isDirectory: false)
 		}
 	}
 
-	private func guaranteeDirectoryExists(url: NSURL) {
-		try! self.fileManager.createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
+	private func guaranteeDirectoryExists(_ url: URL) {
+		try! self.fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
 	}
 }

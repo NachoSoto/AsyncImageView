@@ -13,7 +13,7 @@ import RandomKit
 
 @testable import AsyncImageView
 
-private func testCache<T: CacheType where T.Value: Equatable>(cacheCreator cacheCreator: () -> T, keyCreator: () -> T.Key, valueCreator: () -> T.Value) {
+private func testCache<T: CacheType where T.AsyncImageView.Value: Equatable>(cacheCreator: () -> T, keyCreator: () -> T.Key, valueCreator: () -> T.AsyncImageView.Value) {
 	var cache: T!
 
 	beforeEach {
@@ -73,8 +73,8 @@ class DiskCacheSpec: QuickSpec {
 	override func spec() {
 		describe("DiskCache") {
 			let directoryCreator = {
-				return NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-					.URLByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString, isDirectory: true)
+				return try! URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+					.appendingPathComponent(ProcessInfo.processInfo().globallyUniqueString, isDirectory: true)
 			}
 
 			testCache(
@@ -86,8 +86,8 @@ class DiskCacheSpec: QuickSpec {
 			)
 
 			it("saves files in subdirectory") {
-				func readFile(url: NSURL) -> String? {
-					return NSData(contentsOfURL: url)
+				func readFile(_ url: URL) -> String? {
+					return (try? Data(contentsOf: url))
 						.flatMap { NSString(data: $0, encoding: String.encoding) as String? }
 				}
 
@@ -97,8 +97,8 @@ class DiskCacheSpec: QuickSpec {
 				cache.setValue("hello", forKey: "word")
 				cache.setValue("hi", forKey: "apple")
 
-				expect(readFile(directory.URLByAppendingPathComponent("4").URLByAppendingPathComponent("word"))) == "hello"
-				expect(readFile(directory.URLByAppendingPathComponent("5").URLByAppendingPathComponent("apple"))) == "hi"
+				expect(readFile(try! directory.appendingPathComponent("4").appendingPathComponent("word"))) == "hello"
+				expect(readFile(try! directory.appendingPathComponent("5").appendingPathComponent("apple"))) == "hi"
 			}
 		}
 	}
@@ -127,16 +127,16 @@ extension String: DataFileType {
 }
 
 extension String: NSDataConvertible {
-	public init?(data: NSData) {
+	public init?(data: Data) {
 		self.init(data: data, encoding: String.encoding)
 	}
 
-	public var data: NSData? {
-		return (self as NSString).dataUsingEncoding(String.encoding)
+	public var data: Data? {
+		return (self as NSString).data(using: String.encoding)
 	}
 
 	private static var encoding: UInt {
-		return NSUTF8StringEncoding
+		return String.Encoding.utf8
 	}
 }
 
@@ -144,6 +144,6 @@ private let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123
 
 extension String {
 	private static func randomReadableString() -> String {
-		return self.random(UInt(Int.random(1...15)), NSCharacterSet(charactersInString: alphabet))
+		return self.random(UInt(Int.random(1...15)), CharacterSet(charactersIn: alphabet))
 	}
 }

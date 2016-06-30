@@ -15,7 +15,7 @@ import Result
 public final class AnyRenderer<
 	Data: RenderDataType,
 	RenderResult: RenderResultType,
-	Error: ErrorType
+	Error: ErrorProtocol
 >: RendererType {
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
@@ -32,7 +32,7 @@ public final class AnyRenderer<
 		self.renderBlock = renderBlock
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, Error> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, Error> {
 		return self.renderBlock(data)
 	}
 }
@@ -41,17 +41,17 @@ extension SynchronousRendererType {
 	/// Constructs an `AnyRenderer` with a `SynchronousRendererType`.
 	/// The created `SignalProducer` will simply emit the result
 	/// of `renderImageWithData`.
-	public func asyncRenderer(scheduler: SchedulerType = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
+	public func asyncRenderer(_ scheduler: SchedulerProtocol = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
 		return AnyRenderer { data in
 			return SignalProducer { observer, disposable in
-				if !disposable.disposed {
+				if !disposable.isDisposed {
 					observer.sendNext(self.renderImageWithData(data))
 					observer.sendCompleted()
 				} else {
 					observer.sendInterrupted()
 				}
 			}
-				.startOn(scheduler)
+				.start(on: scheduler)
 		}
 	}
 }
@@ -62,7 +62,7 @@ extension RendererType {
 	///
 	/// This is useful when you want to compose two renderers 
 	/// with different `RenderDataType`s.
-	public func mapData<NewData: RenderDataType>(mapper: (NewData) -> Self.Data)
+	public func mapData<NewData: RenderDataType>(_ mapper: (NewData) -> Self.Data)
 		-> AnyRenderer<NewData, Self.RenderResult, Self.Error> {
 			return AnyRenderer { data in
 				return self.renderImageWithData(mapper(data))

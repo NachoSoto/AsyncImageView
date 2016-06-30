@@ -28,15 +28,15 @@ public final class CacheRenderer<
 
 	/// Returns an image from the cache if found,
 	/// otherwise it invokes the decorated `renderer` and caches the result.
-	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
+	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
 		return SignalProducer
 			.attempt { [cache = self.cache] in
 				return Result(
 					cache.valueForKey(data)?.image.asCacheHit,
-					failWith: CacheRendererError.ImageNotFound
+					failWith: CacheRendererError.imageNotFound
 				)
 			}
-			.startOn(QueueScheduler())
+			.start(on: QueueScheduler())
 			.flatMapError { [renderer = self.renderer] _ in
 				return renderer
 					.renderImageWithData(data)
@@ -55,7 +55,7 @@ extension RendererType {
 		where
 		Cache.Key == Self.Data,
 		Cache.Value == Self.RenderResult
-		>(cache: Cache) -> CacheRenderer<Self, Cache>
+		>(_ cache: Cache) -> CacheRenderer<Self, Cache>
 	{
 		return CacheRenderer(renderer: self, cache: cache)
 	}
@@ -71,12 +71,12 @@ extension RenderDataType where Self: DataFileType {
 	}
 }
 
-internal func subdirectoryForSize(size: CGSize) -> String {
+internal func subdirectoryForSize(_ size: CGSize) -> String {
 	return String(format: "%.2fx%.2f", size.width, size.height)
 }
 
-private enum CacheRendererError: ErrorType {
-	case ImageNotFound
+private enum CacheRendererError: ErrorProtocol {
+	case imageNotFound
 }
 
 private extension UIImage {

@@ -14,8 +14,8 @@ public final class FallbackRenderer<
 	Data: RenderDataType,
 	RR1: RenderResultType,
 	RR2: RenderResultType,
-	E1: ErrorType,
-	E2: ErrorType
+	E1: ErrorProtocol,
+	E2: ErrorProtocol
 >: RendererType {
 	private let primaryRenderer: AnyRenderer<Data, RR1, E1>
 	private let fallbackRenderer: AnyRenderer<Data, RR2, E2>
@@ -37,7 +37,7 @@ public final class FallbackRenderer<
 
 	/// The resulting `SignalProducer` will emit images created by the primary
 	/// renderer. If that emits an error, the fallback Renderer will be used.
-	public func renderImageWithData(data: Data) -> SignalProducer<ImageResult, E2> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, E2> {
 		return self.primaryRenderer
 			.renderImageWithData(data)
 			.map { $0.asResult }
@@ -55,7 +55,7 @@ extension RendererType {
 		Other: RendererType
 		where
 		Self.Data == Other.Data
-		>(fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
+		>(_ fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
 	{
 		return FallbackRenderer(primaryRenderer: self, fallbackRenderer: fallbackRenderer)
 	}

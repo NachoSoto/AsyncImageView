@@ -44,13 +44,13 @@ public protocol RendererType {
 	associatedtype Data: RenderDataType
 
 	associatedtype RenderResult: RenderResultType
-	associatedtype Error: ErrorType
+	associatedtype Error: ErrorProtocol
 
-	func renderImageWithData(data: Data) -> SignalProducer<RenderResult, Error>
+	func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, Error>
 }
 
 public protocol SynchronousRendererType {
 	associatedtype Data: RenderDataType
 
-	func renderImageWithData(data: Data) -> UIImage
+	func renderImageWithData(_ data: Data) -> UIImage
 }

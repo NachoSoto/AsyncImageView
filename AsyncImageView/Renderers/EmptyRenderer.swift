@@ -21,7 +21,7 @@ public final class EmptyRenderer<
 	public init() {
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, NoError> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, NoError> {
 		return .empty
 	}
 }

@@ -12,7 +12,7 @@ import ReactiveCocoa
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
-	public typealias Block = (context: CGContextRef, data: Data) -> ()
+	public typealias Block = (context: CGContext, data: Data) -> ()
 
 	private let scale: CGFloat
 	private let opaque: Bool
@@ -32,6 +32,8 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
 	}
 
 	public func renderImageWithData(data: Data) -> UIImage {
+		// TODO: use new ImageRenderer
+
 		UIGraphicsBeginImageContextWithOptions(self.imageSize ?? data.size, self.opaque, self.scale)
 
 		self.renderingBlock(context: UIGraphicsGetCurrentContext()!, data: data)
@@ -39,6 +41,6 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
 
-		return image
+		return image!
 	}
 }

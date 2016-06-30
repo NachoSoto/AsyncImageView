@@ -17,7 +17,7 @@ import AsyncImageView
 class MulticastedRendererSpec: QuickSpec {
 	override func spec() {
 		describe("MulticastedRenderer") {
-			let data: TestData = .A
+			let data: TestData = .a
 			let size = CGSize(width: 1, height: 1)
 
 			context("General tests") {
@@ -27,11 +27,11 @@ class MulticastedRendererSpec: QuickSpec {
 				var innerRenderer: InnerRendererType!
 				var renderer: RenderType!
 
-				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
+				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
 
-				func getImageForData(data: TestData, _ size: CGSize) -> ImageResult? {
+				func getImageForData(_ data: TestData, _ size: CGSize) -> ImageResult? {
 					return getProducerForData(data, size)
 						.single()?
 						.value
@@ -66,7 +66,7 @@ class MulticastedRendererSpec: QuickSpec {
 				typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
 
 				var scheduler: TestScheduler!
-				let delay: NSTimeInterval = 1
+				let delay: TimeInterval = 1
 
 				var innerRenderer: InnerRendererType!
 				var renderer: RenderType!
@@ -74,11 +74,11 @@ class MulticastedRendererSpec: QuickSpec {
 				var cacheHitRenderer: CacheHitRenderer!
 
 
-				func getProducerForData(data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
+				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
 
-				func getImageForData(data: TestData, _ size: CGSize) -> ImageResult? {
+				func getImageForData(_ data: TestData, _ size: CGSize) -> ImageResult? {
 					return getProducerForData(data, size)
 						.single()?
 						.value
@@ -147,7 +147,7 @@ private final class CacheHitRenderer: RendererType {
 
 	private let testRenderer = TestRenderer()
 
-	func renderImageWithData(data: TestRenderData) ->  SignalProducer<ImageResult, NoError> {
+	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<ImageResult, NoError> {
 		return testRenderer.renderImageWithData(data)
 			.map {
 				return RenderResult(
@@ -161,16 +161,16 @@ private final class CacheHitRenderer: RendererType {
 /// `RendererType` decorator which introduces a delay on the resulting image.
 private final class DelayedRenderer<T: RendererType>: RendererType {
 	private let renderer: T
-	private let delay: NSTimeInterval
-	private let scheduler: DateSchedulerType
+	private let delay: TimeInterval
+	private let scheduler: DateSchedulerProtocol
 
-	init(renderer: T, delay: NSTimeInterval, scheduler: DateSchedulerType) {
+	init(renderer: T, delay: TimeInterval, scheduler: DateSchedulerProtocol) {
 		self.renderer = renderer
 		self.delay = delay
 		self.scheduler = scheduler
 	}
 
-	func renderImageWithData(data: T.Data) -> SignalProducer<T.RenderResult, T.Error> {
+	func renderImageWithData(_ data: T.AsyncImageView.Data) -> SignalProducer<T.RenderResult, T.AsyncImageView.Error> {
 		return renderer
 			.renderImageWithData(data)
 			.delay(self.delay, onScheduler: self.scheduler)

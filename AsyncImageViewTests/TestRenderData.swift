@@ -17,9 +17,9 @@ import Nimble
 @testable import AsyncImageView
 
 internal enum TestData: CGFloat, Hashable {
-	case A = 1.0
-	case B = 2.0
-	case C = 3.0
+	case a = 1.0
+	case b = 2.0
+	case c = 3.0
 }
 
 extension TestData: ImageViewDataType {
@@ -27,7 +27,7 @@ extension TestData: ImageViewDataType {
 		return self
 	}
 
-	func renderDataWithSize(size: CGSize) -> TestRenderData {
+	func renderDataWithSize(_ size: CGSize) -> TestRenderData {
 		return RenderData(data: self.data, size: size)
 	}
 }
@@ -49,7 +49,7 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
-	func renderImageWithData(data: TestRenderData) -> SignalProducer<UIImage, NoError> {
+	func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, NoError> {
 		return TestRenderer
 			.rendererForSize(data.size, scale: data.data.rawValue)
 			.asyncRenderer(ImmediateScheduler())
@@ -59,7 +59,7 @@ internal final class TestRenderer: RendererType {
 			})
 	}
 
-	static func rendererForSize(size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
+	static func rendererForSize(_ size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
 		precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
 		return ContextRenderer<TestRenderData>(scale: scale, opaque: true) { _ in
@@ -68,7 +68,7 @@ internal final class TestRenderer: RendererType {
 	}
 }
 
-internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, data: TestData?) {
+internal func verifyImage(@autoclosure(escaping) _ image: () -> UIImage?, withSize size: CGSize, data: TestData?) {
 	if let data = data {
 		verifyImage(image, withSize: size, expectedScale: data.rawValue)
 	} else {
@@ -76,7 +76,7 @@ internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize
 	}
 }
 
-internal func verifyImage(@autoclosure(escaping) image: () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {
+internal func verifyImage(@autoclosure(escaping) _ image: () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {
 	expect(image()?.size).toEventually(equal(size))
 	expect(image()?.scale).toEventually(equal(expectedScale))
 }

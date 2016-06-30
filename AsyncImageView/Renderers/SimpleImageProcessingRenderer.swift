@@ -12,17 +12,17 @@ import ReactiveCocoa
 /// `RendererType` decorator that applies processing to every emitted image.
 /// This allows, for example, to apply `UIImage.resizableImage(withCapInsets:)` on every image.
 public final class SimpleImageProcessingRenderer<Renderer: RendererType>: RendererType {
-    public typealias Block = (image: UIImage, data: Renderer.Data) -> UIImage
+    public typealias Block = (_ image: UIImage, _ data: Renderer.Data) -> UIImage
 
 	private let renderer: Renderer
 	private let renderingBlock: Block
 
-	private let schedulerCreator: () -> SchedulerType
+	private let schedulerCreator: () -> SchedulerProtocol
 
 	public init(
 		renderer: Renderer,
-		renderingBlock: Block,
-		schedulerCreator: () -> SchedulerType = { QueueScheduler() }
+		renderingBlock: @escaping Block,
+		schedulerCreator: @escaping () -> SchedulerProtocol = { QueueScheduler() }
     ) {
         self.renderer = renderer
         self.renderingBlock = renderingBlock
@@ -30,19 +30,19 @@ public final class SimpleImageProcessingRenderer<Renderer: RendererType>: Render
         self.schedulerCreator = schedulerCreator
     }
 
-	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
+	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
 		return self.renderer.renderImageWithData(data)
-			.observeOn(self.schedulerCreator())
+			.observe(on: self.schedulerCreator())
 			.map { $0.image }
 			.map { [block = self.renderingBlock] image in
-                block(image: image, data: data)
+                block(image, data)
 			}
 	}
 }
 
 extension RendererType {
 	/// Decorates this `RendererType` by applying the given block to every generated image.
-	public func mapImage(function: SimpleImageProcessingRenderer<Self>.Block) -> SimpleImageProcessingRenderer<Self> {
+	public func mapImage(function: @escaping SimpleImageProcessingRenderer<Self>.Block) -> SimpleImageProcessingRenderer<Self> {
         return SimpleImageProcessingRenderer(renderer: self, renderingBlock: function)
 	}
 }

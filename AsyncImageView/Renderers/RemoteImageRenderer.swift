@@ -12,7 +12,7 @@ import ReactiveCocoa
 import Result
 
 public protocol RemoteRenderDataType: RenderDataType {
-	var imageURL: NSURL { get }
+	var imageURL: URL { get }
 }
 
 /// `RendererType` which downloads images.
@@ -21,46 +21,46 @@ public protocol RemoteRenderDataType: RenderDataType {
 /// download the original image.
 /// Consider chaining this with `ImageInflaterRenderer`.
 public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
-	private let session: NSURLSession
+	private let session: URLSession
 
-	public init(session: NSURLSession = NSURLSession.sharedSession()) {
+	public init(session: URLSession = URLSession.shared()) {
 		self.session = session
 	}
 
-	public func renderImageWithData(data: T) -> SignalProducer<UIImage, RemoteImageRendererError> {
-		return self.session.rac_dataWithRequest(NSURLRequest(URL: data.imageURL))
-			.mapError(RemoteImageRendererError.LoadingError)
+	public func renderImageWithData(_ data: T) -> SignalProducer<UIImage, RemoteImageRendererError> {
+		return self.session.rac_dataWithRequest(URLRequest(url: data.imageURL))
+			.mapError(RemoteImageRendererError.loadingError)
 			.attemptMap { (data, response) in
 				Result(
-					(response as? NSHTTPURLResponse).map { (data, $0) },
-					failWith: .InvalidResponse
+					(response as? HTTPURLResponse).map { (data, $0) },
+					failWith: .invalidResponse
 				)
 			}
-			.flatMap(.Merge) { (data, response) -> SignalProducer<NSData, RemoteImageRendererError> in
+			.flatMap(.merge) { (data, response) -> SignalProducer<Foundation.Data, RemoteImageRendererError> in
 				let statusCode = response.statusCode
 
 				if statusCode >= 200 && statusCode < 300 {
 					return SignalProducer(value: data)
 				} else {
-					return SignalProducer(error: .InvalidStatusCode(statusCode: statusCode))
+					return SignalProducer(error: .invalidStatusCode(statusCode: statusCode))
 				}
 			}
-			.observeOn(QueueScheduler())
-			.flatMap(.Merge) { data in
+			.observe(on: QueueScheduler())
+			.flatMap(.merge) { data in
 				return SignalProducer
 					.attempt {
 						return Result(
 							UIImage(data: data),
-							failWith: RemoteImageRendererError.DecodingError
+							failWith: RemoteImageRendererError.decodingError
 						)
 				}
 		}
 	}
 }
 
-public enum RemoteImageRendererError: ErrorType {
-	case LoadingError(originalError: NSError)
-	case InvalidResponse
-	case InvalidStatusCode(statusCode: Int)
-	case DecodingError
+public enum RemoteImageRendererError: ErrorProtocol {
+	case loadingError(originalError: NSError)
+	case invalidResponse
+	case invalidStatusCode(statusCode: Int)
+	case decodingError
 }

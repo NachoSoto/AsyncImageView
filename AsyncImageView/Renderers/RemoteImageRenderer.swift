@@ -23,7 +23,7 @@ public protocol RemoteRenderDataType: RenderDataType {
 public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 	private let session: URLSession
 
-	public init(session: URLSession = URLSession.shared()) {
+	public init(session: URLSession = URLSession.shared) {
 		self.session = session
 	}
 

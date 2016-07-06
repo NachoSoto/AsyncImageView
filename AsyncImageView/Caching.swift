@@ -114,7 +114,7 @@ public func diskCacheDefaultCacheDirectory() -> URL {
 /// `CacheType` backed by files on disk.
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private let rootDirectory: URL
-	private let fileManager = FileManager.default()
+	private let fileManager = FileManager.default
 	private let lock: Lock
 
 	public static func onCacheSubdirectory(_ directoryName: String) -> DiskCache {
@@ -142,7 +142,7 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 			self.guaranteeDirectoryExists(try! url.deletingLastPathComponent())
 
 			if let data = value.flatMap({ $0.data }) {
-				try! data.write(to: url, options: .dataWritingAtomic)
+				try! data.write(to: url, options: .atomicWrite)
 			} else if self.fileManager.fileExists(atPath: url.path!) {
 				try! self.fileManager.removeItem(at: url)
 			}

@@ -28,7 +28,7 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 	}
 
 	public func renderImageWithData(_ data: T) -> SignalProducer<UIImage, RemoteImageRendererError> {
-		return self.session.rac_dataWithRequest(URLRequest(url: data.imageURL))
+		return self.session.rac_data(with: URLRequest(url: data.imageURL))
 			.mapError(RemoteImageRendererError.loadingError)
 			.attemptMap { (data, response) in
 				Result(

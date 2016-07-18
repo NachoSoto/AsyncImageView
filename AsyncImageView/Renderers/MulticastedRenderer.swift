@@ -45,7 +45,7 @@ public final class MulticastedRenderer<
 		return property.producer
 			.filter { $0 != nil } // Skip initial `nil` value.
 			.map { $0! }
-			.takeFirst()
+			.take(first: 1)
  	}
 
 	private func getPropertyForData(_ data: Data) -> ImageProperty {
@@ -57,7 +57,7 @@ public final class MulticastedRenderer<
 			} else {
 				result = ImageProperty(
 					initial: nil,
-					followingBy: renderer.createProducerForRenderingData(data)
+					then: renderer.createProducerForRenderingData(data)
 						.map(Optional.init)
 				)
 
@@ -70,7 +70,7 @@ public final class MulticastedRenderer<
 
 	private static func clearCacheOnMemoryWarning(_ cache: Atomic<[Data : ImageProperty]>) -> Disposable {
 		return NotificationCenter.default
-			.rac_notifications(for: .UIApplicationDidReceiveMemoryWarning, object: nil)
+			.rac_notifications(forName: .UIApplicationDidReceiveMemoryWarning, object: nil)
 			.observe(on: QueueScheduler())
 			.startWithNext { _ in
 				cache.modify { $0 = [:] }

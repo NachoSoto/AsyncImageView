@@ -54,8 +54,9 @@ public final class AsyncImageView<
 			.skipRepeats(==)
 			.observe(on: uiScheduler)
 			.on(next: { [weak self] in
-				if let strongSelf = self
-					where placeholderRenderer == nil || $0 == nil {
+				if
+					let strongSelf = self,
+					placeholderRenderer == nil || $0 == nil {
 						strongSelf.resetImage()
 				}
 			})
@@ -65,7 +66,7 @@ public final class AsyncImageView<
 					if let placeholderRenderer = placeholderRenderer {
 						return placeholderRenderer
 							.renderImageWithData(data)
-							.takeUntilReplacement(renderer.renderImageWithData(data))
+							.take(untilReplacement: renderer.renderImageWithData(data))
 					} else {
 						return renderer.renderImageWithData(data)
 					}

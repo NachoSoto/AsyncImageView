@@ -44,7 +44,7 @@ public protocol RendererType {
 	associatedtype Data: RenderDataType
 
 	associatedtype RenderResult: RenderResultType
-	associatedtype Error: ErrorProtocol
+	associatedtype Error: Swift.Error
 
 	func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, Error>
 }

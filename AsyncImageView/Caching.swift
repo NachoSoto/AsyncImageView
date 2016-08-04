@@ -23,7 +23,7 @@ public protocol CacheType {
 
 /// `CacheType` backed by `NSCache`.
 public final class InMemoryCache<K: Hashable, V>: CacheType {
-	private typealias NativeCacheType = Cache<CacheKey<K>, CacheValue<V>>
+	private typealias NativeCacheType = NSCache<CacheKey<K>, CacheValue<V>>
 
 	private let cache: NativeCacheType
 
@@ -107,7 +107,7 @@ public protocol NSDataConvertible {
 /// by default.
 public func diskCacheDefaultCacheDirectory() -> URL {
 	return try! FileManager()
-		.urlForDirectory(.cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+		.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 		.appendingPathComponent("AsyncImageView", isDirectory: true)
 }
 
@@ -115,10 +115,10 @@ public func diskCacheDefaultCacheDirectory() -> URL {
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private let rootDirectory: URL
 	private let fileManager = FileManager.default
-	private let lock: Lock
+	private let lock: NSLock
 
 	public static func onCacheSubdirectory(_ directoryName: String) -> DiskCache {
-		let url = try! diskCacheDefaultCacheDirectory()
+		let url = diskCacheDefaultCacheDirectory()
 			.appendingPathComponent(directoryName, isDirectory: true)
 
 		return DiskCache(rootDirectory: url)
@@ -126,7 +126,7 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 
 	public init(rootDirectory: URL) {
 		self.rootDirectory = rootDirectory
-		self.lock = Lock()
+		self.lock = NSLock()
 		self.lock.name = "DiskCache.\(rootDirectory.absoluteString)"
 	}
 
@@ -139,11 +139,11 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 		let url = self.filePathForKey(key)
 
 		self.withLock {
-			self.guaranteeDirectoryExists(try! url.deletingLastPathComponent())
+			self.guaranteeDirectoryExists(url.deletingLastPathComponent())
 
 			if let data = value.flatMap({ $0.data }) {
 				try! data.write(to: url, options: .atomicWrite)
-			} else if self.fileManager.fileExists(atPath: url.path!) {
+			} else if self.fileManager.fileExists(atPath: url.path) {
 				try! self.fileManager.removeItem(at: url)
 			}
 		}
@@ -159,11 +159,11 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 
 	private func filePathForKey(_ key: K) -> URL {
 		if let subdirectory = key.subdirectory {
-			return try! self.rootDirectory
+			return self.rootDirectory
 				.appendingPathComponent(subdirectory, isDirectory: true)
 				.appendingPathComponent(key.uniqueFilename, isDirectory: false)
 		} else {
-			return try! self.rootDirectory
+			return self.rootDirectory
 				.appendingPathComponent(key.uniqueFilename, isDirectory: false)
 		}
 	}

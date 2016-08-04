@@ -28,12 +28,8 @@ public final class InMemoryCache<K: Hashable, V>: CacheType {
 	private let cache: NativeCacheType
 
 	public init(cacheName: String) {
-		self.cache = {
-			let cache = NativeCacheType()
-			cache.name = cacheName
-
-			return cache
-		}()
+		self.cache = NativeCacheType()
+		self.cache.name = cacheName
 	}
 
 	public func valueForKey(_ key: K) -> V? {

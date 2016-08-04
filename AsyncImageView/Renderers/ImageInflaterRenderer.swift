@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 /// `RendererType` decorator that inflates images.
 public final class ImageInflaterRenderer<
-	Data: RenderDataType, RenderResult: RenderResultType, Error: ErrorProtocol
+	Data: RenderDataType, RenderResult: RenderResultType, Error: Swift.Error
 >: RendererType {
 	private let screenScale: CGFloat
 	private let opaque: Bool

@@ -14,8 +14,8 @@ public final class FallbackRenderer<
 	Data: RenderDataType,
 	RR1: RenderResultType,
 	RR2: RenderResultType,
-	E1: ErrorProtocol,
-	E2: ErrorProtocol
+	E1: Swift.Error,
+	E2: Swift.Error
 >: RendererType {
 	private let primaryRenderer: AnyRenderer<Data, RR1, E1>
 	private let fallbackRenderer: AnyRenderer<Data, RR2, E2>

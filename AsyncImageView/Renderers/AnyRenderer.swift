@@ -15,7 +15,7 @@ import Result
 public final class AnyRenderer<
 	Data: RenderDataType,
 	RenderResult: RenderResultType,
-	Error: ErrorProtocol
+	Error: Swift.Error
 >: RendererType {
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 

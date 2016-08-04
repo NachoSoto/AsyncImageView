@@ -61,7 +61,7 @@ private func hash<L: Hashable, R: Hashable>(_ left: L, _ right: [R]) -> Int {
 }
 
 private func hash<S: Sequence where S.Iterator.Element: Hashable>(_ sequence: S) -> Int {
-	return sequence.reduce(0, combine: ^^^)
+	return sequence.reduce(0, ^^^)
 }
 
 private func hash<R: Hashable>(_ left: Int, _ right: R) -> Int {

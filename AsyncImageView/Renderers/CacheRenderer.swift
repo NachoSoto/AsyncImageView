@@ -75,7 +75,7 @@ internal func subdirectoryForSize(_ size: CGSize) -> String {
 	return String(format: "%.2fx%.2f", size.width, size.height)
 }
 
-private enum CacheRendererError: ErrorProtocol {
+private enum CacheRendererError: Error {
 	case imageNotFound
 }
 

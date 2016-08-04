@@ -1,4 +1,4 @@
-github "NachoSoto/Quick" "nn-swift-3-compatibility"
-github "NachoSoto/Nimble" "nn-swift-3-compatibility"
+github "norio-nomura/Quick" "nn-swift-3-compatibility"
+github "andersio/Nimble" "swift3-beta-4"
 github "nvzqz/RandomKit" "master"
 github "jspahrsummers/xcconfigs" "d78854b22b9567e7f30d748bdd4966c86bcc93a5"

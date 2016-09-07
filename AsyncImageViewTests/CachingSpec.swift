@@ -13,7 +13,13 @@ import RandomKit
 
 @testable import AsyncImageView
 
-private func testCache<T: CacheType where T.AsyncImageView.Value: Equatable>(cacheCreator: () -> T, keyCreator: () -> T.Key, valueCreator: () -> T.AsyncImageView.Value) {
+private func testCache<T: CacheType>(
+	cacheCreator: @escaping () -> T,
+	keyCreator: @escaping () -> T.Key,
+	valueCreator: @escaping () -> T.Value
+)
+	where T.Value: Equatable
+{
 	var cache: T!
 
 	beforeEach {
@@ -61,7 +67,7 @@ class InMemoryCacheSpec: QuickSpec {
 	override func spec() {
 		describe("InMemoryCache") {
 			testCache(
-				cacheCreator: { InMemoryCache(cacheName: "test") },
+				cacheCreator: { InMemoryCache<String, String>(cacheName: "test") },
 				keyCreator: String.randomReadableString,
 				valueCreator: String.randomReadableString
 			)
@@ -73,8 +79,8 @@ class DiskCacheSpec: QuickSpec {
 	override func spec() {
 		describe("DiskCache") {
 			let directoryCreator = {
-				return try! URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-					.appendingPathComponent(ProcessInfo.processInfo().globallyUniqueString, isDirectory: true)
+				return URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+					.appendingPathComponent(ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
 			}
 
 			testCache(
@@ -88,7 +94,7 @@ class DiskCacheSpec: QuickSpec {
 			it("saves files in subdirectory") {
 				func readFile(_ url: URL) -> String? {
 					return (try? Data(contentsOf: url))
-						.flatMap { NSString(data: $0, encoding: String.encoding) as String? }
+						.flatMap { NSString(data: $0, encoding: String.encoding.rawValue) as String? }
 				}
 
 				let directory = directoryCreator()
@@ -97,8 +103,8 @@ class DiskCacheSpec: QuickSpec {
 				cache.setValue("hello", forKey: "word")
 				cache.setValue("hi", forKey: "apple")
 
-				expect(readFile(try! directory.appendingPathComponent("4").appendingPathComponent("word"))) == "hello"
-				expect(readFile(try! directory.appendingPathComponent("5").appendingPathComponent("apple"))) == "hi"
+				expect(readFile(directory.appendingPathComponent("4").appendingPathComponent("word"))) == "hello"
+				expect(readFile(directory.appendingPathComponent("5").appendingPathComponent("apple"))) == "hi"
 			}
 		}
 	}
@@ -132,18 +138,18 @@ extension String: NSDataConvertible {
 	}
 
 	public var data: Data? {
-		return (self as NSString).data(using: String.encoding)
+		return (self as NSString).data(using: String.encoding.rawValue)
 	}
 
-	private static var encoding: UInt {
-		return String.Encoding.utf8
+	fileprivate static var encoding: String.Encoding {
+		return .utf8
 	}
 }
 
 private let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 extension String {
-	private static func randomReadableString() -> String {
+	fileprivate static func randomReadableString() -> String {
 		return self.random(UInt(Int.random(1...15)), CharacterSet(charactersIn: alphabet))
 	}
 }

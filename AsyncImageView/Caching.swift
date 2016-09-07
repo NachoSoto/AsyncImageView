@@ -66,7 +66,7 @@ private final class CacheKey<K: Hashable>: NSObject {
 		super.init()
 	}
 
-	private override func isEqual(_ object: AnyObject?) -> Bool {
+	@objc override func isEqual(_ object: Any?) -> Bool {
 		if let otherData = object as? CacheKey<K> {
 			return otherData.value == self.value
 		} else {
@@ -74,7 +74,7 @@ private final class CacheKey<K: Hashable>: NSObject {
 		}
 	}
 
-	private override var hash: Int {
+	@objc override var hash: Int {
 		return self.cachedHash
 	}
 }

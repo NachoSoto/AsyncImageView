@@ -11,13 +11,13 @@ import UIKit
 extension UIImage: NSDataConvertible {
 	// init(data:) is already implemented by UIImage.
 
-	public var data: NSData? {
+	public var data: Data? {
 		return UIImagePNGRepresentation(self)
 	}
 }
 
 extension ImageResult: NSDataConvertible {
-	public init?(data: NSData) {
+	public init?(data: Data) {
 		if let image = UIImage(data: data) {
 			self.init(
 				image: image,
@@ -28,7 +28,7 @@ extension ImageResult: NSDataConvertible {
 		}
 	}
 
-	public var data: NSData? {
+	public var data: Data? {
 		return self.image.data
 	}
 }

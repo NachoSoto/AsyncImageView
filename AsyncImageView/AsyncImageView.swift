@@ -14,7 +14,7 @@ import Result
 public protocol ImageViewDataType {
 	associatedtype RenderData: RenderDataType
 
-	func renderDataWithSize(size: CGSize) -> RenderData
+	func renderDataWithSize(_ size: CGSize) -> RenderData
 }
 
 /// A `UIImageView` that can render asynchronously.
@@ -22,7 +22,7 @@ public final class AsyncImageView<
 	Data: RenderDataType,
 	ImageViewData: ImageViewDataType,
 	Renderer: RendererType,
-	PlaceholderRenderer: RendererType
+	PlaceholderRenderer: RendererType>: UIImageView
 	where
 	ImageViewData.RenderData == Data,
 	Renderer.Data == Data,
@@ -30,18 +30,18 @@ public final class AsyncImageView<
 	PlaceholderRenderer.Data == Data,
 	PlaceholderRenderer.Error == NoError,
 	Renderer.RenderResult == PlaceholderRenderer.RenderResult
->: UIImageView {
+ {
 	private let requestsSignal: Signal<Data?, NoError>
 	private let requestsObserver: Signal<Data?, NoError>.Observer
 
-	private let imageCreationScheduler: SchedulerType
+	private let imageCreationScheduler: SchedulerProtocol
 
 	public init(
 		initialFrame: CGRect,
 		renderer: Renderer,
 		placeholderRenderer: PlaceholderRenderer? = nil,
-		uiScheduler: SchedulerType = UIScheduler(),
-		imageCreationScheduler: SchedulerType = QueueScheduler())
+		uiScheduler: SchedulerProtocol = UIScheduler(),
+		imageCreationScheduler: SchedulerProtocol = QueueScheduler())
 	{
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
 		self.imageCreationScheduler = imageCreationScheduler
@@ -52,20 +52,21 @@ public final class AsyncImageView<
 
 		self.requestsSignal
 			.skipRepeats(==)
-			.observeOn(uiScheduler)
+			.observe(on: uiScheduler)
 			.on(next: { [weak self] in
-				if let strongSelf = self
-					where placeholderRenderer == nil || $0 == nil {
+				if
+					let strongSelf = self,
+					placeholderRenderer == nil || $0 == nil {
 						strongSelf.resetImage()
 				}
 			})
-			.observeOn(self.imageCreationScheduler)
-			.flatMap(.Latest) { data -> SignalProducer<Renderer.RenderResult, NoError> in
+			.observe(on: self.imageCreationScheduler)
+			.flatMap(.latest) { data -> SignalProducer<Renderer.RenderResult, NoError> in
 				if let data = data {
 					if let placeholderRenderer = placeholderRenderer {
 						return placeholderRenderer
 							.renderImageWithData(data)
-							.takeUntilReplacement(renderer.renderImageWithData(data))
+							.take(untilReplacement: renderer.renderImageWithData(data))
 					} else {
 						return renderer.renderImageWithData(data)
 					}
@@ -73,7 +74,7 @@ public final class AsyncImageView<
 					return .empty
 				}
 			}
-			.observeOn(uiScheduler)
+			.observe(on: uiScheduler)
 			.observeNext { [weak self] in self?.updateImage($0) }
 	}
 
@@ -110,7 +111,7 @@ public final class AsyncImageView<
 		}
 	}
 
-	private func requestNewImage(size: CGSize, data: ImageViewData?) {
+	private func requestNewImage(_ size: CGSize, data: ImageViewData?) {
 		self.imageCreationScheduler.schedule { [weak instance = self, observer = self.requestsObserver] in
 			if instance != nil {
 				observer.sendNext(data?.renderDataWithSize(size))
@@ -120,14 +121,14 @@ public final class AsyncImageView<
 
 	// MARK: -
 
-	private func updateImage(result: Renderer.RenderResult) {
+	private func updateImage(_ result: Renderer.RenderResult) {
 		if result.cacheHit {
 			self.image = result.image
 		} else {
-			UIView.transitionWithView(
-				self,
+			UIView.transition(
+				with: self,
 				duration: fadeAnimationDuration,
-				options: [.CurveEaseOut, .TransitionCrossDissolve],
+				options: [.curveEaseOut, .transitionCrossDissolve],
 				animations: { self.image = result.image },
 				completion: nil
 			)
@@ -137,4 +138,4 @@ public final class AsyncImageView<
 
 // MARK: - Constants
 
-private let fadeAnimationDuration: NSTimeInterval = 0.4
+private let fadeAnimationDuration: TimeInterval = 0.4

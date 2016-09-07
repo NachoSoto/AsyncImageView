@@ -14,10 +14,11 @@ import Result
 public final class CacheRenderer<
 	Renderer: RendererType,
 	Cache: CacheType
+	>: RendererType
 	where
 	Cache.Key == Renderer.Data,
 	Cache.Value == Renderer.RenderResult
->: RendererType {
+ {
 	private let renderer: Renderer
 	private let cache: Cache
 
@@ -28,15 +29,15 @@ public final class CacheRenderer<
 
 	/// Returns an image from the cache if found,
 	/// otherwise it invokes the decorated `renderer` and caches the result.
-	public func renderImageWithData(data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
+	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
 		return SignalProducer
 			.attempt { [cache = self.cache] in
 				return Result(
 					cache.valueForKey(data)?.image.asCacheHit,
-					failWith: CacheRendererError.ImageNotFound
+					failWith: CacheRendererError.imageNotFound
 				)
 			}
-			.startOn(QueueScheduler())
+			.start(on: QueueScheduler())
 			.flatMapError { [renderer = self.renderer] _ in
 				return renderer
 					.renderImageWithData(data)
@@ -50,12 +51,8 @@ public final class CacheRenderer<
 
 extension RendererType {
 	/// Surrounds this renderer with a layer of caching.
-	public func withCache<
-		Cache: CacheType
-		where
-		Cache.Key == Self.Data,
-		Cache.Value == Self.RenderResult
-		>(cache: Cache) -> CacheRenderer<Self, Cache>
+	public func withCache<Cache: CacheType>(_ cache: Cache) -> CacheRenderer<Self, Cache>
+		where Cache.Key == Self.Data, Cache.Value == Self.RenderResult
 	{
 		return CacheRenderer(renderer: self, cache: cache)
 	}
@@ -71,12 +68,12 @@ extension RenderDataType where Self: DataFileType {
 	}
 }
 
-internal func subdirectoryForSize(size: CGSize) -> String {
+internal func subdirectoryForSize(_ size: CGSize) -> String {
 	return String(format: "%.2fx%.2f", size.width, size.height)
 }
 
-private enum CacheRendererError: ErrorType {
-	case ImageNotFound
+private enum CacheRendererError: Error {
+	case imageNotFound
 }
 
 private extension UIImage {

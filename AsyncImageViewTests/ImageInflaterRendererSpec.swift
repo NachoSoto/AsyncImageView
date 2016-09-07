@@ -23,7 +23,7 @@ class ImageInflaterRendererSpec: QuickSpec {
 						inSize: size
 					)
 
-					expect(result) == CGRect(origin: CGPointZero, size: size)
+					expect(result) == CGRect(origin: CGPoint.zero, size: size)
 				}
 			}
 
@@ -36,7 +36,7 @@ class ImageInflaterRendererSpec: QuickSpec {
 					inSize: canvasSize
 				)
 
-				expect(result) == CGRect(origin: CGPointZero, size: canvasSize)
+				expect(result) == CGRect(origin: CGPoint.zero, size: canvasSize)
 			}
 
 			it("scales up size if aspect ratio matches, but canvas is bigger") {
@@ -48,7 +48,7 @@ class ImageInflaterRendererSpec: QuickSpec {
 					inSize: canvasSize
 				)
 
-				expect(result) == CGRect(origin: CGPointZero, size: canvasSize)
+				expect(result) == CGRect(origin: CGPoint.zero, size: canvasSize)
 			}
 
 			it("centers image horizontally if height matches, but canvas width is smaller") {

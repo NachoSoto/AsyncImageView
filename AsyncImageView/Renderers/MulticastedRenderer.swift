@@ -12,17 +12,17 @@ import ReactiveCocoa
 import Result
 
 // The initial value is `nil`.
-private typealias ImageProperty = AnyProperty<ImageResult?>
+private typealias ImageProperty = Property<ImageResult?>
 
 /// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
 	Data: RenderDataType,
-	Renderer: RendererType
+	Renderer: RendererType>: RendererType
 	where
 	Renderer.Data == Data,
 	Renderer.Error == NoError
->: RendererType {
+{
 	private let renderer: Renderer
 	private let cache: Atomic<[Data : ImageProperty]>
 
@@ -39,45 +39,41 @@ public final class MulticastedRenderer<
 		self.memoryWarningDisposable.dispose()
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<ImageResult, NoError> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, NoError> {
 		let property = getPropertyForData(data)
 
 		return property.producer
 			.filter { $0 != nil } // Skip initial `nil` value.
 			.map { $0! }
-			.take(1)
+			.take(first: 1)
  	}
 
-	private func getPropertyForData(data: Data) -> ImageProperty {
+	private func getPropertyForData(_ data: Data) -> ImageProperty {
 		var result: ImageProperty!
 
 		self.cache.modify { cache in
-			var mutableCache = cache
-
 			if let property = cache[data] {
 				result = property
-				return cache
+			} else {
+				result = ImageProperty(
+					initial: nil,
+					then: renderer.createProducerForRenderingData(data)
+						.map(Optional.init)
+				)
+
+				cache[data] = result
 			}
-
-			result = ImageProperty(
-				initialValue: nil,
-				producer: renderer.createProducerForRenderingData(data)
-					.map(Optional.init)
-			)
-
-			mutableCache[data] = result
-			return mutableCache
 		}
 
 		return result
 	}
 
-	private static func clearCacheOnMemoryWarning(cache: Atomic<[Data : ImageProperty]>) -> Disposable {
-		return NSNotificationCenter.defaultCenter()
-			.rac_notifications(UIApplicationDidReceiveMemoryWarningNotification, object: nil)
-			.observeOn(QueueScheduler())
+	private static func clearCacheOnMemoryWarning(_ cache: Atomic<[Data : ImageProperty]>) -> Disposable {
+		return NotificationCenter.default
+			.rac_notifications(forName: .UIApplicationDidReceiveMemoryWarning, object: nil)
+			.observe(on: QueueScheduler())
 			.startWithNext { _ in
-				cache.modify { _ in [:] }
+				cache.modify { $0 = [:] }
 			}
 	}
 }
@@ -90,9 +86,9 @@ extension RendererType where Error == NoError {
 }
 
 extension RendererType {
-	private func createProducerForRenderingData(data: Data) -> SignalProducer<ImageResult, Error> {
+	fileprivate func createProducerForRenderingData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderImageWithData(data)
-			.flatMap(.Concat) { result in
+			.flatMap(.concat) { result in
 				return SignalProducer(values: [
 					ImageResult(image: result.image, cacheHit: false),
 					ImageResult(image: result.image, cacheHit: true)

@@ -15,24 +15,22 @@ import Result
 public final class AnyRenderer<
 	Data: RenderDataType,
 	RenderResult: RenderResultType,
-	Error: ErrorType
+	Error: Swift.Error
 >: RendererType {
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
 	/// Creates an `AnyRenderer` based on another `RendererType`.
-	public convenience init<
-		R: RendererType
+	public convenience init<R: RendererType>(_ renderer: R)
 		where R.Data == Data, R.RenderResult == RenderResult, R.Error == Error
-		>(_ renderer: R)
 	{
 		self.init(renderBlock: renderer.renderImageWithData)
 	}
 
-	private init(renderBlock: (Data) -> SignalProducer<RenderResult, Error>) {
+	fileprivate init(renderBlock: @escaping (Data) -> SignalProducer<RenderResult, Error>) {
 		self.renderBlock = renderBlock
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<RenderResult, Error> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, Error> {
 		return self.renderBlock(data)
 	}
 }
@@ -41,17 +39,17 @@ extension SynchronousRendererType {
 	/// Constructs an `AnyRenderer` with a `SynchronousRendererType`.
 	/// The created `SignalProducer` will simply emit the result
 	/// of `renderImageWithData`.
-	public func asyncRenderer(scheduler: SchedulerType = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
-		return AnyRenderer { data in
+	public func asyncRenderer(_ scheduler: SchedulerProtocol = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
+		return AnyRenderer { (data: Self.Data) in
 			return SignalProducer { observer, disposable in
-				if !disposable.disposed {
+				if !disposable.isDisposed {
 					observer.sendNext(self.renderImageWithData(data))
 					observer.sendCompleted()
 				} else {
 					observer.sendInterrupted()
 				}
 			}
-				.startOn(scheduler)
+				.start(on: scheduler)
 		}
 	}
 }
@@ -62,7 +60,7 @@ extension RendererType {
 	///
 	/// This is useful when you want to compose two renderers 
 	/// with different `RenderDataType`s.
-	public func mapData<NewData: RenderDataType>(mapper: (NewData) -> Self.Data)
+	public func mapData<NewData: RenderDataType>(_ mapper: @escaping (NewData) -> Self.Data)
 		-> AnyRenderer<NewData, Self.RenderResult, Self.Error> {
 			return AnyRenderer { data in
 				return self.renderImageWithData(mapper(data))

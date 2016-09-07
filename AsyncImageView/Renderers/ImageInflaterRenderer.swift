@@ -11,27 +11,25 @@ import ReactiveCocoa
 
 /// `RendererType` decorator that inflates images.
 public final class ImageInflaterRenderer<
-	Data: RenderDataType, RenderResult: RenderResultType, Error: ErrorType
+	Data: RenderDataType, RenderResult: RenderResultType, Error: Swift.Error
 >: RendererType {
 	private let screenScale: CGFloat
 	private let opaque: Bool
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
-	public init<
-		Renderer: RendererType where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error
-		>(renderer: Renderer, screenScale: CGFloat, opaque: Bool)
-	{
+	public init<Renderer: RendererType>(renderer: Renderer, screenScale: CGFloat, opaque: Bool)
+	where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error {
 		self.screenScale = screenScale
 		self.opaque = opaque
 		self.renderBlock = renderer.renderImageWithData
 	}
 
-	public func renderImageWithData(data: Data) -> SignalProducer<UIImage, Error> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, Error> {
 		return self.renderBlock(data)
 			.map { [scale = self.screenScale] result in
 				return result.image.inflate(withSize: data.size, scale: scale, opaque: self.opaque)
 			}
-			.startOn(QueueScheduler())
+			.start(on: QueueScheduler())
 	}
 }
 
@@ -51,41 +49,41 @@ extension UIImage {
 		withSize size: CGSize,
 		scale: CGFloat,
 		opaque: Bool,
-		@noescape renderingBlock: (image: UIImage, context: CGContextRef, contextSize: CGSize, imageDrawing: () -> ()) -> ())
+		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> ()) -> ())
 		-> UIImage
 	{
 		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
-		let alphaInfo: CGImageAlphaInfo = (opaque) ? .NoneSkipLast : .PremultipliedLast
-		let bitmapInfo = alphaInfo.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
+		let alphaInfo: CGImageAlphaInfo = (opaque) ? .noneSkipLast : .premultipliedLast
+		let bitmapInfo = alphaInfo.rawValue | CGBitmapInfo.byteOrder32Little.rawValue
 
 		let contextSize = size * scale
 
 		let imageWidth = Int(contextSize.width)
 		let imageHeight = Int(contextSize.height)
 
-		guard let bitmapContext = CGBitmapContextCreate(nil, imageWidth, imageHeight, 8, imageWidth * 4, colorSpace, bitmapInfo) else {
+		guard let bitmapContext = CGContext(data: nil, width: imageWidth, height: imageHeight, bitsPerComponent: 8, bytesPerRow: imageWidth * 4, space: colorSpace, bitmapInfo: bitmapInfo) else {
 			fatalError("Error creating bitmap context")
 		}
 
 		renderingBlock(
-			image: self,
-			context: bitmapContext,
-			contextSize: contextSize,
-			imageDrawing: {
+			self,
+			bitmapContext,
+			contextSize,
+			{
 				let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
 					imageSize: self.size * self.scale,
 					inSize: contextSize
 				)
 
-				guard let imageRef = self.CGImage else { fatalError("Unable to get a CGImage from \(self).") }
-				CGContextDrawImage(bitmapContext, outputFrame, imageRef)
+				guard let imageRef = self.cgImage else { fatalError("Unable to get a CGImage from \(self).") }
+				bitmapContext.draw(imageRef, in: outputFrame)
 			}
 		)
 
 		return UIImage(
-			CGImage: CGBitmapContextCreateImage(bitmapContext)!,
+			cgImage: bitmapContext.makeImage()!,
 			scale: scale,
 			orientation: self.imageOrientation
 		)
@@ -93,16 +91,16 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(screenScale: CGFloat, opaque: Bool) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
+	public func inflatedWithScale(_ screenScale: CGFloat, opaque: Bool) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
 		return ImageInflaterRenderer(renderer: self, screenScale: screenScale, opaque: opaque)
 	}
 }
 
 internal struct InflaterSizeCalculator {
-	static func drawingRectForRenderingImageOfSize(imageSize imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
+	static func drawingRectForRenderingImageOfSize(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
 		if (imageSize == canvasSize ||
 			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat(FLT_EPSILON)) {
-				return CGRect(origin: CGPointZero, size: canvasSize)
+				return CGRect(origin: .zero, size: canvasSize)
 		} else {
 			let destScale = max(
 				canvasSize.width / imageSize.width,
@@ -115,7 +113,7 @@ internal struct InflaterSizeCalculator {
 			let dWidth = ((canvasSize.width - newWidth) / 2.0)
 			let dHeight = ((canvasSize.height - newHeight) / 2.0)
 
-			return CGRectMake(dWidth, dHeight, newWidth, newHeight)
+			return CGRect(x: dWidth, y: dHeight, width: newWidth, height: newHeight)
 		}
 	}
 }

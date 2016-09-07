@@ -22,7 +22,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 			context("General tests") {
 				typealias InnerRendererType = AnyRenderer<TestRenderData, UIImage, NoError>
-				typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
+				typealias RenderType = MulticastedRenderer<InnerRendererType, TestRenderData>
 
 				var innerRenderer: InnerRendererType!
 				var renderer: RenderType!
@@ -63,7 +63,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 			context("Cache hit") {
 				typealias InnerRendererType = AnyRenderer<TestRenderData, ImageResult, NoError>
-				typealias RenderType = MulticastedRenderer<TestRenderData, InnerRendererType>
+				typealias RenderType = MulticastedRenderer<InnerRendererType, TestRenderData>
 
 				var scheduler: TestScheduler!
 				let delay: TimeInterval = 1
@@ -105,7 +105,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 					producer.startWithNext { result = $0 }
 
-					scheduler.advanceByInterval(delay)
+					scheduler.advance(by: delay)
 
 					expect(result).toEventuallyNot(beNil())
 
@@ -127,7 +127,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 				it("is a cache hit the second time the producer is fetched") {
 					let producer = getProducerForData(data, size)
-					scheduler.advanceByInterval(delay)
+					scheduler.advance(by: delay)
 
 					var result: ImageResult?
 					producer.startWithNext { result = $0 }
@@ -170,9 +170,9 @@ private final class DelayedRenderer<T: RendererType>: RendererType {
 		self.scheduler = scheduler
 	}
 
-	func renderImageWithData(_ data: T.AsyncImageView.Data) -> SignalProducer<T.RenderResult, T.AsyncImageView.Error> {
+	func renderImageWithData(_ data: T.Data) -> SignalProducer<T.RenderResult, T.Error> {
 		return renderer
 			.renderImageWithData(data)
-			.delay(self.delay, onScheduler: self.scheduler)
+			.delay(self.delay, on: self.scheduler)
 	}
 }

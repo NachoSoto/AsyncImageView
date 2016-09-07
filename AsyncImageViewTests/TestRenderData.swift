@@ -55,7 +55,7 @@ internal final class TestRenderer: RendererType {
 			.asyncRenderer(ImmediateScheduler())
 			.renderImageWithData(data)
 			.on(started: {
-				self.renderedImages.modify { $0 + [data] }
+				self.renderedImages.modify { $0 = $0 + [data] }
 			})
 	}
 
@@ -68,7 +68,7 @@ internal final class TestRenderer: RendererType {
 	}
 }
 
-internal func verifyImage(@autoclosure(escaping) _ image: () -> UIImage?, withSize size: CGSize, data: TestData?) {
+internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?, withSize size: CGSize, data: TestData?) {
 	if let data = data {
 		verifyImage(image, withSize: size, expectedScale: data.rawValue)
 	} else {
@@ -76,7 +76,7 @@ internal func verifyImage(@autoclosure(escaping) _ image: () -> UIImage?, withSi
 	}
 }
 
-internal func verifyImage(@autoclosure(escaping) _ image: () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {
+internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {
 	expect(image()?.size).toEventually(equal(size))
 	expect(image()?.scale).toEventually(equal(expectedScale))
 }

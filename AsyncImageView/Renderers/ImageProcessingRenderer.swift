@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 /// `RendererType` decorator that applies processing to every emitted image.
 public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType {
-	public typealias Block = (image: UIImage, context: CGContext, contextSize: CGSize, imageDrawingBlock: () -> ()) -> ()
+	public typealias Block = (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawingBlock: () -> ()) -> ()
 
 	private let renderer: Renderer
 	private let scale: CGFloat
@@ -24,8 +24,8 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 		renderer: Renderer,
 		scale: CGFloat,
 		opaque: Bool,
-		renderingBlock: Block,
-		schedulerCreator: () -> SchedulerProtocol = { QueueScheduler() }) {
+		renderingBlock: @escaping Block,
+		schedulerCreator: @escaping () -> SchedulerProtocol = { QueueScheduler() }) {
 			self.renderer = renderer
 			self.scale = scale
 			self.opaque = opaque
@@ -51,7 +51,11 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 
 extension RendererType {
 	/// Decorates this `RendererType` by applying the given block to every generated image.
-	public func processedWithScale(scale: CGFloat, opaque: Bool, renderingBlock block: ImageProcessingRenderer<Self>.Block) -> ImageProcessingRenderer<Self> {
+	public func processedWithScale(
+		scale: CGFloat,
+		opaque: Bool,
+		renderingBlock block: @escaping ImageProcessingRenderer<Self>.Block
+	) -> ImageProcessingRenderer<Self> {
 		return ImageProcessingRenderer(renderer: self, scale: scale, opaque: opaque, renderingBlock: block)
 	}
 }

@@ -18,11 +18,11 @@ private typealias ImageProperty = Property<ImageResult?>
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
 	Data: RenderDataType,
-	Renderer: RendererType
+	Renderer: RendererType>: RendererType
 	where
 	Renderer.Data == Data,
 	Renderer.Error == NoError
->: RendererType {
+{
 	private let renderer: Renderer
 	private let cache: Atomic<[Data : ImageProperty]>
 
@@ -86,7 +86,7 @@ extension RendererType where Error == NoError {
 }
 
 extension RendererType {
-	private func createProducerForRenderingData(_ data: Data) -> SignalProducer<ImageResult, Error> {
+	fileprivate func createProducerForRenderingData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderImageWithData(data)
 			.flatMap(.concat) { result in
 				return SignalProducer(values: [

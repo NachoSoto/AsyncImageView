@@ -17,8 +17,9 @@ private typealias ImageProperty = Property<ImageResult?>
 /// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
-	Data: RenderDataType,
-	Renderer: RendererType>: RendererType
+	Renderer: RendererType,
+	Data: RenderDataType
+>: RendererType
 	where
 	Renderer.Data == Data,
 	Renderer.Error == NoError
@@ -80,7 +81,7 @@ public final class MulticastedRenderer<
 
 extension RendererType where Error == NoError {
 	/// Multicasts the results of this `RendererType`.
-	public func multicasted() -> MulticastedRenderer<Self.Data, Self> {
+	public func multicasted() -> MulticastedRenderer<Self, Self.Data> {
 		return MulticastedRenderer(renderer: self)
 	}
 }

@@ -22,7 +22,7 @@ public final class AsyncImageView<
 	Data: RenderDataType,
 	ImageViewData: ImageViewDataType,
 	Renderer: RendererType,
-	PlaceholderRenderer: RendererType
+	PlaceholderRenderer: RendererType>: UIImageView
 	where
 	ImageViewData.RenderData == Data,
 	Renderer.Data == Data,
@@ -30,7 +30,7 @@ public final class AsyncImageView<
 	PlaceholderRenderer.Data == Data,
 	PlaceholderRenderer.Error == NoError,
 	Renderer.RenderResult == PlaceholderRenderer.RenderResult
->: UIImageView {
+ {
 	private let requestsSignal: Signal<Data?, NoError>
 	private let requestsObserver: Signal<Data?, NoError>.Observer
 

@@ -14,10 +14,11 @@ import Result
 public final class CacheRenderer<
 	Renderer: RendererType,
 	Cache: CacheType
+	>: RendererType
 	where
 	Cache.Key == Renderer.Data,
 	Cache.Value == Renderer.RenderResult
->: RendererType {
+ {
 	private let renderer: Renderer
 	private let cache: Cache
 
@@ -50,12 +51,8 @@ public final class CacheRenderer<
 
 extension RendererType {
 	/// Surrounds this renderer with a layer of caching.
-	public func withCache<
-		Cache: CacheType
-		where
-		Cache.Key == Self.Data,
-		Cache.Value == Self.RenderResult
-		>(_ cache: Cache) -> CacheRenderer<Self, Cache>
+	public func withCache<Cache: CacheType>(_ cache: Cache) -> CacheRenderer<Self, Cache>
+		where Cache.Key == Self.Data, Cache.Value == Self.RenderResult
 	{
 		return CacheRenderer(renderer: self, cache: cache)
 	}

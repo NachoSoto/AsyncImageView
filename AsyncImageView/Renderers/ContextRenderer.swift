@@ -12,7 +12,7 @@ import ReactiveCocoa
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
-	public typealias Block = (context: CGContext, data: Data) -> ()
+	public typealias Block = (_ context: CGContext, _ data: Data) -> ()
 
 	private let scale: CGFloat
 	private let opaque: Bool

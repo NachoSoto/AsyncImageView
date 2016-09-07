@@ -17,10 +17,8 @@ public final class ImageInflaterRenderer<
 	private let opaque: Bool
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
 
-	public init<
-		Renderer: RendererType where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error
-		>(renderer: Renderer, screenScale: CGFloat, opaque: Bool)
-	{
+	public init<Renderer: RendererType>(renderer: Renderer, screenScale: CGFloat, opaque: Bool)
+	where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error {
 		self.screenScale = screenScale
 		self.opaque = opaque
 		self.renderBlock = renderer.renderImageWithData
@@ -51,7 +49,7 @@ extension UIImage {
 		withSize size: CGSize,
 		scale: CGFloat,
 		opaque: Bool,
-		renderingBlock: @noescape(image: UIImage, context: CGContext, contextSize: CGSize, imageDrawing: () -> ()) -> ())
+		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> ()) -> ())
 		-> UIImage
 	{
 		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
@@ -70,17 +68,17 @@ extension UIImage {
 		}
 
 		renderingBlock(
-			image: self,
-			context: bitmapContext,
-			contextSize: contextSize,
-			imageDrawing: {
+			self,
+			bitmapContext,
+			contextSize,
+			{
 				let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
 					imageSize: self.size * self.scale,
 					inSize: contextSize
 				)
 
 				guard let imageRef = self.cgImage else { fatalError("Unable to get a CGImage from \(self).") }
-				bitmapContext.draw(in: outputFrame, image: imageRef)
+				bitmapContext.draw(imageRef, in: outputFrame)
 			}
 		)
 

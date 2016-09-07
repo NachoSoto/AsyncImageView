@@ -35,12 +35,14 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 	}
 
 	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
+		let size = data.size
+
 		return self.renderer.renderImageWithData(data)
 			.observe(on: self.schedulerCreator())
 			.map { $0.image }
 			.map { [scale = self.scale, opaque = self.opaque, block = self.renderingBlock] image in
 				image.processImageWithBitmapContext(
-					withSize: data.size,
+					withSize: size,
 					scale: scale,
 					opaque: opaque,
 					renderingBlock: block

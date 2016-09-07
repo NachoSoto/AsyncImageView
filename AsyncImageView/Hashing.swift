@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Nacho Soto. All rights reserved.
 //
 
-infix operator ^^^ { associativity left precedence 160 }
+infix operator ^^^ : MultiplicationPrecedence
 
 internal func ^^^<L: Hashable, R: Hashable>(left: L, right: R) -> Int {
 	return hash(left, right)

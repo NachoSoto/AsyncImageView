@@ -60,7 +60,7 @@ private func hash<L: Hashable, R: Hashable>(_ left: L, _ right: [R]) -> Int {
 	return hash(left, hash(right))
 }
 
-private func hash<S: Sequence where S.Iterator.Element: Hashable>(_ sequence: S) -> Int {
+private func hash<S: Sequence>(_ sequence: S) -> Int where S.Iterator.Element: Hashable {
 	return sequence.reduce(0, ^^^)
 }
 

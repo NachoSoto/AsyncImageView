@@ -20,8 +20,7 @@ public final class FallbackRenderer<
 	private let primaryRenderer: AnyRenderer<Data, RR1, E1>
 	private let fallbackRenderer: AnyRenderer<Data, RR2, E2>
 
-	public init<
-		R1: RendererType, R2: RendererType
+	public init<R1: RendererType, R2: RendererType>(primaryRenderer: R1, fallbackRenderer: R2)
 		where
 		R1.Data == Data,
 		R2.Data == Data,
@@ -29,7 +28,6 @@ public final class FallbackRenderer<
 		R2.RenderResult == RR2,
 		R1.Error == E1,
 		R2.Error == E2
-		>(primaryRenderer: R1, fallbackRenderer: R2)
 	{
 		self.primaryRenderer = AnyRenderer(primaryRenderer)
 		self.fallbackRenderer = AnyRenderer(fallbackRenderer)
@@ -51,18 +49,16 @@ public final class FallbackRenderer<
 
 extension RendererType {
 	/// Surrounds this renderer with a layer of caching.
-	public func fallback<
-		Other: RendererType
-		where
-		Self.Data == Other.Data
-		>(_ fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
+	public func fallback<Other: RendererType>
+		(_ fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
+		where Self.Data == Other.Data
 	{
 		return FallbackRenderer(primaryRenderer: self, fallbackRenderer: fallbackRenderer)
 	}
 }
 
 extension RenderResultType {
-	private var asResult: ImageResult {
+	fileprivate var asResult: ImageResult {
 		return ImageResult(
 			image: self.image,
 			cacheHit: self.cacheHit
@@ -71,7 +67,7 @@ extension RenderResultType {
 }
 
 extension ImageResult {
-	private var asResult: ImageResult {
+	fileprivate var asResult: ImageResult {
 		return self
 	}
 }

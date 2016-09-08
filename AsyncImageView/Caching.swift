@@ -33,7 +33,7 @@ public final class InMemoryCache<K: Hashable, V>: CacheType {
 	}
 
 	public func valueForKey(_ key: K) -> V? {
-		return cache.object(forKey: CacheKey(value: key))?.value
+		return cache.object(forKey: CacheKey<K>(value: key))?.wrapped
 	}
 
 	public func setValue(_ value: V?, forKey key: K) {
@@ -48,10 +48,10 @@ public final class InMemoryCache<K: Hashable, V>: CacheType {
 }
 
 private final class CacheValue<V>: NSObject {
-	private let value: V
+	let wrapped: V
 
-	init(value: V) {
-		self.value = value
+	init(wrapped: V) {
+		self.wrapped = wrapped
 	}
 }
 

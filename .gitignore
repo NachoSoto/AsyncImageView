@@ -17,6 +17,7 @@ DerivedData
 
 test_output
 
-Carthage/Checkouts
+Carthage/Checkouts/*
+!Carthage/Checkouts/xcconfigs
 Carthage/Build/watchOS
 Carthage/Build/Mac

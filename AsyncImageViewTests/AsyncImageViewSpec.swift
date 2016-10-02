@@ -79,6 +79,15 @@ class AsyncImageViewSpec: QuickSpec {
 						verifyView()
 					}
 
+					it("updates image when updating bounds") {
+						view.frame.size = CGSize(width: 10, height: 10)
+						view.data = .C
+
+						view.bounds.size = CGSize(width: 15, height: 15)
+
+						verifyView()
+					}
+
 					it("resets image when updating data") {
 						view.frame.size = CGSize(width: 10, height: 10)
 						view.data = .C

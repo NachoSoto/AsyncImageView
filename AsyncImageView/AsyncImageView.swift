@@ -91,6 +91,12 @@ public final class AsyncImageView<
 		}
 	}
 
+	public override var bounds: CGRect {
+		didSet {
+			self.requestNewImageIfReady()
+		}
+	}
+
 	public var data: ImageViewData? {
 		didSet {
 			self.requestNewImageIfReady()

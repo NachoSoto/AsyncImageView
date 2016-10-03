@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveCocoa
 
-/// `RendererType` decorator that applies processing to every emitted image.
+/// `RendererType` decorator that allows rendering a new image derived from the original one.
 public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType {
 	public typealias Block = (image: UIImage, context: CGContextRef, contextSize: CGSize, imageDrawingBlock: () -> ()) -> ()
 

@@ -62,6 +62,8 @@
 		57FC1B0B1C0293CE00FAD2F3 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B011C0293CE00FAD2F3 /* Renderer.swift */; };
 		57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */; };
 		57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */; };
+		786FF8C01DA20260005BB73E /* SimpleImageProcessingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786FF8BF1DA20260005BB73E /* SimpleImageProcessingRenderer.swift */; };
+		786FF8C11DA20260005BB73E /* SimpleImageProcessingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786FF8BF1DA20260005BB73E /* SimpleImageProcessingRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +148,7 @@
 		57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteImageRenderer.swift; path = Renderers/RemoteImageRenderer.swift; sourceTree = "<group>"; };
 		57FC1B011C0293CE00FAD2F3 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Renderer.swift; path = Renderers/Renderer.swift; sourceTree = "<group>"; };
 		57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CacheRenderer.swift; path = Renderers/CacheRenderer.swift; sourceTree = "<group>"; };
+		786FF8BF1DA20260005BB73E /* SimpleImageProcessingRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleImageProcessingRenderer.swift; path = Renderers/SimpleImageProcessingRenderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +350,7 @@
 				57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */,
 				570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */,
 				570994091C090E050010B340 /* ImageProcessingRenderer.swift */,
+				786FF8BF1DA20260005BB73E /* SimpleImageProcessingRenderer.swift */,
 				5709940D1C0912D30010B340 /* ContextRenderer.swift */,
 				571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */,
 				57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */,
@@ -498,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				570994051C0903BF0010B340 /* LocalImageRenderer.swift in Sources */,
+				786FF8C01DA20260005BB73E /* SimpleImageProcessingRenderer.swift in Sources */,
 				57FC1B081C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */,
 				57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57FC1AEE1C0283D600FAD2F3 /* Hashing.swift in Sources */,
@@ -533,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				570994061C0903BF0010B340 /* LocalImageRenderer.swift in Sources */,
+				786FF8C11DA20260005BB73E /* SimpleImageProcessingRenderer.swift in Sources */,
 				57FC1B091C0293CE00FAD2F3 /* RemoteImageRenderer.swift in Sources */,
 				57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */,
 				57FC1AEF1C0283D600FAD2F3 /* Hashing.swift in Sources */,

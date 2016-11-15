@@ -13,7 +13,7 @@ import ReactiveCocoa
 
 /// `RendererType` decorator that allows rendering a new image derived from the original one.
 public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType {
-	public typealias Block = (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawingBlock: () -> ()) -> ()
+	public typealias Block = (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ data: Renderer.Data, _ imageDrawingBlock: () -> ()) -> ()
 
 	private let renderer: Renderer
 	private let scale: CGFloat
@@ -45,7 +45,15 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 					withSize: data.size,
 					scale: scale,
 					opaque: opaque,
-					renderingBlock: block
+                    renderingBlock: { image, context, contextSize, imageDrawingBlock in
+                        block(
+                            image,
+                            context,
+                            contextSize,
+                            data,
+                            imageDrawingBlock
+                        )
+                    }
 				)
 			}
 	}

@@ -56,6 +56,9 @@ CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO
 // For example, this can catch issues when one incorrectly intermixes using NSNumbers and raw integers.
 CLANG_WARN_INT_CONVERSION = YES
 
+// Warn about implicit capture of self (e.g. direct ivar access)
+CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES
+
 // Don't warn about repeatedly using a weak reference without assigning the weak reference to a strong reference. Too many false positives.
 CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO
 
@@ -64,6 +67,12 @@ CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR
 
 // Whether to warn on suspicious implicit conversions
 CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES
+
+// Warn about incorrect uses of nullable values
+CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES
+
+// Warn for missing nullability attributes
+CLANG_ANALYZER_NONNULL = YES
 
 // Warn about potentially unreachable code
 CLANG_WARN_UNREACHABLE_CODE = YES
@@ -106,6 +115,7 @@ GCC_VERSION = com.apple.compilers.llvm.clang.1_0
 
 // Whether warnings are treated as errors
 GCC_TREAT_WARNINGS_AS_ERRORS = YES
+SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
 
 // Whether to warn about 64-bit values being implicitly shortened to 32 bits
 GCC_WARN_64_TO_32_BIT_CONVERSION = YES
@@ -171,9 +181,17 @@ GCC_WARN_UNUSED_VARIABLE = YES
 RUN_CLANG_STATIC_ANALYZER = YES
 
 // Don't treat unknown warnings as errors, and disable GCC compatibility warnings and unused static const variable warnings
-WARNING_CFLAGS = -Wno-error=unknown-warning-option -Wno-gcc-compat -Wno-unused-const-variable -Wno-nullability-completeness
+WARNING_CFLAGS = -Wno-error=unknown-warning-option -Wno-gcc-compat -Wno-unused-const-variable
 
 // This setting is on for new projects as of Xcode ~6.3, though it is still not
 // the default. It warns if the same variable is declared in two binaries that
 // are linked together.
 GCC_NO_COMMON_BLOCKS = YES
+
+// This warnings detects when a function will recursively call itself on every
+// code path though that function. More information can be found here:
+// http://lists.llvm.org/pipermail/cfe-commits/Week-of-Mon-20131216/096004.html
+CLANG_WARN_INFINITE_RECURSION = YES
+
+// This warning detects suspicious uses of std::move.
+CLANG_WARN_SUSPICIOUS_MOVE = YES

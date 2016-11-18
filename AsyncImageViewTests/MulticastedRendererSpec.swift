@@ -10,6 +10,7 @@ import Quick
 import Nimble
 
 import Result
+import ReactiveSwift
 import ReactiveCocoa
 
 import AsyncImageView
@@ -103,7 +104,7 @@ class MulticastedRendererSpec: QuickSpec {
 					let producer = getProducerForData(data, size)
 					var result: ImageResult?
 
-					producer.startWithNext { result = $0 }
+					producer.startWithValues { result = $0 }
 
 					scheduler.advance(by: delay)
 
@@ -130,7 +131,7 @@ class MulticastedRendererSpec: QuickSpec {
 					scheduler.advance(by: delay)
 
 					var result: ImageResult?
-					producer.startWithNext { result = $0 }
+					producer.startWithValues { result = $0 }
 
 					expect(result).toEventuallyNot(beNil())
 					expect(result?.cacheHit) == true

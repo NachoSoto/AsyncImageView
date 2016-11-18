@@ -8,6 +8,7 @@
 
 import UIKit
 
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -53,7 +54,7 @@ public final class AsyncImageView<
 		self.requestsSignal
 			.skipRepeats(==)
 			.observe(on: uiScheduler)
-			.on(next: { [weak self] in
+			.on(value: { [weak self] in
 				if
 					let strongSelf = self,
 					placeholderRenderer == nil || $0 == nil {
@@ -75,7 +76,7 @@ public final class AsyncImageView<
 				}
 			}
 			.observe(on: uiScheduler)
-			.observeNext { [weak self] in self?.updateImage($0) }
+			.observeValues { [weak self] in self?.updateImage($0) }
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
@@ -120,7 +121,7 @@ public final class AsyncImageView<
 	private func requestNewImage(_ size: CGSize, data: ImageViewData?) {
 		self.imageCreationScheduler.schedule { [weak instance = self, observer = self.requestsObserver] in
 			if instance != nil {
-				observer.sendNext(data?.renderDataWithSize(size))
+				observer.send(value: data?.renderDataWithSize(size))
 			}
 		}
 	}

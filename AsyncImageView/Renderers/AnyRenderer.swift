@@ -8,6 +8,7 @@
 
 import UIKit
 
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -43,7 +44,7 @@ extension SynchronousRendererType {
 		return AnyRenderer { (data: Self.Data) in
 			return SignalProducer { observer, disposable in
 				if !disposable.isDisposed {
-					observer.sendNext(self.renderImageWithData(data))
+					observer.send(value: self.renderImageWithData(data))
 					observer.sendCompleted()
 				} else {
 					observer.sendInterrupted()

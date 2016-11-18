@@ -9,6 +9,7 @@
 import Quick
 import Nimble
 
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -279,7 +280,7 @@ private final class ManualRenderer: RendererType {
 		let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
 		let observer = signals[data]!.observer
 
-		observer.sendNext(image)
+		observer.send(value: image)
 		observer.sendCompleted()
 	}
 

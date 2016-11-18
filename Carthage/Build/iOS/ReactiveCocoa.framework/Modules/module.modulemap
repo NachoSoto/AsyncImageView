@@ -1,8 +1,9 @@
 framework module ReactiveCocoa {
-  umbrella header "ReactiveCocoa.h"
+	umbrella header "ReactiveCocoa.h"
+	private header "RACObjCRuntimeUtilities.h"
 
-  export *
-  module * { export * }
+	export *
+	module * { export * }
 }
 
 module ReactiveCocoa.Swift {

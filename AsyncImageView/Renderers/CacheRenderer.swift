@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -41,7 +43,7 @@ public final class CacheRenderer<
 			.flatMapError { [renderer = self.renderer] _ in
 				return renderer
 					.renderImageWithData(data)
-					.on(next: { [cache = self.cache] result in
+					.on(value: { [cache = self.cache] result in
 						cache.setValue(result, forKey: data)
 					})
 					.map { $0.image.asCacheMiss }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import ReactiveSwift
 import ReactiveCocoa
 
 /// `RendererType` decorator that will fall back from one `RendererType` to another.

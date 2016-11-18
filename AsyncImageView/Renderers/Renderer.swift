@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import ReactiveSwift
 import ReactiveCocoa
 
 /// Information required to produce an image

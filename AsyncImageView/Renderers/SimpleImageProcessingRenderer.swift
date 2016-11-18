@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import ReactiveSwift
 import ReactiveCocoa
 
 /// `RendererType` decorator that applies processing to every emitted image.

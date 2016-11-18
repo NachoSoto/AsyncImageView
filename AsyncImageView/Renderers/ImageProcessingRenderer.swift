@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import ReactiveSwift
 import ReactiveCocoa
 
 /// `RendererType` decorator that allows rendering a new image derived from the original one.

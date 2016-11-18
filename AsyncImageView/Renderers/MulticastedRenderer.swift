@@ -8,6 +8,7 @@
 
 import UIKit
 
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -71,11 +72,11 @@ public final class MulticastedRenderer<
 
 	private static func clearCacheOnMemoryWarning(_ cache: Atomic<[Data : ImageProperty]>) -> Disposable {
 		return NotificationCenter.default
-			.rac_notifications(forName: .UIApplicationDidReceiveMemoryWarning, object: nil)
+			.reactive.notifications(forName: .UIApplicationDidReceiveMemoryWarning, object: nil)
 			.observe(on: QueueScheduler())
-			.startWithNext { _ in
+			.observeValues { _ in
 				cache.modify { $0 = [:] }
-			}
+			}!
 	}
 }
 

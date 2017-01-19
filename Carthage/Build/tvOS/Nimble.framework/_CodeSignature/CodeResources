@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/CwlCatchBadInstruction.h</key>
+		<data>
+		tpUqlpWHcMy0tfQGrW/lFMpmYXg=
+		</data>
+		<key>Headers/CwlCatchException.h</key>
+		<data>
+		sEWkXk171mzdxx/iOyw13hdPgUk=
+		</data>
 		<key>Headers/DSL.h</key>
 		<data>
-		J40OQQEBu0ItDFkNRRvPqI5qth0=
+		XkRJ/tCNPHszmQaE2ePKzI3isLg=
 		</data>
 		<key>Headers/NMBExceptionCapture.h</key>
 		<data>
@@ -18,23 +26,23 @@
 		</data>
 		<key>Headers/Nimble-Swift.h</key>
 		<data>
-		CDHSxLsfCxatiu2aKd3gTWYyvVc=
+		cC+8P/Vtqp5wVo75VG3wNbhK8qc=
 		</data>
 		<key>Headers/Nimble.h</key>
 		<data>
-		w1UtGfcGTE/p1V3KbZSK2G6VCig=
+		Ss+U/fOsPq04kPXZyrx0V2mmeTI=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		mDX0cbY37yGZRiMAa8fJSzPK2JQ=
+		yW3bIW5MjMdlSV8/LimnqU44jBc=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		0I/NjEU9FVCA7+l5b/Cv9DE6qAM=
+		wVh/YZ5OIIQNlR8TLSnqNRq34wg=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		GFBahFdU1npZj2uxmqK0uvy6EPQ=
+		zFG4rUE8X8S70daJw+WESllSmDU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,15 +51,37 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/CwlCatchBadInstruction.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tpUqlpWHcMy0tfQGrW/lFMpmYXg=
+			</data>
+			<key>hash2</key>
+			<data>
+			Gq3XGACd7Lrzul1ElsWb/+jEHweR34GIE0S/0qzVkpQ=
+			</data>
+		</dict>
+		<key>Headers/CwlCatchException.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sEWkXk171mzdxx/iOyw13hdPgUk=
+			</data>
+			<key>hash2</key>
+			<data>
+			wVP+XXOT+cin9q0TGVIzUslMTOU3UFM5LaBYWv3IJIY=
+			</data>
+		</dict>
 		<key>Headers/DSL.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			J40OQQEBu0ItDFkNRRvPqI5qth0=
+			XkRJ/tCNPHszmQaE2ePKzI3isLg=
 			</data>
 			<key>hash2</key>
 			<data>
-			KHqppfl8zd8owDft2GIIYNvYwy1BQwf11QsIibAg4rI=
+			uZIpFwVE2Ji0uokI07CJriGmi5ftdjtEAx2aoeR085c=
 			</data>
 		</dict>
 		<key>Headers/NMBExceptionCapture.h</key>
@@ -80,44 +110,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CDHSxLsfCxatiu2aKd3gTWYyvVc=
+			cC+8P/Vtqp5wVo75VG3wNbhK8qc=
 			</data>
 			<key>hash2</key>
 			<data>
-			ghu6EnW8lgL5KVZzWEgMtJUKTa0FtVmXFfB2wKpSXL0=
+			1PrjJmGLjSyPs0ygfbDVe8z7QLtXFXzfiXcO3hXnF10=
 			</data>
 		</dict>
 		<key>Headers/Nimble.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			w1UtGfcGTE/p1V3KbZSK2G6VCig=
+			Ss+U/fOsPq04kPXZyrx0V2mmeTI=
 			</data>
 			<key>hash2</key>
 			<data>
-			ByKJo5qCvWQBeL+jjoZ422JfezS1M26HYLLAkbmIXPA=
+			Jb6wSY5AUrpIJBxKCYeQUG5d4LMpI/gtTZtqe3bkeXA=
 			</data>
 		</dict>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0I/NjEU9FVCA7+l5b/Cv9DE6qAM=
+			wVh/YZ5OIIQNlR8TLSnqNRq34wg=
 			</data>
 			<key>hash2</key>
 			<data>
-			8VA4rtJzPiNS5wM+Src5KnD4xrKF8u1cm3Ty+0Lcm7A=
+			i53qlhvuPvoKnciWtcgq7h+YVlOnRyp1P1Wee0696jw=
 			</data>
 		</dict>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GFBahFdU1npZj2uxmqK0uvy6EPQ=
+			zFG4rUE8X8S70daJw+WESllSmDU=
 			</data>
 			<key>hash2</key>
 			<data>
-			ul5qDOuocet27ckkAnDgXNN1M60pb76Mcrm07d2cqew=
+			TzYB0tjnWM9JUugctmxRyPveWOA+ATdKeckBlFrhV+E=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -149,6 +179,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -194,6 +229,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>

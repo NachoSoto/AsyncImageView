@@ -50,23 +50,45 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
-	func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, NoError> {
-		return TestRenderer
-			.rendererForSize(data.size, scale: data.data.rawValue)
-			.asyncRenderer(ImmediateScheduler())
-			.renderImageWithData(data)
-			.on(started: {
-				self.renderedImages.modify { $0 = $0 + [data] }
-			})
+    func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, NoError> {
+        let renderer: AnyRenderer<TestRenderData, UIImage, NoError>
+        
+        if #available(iOS 10.0, *) {
+            renderer = AnyRenderer(
+                TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
+                    .asyncRenderer(ImmediateScheduler())
+            )
+        } else {
+            renderer = AnyRenderer(
+                TestRenderer.oldRendererForSize(data.size, scale: data.data.rawValue)
+                    .asyncRenderer(ImmediateScheduler())
+            )
+        }
+        
+        return renderer
+            .renderImageWithData(data)
+            .on(started: {
+                self.renderedImages.modify { $0 = $0 + [data] }
+            })
 	}
 
-	static func rendererForSize(_ size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
+    @available(iOS 10.0, *)
+    static func rendererForSize(_ size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
 		precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
 		return ContextRenderer<TestRenderData>(scale: scale, opaque: true) { _ in
 			// nothing to render
 		}
 	}
+    
+    @available(iOS 9.0, *)
+    static func oldRendererForSize(_ size: CGSize, scale: CGFloat) -> OldContextRenderer<TestRenderData> {
+        precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
+        
+        return OldContextRenderer<TestRenderData>(scale: scale, opaque: true) { _ in
+            // nothing to render
+        }
+    }
 }
 
 internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?, withSize size: CGSize, data: TestData?) {

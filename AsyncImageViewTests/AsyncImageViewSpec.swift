@@ -277,7 +277,14 @@ private final class ManualRenderer: RendererType {
 	}
 
 	func emitImageForData(_ data: TestRenderData, scale: CGFloat) {
-		let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
+        let image: UIImage
+        
+        if #available(iOS 10.0, *) {
+            image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
+        } else {
+            image = TestRenderer.oldRendererForSize(data.size, scale: scale).renderImageWithData(data)
+        }
+        
 		let observer = signals[data]!.input
 
 		observer.send(value: image)

@@ -20,6 +20,8 @@
 		571FE6AA1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
 		571FE6AB1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
 		572A4E7C1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */; };
+		5742CF561E3152B500EA23A0 /* ShiftOperations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5742CF551E3152B500EA23A0 /* ShiftOperations.framework */; };
+		5742CF571E3152BA00EA23A0 /* ShiftOperations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5742CF551E3152B500EA23A0 /* ShiftOperations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57645A741C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */; };
 		57645A751C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */; };
 		57BD68391C02598F0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -90,6 +92,7 @@
 				57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */,
 				57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */,
 				57F5C5971C05200500753642 /* RandomKit.framework in Embed Frameworks */,
+				5742CF571E3152BA00EA23A0 /* ShiftOperations.framework in Embed Frameworks */,
 				57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -106,6 +109,7 @@
 		571095A71DDEC03100781D9C /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyRenderer.swift; path = Renderers/EmptyRenderer.swift; sourceTree = "<group>"; };
 		572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInflaterRendererSpec.swift; sourceTree = "<group>"; };
+		5742CF551E3152B500EA23A0 /* ShiftOperations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShiftOperations.framework; path = Carthage/Build/iOS/ShiftOperations.framework; sourceTree = "<group>"; };
 		57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorIgnoringRenderer.swift; path = Renderers/ErrorIgnoringRenderer.swift; sourceTree = "<group>"; };
 		57BD68351C02598F0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BD68381C02598F0077A391 /* AsyncImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57F5C5961C051FFB00753642 /* RandomKit.framework in Frameworks */,
+				5742CF561E3152B500EA23A0 /* ShiftOperations.framework in Frameworks */,
 				57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */,
 				57BD68F81C0269440077A391 /* Nimble.framework in Frameworks */,
 				57BD68F91C0269440077A391 /* Quick.framework in Frameworks */,
@@ -245,6 +250,7 @@
 		57BD68841C025F410077A391 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				5742CF551E3152B500EA23A0 /* ShiftOperations.framework */,
 				571095A71DDEC03100781D9C /* ReactiveSwift.framework */,
 				57F5C5951C051FFB00753642 /* RandomKit.framework */,
 				57BD68F01C0269280077A391 /* Nimble.framework */,

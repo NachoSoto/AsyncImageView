@@ -270,7 +270,7 @@ class AsyncImageViewSpec: QuickSpec {
 }
 
 private final class ManualRenderer: RendererType {
-	var signals: [TestRenderData : (signal: Signal<UIImage, NoError>, observer: Signal<UIImage, NoError>.Observer)] = [:]
+	var signals: [TestRenderData : (output: Signal<UIImage, NoError>, input: Signal<UIImage, NoError>.Observer)] = [:]
 
 	func addRenderSignal(_ data: TestRenderData) {
 		signals[data] = Signal<UIImage, NoError>.pipe()
@@ -278,19 +278,19 @@ private final class ManualRenderer: RendererType {
 
 	func emitImageForData(_ data: TestRenderData, scale: CGFloat) {
 		let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
-		let observer = signals[data]!.observer
+		let observer = signals[data]!.input
 
 		observer.send(value: image)
 		observer.sendCompleted()
 	}
 
 	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
-		guard let signal = signals[data]?.signal else {
+		guard let signal = signals[data]?.output else {
 			XCTFail("Signal not created for \(data)")
 			return .empty
 		}
 
-		return SignalProducer(signal: signal)
+		return SignalProducer(signal)
 	}
 }
 

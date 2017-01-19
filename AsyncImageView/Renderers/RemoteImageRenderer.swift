@@ -60,7 +60,7 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 }
 
 public enum RemoteImageRendererError: Error {
-	case loadingError(originalError: NSError)
+	case loadingError(originalError: Error)
 	case invalidResponse
 	case invalidStatusCode(statusCode: Int)
 	case decodingError

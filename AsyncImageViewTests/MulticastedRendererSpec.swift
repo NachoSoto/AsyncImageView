@@ -68,6 +68,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 				var scheduler: TestScheduler!
 				let delay: TimeInterval = 1
+                let interval: DispatchTimeInterval = .seconds(Int(delay))
 
 				var innerRenderer: InnerRendererType!
 				var renderer: RenderType!
@@ -95,7 +96,7 @@ class MulticastedRendererSpec: QuickSpec {
 						renderer: innerRenderer,
 						delay: delay,
 						scheduler: scheduler
-						))
+                    ))
 
 					renderer = RenderType(renderer: delayedTestRenderer)
 				}
@@ -106,7 +107,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 					producer.startWithValues { result = $0 }
 
-					scheduler.advance(by: delay)
+					scheduler.advance(by: interval)
 
 					expect(result).toEventuallyNot(beNil())
 
@@ -128,7 +129,7 @@ class MulticastedRendererSpec: QuickSpec {
 
 				it("is a cache hit the second time the producer is fetched") {
 					let producer = getProducerForData(data, size)
-					scheduler.advance(by: delay)
+					scheduler.advance(by: interval)
 
 					var result: ImageResult?
 					producer.startWithValues { result = $0 }

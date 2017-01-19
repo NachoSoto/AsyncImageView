@@ -70,7 +70,7 @@ extension RenderDataType where Self: DataFileType {
 	}
 }
 
-internal func subdirectoryForSize(_ size: CGSize) -> String {
+public func subdirectoryForSize(_ size: CGSize) -> String {
 	return String(format: "%.2fx%.2f", size.width, size.height)
 }
 

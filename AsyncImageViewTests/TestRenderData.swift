@@ -15,7 +15,7 @@ import Result
 import Quick
 import Nimble
 
-@testable import AsyncImageView
+import AsyncImageView
 
 internal enum TestData: CGFloat, Hashable {
 	case a = 1.0

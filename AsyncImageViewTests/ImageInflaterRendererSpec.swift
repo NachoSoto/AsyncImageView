@@ -10,7 +10,7 @@ import Quick
 import Nimble
 import RandomKit
 
-@testable import AsyncImageView
+import AsyncImageView
 
 class ImageInflaterRendererSpec: QuickSpec {
 	override func spec() {

@@ -11,7 +11,7 @@ import Nimble
 
 import RandomKit
 
-@testable import AsyncImageView
+import AsyncImageView
 
 private func testCache<T: CacheType>(
 	cacheCreator: @escaping () -> T,

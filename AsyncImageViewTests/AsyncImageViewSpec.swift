@@ -13,7 +13,7 @@ import ReactiveSwift
 import ReactiveCocoa
 import Result
 
-@testable import AsyncImageView
+import AsyncImageView
 
 class AsyncImageViewSpec: QuickSpec {
 	override func spec() {

@@ -9,11 +9,11 @@ matrix:
       before_install:
         - gem install scan
       script:
-        - scan -s 'AsyncImageView-iOS' -a "iPhone SE (10.0)" -b "raw" -c -q "Release"
+        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone SE (10.0)" -b "raw" -c -q "Release"
 
     - os: osx
       before_install:
         - gem install scan
       script:
-        - scan -s 'AsyncImageView-iOS' -a "iPhone 6s (9.3)" -b "raw" -c -q "Release"
+        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone 6s (9.3)" -b "raw" -c -q "Release"
 

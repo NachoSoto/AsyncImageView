@@ -98,8 +98,8 @@ extension RendererType {
 	}
 }
 
-internal struct InflaterSizeCalculator {
-	static func drawingRectForRenderingImageOfSize(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
+public struct InflaterSizeCalculator {
+	public static func drawingRectForRenderingImageOfSize(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
 		if (imageSize == canvasSize ||
 			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat(FLT_EPSILON)) {
 				return CGRect(origin: .zero, size: canvasSize)

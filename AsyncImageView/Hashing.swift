@@ -8,36 +8,36 @@
 
 infix operator ^^^ : MultiplicationPrecedence
 
-internal func ^^^<L: Hashable, R: Hashable>(left: L, right: R) -> Int {
+public func ^^^<L: Hashable, R: Hashable>(left: L, right: R) -> Int {
 	return hash(left, right)
 }
 
-internal func ^^^<R: Hashable>(left: Int, right: R) -> Int {
+public func ^^^<R: Hashable>(left: Int, right: R) -> Int {
 	return hash(left, right)
 }
 
-internal func ^^^<L: Hashable>(left: L, right: Int) -> Int {
+public func ^^^<L: Hashable>(left: L, right: Int) -> Int {
 	return hash(right, left)
 }
 
-internal func ^^^<L: Hashable, R: Hashable>(left: L, right: R?) -> Int {
+public func ^^^<L: Hashable, R: Hashable>(left: L, right: R?) -> Int {
 	return hash(left, right)
 }
 
-internal func ^^^<L: Hashable, R: Hashable>(left: L?, right: R) -> Int {
+public func ^^^<L: Hashable, R: Hashable>(left: L?, right: R) -> Int {
 	return hash(right, left)
 }
 
-internal func ^^^<L: Hashable, R: Hashable>(left: L, right: [R]) -> Int {
+public func ^^^<L: Hashable, R: Hashable>(left: L, right: [R]) -> Int {
 	return hash(left, right)
 }
 
-internal func ^^^<L: Hashable, R: Hashable>(left: [L], right: R) -> Int {
+public func ^^^<L: Hashable, R: Hashable>(left: [L], right: R) -> Int {
 	return hash(right, left)
 }
 
 extension Sequence where Self.Iterator.Element: Hashable {
-	internal var hashValue: Int {
+	public var hashValue: Int {
 		return hash(self)
 	}
 }

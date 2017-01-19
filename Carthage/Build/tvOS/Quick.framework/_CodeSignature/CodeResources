@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/Quick-Swift.h</key>
 		<data>
-		05W1dd13HHCsN5zw8/dJ5qRu5r0=
+		7rRJNuWXwwC8dugEgVIeScxsTio=
 		</data>
 		<key>Headers/Quick.h</key>
 		<data>
@@ -26,15 +26,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		phlI2mA+5Uu4azQSOOG6Mv9lhyI=
+		DFyQ5QoCa+MBJH5dUgQEN7BLhpY=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		HaiBczyLcC77cA+QLUEugwX7Hm8=
+		pn6SilYXgrBi1npPLtE7yk8tojU=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		82C98kax0ArEzs6kS2vfuSCvYpI=
+		coyzZu8sWUCodxwwBNGK5W6RhR8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			05W1dd13HHCsN5zw8/dJ5qRu5r0=
+			7rRJNuWXwwC8dugEgVIeScxsTio=
 			</data>
 			<key>hash2</key>
 			<data>
-			HSupCR9Q9BDIoYqax3PyZkCkaDua5YPFpxAH/8MeA7c=
+			qA8ArZxrqgwrfXhDTKEM6cRMnsVg+gPfNsuqmWWqxPo=
 			</data>
 		</dict>
 		<key>Headers/Quick.h</key>
@@ -102,22 +102,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HaiBczyLcC77cA+QLUEugwX7Hm8=
+			pn6SilYXgrBi1npPLtE7yk8tojU=
 			</data>
 			<key>hash2</key>
 			<data>
-			N0ok1GcILRrUMzwgQNhami5oy9lpwhice1wDrc67ee8=
+			8ddVt7RYn9o3BOO75P7SnAptnfTmwzPXpBXxfiTYAIA=
 			</data>
 		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			82C98kax0ArEzs6kS2vfuSCvYpI=
+			coyzZu8sWUCodxwwBNGK5W6RhR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			KOmEBi10R6MKW8/x+oUyxIqRR2jdB8cxSo2Y3SzLltc=
+			HJJ+LwJZSXbbHEYY+heYbH4LXnADlDOqFNUYytCwd8g=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -149,6 +149,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -194,6 +199,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>

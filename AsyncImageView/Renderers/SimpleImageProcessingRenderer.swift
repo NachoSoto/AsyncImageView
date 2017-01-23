@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import ReactiveCocoa
 
 /// `RendererType` decorator that applies processing to every emitted image.
 /// This allows, for example, to apply `UIImage.resizableImage(withCapInsets:)` on every image.

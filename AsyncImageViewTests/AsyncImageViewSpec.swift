@@ -10,7 +10,6 @@ import Quick
 import Nimble
 
 import ReactiveSwift
-import ReactiveCocoa
 import Result
 
 import AsyncImageView

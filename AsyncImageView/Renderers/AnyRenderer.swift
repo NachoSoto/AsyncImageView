@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import ReactiveCocoa
 import Result
 
 /// A type-erased `RendererType`.

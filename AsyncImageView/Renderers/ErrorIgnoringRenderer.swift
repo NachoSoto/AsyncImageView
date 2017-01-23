@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import ReactiveCocoa
 import Result
 
 /// `RendererType` decorator that ignores errors from a renderer.

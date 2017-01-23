@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreGraphics
-import ReactiveCocoa
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
 @available(iOS 10.0, *)

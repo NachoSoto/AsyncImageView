@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import ReactiveCocoa
 import Result
 
 public protocol LocalRenderDataType: RenderDataType {

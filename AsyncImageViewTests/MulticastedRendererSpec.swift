@@ -11,7 +11,6 @@ import Nimble
 
 import Result
 import ReactiveSwift
-import ReactiveCocoa
 
 import AsyncImageView
 

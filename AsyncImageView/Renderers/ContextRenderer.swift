@@ -10,7 +10,7 @@ import UIKit
 import CoreGraphics
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
-@available(iOS 10.0, *)
+@available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
 	public typealias Block = (_ context: CGContext, _ data: Data) -> ()
 
@@ -44,7 +44,6 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
 }
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
-@available(iOS 9.0, *)
 public final class OldContextRenderer<Data: RenderDataType>: SynchronousRendererType {
     public typealias Block = (_ context: CGContext, _ data: Data) -> ()
     

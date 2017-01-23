@@ -71,7 +71,7 @@ internal final class TestRenderer: RendererType {
             })
 	}
 
-    @available(iOS 10.0, *)
+    @available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
     static func rendererForSize(_ size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
 		precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
@@ -80,7 +80,6 @@ internal final class TestRenderer: RendererType {
 		}
 	}
     
-    @available(iOS 9.0, *)
     static func oldRendererForSize(_ size: CGSize, scale: CGFloat) -> OldContextRenderer<TestRenderData> {
         precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
         

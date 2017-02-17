@@ -19,6 +19,8 @@
 		571095A81DDEC03100781D9C /* ReactiveSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 571095A71DDEC03100781D9C /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5715712F1E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
 		571571301E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
+		571B6A121E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */; };
+		571B6A131E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */; };
 		571FB6241E7C3FEF007E44BD /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571095A71DDEC03100781D9C /* ReactiveSwift.framework */; };
 		571FB6271E7C4029007E44BD /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571FB6261E7C4029007E44BD /* ReactiveSwift.framework */; };
 		571FE6AA1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
@@ -108,6 +110,7 @@
 		5709940D1C0912D30010B340 /* ContextRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextRenderer.swift; path = Renderers/ContextRenderer.swift; sourceTree = "<group>"; };
 		571095A71DDEC03100781D9C /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewRenderer.swift; path = Renderers/ViewRenderer.swift; sourceTree = "<group>"; };
+		571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteOrLocalImageRenderer.swift; path = Renderers/RemoteOrLocalImageRenderer.swift; sourceTree = "<group>"; };
 		571FB6261E7C4029007E44BD /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/tvOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyRenderer.swift; path = Renderers/EmptyRenderer.swift; sourceTree = "<group>"; };
 		572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInflaterRendererSpec.swift; sourceTree = "<group>"; };
@@ -364,6 +367,7 @@
 				57FC1AFF1C0293CE00FAD2F3 /* ImageInflaterRenderer.swift */,
 				570994041C0903BF0010B340 /* LocalImageRenderer.swift */,
 				57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */,
+				571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */,
 				57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */,
 				570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */,
 				570994091C090E050010B340 /* ImageProcessingRenderer.swift */,
@@ -535,6 +539,7 @@
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59B1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
+				571B6A121E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */,
 				57FC1B021C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				5709940A1C090E050010B340 /* ImageProcessingRenderer.swift in Sources */,
 				570993FE1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */,
@@ -572,6 +577,7 @@
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59C1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
+				571B6A131E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */,
 				57FC1B031C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				5709940B1C090E050010B340 /* ImageProcessingRenderer.swift in Sources */,
 				570993FF1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */,

@@ -18,7 +18,7 @@ public protocol ImageViewDataType {
 }
 
 /// A `UIImageView` that can render asynchronously.
-public final class AsyncImageView<
+open class AsyncImageView<
 	Data: RenderDataType,
 	ImageViewData: ImageViewDataType,
 	Renderer: RendererType,
@@ -86,19 +86,19 @@ public final class AsyncImageView<
 		requestsObserver.sendCompleted()
 	}
 
-	public override var frame: CGRect {
+	open override var frame: CGRect {
 		didSet {
 			self.requestNewImageIfReady()
 		}
 	}
 
-	public override var bounds: CGRect {
+	open override var bounds: CGRect {
 		didSet {
 			self.requestNewImageIfReady()
 		}
 	}
 
-	public var data: ImageViewData? {
+	public final var data: ImageViewData? {
 		didSet {
 			self.requestNewImageIfReady()
 		}

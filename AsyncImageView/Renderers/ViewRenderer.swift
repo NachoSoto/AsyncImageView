@@ -38,7 +38,10 @@ public final class ViewRenderer<Data: RenderDataType>: SynchronousRendererType {
         )
         
         return renderer.image { context in
-            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+            precondition(
+                view.drawHierarchy(in: view.bounds, afterScreenUpdates: true),
+                "Error generating snapshot"
+            )
         }
     }
 }
@@ -67,7 +70,11 @@ public final class OldViewRenderer<Data: RenderDataType>: SynchronousRendererTyp
         UIGraphicsBeginImageContextWithOptions(data.size, self.opaque, 0)
         defer { UIGraphicsEndImageContext() }
         
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        precondition(
+            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true),
+            "Error generating snapshot"
+        )
+        
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 }

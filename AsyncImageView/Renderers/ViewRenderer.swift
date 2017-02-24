@@ -31,10 +31,9 @@ public final class ViewRenderer<Data: RenderDataType>: SynchronousRendererType {
         view.layoutIfNeeded()
         
         UIGraphicsBeginImageContextWithOptions(data.size, self.opaque, 0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
+        defer { UIGraphicsEndImageContext() }
         
-        return snapshotImage
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        return UIGraphicsGetImageFromCurrentImageContext()!
     }
 }

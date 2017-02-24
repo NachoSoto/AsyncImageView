@@ -10,7 +10,41 @@ import UIKit
 import CoreGraphics
 
 /// `SynchronousRendererType` which generates a `UIImage` from a UIView.
+@available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
 public final class ViewRenderer<Data: RenderDataType>: SynchronousRendererType {
+    public typealias Block = (_ data: Data) -> UIView
+    
+    private let format: UIGraphicsImageRendererFormat
+    private let viewCreationBlock: Block
+    
+    /// - opaque: A Boolean flag indicating whether the bitmap is opaque.
+    /// If you know the bitmap is fully opaque, specify YES to ignore the
+    /// alpha channel and optimize the bitmap’s storage.
+    public init(opaque: Bool, viewCreationBlock: @escaping Block) {
+        self.format = UIGraphicsImageRendererFormat()
+        self.format.opaque = opaque
+        self.viewCreationBlock = viewCreationBlock
+    }
+    
+    public func renderImageWithData(_ data: Data) -> UIImage {
+        let view = self.viewCreationBlock(data)
+        view.frame.origin = .zero
+        view.bounds.size = data.size
+        view.layoutIfNeeded()
+        
+        let renderer = UIGraphicsImageRenderer(
+            size: data.size,
+            format: self.format
+        )
+        
+        return renderer.image { context in
+            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        }
+    }
+}
+
+/// `SynchronousRendererType` which generates a `UIImage` from a UIView.
+public final class OldViewRenderer<Data: RenderDataType>: SynchronousRendererType {
     public typealias Block = (_ data: Data) -> UIView
     
     private let opaque: Bool

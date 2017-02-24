@@ -36,6 +36,14 @@ public func ^^^<L: Hashable, R: Hashable>(left: [L], right: R) -> Int {
 	return hash(right, left)
 }
 
+// MARK: Extensions
+
+extension CGSize: Hashable {
+    public var hashValue: Int {
+        return self.width ^^^ self.height
+    }
+}
+
 extension Sequence where Self.Iterator.Element: Hashable {
 	public var hashValue: Int {
 		return hash(self)

@@ -39,7 +39,7 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
         )
         
         return renderer.image { context in
-            self.renderingBlock(UIGraphicsGetCurrentContext()!, data)
+            self.renderingBlock(context.cgContext, data)
         }
     }
 }

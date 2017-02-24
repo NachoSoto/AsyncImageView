@@ -17,6 +17,8 @@
 		5709940E1C0912D30010B340 /* ContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709940D1C0912D30010B340 /* ContextRenderer.swift */; };
 		5709940F1C0912D30010B340 /* ContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709940D1C0912D30010B340 /* ContextRenderer.swift */; };
 		571095A81DDEC03100781D9C /* ReactiveSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 571095A71DDEC03100781D9C /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5715712F1E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
+		571571301E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
 		571FE6AA1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
 		571FE6AB1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
 		572A4E7C1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */; };
@@ -103,6 +105,7 @@
 		570994091C090E050010B340 /* ImageProcessingRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageProcessingRenderer.swift; path = Renderers/ImageProcessingRenderer.swift; sourceTree = "<group>"; };
 		5709940D1C0912D30010B340 /* ContextRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextRenderer.swift; path = Renderers/ContextRenderer.swift; sourceTree = "<group>"; };
 		571095A71DDEC03100781D9C /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewRenderer.swift; path = Renderers/ViewRenderer.swift; sourceTree = "<group>"; };
 		571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyRenderer.swift; path = Renderers/EmptyRenderer.swift; sourceTree = "<group>"; };
 		572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInflaterRendererSpec.swift; sourceTree = "<group>"; };
 		5742CF551E3152B500EA23A0 /* ShiftOperations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShiftOperations.framework; path = Carthage/Build/iOS/ShiftOperations.framework; sourceTree = "<group>"; };
@@ -352,6 +355,7 @@
 				570994091C090E050010B340 /* ImageProcessingRenderer.swift */,
 				786FF8BF1DA20260005BB73E /* SimpleImageProcessingRenderer.swift */,
 				5709940D1C0912D30010B340 /* ContextRenderer.swift */,
+				5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */,
 				571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */,
 				57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */,
 			);
@@ -513,6 +517,7 @@
 				57FC1B061C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				571FE6AA1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */,
 				5709940E1C0912D30010B340 /* ContextRenderer.swift in Sources */,
+				5715712F1E60C8D000D0FB1E /* ViewRenderer.swift in Sources */,
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59B1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
@@ -549,6 +554,7 @@
 				57FC1B071C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				571FE6AB1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */,
 				5709940F1C0912D30010B340 /* ContextRenderer.swift in Sources */,
+				571571301E60C8D000D0FB1E /* ViewRenderer.swift in Sources */,
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59C1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,

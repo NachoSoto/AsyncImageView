@@ -29,7 +29,16 @@ private func testCache<T: CacheType>(
 	it("returns nil when not cached") {
 		expect(cache.valueForKey(keyCreator())).to(beNil())
 	}
-
+    
+    it("returns nil when expired") {
+        let key = keyCreator()
+        let value = valueCreator()
+        
+        cache.setValue(value, forKey: key, expiration: .seconds(-1))
+        
+        expect(cache.valueForKey(keyCreator())).to(beNil())
+    }
+    
 	it("recovers value after saving it") {
 		let key = keyCreator()
 		let value = valueCreator()

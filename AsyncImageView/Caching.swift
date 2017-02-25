@@ -14,9 +14,19 @@ public protocol CacheType {
 
 	/// Retrieves the value for this key.
 	func valueForKey(_ key: Key) -> Value?
+    
+    /// Sets a value for a key. If `value` is `nil`, it will be removed.
+    func setValue(_ value: Value?, forKey key: Key)
 
 	/// Sets a value for a key. If `value` is `nil`, it will be removed.
-	func setValue(_ value: Value?, forKey key: Key)
+	func setValue(_ value: Value?, forKey key: Key, expiration: CacheExpiration)
+}
+
+public enum CacheExpiration {
+    case seconds(TimeInterval)
+    case days(Int)
+    case date(Date)
+    case never
 }
 
 // MARK: -
@@ -33,26 +43,65 @@ public final class InMemoryCache<K: Hashable, V>: CacheType {
 	}
 
 	public func valueForKey(_ key: K) -> V? {
-		return cache.object(forKey: CacheKey<K>(value: key))?.wrapped
+        if let value = cache.object(forKey: CacheKey<K>(value: key)), !value.isExpired {
+            return value.wrapped
+        } else {
+            return nil
+        }
 	}
 
-	public func setValue(_ value: V?, forKey key: K) {
+    public func setValue(_ value: V?, forKey key: K) {
+        self.setValue(value, forKey: key, expiration: .never)
+    }
+    
+    public func setValue(_ value: V?, forKey key: K, expiration: CacheExpiration) {
 		let key = CacheKey(value: key)
 
-		if let value = value.map(CacheValue.init) {
-			cache.setObject(value, forKey: key)
+        if let value = value {
+			cache.setObject(CacheValue(wrapped: value, expirationDate: expiration.date), forKey: key)
 		} else {
 			cache.removeObject(forKey: key)
 		}
 	}
 }
 
-private final class CacheValue<V>: NSObject {
+private class CacheValue<V>: NSObject {
 	let wrapped: V
+    let expirationDate: Date
 
-	init(wrapped: V) {
+	init(wrapped: V, expirationDate: Date) {
 		self.wrapped = wrapped
+        self.expirationDate = expirationDate
 	}
+    
+    var isExpired: Bool {
+        return self.expirationDate.inThePast
+    }
+}
+
+private enum DiskCacheValueKeys: String {
+    case value
+    case expiration
+}
+
+private final class DiskCacheValue<V: NSDataConvertible>: CacheValue<V> {
+    override init(wrapped: V, expirationDate: Date) {
+        super.init(wrapped: wrapped, expirationDate: expirationDate)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        guard let value = aDecoder.decodeObject(forKey: DiskCacheValueKeys.value.rawValue) as? V,
+            let expiration = aDecoder.decodeObject(forKey: DiskCacheValueKeys.expiration.rawValue) as! Date? else {
+                return nil
+        }
+        
+        super.init(wrapped: value, expirationDate: expiration)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.wrapped, forKey: DiskCacheValueKeys.value.rawValue)
+        aCoder.encode(self.expirationDate, forKey: DiskCacheValueKeys.expiration.rawValue)
+    }
 }
 
 private final class CacheKey<K: Hashable>: NSObject {
@@ -127,19 +176,36 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	}
 
 	public func valueForKey(_ key: K) -> V? {
-		return withLock { (try? Data(contentsOf: self.filePathForKey(key))) }
-			.flatMap(V.init)
+        let path = self.filePathForKey(key).absoluteString
+        
+        return withLock {
+            if self.fileManager.fileExists(atPath: path),
+                let value = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! DiskCacheValue<V>?,
+                !value.isExpired {
+                return value.wrapped
+            } else {
+                return nil
+            }
+        }
 	}
+    
+    public func setValue(_ value: V?, forKey key: K) {
+        self.setValue(value, forKey: key, expiration: .never)
+    }
 
-	public func setValue(_ value: V?, forKey key: K) {
-		let url = self.filePathForKey(key)
+	public func setValue(_ value: V?, forKey key: K, expiration: CacheExpiration) {
+        let url = self.filePathForKey(key)
+		let path = url.absoluteString
 
 		self.withLock {
 			self.guaranteeDirectoryExists(url.deletingLastPathComponent())
-
-			if let data = value.flatMap({ $0.data }) {
-				try! data.write(to: url, options: .atomicWrite)
-			} else if self.fileManager.fileExists(atPath: url.path) {
+            
+            let data = value
+                .map { DiskCacheValue(wrapped: $0, expirationDate: expiration.date) }
+            
+            if let data = data {
+                NSKeyedArchiver.archiveRootObject(data, toFile: path)
+			} else if self.fileManager.fileExists(atPath: path) {
 				try! self.fileManager.removeItem(at: url)
 			}
 		}
@@ -167,4 +233,25 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private func guaranteeDirectoryExists(_ url: URL) {
 		try! self.fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
 	}
+}
+
+fileprivate extension CacheExpiration {
+    var date: Date {
+        switch self {
+        case let .seconds(seconds):
+            return Date().addingTimeInterval(seconds)
+        case let .days(days):
+            return Date().addingTimeInterval(Double(days) * 86400.0)
+        case let .date(date):
+            return date
+        case .never:
+            return Date.distantFuture
+        }
+    }
+}
+
+fileprivate extension Date {
+    var inThePast: Bool {
+        return self.timeIntervalSinceNow < 0
+    }
 }

@@ -22,10 +22,12 @@ public final class CacheRenderer<
  {
 	private let renderer: Renderer
 	private let cache: Cache
+    private let cacheExpiration: CacheExpiration
 
-	public init(renderer: Renderer, cache: Cache) {
+    public init(renderer: Renderer, cache: Cache, cacheExpiration: CacheExpiration = .never) {
 		self.renderer = renderer
 		self.cache = cache
+        self.cacheExpiration = cacheExpiration
 	}
 
 	/// Returns an image from the cache if found,
@@ -42,8 +44,8 @@ public final class CacheRenderer<
 			.flatMapError { [renderer = self.renderer] _ in
 				return renderer
 					.renderImageWithData(data)
-					.on(value: { [cache = self.cache] result in
-						cache.setValue(result, forKey: data)
+					.on(value: { [cache = self.cache, expiration = self.cacheExpiration] result in
+                        cache.setValue(result, forKey: data, expiration: expiration)
 					})
 					.map { $0.image.asCacheMiss }
 			}

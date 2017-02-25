@@ -39,7 +39,7 @@ private func testCache<T: CacheType>(
         expect(cache.valueForKey(keyCreator())).to(beNil())
     }
     
-	it("recovers value after saving it") {
+	fit("recovers value after saving it") {
 		let key = keyCreator()
 		let value = valueCreator()
 
@@ -72,17 +72,17 @@ private func testCache<T: CacheType>(
 	}
 }
 
-class InMemoryCacheSpec: QuickSpec {
-	override func spec() {
-		describe("InMemoryCache") {
-			testCache(
-				cacheCreator: { InMemoryCache<String, String>(cacheName: "test") },
-				keyCreator: String.randomReadableString,
-				valueCreator: String.randomReadableString
-			)
-		}
-	}
-}
+//class InMemoryCacheSpec: QuickSpec {
+//	override func spec() {
+//		describe("InMemoryCache") {
+//			testCache(
+//				cacheCreator: { InMemoryCache<String, String>(cacheName: "test") },
+//				keyCreator: String.randomReadableString,
+//				valueCreator: String.randomReadableString
+//			)
+//		}
+//	}
+//}
 
 class DiskCacheSpec: QuickSpec {
 	override func spec() {

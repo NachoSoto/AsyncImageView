@@ -84,23 +84,31 @@ private enum DiskCacheValueKeys: String {
     case expiration
 }
 
-private final class DiskCacheValue<V: NSDataConvertible>: CacheValue<V> {
-    override init(wrapped: V, expirationDate: Date) {
-        super.init(wrapped: wrapped, expirationDate: expirationDate)
+@objc private final class DiskCacheValue: NSObject, NSCoding {
+    let wrapped: NSDataConvertible
+    let expirationDate: Date
+    
+    init(wrapped: NSDataConvertible, expirationDate: Date) {
+        self.wrapped = wrapped
+        self.expirationDate = expirationDate
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        guard let value = aDecoder.decodeObject(forKey: DiskCacheValueKeys.value.rawValue) as? V,
+    @objc required convenience init?(coder aDecoder: NSCoder) {
+        guard let value = aDecoder.decodeObject(forKey: DiskCacheValueKeys.value.rawValue) as? NSDataConvertible,
             let expiration = aDecoder.decodeObject(forKey: DiskCacheValueKeys.expiration.rawValue) as! Date? else {
                 return nil
         }
         
-        super.init(wrapped: value, expirationDate: expiration)
+        self.init(wrapped: value, expirationDate: expiration)
     }
     
-    func encode(with aCoder: NSCoder) {
+    @objc func encode(with aCoder: NSCoder) {
         aCoder.encode(self.wrapped, forKey: DiskCacheValueKeys.value.rawValue)
         aCoder.encode(self.expirationDate, forKey: DiskCacheValueKeys.expiration.rawValue)
+    }
+    
+    var isExpired: Bool {
+        return self.expirationDate.inThePast
     }
 }
 
@@ -156,6 +164,8 @@ public func diskCacheDefaultCacheDirectory() -> URL {
 		.appendingPathComponent("AsyncImageView", isDirectory: true)
 }
 
+// TODO: clean up expired files, when loading them (delete them), but also periodically
+
 /// `CacheType` backed by files on disk.
 public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	private let rootDirectory: URL
@@ -176,13 +186,17 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	}
 
 	public func valueForKey(_ key: K) -> V? {
-        let path = self.filePathForKey(key).absoluteString
+        let path = self.filePathForKey(key).path
         
         return withLock {
-            if self.fileManager.fileExists(atPath: path),
-                let value = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! DiskCacheValue<V>?,
-                !value.isExpired {
-                return value.wrapped
+            let x = self.fileManager.fileExists(atPath: path)
+            let y = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! DiskCacheValue?
+            
+            if x,
+                let value = y,
+                !value.isExpired,
+                let wrapped = value.wrapped as? V {
+                return wrapped
             } else {
                 return nil
             }
@@ -195,7 +209,7 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 
 	public func setValue(_ value: V?, forKey key: K, expiration: CacheExpiration) {
         let url = self.filePathForKey(key)
-		let path = url.absoluteString
+		let path = url.path
 
 		self.withLock {
 			self.guaranteeDirectoryExists(url.deletingLastPathComponent())
@@ -203,8 +217,10 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
             let data = value
                 .map { DiskCacheValue(wrapped: $0, expirationDate: expiration.date) }
             
-            if let data = data {
-                NSKeyedArchiver.archiveRootObject(data, toFile: path)
+            if let data = data, !data.isExpired {
+                try! NSKeyedArchiver
+                    .archivedData(withRootObject: data)
+                    .write(to: url, options: .atomicWrite)
 			} else if self.fileManager.fileExists(atPath: path) {
 				try! self.fileManager.removeItem(at: url)
 			}

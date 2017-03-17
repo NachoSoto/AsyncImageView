@@ -296,7 +296,7 @@ private final class ManualRenderer: RendererType {
 			return .empty
 		}
 
-		return SignalProducer(signal)
+        return SignalProducer(signal)
 	}
 }
 

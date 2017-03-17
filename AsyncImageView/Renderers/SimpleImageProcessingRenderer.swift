@@ -18,12 +18,12 @@ public final class SimpleImageProcessingRenderer<Renderer: RendererType>: Render
 	private let renderer: Renderer
 	private let renderingBlock: Block
 
-	private let schedulerCreator: () -> SchedulerProtocol
+	private let schedulerCreator: () -> Scheduler
 
 	public init(
 		renderer: Renderer,
 		renderingBlock: @escaping Block,
-		schedulerCreator: @escaping () -> SchedulerProtocol = { QueueScheduler() }
+		schedulerCreator: @escaping () -> Scheduler = { QueueScheduler() }
     ) {
         self.renderer = renderer
         self.renderingBlock = renderingBlock

@@ -39,7 +39,7 @@ extension SynchronousRendererType {
 	/// Constructs an `AnyRenderer` with a `SynchronousRendererType`.
 	/// The created `SignalProducer` will simply emit the result
 	/// of `renderImageWithData`.
-	public func asyncRenderer(_ scheduler: SchedulerProtocol = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
+	public func asyncRenderer(_ scheduler: Scheduler = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
 		return AnyRenderer { (data: Self.Data) in
 			return SignalProducer { observer, disposable in
 				if !disposable.isDisposed {

@@ -163,9 +163,9 @@ private final class CacheHitRenderer: RendererType {
 private final class DelayedRenderer<T: RendererType>: RendererType {
 	private let renderer: T
 	private let delay: TimeInterval
-	private let scheduler: DateSchedulerProtocol
+	private let scheduler: DateScheduler
 
-	init(renderer: T, delay: TimeInterval, scheduler: DateSchedulerProtocol) {
+	init(renderer: T, delay: TimeInterval, scheduler: DateScheduler) {
 		self.renderer = renderer
 		self.delay = delay
 		self.scheduler = scheduler

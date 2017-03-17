@@ -20,9 +20,9 @@ public protocol LocalRenderDataType: RenderDataType {
 /// Note that this Renderer will ignore `RenderDataType.size`.
 /// Consider chaining this with `ImageInflaterRenderer`.
 public final class LocalImageRenderer<T: LocalRenderDataType>: RendererType {
-	private let scheduler: SchedulerProtocol
+	private let scheduler: Scheduler
 
-	public init(scheduler: SchedulerProtocol = QueueScheduler()) {
+	public init(scheduler: Scheduler = QueueScheduler()) {
 		self.scheduler = scheduler
 	}
 

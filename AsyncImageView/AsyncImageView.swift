@@ -34,14 +34,14 @@ open class AsyncImageView<
 	private let requestsSignal: Signal<Data?, NoError>
 	private let requestsObserver: Signal<Data?, NoError>.Observer
 
-	private let imageCreationScheduler: SchedulerProtocol
+	private let imageCreationScheduler: Scheduler
 
 	public init(
 		initialFrame: CGRect,
 		renderer: Renderer,
 		placeholderRenderer: PlaceholderRenderer? = nil,
-		uiScheduler: SchedulerProtocol = UIScheduler(),
-		imageCreationScheduler: SchedulerProtocol = QueueScheduler())
+		uiScheduler: Scheduler = UIScheduler(),
+		imageCreationScheduler: Scheduler = QueueScheduler())
 	{
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
 		self.imageCreationScheduler = imageCreationScheduler

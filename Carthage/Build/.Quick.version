@@ -1,0 +1,16 @@
+{
+  "commitish" : "v1.1.0",
+  "iOS" : [
+    {
+      "hash" : "3597a339c62fd046d279134949aaf75062e805b36e9a5f56248b31ac19dd98ef",
+      "name" : "Quick"
+    }
+  ],
+  "xcodeVersion" : "Xcode 8.2.1\nBuild version 8C1002",
+  "tvOS" : [
+    {
+      "hash" : "59f5004fc62e98f94045eb5c2e9e12575bdc91e371c5b3fef4d4622e1fa05249",
+      "name" : "Quick"
+    }
+  ]
+}

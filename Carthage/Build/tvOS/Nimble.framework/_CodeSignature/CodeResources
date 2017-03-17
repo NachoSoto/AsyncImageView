@@ -34,7 +34,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		yW3bIW5MjMdlSV8/LimnqU44jBc=
+		YLkO/W0bMbMjWkQ5hUPgnh697Nk=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		zFG4rUE8X8S70daJw+WESllSmDU=
+		bsQ5Goq0nNR1KRuMHlz9XAezZFw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -143,11 +143,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zFG4rUE8X8S70daJw+WESllSmDU=
+			bsQ5Goq0nNR1KRuMHlz9XAezZFw=
 			</data>
 			<key>hash2</key>
 			<data>
-			TzYB0tjnWM9JUugctmxRyPveWOA+ATdKeckBlFrhV+E=
+			YISWKUcymFQpLl4IQIcPl+as+lv5TfOemoKGNw1mdEE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

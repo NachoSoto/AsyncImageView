@@ -1,0 +1,16 @@
+{
+  "commitish" : "v5.1.1",
+  "iOS" : [
+    {
+      "hash" : "2589f4b828e4e5553c5b31da3f47f366d6bda013cf835976a6d7567eaaf567bb",
+      "name" : "Nimble"
+    }
+  ],
+  "xcodeVersion" : "Xcode 8.2.1\nBuild version 8C1002",
+  "tvOS" : [
+    {
+      "hash" : "361048c7a4473180485ee01ba2be91e62ca71361a49fc46f43ab9401eb75bd1b",
+      "name" : "Nimble"
+    }
+  ]
+}

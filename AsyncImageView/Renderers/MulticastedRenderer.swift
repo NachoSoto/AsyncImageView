@@ -90,7 +90,7 @@ extension RendererType {
 	fileprivate func createProducerForRenderingData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderImageWithData(data)
 			.flatMap(.concat) { result in
-				return SignalProducer([
+                return SignalProducer([
 					ImageResult(image: result.image, cacheHit: false),
 					ImageResult(image: result.image, cacheHit: true)
 				])

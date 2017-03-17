@@ -1,0 +1,24 @@
+{
+  "commitish" : "1.1.0",
+  "iOS" : [
+    {
+      "hash" : "048895d7d1eaf8623373683b94da1541530373ace5b3f2f5d5436c433b709d0b",
+      "name" : "Result"
+    },
+    {
+      "hash" : "11f41bd000c2bc37e2984de2cc8539a0b024412423585044e704621be7e45e8d",
+      "name" : "ReactiveSwift"
+    }
+  ],
+  "xcodeVersion" : "Xcode 8.2.1\nBuild version 8C1002",
+  "tvOS" : [
+    {
+      "hash" : "dd6491ab1c9906ee010e41763c7f694877b72304269849ed68bac07f017017ce",
+      "name" : "Result"
+    },
+    {
+      "hash" : "56b66bcc5dea2766532cca552a003cf52efd87091fcc039268fea1b3f2c01eda",
+      "name" : "ReactiveSwift"
+    }
+  ]
+}

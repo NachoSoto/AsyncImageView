@@ -19,6 +19,8 @@
 		571095A81DDEC03100781D9C /* ReactiveSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 571095A71DDEC03100781D9C /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5715712F1E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
 		571571301E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
+		571FB6241E7C3FEF007E44BD /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571095A71DDEC03100781D9C /* ReactiveSwift.framework */; };
+		571FB6271E7C4029007E44BD /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571FB6261E7C4029007E44BD /* ReactiveSwift.framework */; };
 		571FE6AA1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
 		571FE6AB1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
 		572A4E7C1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */; };
@@ -106,6 +108,7 @@
 		5709940D1C0912D30010B340 /* ContextRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextRenderer.swift; path = Renderers/ContextRenderer.swift; sourceTree = "<group>"; };
 		571095A71DDEC03100781D9C /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewRenderer.swift; path = Renderers/ViewRenderer.swift; sourceTree = "<group>"; };
+		571FB6261E7C4029007E44BD /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/tvOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyRenderer.swift; path = Renderers/EmptyRenderer.swift; sourceTree = "<group>"; };
 		572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInflaterRendererSpec.swift; sourceTree = "<group>"; };
 		5742CF551E3152B500EA23A0 /* ShiftOperations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShiftOperations.framework; path = Carthage/Build/iOS/ShiftOperations.framework; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 			files = (
 				57BD68E71C0269080077A391 /* Result.framework in Frameworks */,
 				57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */,
+				571FB6241E7C3FEF007E44BD /* ReactiveSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57BD68EB1C0269130077A391 /* Result.framework in Frameworks */,
+				571FB6271E7C4029007E44BD /* ReactiveSwift.framework in Frameworks */,
 				57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +194,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		571FB6251E7C4029007E44BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				571FB6261E7C4029007E44BD /* ReactiveSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		57BD682B1C02598F0077A391 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +210,7 @@
 				57BD68921C02607F0077A391 /* Configuration */,
 				57BD68831C025F350077A391 /* Dependencies */,
 				57BD68361C02598F0077A391 /* Products */,
+				571FB6251E7C4029007E44BD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

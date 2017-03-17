@@ -19,14 +19,14 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 	private let opaque: Bool
 	private let renderingBlock: Block
 
-	private let schedulerCreator: () -> SchedulerProtocol
+	private let schedulerCreator: () -> Scheduler
 
 	public init(
 		renderer: Renderer,
 		scale: CGFloat,
 		opaque: Bool,
 		renderingBlock: @escaping Block,
-		schedulerCreator: @escaping () -> SchedulerProtocol = { QueueScheduler() }) {
+		schedulerCreator: @escaping () -> Scheduler = { QueueScheduler() }) {
 			self.renderer = renderer
 			self.scale = scale
 			self.opaque = opaque

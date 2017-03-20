@@ -9,9 +9,12 @@
 import UIKit
 import CoreGraphics
 
-/// `SynchronousRendererType` which generates a `UIImage` from a UIView.
+import ReactiveSwift
+import Result
+
+/// `RendererType` which generates a `UIImage` from a UIView.
 @available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
-public final class ViewRenderer<Data: RenderDataType>: SynchronousRendererType {
+public final class ViewRenderer<Data: RenderDataType>: RendererType {
     public typealias Block = (_ data: Data) -> UIView
     
     private let format: UIGraphicsImageRendererFormat
@@ -26,28 +29,26 @@ public final class ViewRenderer<Data: RenderDataType>: SynchronousRendererType {
         self.viewCreationBlock = viewCreationBlock
     }
     
-    public func renderImageWithData(_ data: Data) -> UIImage {
-        let view = self.viewCreationBlock(data)
-        view.frame.origin = .zero
-        view.bounds.size = data.size
-        view.layoutIfNeeded()
-        
-        let renderer = UIGraphicsImageRenderer(
-            size: data.size,
-            format: self.format
+    public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, NoError> {
+        return createProducer(
+            data,
+            viewCreationBlock: self.viewCreationBlock,
+            renderBlock: { view in
+                let renderer = UIGraphicsImageRenderer(
+                    size: data.size,
+                    format: self.format
+                )
+                
+                return renderer.image { context in
+                    draw(view: view, inContext: context.cgContext)
+                }
+            }
         )
-        
-        return renderer.image { context in
-            precondition(
-                view.drawHierarchy(in: view.bounds, afterScreenUpdates: true),
-                "Error generating snapshot"
-            )
-        }
     }
 }
 
-/// `SynchronousRendererType` which generates a `UIImage` from a UIView.
-public final class OldViewRenderer<Data: RenderDataType>: SynchronousRendererType {
+/// `RendererType` which generates a `UIImage` from a UIView.
+public final class OldViewRenderer<Data: RenderDataType>: RendererType {
     public typealias Block = (_ data: Data) -> UIView
     
     private let opaque: Bool
@@ -61,20 +62,46 @@ public final class OldViewRenderer<Data: RenderDataType>: SynchronousRendererTyp
         self.viewCreationBlock = viewCreationBlock
     }
     
-    public func renderImageWithData(_ data: Data) -> UIImage {
-        let view = self.viewCreationBlock(data)
+    public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, NoError> {
+        return createProducer(
+            data,
+            viewCreationBlock: self.viewCreationBlock,
+            renderBlock: { view in
+                
+                UIGraphicsBeginImageContextWithOptions(data.size, self.opaque, 0)
+                defer { UIGraphicsEndImageContext() }
+                
+                draw(view: view, inContext: UIGraphicsGetCurrentContext()!)
+                
+                return UIGraphicsGetImageFromCurrentImageContext()!
+            }
+        )
+    }
+}
+
+fileprivate func createProducer<Data: RenderDataType>(
+    _ data: Data,
+    viewCreationBlock: @escaping (_ data: Data) -> UIView,
+    renderBlock: @escaping (UIView) -> UIImage
+) -> SignalProducer<UIImage, NoError> {
+    return SignalProducer { observer, disposable in
+        let view = viewCreationBlock(data)
         view.frame.origin = .zero
         view.bounds.size = data.size
         view.layoutIfNeeded()
         
-        UIGraphicsBeginImageContextWithOptions(data.size, self.opaque, 0)
-        defer { UIGraphicsEndImageContext() }
-        
-        precondition(
-            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true),
-            "Error generating snapshot"
-        )
-        
-        return UIGraphicsGetImageFromCurrentImageContext()!
+        // Make the CA renderer wait "until all the post-commit triggers fire".
+        // We can't take a snapshot right away because the view has not been commited to the render server yet.
+        DispatchQueue.main.async {
+            if !disposable.isDisposed {
+                observer.send(value: renderBlock(view))
+                observer.sendCompleted()
+            }
+        }
     }
+        .start(on: UIScheduler())
+}
+
+fileprivate func draw(view: UIView, inContext context: CGContext) {
+    view.layer.render(in: context)
 }

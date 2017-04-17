@@ -100,7 +100,7 @@ extension RendererType {
 public struct InflaterSizeCalculator {
 	public static func drawingRectForRenderingImageOfSize(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
 		if (imageSize == canvasSize ||
-			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat(Float.ulpOfOne)) {
+			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne) {
 				return CGRect(origin: .zero, size: canvasSize)
 		} else {
 			let destScale = max(

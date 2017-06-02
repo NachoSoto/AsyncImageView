@@ -14,32 +14,68 @@ import ReactiveSwift
 public final class ImageInflaterRenderer<
 	Data: RenderDataType, RenderResult: RenderResultType, Error: Swift.Error
 >: RendererType {
-	private let screenScale: CGFloat
+    public typealias ContentMode = ImageInflaterRendererContentMode
+    
+    private let screenScale: CGFloat
 	private let opaque: Bool
 	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
+    private let contentMode: ContentMode
 
-	public init<Renderer: RendererType>(renderer: Renderer, screenScale: CGFloat, opaque: Bool)
-	where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error {
+    public init<Renderer: RendererType>(
+        renderer: Renderer,
+        screenScale: CGFloat,
+        opaque: Bool,
+        contentMode: ContentMode = .defaultMode
+    ) where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error {
 		self.screenScale = screenScale
 		self.opaque = opaque
 		self.renderBlock = renderer.renderImageWithData
+        self.contentMode = contentMode
 	}
 
 	public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, Error> {
 		return self.renderBlock(data)
 			.map { [scale = self.screenScale] result in
-				return result.image.inflate(withSize: data.size, scale: scale, opaque: self.opaque)
+                return result.image.inflate(withSize: data.size,
+                                            scale: scale,
+                                            opaque: self.opaque,
+                                            contentMode: self.contentMode)
 			}
 			.start(on: QueueScheduler())
 	}
 }
 
+public enum ImageInflaterRendererContentMode {
+    case aspectFill
+    case aspectFit
+    
+    // For backwards compatibility
+    public static let defaultMode: ImageInflaterRendererContentMode = .aspectFill
+    
+    fileprivate func drawingRectForRendering(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
+        switch self {
+        case .aspectFill:
+            return InflaterSizeCalculator.drawingRectForRenderingWithAspectFill(imageSize: imageSize,
+                                                                                inSize: canvasSize)
+        case .aspectFit:
+            return InflaterSizeCalculator.drawingRectForRenderingWithAspectFit(imageSize: imageSize,
+                                                                               inSize: canvasSize)
+        }
+    }
+}
+
 extension UIImage {
-	internal func inflate(withSize size: CGSize, scale: CGFloat, opaque: Bool) -> UIImage {
+    internal func inflate(
+        withSize size: CGSize,
+        scale: CGFloat,
+        opaque: Bool,
+        contentMode: ImageInflaterRendererContentMode
+    ) -> UIImage {
 		return self.processImageWithBitmapContext(
 			withSize: size,
 			scale: scale,
 			opaque: opaque,
+			contentMode: contentMode,
 			renderingBlock: { _, _, _, imageDrawing in
 				imageDrawing()
 			}
@@ -50,6 +86,7 @@ extension UIImage {
 		withSize size: CGSize,
 		scale: CGFloat,
 		opaque: Bool,
+		contentMode: ImageInflaterRendererContentMode,
 		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> ()) -> ())
 		-> UIImage
 	{
@@ -73,7 +110,7 @@ extension UIImage {
 			bitmapContext,
 			contextSize,
 			{
-				let outputFrame = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
+				let outputFrame = contentMode.drawingRectForRendering(
 					imageSize: self.size * self.scale,
 					inSize: contextSize
 				)
@@ -98,7 +135,7 @@ extension RendererType {
 }
 
 public struct InflaterSizeCalculator {
-	public static func drawingRectForRenderingImageOfSize(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
+	public static func drawingRectForRenderingWithAspectFill(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
 		if (imageSize == canvasSize ||
 			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne) {
 				return CGRect(origin: .zero, size: canvasSize)
@@ -117,6 +154,27 @@ public struct InflaterSizeCalculator {
 			return CGRect(x: dWidth, y: dHeight, width: newWidth, height: newHeight)
 		}
 	}
+    
+    // TODO: write tests for this
+    public static func drawingRectForRenderingWithAspectFit(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
+        if (imageSize == canvasSize ||
+            abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne) {
+            return CGRect(origin: .zero, size: canvasSize)
+        } else {
+            let destScale = min(
+                canvasSize.width / imageSize.width,
+                canvasSize.height / imageSize.height
+            )
+            
+            let newWidth = imageSize.width * destScale
+            let newHeight = imageSize.height * destScale
+            
+            let dWidth = ((canvasSize.width - newWidth) / 2.0)
+            let dHeight = ((canvasSize.height - newHeight) / 2.0)
+            
+            return CGRect(x: dWidth, y: dHeight, width: newWidth, height: newHeight)
+        }
+    }
 }
 
 private extension CGSize {

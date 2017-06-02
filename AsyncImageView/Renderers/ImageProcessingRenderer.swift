@@ -17,6 +17,7 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 	private let renderer: Renderer
 	private let scale: CGFloat
 	private let opaque: Bool
+    private let contentMode: ImageInflaterRendererContentMode
 	private let renderingBlock: Block
 
 	private let schedulerCreator: () -> Scheduler
@@ -25,11 +26,13 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 		renderer: Renderer,
 		scale: CGFloat,
 		opaque: Bool,
+		contentMode: ImageInflaterRendererContentMode = .defaultMode,
 		renderingBlock: @escaping Block,
 		schedulerCreator: @escaping () -> Scheduler = { QueueScheduler() }) {
 			self.renderer = renderer
 			self.scale = scale
 			self.opaque = opaque
+            self.contentMode = contentMode
 			self.renderingBlock = renderingBlock
 
 			self.schedulerCreator = schedulerCreator
@@ -39,11 +42,17 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 		return self.renderer.renderImageWithData(data)
 			.observe(on: self.schedulerCreator())
 			.map { $0.image }
-			.map { [scale = self.scale, opaque = self.opaque, block = self.renderingBlock] image in
+			.map { [
+                scale = self.scale,
+                opaque = self.opaque,
+                block = self.renderingBlock,
+                contentMode = self.contentMode
+            ] image in
 				image.processImageWithBitmapContext(
 					withSize: data.size,
 					scale: scale,
 					opaque: opaque,
+					contentMode: contentMode,
                     renderingBlock: { image, context, contextSize, imageDrawingBlock in
                         block(
                             image,

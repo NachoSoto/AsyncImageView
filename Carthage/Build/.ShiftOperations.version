@@ -1,9 +1,14 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
-  "commitish" : "v1.0.0",
+  "tvOS" : [
+    {
+      "hash" : "9b3901e67fb6fc3e068cbeeb296dbef50984a64a19b5f2abc440ca9af50e3696",
+      "name" : "ShiftOperations"
+    }
+  ],
+  "commitish" : "v1.0.2",
   "iOS" : [
     {
-      "hash" : "81562205653611d928a2b84bb31aa3fce893cf52ab4c79bc3b831cc97fe9eb46",
+      "hash" : "8d949333b35ff23cc6c7c8c37fc40876ca3dc755c0c27df442a23538e090a8d8",
       "name" : "ShiftOperations"
     }
   ]

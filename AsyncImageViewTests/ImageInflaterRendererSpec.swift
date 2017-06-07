@@ -17,7 +17,7 @@ class ImageInflaterRendererSpec: QuickSpec {
 		describe("ImageInflaterRenderer") {
 			context("Size Calculator") {
 				it("returns identity frame if sizes match") {
-					let size = CGSize.random()
+                    let size = CGSize.random(using: &ARC4Random.default)
 					let result = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
 						imageSize: size,
 						inSize: size
@@ -28,7 +28,7 @@ class ImageInflaterRendererSpec: QuickSpec {
 			}
 
 			it("reduces size if aspect ratio matches, but canvas is smaller") {
-				let imageSize = CGSize.random()
+                let imageSize = CGSize.random(using: &ARC4Random.default)
 				let canvasSize = CGSize(width: imageSize.width * 0.4, height: imageSize.height * 0.4)
 
 				let result = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(
@@ -40,7 +40,7 @@ class ImageInflaterRendererSpec: QuickSpec {
 			}
 
 			it("scales up size if aspect ratio matches, but canvas is bigger") {
-				let imageSize = CGSize.random()
+				let imageSize = CGSize.random(using: &ARC4Random.default)
 				let canvasSize = CGSize(width: imageSize.width * 2, height: imageSize.height * 2)
 
 				let result = InflaterSizeCalculator.drawingRectForRenderingImageOfSize(

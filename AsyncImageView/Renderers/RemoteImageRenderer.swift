@@ -29,37 +29,37 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 
 	public func renderImageWithData(_ data: T) -> SignalProducer<UIImage, RemoteImageRendererError> {
 		return self.session.reactive.data(with: URLRequest(url: data.imageURL))
-			.mapError(RemoteImageRendererError.loadingError)
-			.attemptMap { (data, response) in
-				Result(
-					(response as? HTTPURLResponse).map { (data, $0) },
-					failWith: .invalidResponse
-				)
-			}
-			.flatMap(.merge) { (data, response) -> SignalProducer<Foundation.Data, RemoteImageRendererError> in
-				let statusCode = response.statusCode
+            .mapError(RemoteImageRendererError.loadingError)
+            .attemptMap { data in
+                return Result(
+                    (data.1 as? HTTPURLResponse).map { (data.0, $0) },
+                    failWith: .invalidResponse
+                )
+            }
+            .flatMap(.merge) { data -> SignalProducer<Foundation.Data, RemoteImageRendererError> in
+                let statusCode = data.1.statusCode
 
-				if statusCode >= 200 && statusCode < 300 {
-					return SignalProducer(value: data)
-				} else {
-					return SignalProducer(error: .invalidStatusCode(statusCode: statusCode))
-				}
-			}
-			.observe(on: QueueScheduler())
-			.flatMap(.merge) { data in
-				return SignalProducer
-					.attempt {
-						return Result(
-							UIImage(data: data),
-							failWith: RemoteImageRendererError.decodingError
-						)
-				}
-		}
+                if statusCode >= 200 && statusCode < 300 {
+                    return SignalProducer(value: data.0)
+                } else {
+                    return SignalProducer(error: .invalidStatusCode(statusCode: statusCode))
+                }
+            }
+            .observe(on: QueueScheduler())
+            .flatMap(.merge) { data in
+                return SignalProducer
+                    .attempt {
+                        return Result(
+                            UIImage(data: data),
+                            failWith: RemoteImageRendererError.decodingError
+                        )
+                }
+        }
 	}
 }
 
 public enum RemoteImageRendererError: Error {
-	case loadingError(originalError: Error)
+	case loadingError(AnyError)
 	case invalidResponse
 	case invalidStatusCode(statusCode: Int)
 	case decodingError

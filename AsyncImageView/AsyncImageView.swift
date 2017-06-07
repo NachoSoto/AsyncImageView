@@ -19,7 +19,7 @@ public protocol ImageViewDataType {
 
 /// A `UIImageView` that can render asynchronously.
 open class AsyncImageView<
-	Data: RenderDataType,
+	Data,
 	ImageViewData: ImageViewDataType,
 	Renderer: RendererType,
 	PlaceholderRenderer: RendererType>: UIImageView

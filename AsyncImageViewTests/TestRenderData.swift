@@ -75,7 +75,7 @@ internal final class TestRenderer: RendererType {
     static func rendererForSize(_ size: CGSize, scale: CGFloat) -> ContextRenderer<TestRenderData> {
 		precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
 
-		return ContextRenderer<TestRenderData>(scale: scale, opaque: true) { _ in
+		return ContextRenderer<TestRenderData>(scale: scale, opaque: true) { _, _ in
 			// nothing to render
 		}
 	}
@@ -83,7 +83,7 @@ internal final class TestRenderer: RendererType {
     static func oldRendererForSize(_ size: CGSize, scale: CGFloat) -> OldContextRenderer<TestRenderData> {
         precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
         
-        return OldContextRenderer<TestRenderData>(scale: scale, opaque: true) { _ in
+        return OldContextRenderer<TestRenderData>(scale: scale, opaque: true) { _, _ in
             // nothing to render
         }
     }

@@ -18,7 +18,7 @@ private typealias ImageProperty = Property<ImageResult?>
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
 	Renderer: RendererType,
-	Data: RenderDataType
+	Data
 >: RendererType
 	where
 	Renderer.Data == Data,

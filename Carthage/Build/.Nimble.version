@@ -1,9 +1,14 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
-  "commitish" : "v6.0.1",
+  "tvOS" : [
+    {
+      "hash" : "b0e70f5f224e4673e06c225c759c389f47b3e656da7361c3afcd66e5ffd85399",
+      "name" : "Nimble"
+    }
+  ],
+  "commitish" : "4cfe93e4b72f66fe63906df8f93729b6ed902a71",
   "iOS" : [
     {
-      "hash" : "a6932ff3c0752e35a65718bb6a71dd477db77ada5b942aeca5bdb1cbd2c4148c",
+      "hash" : "45aef68be5776a7744b570301a9d3da96f4a08682a26b9093ba39bd29020770b",
       "name" : "Nimble"
     }
   ]

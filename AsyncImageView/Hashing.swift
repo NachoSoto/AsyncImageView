@@ -73,7 +73,9 @@ private func hash<S: Sequence>(_ sequence: S) -> Int where S.Iterator.Element: H
 }
 
 private func hash<R: Hashable>(_ left: Int, _ right: R) -> Int {
-	return Int.addWithOverflow(Int.multiplyWithOverflow(left, HashingPrime).0, right.hashValue).0
+    return left
+        .multipliedReportingOverflow(by: HashingPrime).partialValue
+        .addingReportingOverflow(right.hashValue).partialValue
 }
 
 private let HashingPrime: Int = 31

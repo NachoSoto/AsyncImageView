@@ -31,8 +31,45 @@ open class AsyncImageView<
 	PlaceholderRenderer.Error == NoError,
 	Renderer.RenderResult == PlaceholderRenderer.RenderResult
  {
-	private let requestsSignal: Signal<Data?, NoError>
-	private let requestsObserver: Signal<Data?, NoError>.Observer
+	public enum Display {
+		case empty
+		case placeholder
+		case data(ImageViewData)
+		
+		fileprivate func renderDataWithSize(_ size: CGSize) -> DataDisplay {
+			switch self {
+			case .empty:
+				return .empty
+			case .placeholder:
+				return .placeholder
+			case let .data(data):
+				return .data(data.renderDataWithSize(size))
+			}
+		}
+	}
+	
+	fileprivate enum DataDisplay: Equatable {
+		case empty
+		case placeholder
+		case data(Data)
+		
+		static func == (lhs: DataDisplay, rhs: DataDisplay) -> Bool {
+			switch (lhs, rhs) {
+			case (.empty, .empty):
+				return true
+			case (.placeholder, .placeholder):
+				return true
+			case let (.data(lhs), .data(rhs)):
+				return lhs == rhs
+				
+			default:
+				return false
+			}
+		}
+	}
+	
+	private let requestsSignal: Signal<DataDisplay, NoError>
+	private let requestsObserver: Signal<DataDisplay, NoError>.Observer
 
 	private let imageCreationScheduler: Scheduler
 
@@ -56,7 +93,7 @@ open class AsyncImageView<
 			.on(value: { [weak self] in
 				if
 					let strongSelf = self,
-					placeholderRenderer == nil || $0 == nil {
+					placeholderRenderer == nil || $0 == .empty {
 						strongSelf.resetImage()
 				}
 			})
@@ -98,7 +135,7 @@ open class AsyncImageView<
 		}
 	}
 
-	public final var data: ImageViewData? {
+	public final var data: Display {
 		didSet {
 			self.requestNewImageIfReady()
 		}
@@ -117,10 +154,10 @@ open class AsyncImageView<
 		}
 	}
 
-	private func requestNewImage(_ size: CGSize, data: ImageViewData?) {
+	private func requestNewImage(_ size: CGSize, data: Display) {
 		self.imageCreationScheduler.schedule { [weak instance = self, observer = self.requestsObserver] in
 			if instance != nil {
-				observer.send(value: data?.renderDataWithSize(size))
+				observer.send(value: data.renderDataWithSize(size))
 			}
 		}
 	}

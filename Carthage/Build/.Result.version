@@ -1,9 +1,14 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
-  "commitish" : "3.2.1",
+  "tvOS" : [
+    {
+      "hash" : "a3621b9f549dd5629e44e7351d62a6ea6dc9a8c317c648b70d5898858600a728",
+      "name" : "Result"
+    }
+  ],
+  "commitish" : "3.2.3",
   "iOS" : [
     {
-      "hash" : "fbf999decb7f59df6c75abe710db3e577598fd8141ba14ea80372608ccf44f6c",
+      "hash" : "a31c92fd4900593da903fe92e9373ae77591e9275f879da0a6af121923e77190",
       "name" : "Result"
     }
   ]

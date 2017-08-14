@@ -40,7 +40,7 @@ public final class RemoteOrLocalImageRenderer<Local: LocalRenderDataType, Remote
         case let .local(data):
             return self.localRenderer
                 .renderImageWithData(data)
-                .promoteErrors(RemoteImageRendererError.self)
+                .promoteError(RemoteImageRendererError.self)
         }
     }
 }

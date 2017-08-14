@@ -41,8 +41,8 @@ extension SynchronousRendererType {
 	/// of `renderImageWithData`.
 	public func asyncRenderer(_ scheduler: Scheduler = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
 		return AnyRenderer { (data: Self.Data) in
-			return SignalProducer { observer, disposable in
-				if !disposable.isDisposed {
+			return SignalProducer { observer, lifetime in
+				if !lifetime.hasEnded {
 					observer.send(value: self.renderImageWithData(data))
 					observer.sendCompleted()
 				} else {

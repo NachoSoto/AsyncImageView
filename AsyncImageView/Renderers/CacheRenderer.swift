@@ -31,13 +31,12 @@ public final class CacheRenderer<
 	/// Returns an image from the cache if found,
 	/// otherwise it invokes the decorated `renderer` and caches the result.
 	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
-		return SignalProducer
-			.attempt { [cache = self.cache] in
-				return Result(
-					cache.valueForKey(data)?.image.asCacheHit,
-					failWith: CacheRendererError.imageNotFound
-				)
-			}
+        return SignalProducer { [cache = self.cache] in
+            Result(
+                cache.valueForKey(data)?.image.asCacheHit,
+                failWith: CacheRendererError.imageNotFound
+            )
+        }
 			.start(on: QueueScheduler())
 			.flatMapError { [renderer = self.renderer] _ in
 				return renderer

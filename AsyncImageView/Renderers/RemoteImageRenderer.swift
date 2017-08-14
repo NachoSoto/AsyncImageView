@@ -47,13 +47,12 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 			}
 			.observe(on: QueueScheduler())
 			.flatMap(.merge) { data in
-				return SignalProducer
-					.attempt {
-						return Result(
-							UIImage(data: data),
-							failWith: RemoteImageRendererError.decodingError
-						)
-				}
+                return SignalProducer {
+                    Result(
+                        UIImage(data: data),
+                        failWith: RemoteImageRendererError.decodingError
+                    )
+                }
 		}
 	}
 }

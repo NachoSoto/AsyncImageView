@@ -84,7 +84,7 @@ fileprivate func createProducer<Data: RenderDataType>(
     viewCreationBlock: @escaping (_ data: Data) -> UIView,
     renderBlock: @escaping (UIView) -> UIImage
 ) -> SignalProducer<UIImage, NoError> {
-    return SignalProducer { observer, disposable in
+    return SignalProducer { observer, lifetime in
         let view = viewCreationBlock(data)
         view.frame.origin = .zero
         view.bounds.size = data.size
@@ -93,7 +93,7 @@ fileprivate func createProducer<Data: RenderDataType>(
         // Make the CA renderer wait "until all the post-commit triggers fire".
         // We can't take a snapshot right away because the view has not been commited to the render server yet.
         DispatchQueue.main.async {
-            if !disposable.isDisposed {
+            if !lifetime.hasEnded {
                 observer.send(value: renderBlock(view))
                 observer.sendCompleted()
             }

@@ -82,10 +82,6 @@ open class AsyncImageView<
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	deinit {
-		requestsObserver.sendCompleted()
-	}
-
 	open override var frame: CGRect {
 		didSet {
 			self.requestNewImageIfReady()

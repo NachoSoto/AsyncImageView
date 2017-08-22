@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/Quick-Swift.h</key>
 		<data>
-		Nw7lsYn+yIORlCOKhB9QpX4GGT8=
+		So/81XZHVLrw4auHBJwX6SEWBGw=
 		</data>
 		<key>Headers/Quick.h</key>
 		<data>
@@ -26,19 +26,19 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		sjGysk2Dc17E4DEQPmreqrbR+yY=
+		1DUYu//7D3apOkzrasD3N70IFc0=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		zc+TdR15UV5qm6jIHI5Tr/IdrGI=
+		v6Aq773h6G1cdfnVe5LwTITkVew=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		UvaFYwCcRBwb3Xni5HI9ms71B9k=
+		OKtxgUoiCh/hRbSv6iqfIN4qKjA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		QfbrXg9M17t7M1mX9Yzh72ZIg20=
+		76BrdWZVbfRrLrKHiugZs4xUwEY=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Nw7lsYn+yIORlCOKhB9QpX4GGT8=
+			So/81XZHVLrw4auHBJwX6SEWBGw=
 			</data>
 			<key>hash2</key>
 			<data>
-			znyRFhk+N61+mQZSb7f0NPBWV2sALwEWm2UmEBAWE9I=
+			mnRrweV4UYCzWWY5N5AiYYag/woGNSoQLPC6Q3Hap/c=
 			</data>
 		</dict>
 		<key>Headers/Quick.h</key>
@@ -102,33 +102,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zc+TdR15UV5qm6jIHI5Tr/IdrGI=
+			v6Aq773h6G1cdfnVe5LwTITkVew=
 			</data>
 			<key>hash2</key>
 			<data>
-			VgmfaIX2yTrXhaEzDyqeJ8Ffob46fjbL4nS9/2wVL68=
+			+OqAp7DVHEP6f3f4zbQKfR1RRM9cW0W3+slyExNNMRk=
 			</data>
 		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UvaFYwCcRBwb3Xni5HI9ms71B9k=
+			OKtxgUoiCh/hRbSv6iqfIN4qKjA=
 			</data>
 			<key>hash2</key>
 			<data>
-			UfYoaSNoRnQC1OwOzMpC2W3OScwm8h73yoXuy9LdwHo=
+			fzfgaUVuG2xRHV2qLisl9meUPVOyGq0AS5FCaGiAz4U=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QfbrXg9M17t7M1mX9Yzh72ZIg20=
+			76BrdWZVbfRrLrKHiugZs4xUwEY=
 			</data>
 			<key>hash2</key>
 			<data>
-			0MTR+WkLS7dT0YnyNgu3NFKRbfuL3kjMiACLfqKuUaM=
+			BB/V4sLugU/3AfqmH2X6aaAVMh3E6b+VX+dBgHvpNWQ=
 			</data>
 		</dict>
 	</dict>

@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
-  "commitish" : "v1.0.0",
+  "commitish" : "v1.0.2",
   "iOS" : [
     {
-      "hash" : "81562205653611d928a2b84bb31aa3fce893cf52ab4c79bc3b831cc97fe9eb46",
+      "hash" : "ffc65120d7701fd2743343e76427dff9df3bff26163534b5a34be36588c3e83f",
       "name" : "ShiftOperations"
     }
   ]

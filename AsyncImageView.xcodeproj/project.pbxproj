@@ -48,6 +48,8 @@
 		57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F01C0269280077A391 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57CF43E31F4CDBA1001EF304 /* Threadly.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57CF43E21F4CDB9B001EF304 /* Threadly.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57CF43E41F4CDBA3001EF304 /* Threadly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57CF43E21F4CDB9B001EF304 /* Threadly.framework */; };
 		57F5C5911C051ABB00753642 /* CachingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C5901C051ABB00753642 /* CachingSpec.swift */; };
 		57F5C5961C051FFB00753642 /* RandomKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F5C5951C051FFB00753642 /* RandomKit.framework */; };
 		57F5C5971C05200500753642 /* RandomKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57F5C5951C051FFB00753642 /* RandomKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -95,6 +97,7 @@
 				57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */,
 				57F5C5971C05200500753642 /* RandomKit.framework in Embed Frameworks */,
 				5742CF571E3152BA00EA23A0 /* ShiftOperations.framework in Embed Frameworks */,
+				57CF43E31F4CDBA1001EF304 /* Threadly.framework in Embed Frameworks */,
 				57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -147,6 +150,7 @@
 		57BD68E91C0269130077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		57BD68F01C0269280077A391 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		57CF43E21F4CDB9B001EF304 /* Threadly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Threadly.framework; path = Carthage/Build/iOS/Threadly.framework; sourceTree = "<group>"; };
 		57F5C5901C051ABB00753642 /* CachingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingSpec.swift; sourceTree = "<group>"; };
 		57F5C5951C051FFB00753642 /* RandomKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RandomKit.framework; path = Carthage/Build/iOS/RandomKit.framework; sourceTree = "<group>"; };
 		57F5C59A1C052A6000753642 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */,
 				57BD68F81C0269440077A391 /* Nimble.framework in Frameworks */,
 				57BD68F91C0269440077A391 /* Quick.framework in Frameworks */,
+				57CF43E41F4CDBA3001EF304 /* Threadly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +205,7 @@
 		571FB6251E7C4029007E44BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57CF43E21F4CDB9B001EF304 /* Threadly.framework */,
 				571FB6261E7C4029007E44BD /* ReactiveSwift.framework */,
 			);
 			name = Frameworks;
@@ -464,7 +470,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Nacho Soto";
 				TargetAttributes = {
 					57BD68341C02598F0077A391 = {

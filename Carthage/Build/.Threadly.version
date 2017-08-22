@@ -1,0 +1,9 @@
+{
+  "commitish" : "v1.2.0",
+  "iOS" : [
+    {
+      "hash" : "6800ef1e37c2268e4d324cd3ad7a5647ec5e5a91e6c768e8cb2a05621e889717",
+      "name" : "Threadly"
+    }
+  ]
+}

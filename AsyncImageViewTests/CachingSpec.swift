@@ -150,6 +150,8 @@ private let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123
 
 extension String {
 	fileprivate static func randomReadableString() -> String {
-        return self.random(ofLength: UInt(Int.random(within: 1...15)), from: alphabet)!
+        return self.random(ofLength: UInt(Int.random(in: 1...15, using: &generator)),
+                           from: alphabet,
+                           using: &generator)!
 	}
 }

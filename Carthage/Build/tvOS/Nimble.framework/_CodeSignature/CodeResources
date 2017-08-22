@@ -4,161 +4,146 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/CwlCatchBadInstruction.h</key>
+		<key>Headers/CwlPreconditionTesting.h</key>
 		<data>
-		tpUqlpWHcMy0tfQGrW/lFMpmYXg=
-		</data>
-		<key>Headers/CwlCatchException.h</key>
-		<data>
-		sEWkXk171mzdxx/iOyw13hdPgUk=
+		OeQILV+LzpWTl/WvqnQKwUrWWIY=
 		</data>
 		<key>Headers/DSL.h</key>
 		<data>
-		XkRJ/tCNPHszmQaE2ePKzI3isLg=
+		AUiYF1KK3LwjRpEouNvpTSkaFW4=
 		</data>
 		<key>Headers/NMBExceptionCapture.h</key>
 		<data>
-		0uoEANlyEURCtIb/yGnM617IKfI=
+		RmGO4f0XmdOXIZKjjbe0NWdBVrg=
 		</data>
 		<key>Headers/NMBStringify.h</key>
 		<data>
-		+iX46U2rdxHon/WYK1MaBq/1xD4=
+		wKQwON2ZfVL1lWQ7CblsbbV6/LA=
 		</data>
 		<key>Headers/Nimble-Swift.h</key>
 		<data>
-		cC+8P/Vtqp5wVo75VG3wNbhK8qc=
+		ufPsTPhU+g+pE/dJ5XzfSFyj808=
 		</data>
 		<key>Headers/Nimble.h</key>
 		<data>
-		Ss+U/fOsPq04kPXZyrx0V2mmeTI=
+		wAOwkJlzKBKFSrzyxmzbvuaWB0I=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		YLkO/W0bMbMjWkQ5hUPgnh697Nk=
+		Og+oMlP2GuNjYZxZTBIeVBUcN+c=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		wVh/YZ5OIIQNlR8TLSnqNRq34wg=
+		fg8ef7ETQquHkAb3H4ozo15IoLc=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		bsQ5Goq0nNR1KRuMHlz9XAezZFw=
+		7RM0NtBu4bL3oBu9JdGlbXXlc9A=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		HraXvk1VTxnsGdY8oSlKGNkdg60=
+		Vf8LCDMqzRTXdx1KJSdCZVsmj+Y=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/CwlCatchBadInstruction.h</key>
+		<key>Headers/CwlPreconditionTesting.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tpUqlpWHcMy0tfQGrW/lFMpmYXg=
+			OeQILV+LzpWTl/WvqnQKwUrWWIY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Gq3XGACd7Lrzul1ElsWb/+jEHweR34GIE0S/0qzVkpQ=
-			</data>
-		</dict>
-		<key>Headers/CwlCatchException.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			sEWkXk171mzdxx/iOyw13hdPgUk=
-			</data>
-			<key>hash2</key>
-			<data>
-			wVP+XXOT+cin9q0TGVIzUslMTOU3UFM5LaBYWv3IJIY=
+			PNL/h0CL0B6xwofBYAeinGP4iymc2zRTnl+x5+J6QMI=
 			</data>
 		</dict>
 		<key>Headers/DSL.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XkRJ/tCNPHszmQaE2ePKzI3isLg=
+			AUiYF1KK3LwjRpEouNvpTSkaFW4=
 			</data>
 			<key>hash2</key>
 			<data>
-			uZIpFwVE2Ji0uokI07CJriGmi5ftdjtEAx2aoeR085c=
+			h40Q0Yz4G/Q1couw0nQ8jEF94LWjBY6h+5nbM2vxIqM=
 			</data>
 		</dict>
 		<key>Headers/NMBExceptionCapture.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0uoEANlyEURCtIb/yGnM617IKfI=
+			RmGO4f0XmdOXIZKjjbe0NWdBVrg=
 			</data>
 			<key>hash2</key>
 			<data>
-			aX4ITbML98SVvyYDBi/81mtlXL2io0mghO5+1/p/slY=
+			GKhhXxZm4dby9zEBnDghkGxeM8LzfpMG5T0dbUiasQ4=
 			</data>
 		</dict>
 		<key>Headers/NMBStringify.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+iX46U2rdxHon/WYK1MaBq/1xD4=
+			wKQwON2ZfVL1lWQ7CblsbbV6/LA=
 			</data>
 			<key>hash2</key>
 			<data>
-			iQh20wgWPrTQEjuJorbgerCBfc/IlXHlr01yBpB3ugY=
+			KXLeLBD8RtW7rnGSGNwywIzn9NZ58MAHZXgjJ8uUnio=
 			</data>
 		</dict>
 		<key>Headers/Nimble-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cC+8P/Vtqp5wVo75VG3wNbhK8qc=
+			ufPsTPhU+g+pE/dJ5XzfSFyj808=
 			</data>
 			<key>hash2</key>
 			<data>
-			1PrjJmGLjSyPs0ygfbDVe8z7QLtXFXzfiXcO3hXnF10=
+			P7kvHtbdl5kWBpNFHJ3bfYkr708FMvlaJP5MwXuGx18=
 			</data>
 		</dict>
 		<key>Headers/Nimble.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ss+U/fOsPq04kPXZyrx0V2mmeTI=
+			wAOwkJlzKBKFSrzyxmzbvuaWB0I=
 			</data>
 			<key>hash2</key>
 			<data>
-			Jb6wSY5AUrpIJBxKCYeQUG5d4LMpI/gtTZtqe3bkeXA=
+			ZRSPdG0LbIgbRRwFmnppcjL3lgHflAMQjwi5flezj3A=
 			</data>
 		</dict>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wVh/YZ5OIIQNlR8TLSnqNRq34wg=
+			fg8ef7ETQquHkAb3H4ozo15IoLc=
 			</data>
 			<key>hash2</key>
 			<data>
-			i53qlhvuPvoKnciWtcgq7h+YVlOnRyp1P1Wee0696jw=
+			bs7mjyuo/MkDH0HMzQfikiXjgFjbPyXYSY8rp5u2Hh8=
 			</data>
 		</dict>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bsQ5Goq0nNR1KRuMHlz9XAezZFw=
+			7RM0NtBu4bL3oBu9JdGlbXXlc9A=
 			</data>
 			<key>hash2</key>
 			<data>
-			YISWKUcymFQpLl4IQIcPl+as+lv5TfOemoKGNw1mdEE=
+			NaGFGE7GVgc67ej3L7y0NkbeHxU5U0ob/K9SUhNCC9s=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HraXvk1VTxnsGdY8oSlKGNkdg60=
+			Vf8LCDMqzRTXdx1KJSdCZVsmj+Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			5UNLBksfKgZq2GMOZcj2QVolW39toQYZy5HkU/3kDj8=
+			broIDqUDgiUbujwd/QFkg5s+1WWssH3v1lj2FFcvbz8=
 			</data>
 		</dict>
 	</dict>

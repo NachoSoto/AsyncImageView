@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
-  "commitish" : "v3.0.0",
+  "commitish" : "v5.2.3",
   "iOS" : [
     {
-      "hash" : "8050ba7c814066cb6e8162ec40c521ff81c0bd3fa707f733b494ab8c5c21ef53",
+      "hash" : "178091f4af54e87fd8bb2d10d9b3a2bb5b5c7bdf15dbe45f8e7fdaefaa8cf701",
       "name" : "RandomKit"
     }
   ]

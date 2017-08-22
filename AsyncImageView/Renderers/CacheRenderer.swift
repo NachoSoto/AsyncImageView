@@ -51,9 +51,9 @@ public final class CacheRenderer<
 
 extension RendererType {
 	/// Surrounds this renderer with a layer of caching.
-	public func withCache<Cache: CacheType>(_ cache: Cache) -> CacheRenderer<Self, Cache>
-		where Cache.Key == Self.Data, Cache.Value == Self.RenderResult
-	{
+    public func withCache<Cache: CacheType>(_ cache: Cache) -> CacheRenderer<Self, Cache>
+    where Cache.Key == Self.Data, Cache.Value == Self.RenderResult
+    {
 		return CacheRenderer(renderer: self, cache: cache)
 	}
 }

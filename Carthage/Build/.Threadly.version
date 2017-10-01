@@ -1,8 +1,14 @@
 {
+  "tvOS" : [
+    {
+      "hash" : "4816f7725bbb309ff8ea88954278ad1a266a3489cd75831f4bdd92b5aeb7a32a",
+      "name" : "Threadly"
+    }
+  ],
   "commitish" : "v1.2.0",
   "iOS" : [
     {
-      "hash" : "6800ef1e37c2268e4d324cd3ad7a5647ec5e5a91e6c768e8cb2a05621e889717",
+      "hash" : "843de85137820932d4933a961a0c2729318d5472f36f65e0b3d10b5e0a46ce56",
       "name" : "Threadly"
     }
   ]

@@ -1,14 +1,14 @@
 {
   "tvOS" : [
     {
-      "hash" : "3718bc9504857601093f6478b1e3cad427269a2f8e30e461635c13a1b748c0fa",
+      "hash" : "3f2cf51c396db871381685fa8343aee5bef2a5547740d53ca839d28a20a9f43c",
       "name" : "ReactiveSwift"
     }
   ],
   "commitish" : "2.0.1",
   "iOS" : [
     {
-      "hash" : "5a880c3c7fe849ab55220c0972b720c0f66b593d29acdd984c0a9e586e95a77a",
+      "hash" : "81e0c07749e67ea73b659ce9988e09fd82091139166bd868e394295dc231512f",
       "name" : "ReactiveSwift"
     }
   ]

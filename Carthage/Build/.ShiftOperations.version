@@ -1,8 +1,14 @@
 {
+  "tvOS" : [
+    {
+      "hash" : "a4e39d6f178edbf927291e49f0e3a82173180ba78145666d76b60f46420e66ef",
+      "name" : "ShiftOperations"
+    }
+  ],
   "commitish" : "v1.0.2",
   "iOS" : [
     {
-      "hash" : "ffc65120d7701fd2743343e76427dff9df3bff26163534b5a34be36588c3e83f",
+      "hash" : "06e0ad16079de88e494eef9efd5924a428a24c0b8eaf35d25ed6d5c9511adc6a",
       "name" : "ShiftOperations"
     }
   ]

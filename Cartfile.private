@@ -1,5 +1,5 @@
 github "nvzqz/RandomKit" ~> 5.2.3
 github "jspahrsummers/xcconfigs" "master"
 github "Quick/Quick" "master"
-github "Quick/Nimble" ~> 7.0.1
+github "Quick/Nimble" "master"
 

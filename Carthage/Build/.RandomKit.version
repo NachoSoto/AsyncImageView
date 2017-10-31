@@ -1,15 +1,15 @@
 {
-  "tvOS" : [
-    {
-      "hash" : "c753e0bdb6284e3ab886cdaa79a4540d05d0161c4f074b8f6975e4341814abe8",
-      "name" : "RandomKit"
-    }
-  ],
   "commitish" : "v5.2.3",
   "iOS" : [
     {
-      "hash" : "57c5c8e5d64bc23cbb79a703511bdfa35a93f0a47f39fbb0accb1ac069b3ff67",
-      "name" : "RandomKit"
+      "name" : "RandomKit",
+      "hash" : "6bf313f92402f85b1e89db14e9985155d40f5bd61e0b8ff5347142ff9f084b19"
+    }
+  ],
+  "tvOS" : [
+    {
+      "name" : "RandomKit",
+      "hash" : "dd4bc74c151309ab0390d8889c82619e851505fd75b393c3f4fe5031e661cb37"
     }
   ]
 }

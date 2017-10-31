@@ -124,7 +124,7 @@ class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
 
 extension String: DataFileType {
 	public var subdirectory: String? {
-		return "\(self.characters.count)"
+		return "\(self.count)"
 	}
 
 	public var uniqueFilename: String {

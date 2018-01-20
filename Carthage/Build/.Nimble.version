@@ -1,15 +1,15 @@
 {
-  "commitish" : "38c9ab0846a3fbec308eb2aa9ef68b10a7434eb4",
+  "commitish" : "22800b0954c89344bb8c87f8ab93378076716fb7",
   "iOS" : [
     {
       "name" : "Nimble",
-      "hash" : "882dad13ca8eabb7a8c080d77ab9d0a679826cd4e9083bc977aa041cc590a362"
+      "hash" : "1d86ee793a7a596618e22aa68fad6cb9a0e28b68b5c2f4f286bb8c7b129f1a46"
     }
   ],
   "tvOS" : [
     {
       "name" : "Nimble",
-      "hash" : "0a3cc7bae24db26060daf66ecec6120ab92bc823097f6e1a542d3463e25b565e"
+      "hash" : "3a056ec4aa7d185c838397dc55b12b0cbc59fa75f5a4b2658f227a0c613992c9"
     }
   ]
 }

@@ -1,15 +1,15 @@
 {
-  "commitish" : "3.2.4",
+  "commitish" : "c7166692980176af87265746fe9b7af78c5d6ecd",
   "iOS" : [
     {
       "name" : "Result",
-      "hash" : "840207fdc83553079b05d9def8a958502820756fba7b2f3f1e7d488f27c59bfb"
+      "hash" : "480eb9c5a3b25e92aff1a199f819a079595c8c2b495992990596dc2818df8de9"
     }
   ],
   "tvOS" : [
     {
       "name" : "Result",
-      "hash" : "aa929db3ddb72ee81300fff05b0615a0e052d39536c986cb16ed2ef0f1e4d522"
+      "hash" : "f2490d9dc39dfad5889b515b53ced76166af57cd5878308d24400fd740a22ff2"
     }
   ]
 }

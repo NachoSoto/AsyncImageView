@@ -1,15 +1,15 @@
 {
-  "commitish" : "3.0.0",
+  "commitish" : "4.0.0-rc.1",
   "iOS" : [
     {
       "name" : "ReactiveSwift",
-      "hash" : "1dfabaff319b7c669ba96828c3a3378e942b12e7e2ee1587ea3ecd571ab81cc0"
+      "hash" : "079a4dfc02d165da592a61e9e42896edbb1cfb025552978490918eed7923388f"
     }
   ],
   "tvOS" : [
     {
       "name" : "ReactiveSwift",
-      "hash" : "ec50683a217fd1464b98a974e7f6ce455a73229f104acaa594418077a6188d6d"
+      "hash" : "5f7b00f1a050a1b1dc9e5d7a43878c2b970bdb741285c4e5e4c7daf692293899"
     }
   ]
 }

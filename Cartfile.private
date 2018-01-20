@@ -1,4 +1,4 @@
-github "nvzqz/RandomKit" ~> 5.2.3
+github "NachoSoto/RandomKit" "swift-4.1"
 github "jspahrsummers/xcconfigs" "master"
 github "Quick/Quick" "master"
 github "Quick/Nimble" "master"

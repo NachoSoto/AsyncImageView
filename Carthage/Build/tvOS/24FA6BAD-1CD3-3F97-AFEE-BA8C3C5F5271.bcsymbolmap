@@ -1,0 +1,67 @@
+BCSymbolMap Version: 2.0
+__T0Si15ShiftOperationsA4AP2lloixx_xtFZTW
+__T0Si15ShiftOperationsA4AP2ggoixx_xtFZTW
+__T0Si15ShiftOperationsA4AP3lleoiyxz_xtFZTW
+__T0Si15ShiftOperationsA4AP3ggeoiyxz_xtFZTW
+__T0s5Int64V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s5Int64V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s5Int64V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s5Int32V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s5Int32V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s5Int32V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s5Int32V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0s5Int16V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s5Int16V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s5Int16V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s5Int16V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0s4Int8V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s4Int8V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s4Int8V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s4Int8V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0Su15ShiftOperationsA4AP2lloixx_xtFZTW
+__T0Su15ShiftOperationsA4AP2ggoixx_xtFZTW
+__T0Su15ShiftOperationsA4AP3lleoiyxz_xtFZTW
+__T0Su15ShiftOperationsA4AP3ggeoiyxz_xtFZTW
+__T0s6UInt32V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s6UInt32V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s6UInt32V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s6UInt32V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0s6UInt16V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s6UInt16V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s6UInt16V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s6UInt16V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0s5UInt8V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s5UInt8V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s5UInt8V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s5UInt8V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0s6UInt64V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T0s6UInt64V15ShiftOperationsA4CP3lleoiyxz_xtFZTW
+__T0s6UInt64V15ShiftOperationsA4CP2lloixx_xtFZTW
+__T0s6UInt64V15ShiftOperationsA4CP2ggoixx_xtFZTW
+__T0s5Int64V15ShiftOperationsA4CP3ggeoiyxz_xtFZTW
+__T015ShiftOperationsAA_pMF
+___swift_reflection_version
+Apple LLVM version 9.1.0 (clang-902.0.30)
+-emit-bc /Users/nachosoto/dev/ios/AsyncImageView/Carthage/Checkouts/ShiftOperations/Sources/ShiftOperations.swift -target arm64-apple-tvos9.0 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode-beta.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.3.sdk -I "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/BuildProductsPath/Release-appletvos" -F "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/BuildProductsPath/Release-appletvos" -g -module-cache-path /Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/ModuleCache -swift-version 3 -O -serialize-debugging-options -Xcc "-I/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/swift-overrides.hmap" -Xcc -iquote -Xcc "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/ShiftOperations-generated-files.hmap" -Xcc "-I/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/ShiftOperations-own-target-headers.hmap" -Xcc "-I/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/ShiftOperations-all-non-framework-target-headers.hmap" -Xcc -ivfsoverlay -Xcc "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/all-product-headers.yaml" -Xcc -iquote -Xcc "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/ShiftOperations-project-headers.hmap" -Xcc "-I/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/BuildProductsPath/Release-appletvos/include" -Xcc "-I/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/DerivedSources/arm64" -Xcc "-I/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/DerivedSources" -Xcc -working-directory/Users/nachosoto/dev/ios/AsyncImageView/Carthage/Checkouts/ShiftOperations -emit-module-doc-path "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/Objects-normal/arm64/ShiftOperations.swiftdoc" -serialize-diagnostics-path "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/Objects-normal/arm64/ShiftOperations.dia" -parse-as-library -module-name ShiftOperations -emit-module-path "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/Objects-normal/arm64/ShiftOperations.swiftmodule" -emit-objc-header-path "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/Objects-normal/arm64/ShiftOperations-Swift.h" -emit-dependencies-path "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/Objects-normal/arm64/ShiftOperations.d" -num-threads 8 -o "/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/Objects-normal/arm64/ShiftOperations.bc" -resource-dir /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
+<swift-imported-modules>
+/Users/nachosoto/dev/ios/AsyncImageView/Carthage/Checkouts/ShiftOperations
+Apple Swift version 4.1 effective-3.3 (swiftlang-902.0.38 clang-902.0.30)
+/Users/nachosoto/dev/ios/AsyncImageView/Carthage/Checkouts/ShiftOperations/Sources/ShiftOperations.swift
+_T0s5UInt8V15ShiftOperationsA2CWa
+ShiftOperations.swift
+/Users/nachosoto/dev/ios/AsyncImageView/Carthage/Checkouts/ShiftOperations/Sources
+>>=
+<<=
+>>
+<<
+_T0s6UInt16V15ShiftOperationsA2CWa
+_T0s6UInt32V15ShiftOperationsA2CWa
+_T0s6UInt64V15ShiftOperationsA2CWa
+_T0Su15ShiftOperationsA2AWa
+_T0s4Int8V15ShiftOperationsA2CWa
+_T0s5Int16V15ShiftOperationsA2CWa
+_T0s5Int32V15ShiftOperationsA2CWa
+_T0s5Int64V15ShiftOperationsA2CWa
+_T0Si15ShiftOperationsA2AWa
+Apple LLVM version 9.1.0 (clang-902.0.31)
+/Users/nachosoto/Library/Caches/org.carthage.CarthageKit/DerivedData/9.3_9Q107o/ShiftOperations/v1.0.2/Build/Intermediates.noindex/ArchiveIntermediates/ShiftOperations tvOS/IntermediateBuildFilesPath/ShiftOperations.build/Release-appletvos/ShiftOperations tvOS.build/DerivedSources/ShiftOperations_vers.c

@@ -2,14 +2,14 @@ git:
   submodules: false
 
 language: objective-c
-osx_image: xcode9.1
+osx_image: xcode9.4
 matrix:
   include:
     - os: osx
       before_install:
         - gem install scan
       script:
-        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone 7 Plus (11.1)" -b "raw" -c -q "Release"
+        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone 8 Plus (11.3)" -b "raw" -c -q "Release"
 
     - os: osx
       before_install:

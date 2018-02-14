@@ -66,6 +66,9 @@ open class AsyncImageView<
 					if let placeholderRenderer = placeholderRenderer {
 						return placeholderRenderer
 							.renderImageWithData(data)
+							// Avoid flickering when the `placeholderRenderer` emits something
+							// right before the real `renderer`.
+							.delay(delayToWaitForRealRenderer, on: QueueScheduler())
 							.take(untilReplacement: renderer.renderImageWithData(data))
 					} else {
 						return renderer.renderImageWithData(data)
@@ -141,3 +144,4 @@ open class AsyncImageView<
 // MARK: - Constants
 
 private let fadeAnimationDuration: TimeInterval = 0.4
+private let delayToWaitForRealRenderer: TimeInterval = 0.2

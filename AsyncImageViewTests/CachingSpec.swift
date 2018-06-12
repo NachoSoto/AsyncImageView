@@ -9,8 +9,6 @@
 import Quick
 import Nimble
 
-import RandomKit
-
 import AsyncImageView
 
 private func testCache<T: CacheType>(
@@ -143,15 +141,5 @@ extension String: NSDataConvertible {
 
 	fileprivate static var encoding: String.Encoding {
 		return .utf8
-	}
-}
-
-private let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-extension String {
-	fileprivate static func randomReadableString() -> String {
-        return self.random(ofLength: UInt(Int.random(in: 1...15, using: &generator)),
-                           from: alphabet,
-                           using: &generator)!
 	}
 }

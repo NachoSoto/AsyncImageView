@@ -12,7 +12,7 @@ extension UIImage: NSDataConvertible {
 	// init(data:) is already implemented by UIImage.
 
 	public var data: Data? {
-		return UIImagePNGRepresentation(self)
+		return self.pngData()
 	}
 }
 

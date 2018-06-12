@@ -13,11 +13,8 @@ import Result
 
 import Quick
 import Nimble
-import RandomKit
 
 import AsyncImageView
-
-internal var generator = ARC4Random.default
 
 internal enum TestData: CGFloat, Hashable {
 	case a = 1.0

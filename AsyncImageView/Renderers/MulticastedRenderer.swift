@@ -71,7 +71,7 @@ public final class MulticastedRenderer<
 
 	private static func clearCacheOnMemoryWarning(_ cache: Atomic<[Data : ImageProperty]>) -> Disposable {
 		return NotificationCenter.default
-			.reactive.notifications(forName: .UIApplicationDidReceiveMemoryWarning, object: nil)
+			.reactive.notifications(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil)
 			.observe(on: QueueScheduler())
 			.observeValues { _ in
 				cache.modify { $0 = [:] }

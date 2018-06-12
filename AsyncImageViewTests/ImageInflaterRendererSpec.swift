@@ -8,7 +8,6 @@
 
 import Quick
 import Nimble
-import RandomKit
 
 import AsyncImageView
 
@@ -17,7 +16,7 @@ class ImageInflaterRendererSpec: QuickSpec {
         describe("ImageInflaterRenderer") {
             context("Aspect Fit") {
                 it("returns identity frame if sizes match") {
-                    let size = CGSize.random(using: &generator)
+                    let size = CGSize.random()
                     let result = InflaterSizeCalculator.drawingRectForRenderingWithAspectFit(
                         imageSize: size,
                         inSize: size
@@ -27,7 +26,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                 }
                 
                 it("reduces size if aspect ratio matches, but canvas is smaller") {
-                    let imageSize = CGSize.random(using: &generator)
+                    let imageSize = CGSize.random()
                     let canvasSize = CGSize(width: imageSize.width * 0.4, height: imageSize.height * 0.4)
                     
                     let result = InflaterSizeCalculator.drawingRectForRenderingWithAspectFit(
@@ -39,7 +38,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                 }
                 
                 it("scales up size if aspect ratio matches, but canvas is bigger") {
-                    let imageSize = CGSize.random(using: &generator)
+                    let imageSize = CGSize.random()
                     let canvasSize = CGSize(width: imageSize.width * 2, height: imageSize.height * 2)
                     
                     let result = InflaterSizeCalculator.drawingRectForRenderingWithAspectFit(
@@ -176,7 +175,7 @@ class ImageInflaterRendererSpec: QuickSpec {
             
             context("Aspect Fill") {
                 it("returns identity frame if sizes match") {
-                    let size = CGSize.random(using: &generator)
+                    let size = CGSize.random()
                     let result = InflaterSizeCalculator.drawingRectForRenderingWithAspectFill(
                         imageSize: size,
                         inSize: size
@@ -186,7 +185,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                 }
                 
                 it("reduces size if aspect ratio matches, but canvas is smaller") {
-                    let imageSize = CGSize.random(using: &generator)
+                    let imageSize = CGSize.random()
                     let canvasSize = CGSize(width: imageSize.width * 0.4, height: imageSize.height * 0.4)
                     
                     let result = InflaterSizeCalculator.drawingRectForRenderingWithAspectFill(
@@ -198,7 +197,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                 }
                 
                 it("scales up size if aspect ratio matches, but canvas is bigger") {
-                    let imageSize = CGSize.random(using: &generator)
+                    let imageSize = CGSize.random()
                     let canvasSize = CGSize(width: imageSize.width * 2, height: imageSize.height * 2)
                     
                     let result = InflaterSizeCalculator.drawingRectForRenderingWithAspectFill(

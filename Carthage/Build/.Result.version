@@ -3,13 +3,13 @@
   "iOS" : [
     {
       "name" : "Result",
-      "hash" : "4ea1d804bde9b4e5d7cbf28fa726fed11799734c3f28ca1e3d626a1b20b67cc4"
+      "hash" : "b169cce703754f46e8f0bf97a2ca0fcd1b1becdce5ccc87704eaaf4d8589bedc"
     }
   ],
   "tvOS" : [
     {
       "name" : "Result",
-      "hash" : "b418da8570e33b63c1c459cfcff9a6e788bd40203bf1f5e94374e737652d325f"
+      "hash" : "34f5a3be486bcdece41c3b7cde4190f2c9650cd8489a38f7114dbfce7a2b35b3"
     }
   ]
 }

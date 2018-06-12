@@ -3,13 +3,7 @@
   "iOS" : [
     {
       "name" : "Threadly",
-      "hash" : "65a7ec81ff553f824c4998b70289ed9c5a73b6feb24062317012b825c2b7e86b"
-    }
-  ],
-  "tvOS" : [
-    {
-      "name" : "Threadly",
-      "hash" : "098b5a5f93de5cbb2e44e84a162222a9dc0eef556052b2269c89ce3e21e13aec"
+      "hash" : "44beefff855b09737b23d33c4fc8e7726c0ad5004506b04e6dfdbbcc65e6089f"
     }
   ]
 }

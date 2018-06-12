@@ -1,4 +1,0 @@
-framework module RandomKit {
-    header "RandomKit-Swift.h"
-    requires objc
-}

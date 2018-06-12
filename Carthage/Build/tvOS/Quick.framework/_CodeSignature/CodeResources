@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/Quick-Swift.h</key>
 		<data>
-		CV4xrUi3zu4mZCvIlYgW9mpM2X4=
+		OKwTIoq7Sm129I95ZmHfEIVJDlM=
 		</data>
 		<key>Headers/Quick.h</key>
 		<data>
@@ -26,15 +26,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		EbXSsSET2uRqh2nM1st2rYl8RHE=
+		bc7ktskFwe1zjLAVKVUtAMbW2qE=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		4erxLY9VX8kCIr5SxNUc/o8MTOw=
+		0dwYH4noEGtaWKBsEbvBxfzv2rY=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		OmokEsdazIydWg1iJSDwflP71U8=
+		SrLxHqObKqIxCiRzTeWdkgAQGe4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CV4xrUi3zu4mZCvIlYgW9mpM2X4=
+			OKwTIoq7Sm129I95ZmHfEIVJDlM=
 			</data>
 			<key>hash2</key>
 			<data>
-			BX+fJZPsDfmdsPWOD1Uu7cBr18nUwAAOtrLF9w4m8cE=
+			bKI91Q5Py02ahhWianOCxDWQnHcXmojtOjgA10A4bRw=
 			</data>
 		</dict>
 		<key>Headers/Quick.h</key>
@@ -102,22 +102,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4erxLY9VX8kCIr5SxNUc/o8MTOw=
+			0dwYH4noEGtaWKBsEbvBxfzv2rY=
 			</data>
 			<key>hash2</key>
 			<data>
-			agrR3uDREpO/UEofdmqs+CHqYr9ebQwuAz6PLRGlpkM=
+			Mzmdwu7NxS5YXu1yQ4c93Qg+vhRiopzLiY81+wmGgtU=
 			</data>
 		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OmokEsdazIydWg1iJSDwflP71U8=
+			SrLxHqObKqIxCiRzTeWdkgAQGe4=
 			</data>
 			<key>hash2</key>
 			<data>
-			6BMXNrPxEs4WQwwqQnnFYwMJMzCti3fJxNOBxmcGNQ4=
+			rxeUCpfFaKinmOEY0iDxHrV8srt6beiZ2M65tJdqAqw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -134,7 +134,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -165,24 +165,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -218,13 +206,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

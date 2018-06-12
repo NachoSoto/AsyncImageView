@@ -1,4 +1,0 @@
-framework module ShiftOperations {
-    header "ShiftOperations-Swift.h"
-    requires objc
-}

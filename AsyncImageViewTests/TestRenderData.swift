@@ -36,9 +36,11 @@ internal struct TestRenderData: RenderDataType {
 	let data: TestData
 	let size: CGSize
 
-	var hashValue: Int {
-		return data ^^^ size.width ^^^ size.height
-	}
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(data)
+        hasher.combine(size.width)
+        hasher.combine(size.height)
+    }
 }
 
 internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {

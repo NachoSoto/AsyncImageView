@@ -1,4 +1,0 @@
-framework module Threadly {
-    header "Threadly-Swift.h"
-    requires objc
-}

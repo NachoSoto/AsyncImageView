@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/CwlPreconditionTesting_POSIX.h</key>
 		<data>
-		KNkAsmShKcv61xdaEoBEX76MVaA=
+		SRA06e2QXyt14jcs92tRfN7ra68=
 		</data>
 		<key>Headers/DSL.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/Nimble-Swift.h</key>
 		<data>
-		m/zBhiMRQYsdt+V84CPFqjp5XVI=
+		kEnRpd8UAZubQal+gh2Dwa9/4Xc=
 		</data>
 		<key>Headers/Nimble.h</key>
 		<data>
@@ -30,15 +30,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tNp+XkOhrQsAi3FFXho4iKWxVyI=
+		vCZwYyx9p3FUSWTQGmVWSAptSLk=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		8U4BfFOuDRRCLmYVuDh8QlO2T/M=
+		U9tNc3ImLgFASefvmztkt4JS7Ek=
 		</data>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		puL2G5ve29swoGuak9i6dCwXJsg=
+		PqmYZNXfnStOIyWdPCXIDj79z4o=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,11 +51,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KNkAsmShKcv61xdaEoBEX76MVaA=
+			SRA06e2QXyt14jcs92tRfN7ra68=
 			</data>
 			<key>hash2</key>
 			<data>
-			p2pd+GfBsKdSRsAI2hOCHnD4rzFvsww4WfvJ9KU0MHI=
+			OJXTKFENKMHLxfaqwTL8H6CL12YGVKwIC4p/PDQ2LZI=
 			</data>
 		</dict>
 		<key>Headers/DSL.h</key>
@@ -95,11 +95,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			m/zBhiMRQYsdt+V84CPFqjp5XVI=
+			kEnRpd8UAZubQal+gh2Dwa9/4Xc=
 			</data>
 			<key>hash2</key>
 			<data>
-			CsayKyfWPSY2Bf+7Zd/qpm5L7+kgsU4Nd+lqtQ6GrOY=
+			0Ci14d8EMQ8LHoRtEYPglwrlGrAERh/5pqwId9q7BzM=
 			</data>
 		</dict>
 		<key>Headers/Nimble.h</key>
@@ -117,22 +117,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8U4BfFOuDRRCLmYVuDh8QlO2T/M=
+			U9tNc3ImLgFASefvmztkt4JS7Ek=
 			</data>
 			<key>hash2</key>
 			<data>
-			2E3N10511Tc62LgVAIl0pcILSPwgjeUPI8S2miDBpF8=
+			VFI1jkhJRBoXONYUiKSr2eiK5OnYmZpppO+hn7majHU=
 			</data>
 		</dict>
 		<key>Modules/Nimble.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			puL2G5ve29swoGuak9i6dCwXJsg=
+			PqmYZNXfnStOIyWdPCXIDj79z4o=
 			</data>
 			<key>hash2</key>
 			<data>
-			LEqMTQdamGdbyity86dsDGmJdnI/u7GZpQBLmOpaC/I=
+			zMfCyD7mtyyR3MKR5/8vnb2bld4/5MPWVlpF782FdnU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -149,7 +149,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -180,24 +180,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -233,13 +221,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

@@ -3,13 +3,7 @@
   "iOS" : [
     {
       "name" : "ShiftOperations",
-      "hash" : "f3f676d9113828b245f6086eaebdf207e35cda73aa2cf41955710d94dbe8947a"
-    }
-  ],
-  "tvOS" : [
-    {
-      "name" : "ShiftOperations",
-      "hash" : "d6ea788c0b91e49fe6a8766bdf34aaae35bec62cbb0646cf509fb5ddf820a9ed"
+      "hash" : "a1bd60c3992e9537c75cd8804699eff346e7cb9e16f6eb3c9c8768106f344ceb"
     }
   ]
 }

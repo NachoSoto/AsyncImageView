@@ -16,15 +16,19 @@ import Result
 /// if you're already providing a placeholder renderer.
 public final class ErrorIgnoringRenderer<Renderer: RendererType>: RendererType {
 	private let renderer: Renderer
+    private let handler: ((Renderer.Error) -> ())?
 
-	public init(renderer: Renderer) {
+	public init(renderer: Renderer, handler: ((Renderer.Error) -> ())?) {
 		self.renderer = renderer
+        self.handler = handler
 	}
 
 	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<Renderer.RenderResult, NoError> {
 		return self.renderer
 			.renderImageWithData(data)
-			.flatMapError { _ in
+			.flatMapError { [handler = self.handler] error in
+                handler?(error)
+                
 				return .empty
 			}
 	}
@@ -33,6 +37,11 @@ public final class ErrorIgnoringRenderer<Renderer: RendererType>: RendererType {
 extension RendererType {
 	/// Returns a new `RendererType` that will ignore any errors emitted by the receiver.
 	public func ignoreErrors() -> ErrorIgnoringRenderer<Self> {
-		return ErrorIgnoringRenderer(renderer: self)
+        return ErrorIgnoringRenderer(renderer: self, handler: nil)
 	}
+    
+    /// Returns a new `RendererType` that will ignore any errors emitted by the receiver.
+    public func logAndIgnoreErrors(handler: @escaping (Self.Error) -> ()) -> ErrorIgnoringRenderer<Self> {
+        return ErrorIgnoringRenderer(renderer: self, handler: handler)
+    }
 }

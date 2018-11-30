@@ -1,4 +1,4 @@
-**Copyright (c) 2015 - 2016  Nacho Soto**
+**Copyright (c) 2015 - 2019  Nacho Soto**
 **All rights reserved.**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

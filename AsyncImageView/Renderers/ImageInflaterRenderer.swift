@@ -129,8 +129,15 @@ extension UIImage {
 }
 
 extension RendererType {
-	public func inflatedWithScale(_ screenScale: CGFloat, opaque: Bool) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
-		return ImageInflaterRenderer(renderer: self, screenScale: screenScale, opaque: opaque)
+	public func inflatedWithScale(
+        _ screenScale: CGFloat,
+        opaque: Bool,
+        contentMode: ImageInflaterRendererContentMode = .defaultMode
+    ) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
+		return ImageInflaterRenderer(renderer: self,
+                                     screenScale: screenScale,
+                                     opaque: opaque,
+                                     contentMode: contentMode)
 	}
 }
 

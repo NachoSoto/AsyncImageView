@@ -53,7 +53,6 @@ public struct Photos {
         init(screenScale: CGFloat) {
             self.remoteRenderer = AnyRenderer(
                 RemoteImageRenderer<RemoteRenderData>(session: URLSession(configuration: URLSessionConfiguration.default))
-                    plac
                     .logAndIgnoreErrors { print("Error downloading image: \($0)") }
                     .mapData { RemoteRenderData(imageData: $0.imageData, size: $0.size) }
                     .multicasted()

@@ -49,7 +49,7 @@ public final class FallbackRenderer<
 }
 
 extension RendererType {
-	/// Surrounds this renderer with a layer of caching.
+	/// Uses the given `RendererType` whenever `self` produces an error.
 	public func fallback<Other: RendererType>
 		(_ fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
 		where Self.Data == Other.Data

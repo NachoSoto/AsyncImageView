@@ -1,0 +1,4 @@
+github "NachoSoto/AsyncImageView" "5a23a90087f8a93e6d6c7a454c5d3f80bd4c4565"
+github "ReactiveCocoa/ReactiveCocoa" "8.0.2"
+github "ReactiveCocoa/ReactiveSwift" "4.0.0"
+github "antitypical/Result" "4.0.0"

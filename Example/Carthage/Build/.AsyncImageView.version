@@ -1,0 +1,10 @@
+{
+  "commitish" : "5a23a90087f8a93e6d6c7a454c5d3f80bd4c4565",
+  "iOS" : [
+    {
+      "name" : "AsyncImageView",
+      "hash" : "690ff66ffe0c735ee5b139759ebbc9f93053fd7b9fe59fbcdbe7a99645efaf79",
+      "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+    }
+  ]
+}

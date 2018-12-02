@@ -1,0 +1,4 @@
+framework module ReactiveMapKit {
+  header "ReactiveMapKit-Swift.h"
+  requires objc
+}

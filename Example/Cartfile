@@ -1,0 +1,2 @@
+github "ReactiveCocoa/ReactiveCocoa" ~> 8.0.0
+github "NachoSoto/AsyncImageView" "master"

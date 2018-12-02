@@ -1,0 +1,10 @@
+{
+  "commitish" : "4.0.0",
+  "iOS" : [
+    {
+      "name" : "Result",
+      "hash" : "51ab3a410eed9cf651f49415eba5b7f1783426333ea94b9e1f8b014634e72287",
+      "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+    }
+  ]
+}

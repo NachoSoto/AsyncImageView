@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 // The initial value is `nil`.
 private typealias ImageProperty = Property<ImageResult?>
@@ -22,7 +21,7 @@ public final class MulticastedRenderer<
 >: RendererType
 	where
 	Renderer.Data == Data,
-	Renderer.Error == NoError
+	Renderer.Error == Never
 {
 	private let renderer: Renderer
 	private let cache: Atomic<[Data : ImageProperty]>
@@ -40,7 +39,7 @@ public final class MulticastedRenderer<
 		self.memoryWarningDisposable.dispose()
 	}
 
-	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, NoError> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, Never> {
 		let property = getPropertyForData(data)
 
 		return property.producer
@@ -79,7 +78,7 @@ public final class MulticastedRenderer<
 	}
 }
 
-extension RendererType where Error == NoError {
+extension RendererType where Error == Never {
 	/// Multicasts the results of this `RendererType`.
 	public func multicasted() -> MulticastedRenderer<Self, Self.Data> {
 		return MulticastedRenderer(renderer: self)

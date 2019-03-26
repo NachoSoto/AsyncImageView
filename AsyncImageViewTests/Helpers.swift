@@ -17,7 +17,7 @@ internal extension CGSize {
     }
 }
 
-fileprivate let alphabet = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".makeIterator())
+fileprivate let alphabet = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 internal extension String {
     static func randomReadableString() -> String {

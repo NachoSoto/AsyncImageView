@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 public protocol LocalRenderDataType: RenderDataType {
 	var image: UIImage { get }
@@ -26,8 +25,8 @@ public final class LocalImageRenderer<T: LocalRenderDataType>: RendererType {
 		self.scheduler = scheduler
 	}
 
-	public func renderImageWithData(_ data: T) -> SignalProducer<UIImage, NoError> {
-		return SignalProducer { Result(data.image) }
+	public func renderImageWithData(_ data: T) -> SignalProducer<UIImage, Never> {
+        return SignalProducer { Result.success(data.image) }
 			.start(on: self.scheduler)
 	}
 }

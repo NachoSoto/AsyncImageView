@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 /// `RendererType` decorator that ignores errors from a renderer.
 /// Note: it's recommended to use `FallbackRenderer` instead, but this is useful,
@@ -23,7 +22,7 @@ public final class ErrorIgnoringRenderer<Renderer: RendererType>: RendererType {
         self.handler = handler
 	}
 
-	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<Renderer.RenderResult, NoError> {
+	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<Renderer.RenderResult, Never> {
 		return self.renderer
 			.renderImageWithData(data)
 			.flatMapError { [handler = self.handler] error in

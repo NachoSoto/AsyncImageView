@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 /// `RendererType` which does not generate any images.
 ///
@@ -21,7 +20,7 @@ public final class EmptyRenderer<
 	public init() {
 	}
 
-	public func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, NoError> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, Never> {
 		return .empty
 	}
 }

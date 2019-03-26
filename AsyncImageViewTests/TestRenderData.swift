@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 import Quick
 import Nimble
@@ -51,8 +50,8 @@ internal func ==(lhs: TestRenderData, rhs: TestRenderData) -> Bool {
 internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
-    func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, NoError> {
-        let renderer: AnyRenderer<TestRenderData, UIImage, NoError>
+    func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, Never> {
+        let renderer: AnyRenderer<TestRenderData, UIImage, Never>
         
         if #available(iOS 10.0, *) {
             renderer = AnyRenderer(

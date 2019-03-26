@@ -10,7 +10,6 @@ import UIKit
 import CoreGraphics
 
 import ReactiveSwift
-import Result
 
 /// `RendererType` which generates a `UIImage` from a UIView.
 @available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
@@ -29,7 +28,7 @@ public final class ViewRenderer<Data: RenderDataType>: RendererType {
         self.viewCreationBlock = viewCreationBlock
     }
     
-    public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, NoError> {
+    public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, Never> {
         return createProducer(
             data,
             viewCreationBlock: self.viewCreationBlock,
@@ -62,7 +61,7 @@ public final class OldViewRenderer<Data: RenderDataType>: RendererType {
         self.viewCreationBlock = viewCreationBlock
     }
     
-    public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, NoError> {
+    public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, Never> {
         return createProducer(
             data,
             viewCreationBlock: self.viewCreationBlock,
@@ -83,7 +82,7 @@ fileprivate func createProducer<Data: RenderDataType>(
     _ data: Data,
     viewCreationBlock: @escaping (_ data: Data) -> UIView,
     renderBlock: @escaping (UIView) -> UIImage
-) -> SignalProducer<UIImage, NoError> {
+) -> SignalProducer<UIImage, Never> {
     return SignalProducer { observer, lifetime in
         let view = viewCreationBlock(data)
         view.frame.origin = .zero

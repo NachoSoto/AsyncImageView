@@ -40,13 +40,10 @@
 		57BD68D21C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
 		57BD68D31C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
 		57BD68E31C0268930077A391 /* AsyncImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		57BD68E71C0269080077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; };
-		57BD68EB1C0269130077A391 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E91C0269130077A391 /* Result.framework */; };
 		57BD68F81C0269440077A391 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F01C0269280077A391 /* Nimble.framework */; };
 		57BD68F91C0269440077A391 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; };
 		57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F01C0269280077A391 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68F11C0269280077A391 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68E51C0269080077A391 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		57F5C5911C051ABB00753642 /* CachingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C5901C051ABB00753642 /* CachingSpec.swift */; };
 		57F5C59B1C052A6000753642 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
 		57F5C59C1C052A6000753642 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
@@ -86,7 +83,6 @@
 			files = (
 				57BD68E31C0268930077A391 /* AsyncImageView.framework in Embed Frameworks */,
 				571095A81DDEC03100781D9C /* ReactiveSwift.framework in Embed Frameworks */,
-				57BD68FD1C02695F0077A391 /* Result.framework in Embed Frameworks */,
 				57BD68FA1C02695C0077A391 /* Nimble.framework in Embed Frameworks */,
 				57BD68FB1C02695C0077A391 /* Quick.framework in Embed Frameworks */,
 			);
@@ -158,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57BD68E71C0269080077A391 /* Result.framework in Frameworks */,
 				57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */,
 				571FB6241E7C3FEF007E44BD /* ReactiveSwift.framework in Frameworks */,
 			);
@@ -178,7 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57BD68EB1C0269130077A391 /* Result.framework in Frameworks */,
 				571FB6271E7C4029007E44BD /* ReactiveSwift.framework in Frameworks */,
 				57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */,
 			);
@@ -471,6 +465,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 57BD682B1C02598F0077A391;

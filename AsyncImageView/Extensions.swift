@@ -32,3 +32,13 @@ extension ImageResult: NSDataConvertible {
 		return self.image.data
 	}
 }
+
+extension Result {
+    internal init(_ value: Success?, failWith error: @autoclosure () -> Failure) {
+        if let value = value {
+            self = .success(value)
+        } else {
+            self = .failure(error())
+        }
+    }
+}

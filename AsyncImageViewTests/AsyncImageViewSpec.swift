@@ -10,7 +10,6 @@ import Quick
 import Nimble
 
 import ReactiveSwift
-import Result
 
 import AsyncImageView
 
@@ -269,10 +268,10 @@ class AsyncImageViewSpec: QuickSpec {
 }
 
 private final class ManualRenderer: RendererType {
-	var signals: [TestRenderData : (output: Signal<UIImage, NoError>, input: Signal<UIImage, NoError>.Observer)] = [:]
+	var signals: [TestRenderData : (output: Signal<UIImage, Never>, input: Signal<UIImage, Never>.Observer)] = [:]
 
 	func addRenderSignal(_ data: TestRenderData) {
-		signals[data] = Signal<UIImage, NoError>.pipe()
+		signals[data] = Signal<UIImage, Never>.pipe()
 	}
 
 	func emitImageForData(_ data: TestRenderData, scale: CGFloat) {
@@ -290,7 +289,7 @@ private final class ManualRenderer: RendererType {
 		observer.sendCompleted()
 	}
 
-	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<UIImage, NoError> {
+	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<UIImage, Never> {
 		guard let signal = signals[data]?.output else {
 			XCTFail("Signal not created for \(data)")
 			return .empty

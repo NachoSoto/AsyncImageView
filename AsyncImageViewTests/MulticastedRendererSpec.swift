@@ -9,7 +9,6 @@
 import Quick
 import Nimble
 
-import Result
 import ReactiveSwift
 
 import AsyncImageView
@@ -21,13 +20,13 @@ class MulticastedRendererSpec: QuickSpec {
 			let size = CGSize(width: 1, height: 1)
 
 			context("General tests") {
-				typealias InnerRendererType = AnyRenderer<TestRenderData, UIImage, NoError>
+				typealias InnerRendererType = AnyRenderer<TestRenderData, UIImage, Never>
 				typealias RenderType = MulticastedRenderer<InnerRendererType, TestRenderData>
 
 				var innerRenderer: InnerRendererType!
 				var renderer: RenderType!
 
-				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
+				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, Never> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
 
@@ -62,7 +61,7 @@ class MulticastedRendererSpec: QuickSpec {
 			}
 
 			context("Cache hit") {
-				typealias InnerRendererType = AnyRenderer<TestRenderData, ImageResult, NoError>
+				typealias InnerRendererType = AnyRenderer<TestRenderData, ImageResult, Never>
 				typealias RenderType = MulticastedRenderer<InnerRendererType, TestRenderData>
 
 				var scheduler: TestScheduler!
@@ -75,7 +74,7 @@ class MulticastedRendererSpec: QuickSpec {
 				var cacheHitRenderer: CacheHitRenderer!
 
 
-				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, NoError> {
+				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, Never> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
 
@@ -148,7 +147,7 @@ private final class CacheHitRenderer: RendererType {
 
 	private let testRenderer = TestRenderer()
 
-	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<ImageResult, NoError> {
+	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<ImageResult, Never> {
 		return testRenderer.renderImageWithData(data)
 			.map {
 				return RenderResult(

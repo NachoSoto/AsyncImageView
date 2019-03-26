@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 /// A type-erased `RendererType`.
 public final class AnyRenderer<
@@ -39,7 +38,7 @@ extension SynchronousRendererType {
 	/// Constructs an `AnyRenderer` with a `SynchronousRendererType`.
 	/// The created `SignalProducer` will simply emit the result
 	/// of `renderImageWithData`.
-	public func asyncRenderer(_ scheduler: Scheduler = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, NoError> {
+	public func asyncRenderer(_ scheduler: Scheduler = QueueScheduler()) -> AnyRenderer<Self.Data, UIImage, Never> {
 		return AnyRenderer { (data: Self.Data) in
 			return SignalProducer { observer, lifetime in
 				if !lifetime.hasEnded {

@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 public enum RemoteOrLocalRenderData<Local: LocalRenderDataType, Remote: RemoteRenderDataType>: RenderDataType {
     case local(Local)
@@ -46,14 +45,13 @@ public final class RemoteOrLocalImageRenderer<Local: LocalRenderDataType, Remote
 }
 
 extension RemoteOrLocalRenderData {
-    public var hashValue: Int {
-        /// Not distinguishing between types, which can lead to collisions, but they're disambiguated in ==
+    public func hash(into hasher: inout Hasher) {
         switch self {
-        case let .local(data): return data.hashValue
-        case let .remote(data): return data.hashValue
+        case let .local(data): hasher.combine(data)
+        case let .remote(data): hasher.combine(data)
         }
     }
-    
+ 
     public static func == (lhs: RemoteOrLocalRenderData, rhs: RemoteOrLocalRenderData) -> Bool {
         switch (lhs, rhs) {
         case let (.local(lhs), .local(rhs)): return lhs == rhs

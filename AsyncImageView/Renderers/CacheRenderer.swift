@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 /// Decorates a `RendererType` to introduce a layer of caching.
 public final class CacheRenderer<

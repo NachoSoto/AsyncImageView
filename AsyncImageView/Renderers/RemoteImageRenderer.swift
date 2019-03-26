@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 public protocol RemoteRenderDataType: RenderDataType {
 	var imageURL: URL { get }

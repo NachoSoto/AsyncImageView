@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveSwift
-import Result
 
 public protocol ImageViewDataType {
 	associatedtype RenderData: RenderDataType
@@ -26,13 +25,13 @@ open class AsyncImageView<
 	where
 	ImageViewData.RenderData == Data,
 	Renderer.Data == Data,
-	Renderer.Error == NoError,
+	Renderer.Error == Never,
 	PlaceholderRenderer.Data == Data,
-	PlaceholderRenderer.Error == NoError,
+	PlaceholderRenderer.Error == Never,
 	Renderer.RenderResult == PlaceholderRenderer.RenderResult
  {
-	private let requestsSignal: Signal<Data?, NoError>
-	private let requestsObserver: Signal<Data?, NoError>.Observer
+	private let requestsSignal: Signal<Data?, Never>
+	private let requestsObserver: Signal<Data?, Never>.Observer
 
 	private let imageCreationScheduler: Scheduler
 
@@ -61,7 +60,7 @@ open class AsyncImageView<
 				}
 			})
 			.observe(on: self.imageCreationScheduler)
-			.flatMap(.latest) { data -> SignalProducer<Renderer.RenderResult, NoError> in
+			.flatMap(.latest) { data -> SignalProducer<Renderer.RenderResult, Never> in
 				if let data = data {
 					if let placeholderRenderer = placeholderRenderer {
 						return placeholderRenderer

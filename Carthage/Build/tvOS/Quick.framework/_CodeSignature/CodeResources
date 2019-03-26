@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/Quick-Swift.h</key>
 		<data>
-		OKwTIoq7Sm129I95ZmHfEIVJDlM=
+		SJuaOQ5uhQEf8QknMzJhHusyIeU=
 		</data>
 		<key>Headers/Quick.h</key>
 		<data>
@@ -22,19 +22,19 @@
 		</data>
 		<key>Headers/QuickSpec.h</key>
 		<data>
-		8lk/cgg9oHeXFiFsEUPPtLik/Ns=
+		dYCxgMGLYBdZc5AhHjvAD416qj0=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		bc7ktskFwe1zjLAVKVUtAMbW2qE=
+		i7LjuvMSPZHPWcvHLIKxa8ZawoE=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		0dwYH4noEGtaWKBsEbvBxfzv2rY=
+		t7rudwFKEYNtsAH6LdtpdTEB9C4=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		SrLxHqObKqIxCiRzTeWdkgAQGe4=
+		G8tf2hEoWRgQN5F74dUfk2WEDe0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OKwTIoq7Sm129I95ZmHfEIVJDlM=
+			SJuaOQ5uhQEf8QknMzJhHusyIeU=
 			</data>
 			<key>hash2</key>
 			<data>
-			bKI91Q5Py02ahhWianOCxDWQnHcXmojtOjgA10A4bRw=
+			o9RvOk9vhdcmYW9dzfBZXEpDKxdERVbXhGnjqMilRco=
 			</data>
 		</dict>
 		<key>Headers/Quick.h</key>
@@ -91,33 +91,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8lk/cgg9oHeXFiFsEUPPtLik/Ns=
+			dYCxgMGLYBdZc5AhHjvAD416qj0=
 			</data>
 			<key>hash2</key>
 			<data>
-			KErYCB9wbuXdCdGonv0AfgUCnl/QYfDKOzB8e7tngJE=
+			5b0G7icgNk/5Ndfs6doZVsCaPZzj7OSokhYxZ/PczCg=
 			</data>
 		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0dwYH4noEGtaWKBsEbvBxfzv2rY=
+			t7rudwFKEYNtsAH6LdtpdTEB9C4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Mzmdwu7NxS5YXu1yQ4c93Qg+vhRiopzLiY81+wmGgtU=
+			L2GNcECsoy98K3RBrDr/mqmrKaKRAI1AmY1KfxjRcYI=
 			</data>
 		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			SrLxHqObKqIxCiRzTeWdkgAQGe4=
+			G8tf2hEoWRgQN5F74dUfk2WEDe0=
 			</data>
 			<key>hash2</key>
 			<data>
-			rxeUCpfFaKinmOEY0iDxHrV8srt6beiZ2M65tJdqAqw=
+			UUdFGdsSTVC2/niUn4utsPvaK18736Ky50NSYy84R/g=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

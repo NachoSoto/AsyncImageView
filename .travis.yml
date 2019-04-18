@@ -2,12 +2,12 @@ git:
   submodules: false
 
 language: objective-c
-osx_image: xcode10
+osx_image: xcode10.2
 matrix:
   include:
     - os: osx
       before_install:
         - gem install scan
       script:
-        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone XS (12.0)" -b "raw" -c -q "Release"
+        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone XS" -b "raw" -c -q "Release"
 

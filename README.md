@@ -14,7 +14,7 @@ Let's assume you have a `struct` with the image you want to render:
 
 ```swift
 struct Image {
-    let url: Url
+    let url: URL
 }
 ```
 

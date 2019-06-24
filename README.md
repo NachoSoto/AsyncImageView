@@ -56,7 +56,7 @@ struct ImageViews {
                 RemoteImageRenderer<RemoteRenderData>()
                     // AsyncImageView ensures that errors are handled explicitly.
                     // See "fallbacks" below for an alternative to this.
-                    .logAndIgnoreErrors()
+                    .logAndIgnoreErrors  { print("Error downloading image: \($0)") }
                 )
         }
                 

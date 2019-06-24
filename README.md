@@ -13,7 +13,7 @@ To try it out you can run the [Example](Example) included in this repo. You'll n
 Let's assume you have a `struct` with the image you want to render:  
 
 ```swift
-struct Image {
+struct Image: Hashable {
     let url: URL
 }
 ```

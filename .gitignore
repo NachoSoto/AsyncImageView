@@ -22,3 +22,4 @@ Example/Carthage/Checkouts/*
 !Carthage/Checkouts/xcconfigs
 Carthage/Build/watchOS
 Carthage/Build/Mac
+.build

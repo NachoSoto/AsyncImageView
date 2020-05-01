@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/NachoSoto/AsyncImageView'
   s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author           = { 'Ignacio Soto' => 'hello@nachosoto.com' }
-  s.source           = { :git => 'git@github.com:NachoSoto/AsyncImageView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/NachoSoto/AsyncImageView.git', :tag => s.version.to_s }
   s.ios.deployment_target = "12.0"
   s.tvos.deployment_target = "12.0"
 

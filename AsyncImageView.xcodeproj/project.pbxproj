@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5119EE51245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119EE50245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift */; };
+		5119EE52245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119EE50245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift */; };
+		5119EE54245CDD6A003CBEB5 /* AsyncImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119EE53245CDD6A003CBEB5 /* AsyncImageLoader.swift */; };
+		5119EE55245CDD6A003CBEB5 /* AsyncImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119EE53245CDD6A003CBEB5 /* AsyncImageLoader.swift */; };
 		570993FE1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
 		570993FF1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
 		570994011C08F7D90010B340 /* MulticastedRendererSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */; };
@@ -92,6 +96,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5119EE50245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSwiftUIImageView.swift; sourceTree = "<group>"; };
+		5119EE53245CDD6A003CBEB5 /* AsyncImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageLoader.swift; sourceTree = "<group>"; };
 		570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MulticastedRenderer.swift; path = Renderers/MulticastedRenderer.swift; sourceTree = "<group>"; };
 		570994001C08F7D90010B340 /* MulticastedRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastedRendererSpec.swift; sourceTree = "<group>"; };
 		570994041C0903BF0010B340 /* LocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalImageRenderer.swift; path = Renderers/LocalImageRenderer.swift; sourceTree = "<group>"; };
@@ -334,9 +340,11 @@
 			isa = PBXGroup;
 			children = (
 				57BD68CB1C02614B0077A391 /* AsyncImageView.swift */,
+				5119EE50245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift */,
 				57BD68CF1C0261880077A391 /* Caching.swift */,
 				57F5C59A1C052A6000753642 /* Extensions.swift */,
 				57FC1AF01C028C5300FAD2F3 /* Renderers */,
+				5119EE53245CDD6A003CBEB5 /* AsyncImageLoader.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -522,9 +530,11 @@
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59B1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0D1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
+				5119EE54245CDD6A003CBEB5 /* AsyncImageLoader.swift in Sources */,
 				571B6A121E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */,
 				57FC1B021C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				5709940A1C090E050010B340 /* ImageProcessingRenderer.swift in Sources */,
+				5119EE51245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift in Sources */,
 				570993FE1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */,
 				57FC1B0A1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 			);
@@ -560,9 +570,11 @@
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
 				57F5C59C1C052A6000753642 /* Extensions.swift in Sources */,
 				57FC1B0E1C0294D400FAD2F3 /* CacheRenderer.swift in Sources */,
+				5119EE55245CDD6A003CBEB5 /* AsyncImageLoader.swift in Sources */,
 				571B6A131E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */,
 				57FC1B031C0293CE00FAD2F3 /* AnyRenderer.swift in Sources */,
 				5709940B1C090E050010B340 /* ImageProcessingRenderer.swift in Sources */,
+				5119EE52245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift in Sources */,
 				570993FF1C08F7C70010B340 /* MulticastedRenderer.swift in Sources */,
 				57FC1B0B1C0293CE00FAD2F3 /* Renderer.swift in Sources */,
 			);

@@ -1,17 +1,10 @@
 {
-  "commitish" : "723532595dc6b1779276f6473d5db94c97e6a3d9",
+  "commitish" : "d35b035b3299d8a4049459d48aeb1ab0920c1b03",
   "iOS" : [
     {
       "name" : "Quick",
-      "hash" : "4506c73befabc565680e637396597a3ad3fa5b80059049825cc70371b618feea",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
-    }
-  ],
-  "tvOS" : [
-    {
-      "name" : "Quick",
-      "hash" : "96a03e9b421d48b451878b2a05b1c607d430e76c7dfa0826a1d565e98fdcf924",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "a3f0be55152a57662a4edc4ac7f80b9c9ef19d5b8f9b0dcb89902fcec6082fff",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

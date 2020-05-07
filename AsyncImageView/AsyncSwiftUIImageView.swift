@@ -78,7 +78,7 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
                 )
             } else {
                 Rectangle()
-                    .background(Color.clear)
+                    .fill(Color.clear)
             }
         }
         .modifier(SizeModifier())

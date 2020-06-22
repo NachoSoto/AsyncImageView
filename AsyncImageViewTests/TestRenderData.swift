@@ -55,7 +55,7 @@ internal final class TestRenderer: RendererType {
             .asyncRenderer(ImmediateScheduler())
             .renderImageWithData(data)
             .on(started: {
-                self.renderedImages.modify { $0 = $0 + [data] }
+                self.renderedImages.modify { $0.append(data) }
             })
 	}
 

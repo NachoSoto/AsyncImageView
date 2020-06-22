@@ -51,21 +51,8 @@ internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
     func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, Never> {
-        let renderer: AnyRenderer<TestRenderData, UIImage, Never>
-        
-        if #available(iOS 10.0, *) {
-            renderer = AnyRenderer(
-                TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
-                    .asyncRenderer(ImmediateScheduler())
-            )
-        } else {
-            renderer = AnyRenderer(
-                TestRenderer.oldRendererForSize(data.size, scale: data.data.rawValue)
-                    .asyncRenderer(ImmediateScheduler())
-            )
-        }
-        
-        return renderer
+        return TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
+            .asyncRenderer(ImmediateScheduler())
             .renderImageWithData(data)
             .on(started: {
                 self.renderedImages.modify { $0 = $0 + [data] }
@@ -80,14 +67,6 @@ internal final class TestRenderer: RendererType {
 			// nothing to render
 		}
 	}
-    
-    static func oldRendererForSize(_ size: CGSize, scale: CGFloat) -> OldContextRenderer<TestRenderData> {
-        precondition(size.width > 0 && size.height > 0, "Should not attempt to render with invalid size: \(size)")
-        
-        return OldContextRenderer<TestRenderData>(scale: scale, opaque: true) { _, _ in
-            // nothing to render
-        }
-    }
 }
 
 internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?, withSize size: CGSize, data: TestData?) {

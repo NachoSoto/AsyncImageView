@@ -48,7 +48,11 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
                     if let placeholderRenderer = placeholderRenderer {
                         return placeholderRenderer
                             .renderImageWithData(data)
-                            .take(untilReplacement: renderer.renderImageWithData(data))
+                            .take(
+                                untilReplacement: renderer.renderImageWithData(data)
+                                    // Don't allow a finishing signal to cancel replacement without a value (like if it failed)
+                                    .concat(.never)
+                            )
                     } else {
                         return renderer.renderImageWithData(data)
                     }

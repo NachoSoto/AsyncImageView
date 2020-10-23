@@ -262,6 +262,41 @@ class AsyncImageViewSpec: QuickSpec {
 					view.data = nil
 					expect(view.image).to(beNil()) // image should be reset immediately
 				}
+                
+                it("shows placeholder if renderer fails first") {
+                    view.frame.size = CGSize(width: 1, height: 1)
+
+                    let data: TestData = .a
+                    let renderData = data.renderDataWithSize(view.frame.size)
+
+                    placeholderRenderer.addRenderSignal(renderData)
+                    renderer.addRenderSignal(renderData)
+
+                    view.data = data
+
+                    renderer.failAndComplete(renderData)
+                    
+                    placeholderRenderer.emitImageForData(renderData, scale: data.placeholderScale)
+                    verifyPlaceholder()
+                }
+                
+                it("does not reset placeholder if renderer fails after") {
+                    view.frame.size = CGSize(width: 1, height: 1)
+
+                    let data: TestData = .a
+                    let renderData = data.renderDataWithSize(view.frame.size)
+
+                    placeholderRenderer.addRenderSignal(renderData)
+                    renderer.addRenderSignal(renderData)
+
+                    view.data = data
+
+                    placeholderRenderer.emitImageForData(renderData, scale: data.placeholderScale)
+                    verifyPlaceholder()
+
+                    renderer.failAndComplete(renderData)
+                    verifyPlaceholder()
+                }
 			}
 		}
 	}
@@ -273,15 +308,27 @@ private final class ManualRenderer: RendererType {
 	func addRenderSignal(_ data: TestRenderData) {
 		signals[data] = Signal<UIImage, Never>.pipe()
 	}
+    
+    private func observer(forData data: TestRenderData) -> Signal<UIImage, Never>.Observer {
+        return signals[data]!.input
+    }
 
 	func emitImageForData(_ data: TestRenderData, scale: CGFloat) {
-        let image = TestRenderer.rendererForSize(data.size, scale: scale).renderImageWithData(data)
-		let observer = signals[data]!.input
+        let image = TestRenderer.rendererForSize(data.size,
+                                                 scale: scale)
+            .renderImageWithData(data)
+        let observer = self.observer(forData: data)
 
 		observer.send(value: image)
 		observer.sendCompleted()
 	}
-
+    
+    func failAndComplete(_ data: TestRenderData) {
+        // Errors aren't allowed in AsyncImageView (they must be handled prior),
+        // so they instead simply cause the signal to complete.
+        self.observer(forData: data).sendCompleted()
+    }
+    
 	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<UIImage, Never> {
 		guard let signal = signals[data]?.output else {
 			XCTFail("Signal not created for \(data)")

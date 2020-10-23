@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'NSBAsyncImageView'
-  s.version          = '7.0'
+  s.version          = '7.1'
   s.summary          = 'UIImageView for rendering data asynchronously, with composable renderers and caches'
   s.description      = 'This is a Swift framework that provides an easy to use UIImageView subclass for effectively loading and rendering images asynchronously, providing caching, and error handling.'
 

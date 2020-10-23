@@ -9,5 +9,5 @@ matrix:
       before_install:
         - gem install scan
       script:
-        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone 11" -b "raw" -c 
+        - fastlane scan -s 'AsyncImageView-iOS' -a "iPhone 8" -b "raw" -c 
 

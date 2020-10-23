@@ -1,4 +1,4 @@
-github "Quick/Nimble" "7c9ad74efc3803f7ec5e9a2bcb735e0cd3041d98"
-github "Quick/Quick" "d35b035b3299d8a4049459d48aeb1ab0920c1b03"
-github "ReactiveCocoa/ReactiveSwift" "6.2.1"
+github "Quick/Nimble" "3258c2398fd0094aa109b99ff6c1aefac6ac66ef"
+github "Quick/Quick" "31a2b83d8f65fdb7a6845f5402d9adafde5458f8"
+github "ReactiveCocoa/ReactiveSwift" "6.4.0"
 github "jspahrsummers/xcconfigs" "355666c9737d60ca71da5d5da1753d16334ea420"

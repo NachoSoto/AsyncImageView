@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2.2 effective-4.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)
-// swift-module-flags: -target x86_64-apple-ios8.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name Quick
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Quick
 import Foundation
 @_exported import Quick
 import Swift
@@ -104,18 +104,18 @@ public func beforeEach(_ closure: @escaping Quick.BeforeExampleClosure)
 public func beforeEach(_ closure: @escaping Quick.BeforeExampleWithMetadataClosure)
 public func afterEach(_ closure: @escaping Quick.AfterExampleClosure)
 public func afterEach(_ closure: @escaping Quick.AfterExampleWithMetadataClosure)
-public func it(_ description: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, closure: @escaping () -> Swift.Void)
+public func it(_ description: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, closure: @escaping () throws -> Swift.Void)
 public func itBehavesLike(_ name: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line)
 public func itBehavesLike(_ name: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, sharedExampleContext: @escaping Quick.SharedExampleContext)
 public func itBehavesLike<C>(_ behavior: Quick.Behavior<C>.Type, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, context: @escaping () -> C)
 public func pending(_ description: Swift.String, closure: () -> Swift.Void)
 public func xdescribe(_ description: Swift.String, flags: Quick.FilterFlags = [:], closure: () -> Swift.Void)
 public func xcontext(_ description: Swift.String, flags: Quick.FilterFlags = [:], closure: () -> Swift.Void)
-public func xit(_ description: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, closure: @escaping () -> Swift.Void)
+public func xit(_ description: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, closure: @escaping () throws -> Swift.Void)
 public func xitBehavesLike<C>(_ behavior: Quick.Behavior<C>.Type, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, context: @escaping () -> C)
 public func fdescribe(_ description: Swift.String, flags: Quick.FilterFlags = [:], closure: () -> Swift.Void)
 public func fcontext(_ description: Swift.String, flags: Quick.FilterFlags = [:], closure: () -> Swift.Void)
-public func fit(_ description: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, closure: @escaping () -> Swift.Void)
+public func fit(_ description: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, closure: @escaping () throws -> Swift.Void)
 public func fitBehavesLike(_ name: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line)
 public func fitBehavesLike(_ name: Swift.String, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, sharedExampleContext: @escaping Quick.SharedExampleContext)
 public func fitBehavesLike<C>(_ behavior: Quick.Behavior<C>.Type, flags: Quick.FilterFlags = [:], file: Quick.FileString = #file, line: Swift.UInt = #line, context: @escaping () -> C)

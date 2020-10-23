@@ -10,11 +10,11 @@
 		</data>
 		<key>Headers/Quick-Swift.h</key>
 		<data>
-		SJuaOQ5uhQEf8QknMzJhHusyIeU=
+		H9vYs8xmxMLuHBrh4b/s1C8K8Go=
 		</data>
 		<key>Headers/Quick.h</key>
 		<data>
-		/Xf9t+YazFAtXprU9DeUoTWB3rU=
+		87phMUGy+AkHIlCdiF9YaqmgjMI=
 		</data>
 		<key>Headers/QuickConfiguration.h</key>
 		<data>
@@ -26,15 +26,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		i7LjuvMSPZHPWcvHLIKxa8ZawoE=
+		VPlS/iWFCCVLVLuH5VgWhjSsS4Y=
+		</data>
+		<key>Modules/Quick.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
+		<data>
+		eS8I/ui/NHJayAS4SbjZoV6MEN8=
+		</data>
+		<key>Modules/Quick.swiftmodule/Project/x86_64.swiftsourceinfo</key>
+		<data>
+		eS8I/ui/NHJayAS4SbjZoV6MEN8=
+		</data>
+		<key>Modules/Quick.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
+		<data>
+		HGGXwaZ6zDk/7ory/0CPYsFBMGs=
+		</data>
+		<key>Modules/Quick.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
+		<data>
+		1k8/rV3u5o5ZO9NSRsWiA9UayE4=
+		</data>
+		<key>Modules/Quick.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
+		<data>
+		ieH6IO556ZKqCGBnxmbDWwBB6DI=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		t7rudwFKEYNtsAH6LdtpdTEB9C4=
+		HGGXwaZ6zDk/7ory/0CPYsFBMGs=
+		</data>
+		<key>Modules/Quick.swiftmodule/x86_64.swiftinterface</key>
+		<data>
+		1k8/rV3u5o5ZO9NSRsWiA9UayE4=
 		</data>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		G8tf2hEoWRgQN5F74dUfk2WEDe0=
+		ieH6IO556ZKqCGBnxmbDWwBB6DI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,22 +82,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SJuaOQ5uhQEf8QknMzJhHusyIeU=
+			H9vYs8xmxMLuHBrh4b/s1C8K8Go=
 			</data>
 			<key>hash2</key>
 			<data>
-			o9RvOk9vhdcmYW9dzfBZXEpDKxdERVbXhGnjqMilRco=
+			PntZkxMIKVNxPdpFo0RPhFwv3nZXf/uCxtXZxHDGF+I=
 			</data>
 		</dict>
 		<key>Headers/Quick.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/Xf9t+YazFAtXprU9DeUoTWB3rU=
+			87phMUGy+AkHIlCdiF9YaqmgjMI=
 			</data>
 			<key>hash2</key>
 			<data>
-			o72PHzEF8xqr1X84h12P1hJ8rz7d/05zQKDBks4idVU=
+			wGxY76pgIS3o0NaZA6GRlv5NFV51rYtXGOUh0jj/52A=
 			</data>
 		</dict>
 		<key>Headers/QuickConfiguration.h</key>
@@ -98,26 +122,92 @@
 			5b0G7icgNk/5Ndfs6doZVsCaPZzj7OSokhYxZ/PczCg=
 			</data>
 		</dict>
+		<key>Modules/Quick.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			eS8I/ui/NHJayAS4SbjZoV6MEN8=
+			</data>
+			<key>hash2</key>
+			<data>
+			DWVLG+jtIltWWZhdhFrMqz2xVcKS9uj6kJRnOzWIWfY=
+			</data>
+		</dict>
+		<key>Modules/Quick.swiftmodule/Project/x86_64.swiftsourceinfo</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			eS8I/ui/NHJayAS4SbjZoV6MEN8=
+			</data>
+			<key>hash2</key>
+			<data>
+			DWVLG+jtIltWWZhdhFrMqz2xVcKS9uj6kJRnOzWIWfY=
+			</data>
+		</dict>
+		<key>Modules/Quick.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HGGXwaZ6zDk/7ory/0CPYsFBMGs=
+			</data>
+			<key>hash2</key>
+			<data>
+			v2VpNhuHoM44Bgiexzd0W9yOOqmYUJYL3DrPn3znBw4=
+			</data>
+		</dict>
+		<key>Modules/Quick.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1k8/rV3u5o5ZO9NSRsWiA9UayE4=
+			</data>
+			<key>hash2</key>
+			<data>
+			7VY8UrujnxWclLMjR4BwEqRl80Dk1tNzqoLEj1d9oOM=
+			</data>
+		</dict>
+		<key>Modules/Quick.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ieH6IO556ZKqCGBnxmbDWwBB6DI=
+			</data>
+			<key>hash2</key>
+			<data>
+			0jjkGUOH8gOs2sM3j+YJNhnQUrWhUf5NUDpHt8jduiI=
+			</data>
+		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			t7rudwFKEYNtsAH6LdtpdTEB9C4=
+			HGGXwaZ6zDk/7ory/0CPYsFBMGs=
 			</data>
 			<key>hash2</key>
 			<data>
-			L2GNcECsoy98K3RBrDr/mqmrKaKRAI1AmY1KfxjRcYI=
+			v2VpNhuHoM44Bgiexzd0W9yOOqmYUJYL3DrPn3znBw4=
+			</data>
+		</dict>
+		<key>Modules/Quick.swiftmodule/x86_64.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1k8/rV3u5o5ZO9NSRsWiA9UayE4=
+			</data>
+			<key>hash2</key>
+			<data>
+			7VY8UrujnxWclLMjR4BwEqRl80Dk1tNzqoLEj1d9oOM=
 			</data>
 		</dict>
 		<key>Modules/Quick.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G8tf2hEoWRgQN5F74dUfk2WEDe0=
+			ieH6IO556ZKqCGBnxmbDWwBB6DI=
 			</data>
 			<key>hash2</key>
 			<data>
-			UUdFGdsSTVC2/niUn4utsPvaK18736Ky50NSYy84R/g=
+			0jjkGUOH8gOs2sM3j+YJNhnQUrWhUf5NUDpHt8jduiI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

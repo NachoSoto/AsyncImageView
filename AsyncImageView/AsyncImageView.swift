@@ -136,4 +136,4 @@ open class AsyncImageView<
 
 // MARK: - Constants
 
-internal let fadeAnimationDuration: TimeInterval = 0.4
+internal let fadeAnimationDuration: TimeInterval = 0.3

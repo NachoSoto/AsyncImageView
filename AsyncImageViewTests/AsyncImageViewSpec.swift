@@ -16,6 +16,12 @@ import AsyncImageView
 class AsyncImageViewSpec: QuickSpec {
 	override func spec() {
 		describe("AsyncImageView") {
+            var window: UIWindow!
+            
+            beforeEach {
+                window = UIWindow()
+            }
+            
 			context("No placeholder") {
 				typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer, TestRenderer>
 
@@ -30,6 +36,7 @@ class AsyncImageViewSpec: QuickSpec {
 						placeholderRenderer: nil,
 						imageCreationScheduler: ImmediateScheduler()
 					)
+                    window.addSubview(view)
 				}
 
 				func verifyView(file: FileString = #file,
@@ -169,6 +176,7 @@ class AsyncImageViewSpec: QuickSpec {
 						placeholderRenderer: placeholderRenderer,
 						imageCreationScheduler: ImmediateScheduler()
 					)
+                    window.addSubview(view)
 				}
 
 				func verifyRealImage(file: FileString = #file,

@@ -1,19 +1,28 @@
 {
-  "commitish" : "31a2b83d8f65fdb7a6845f5402d9adafde5458f8",
+  "commitish" : "faf6b382c5c84a20a80a351a0a5b37f66e4ff850",
   "iOS" : [
     {
-      "hash" : "f66d6edd4e49f868cb9233e4f8d379b1a95a5a385e2a363dc734a6d04fcfdb8c",
+      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)",
+      "hash" : "22bb8bec27a0bf04e11adc8799477b1ea0154ea076d19c2b3e24bbb38fef29a4",
       "name" : "Quick",
-      "linking" : "dynamic",
-      "swiftToolchainVersion" : "5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
+      "container" : "Quick.xcframework",
+      "identifier" : "ios-arm64_armv7"
+    },
+    {
+      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)",
+      "hash" : "6730f892403b849311e896bc4f492cc6da273490d5ba340a0885fe8160556cfd",
+      "name" : "Quick",
+      "container" : "Quick.xcframework",
+      "identifier" : "ios-arm64_i386_x86_64-simulator"
     }
   ],
   "tvOS" : [
     {
-      "hash" : "cc669c668892f1b35e8cef0b318e634f431f104a6b269d0f508fa35470a80704",
+      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)",
+      "hash" : "d8d9ce6eccadfa49bda0b1ace42320597ccbba040d491710c098d200c610652a",
       "name" : "Quick",
-      "linking" : "dynamic",
-      "swiftToolchainVersion" : "5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
+      "container" : "Quick.xcframework",
+      "identifier" : "tvos-arm64_x86_64-simulator"
     }
   ]
 }

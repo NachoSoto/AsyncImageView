@@ -1,9 +1,0 @@
-{
-  "commitish" : "v1.0.2",
-  "iOS" : [
-    {
-      "name" : "ShiftOperations",
-      "hash" : "a1bd60c3992e9537c75cd8804699eff346e7cb9e16f6eb3c9c8768106f344ceb"
-    }
-  ]
-}

@@ -69,15 +69,27 @@ internal final class TestRenderer: RendererType {
 	}
 }
 
-internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?, withSize size: CGSize, data: TestData?) {
+internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?,
+                          withSize size: CGSize,
+                          data: TestData?,
+                          file: FileString = #file,
+                          line: UInt = #line) {
 	if let data = data {
-		verifyImage(image(), withSize: size, expectedScale: data.rawValue)
+		verifyImage(image(),
+                    withSize: size,
+                    expectedScale: data.rawValue,
+                    file: file,
+                    line: line)
 	} else {
-		expect(image()).toEventually(beNil())
+        expect(file: file, line: line, image()).toEventually(beNil())
 	}
 }
 
-internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?, withSize size: CGSize, expectedScale: CGFloat) {
-	expect(image()?.size).toEventually(equal(size))
-	expect(image()?.scale).toEventually(equal(expectedScale))
+internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?,
+                          withSize size: CGSize,
+                          expectedScale: CGFloat,
+                          file: FileString = #file,
+                          line: UInt = #line) {
+    expect(file: file, line: line, image()?.size).toEventually(equal(size))
+	expect(file: file, line: line, image()?.scale).toEventually(equal(expectedScale))
 }

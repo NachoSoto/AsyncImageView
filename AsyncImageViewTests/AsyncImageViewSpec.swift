@@ -32,8 +32,13 @@ class AsyncImageViewSpec: QuickSpec {
 					)
 				}
 
-				func verifyView() {
-					verifyImage(view.image, withSize: view.frame.size, data: view.data)
+				func verifyView(file: FileString = #file,
+                                line: UInt = #line) {
+					verifyImage(view.image,
+                                withSize: view.frame.size,
+                                data: view.data,
+                                file: file,
+                                line: line)
 				}
 
 				it("has no image initially") {
@@ -166,12 +171,21 @@ class AsyncImageViewSpec: QuickSpec {
 					)
 				}
 
-				func verifyRealImage() {
-					verifyImage(view.image, withSize: view.frame.size, data: view.data!)
+				func verifyRealImage(file: FileString = #file,
+                                     line: UInt = #line) {
+					verifyImage(view.image,
+                                withSize: view.frame.size,
+                                data: view.data!,
+                                file: file, line: line)
 				}
 
-				func verifyPlaceholder() {
-					verifyImage(view.image, withSize: view.frame.size, expectedScale: view.data!.placeholderScale)
+				func verifyPlaceholder(file: FileString = #file,
+                                       line: UInt = #line) {
+					verifyImage(view.image,
+                                withSize: view.frame.size,
+                                expectedScale: view.data!.placeholderScale,
+                                file: file,
+                                line: line)
 				}
 
 				it("has no image initially") {

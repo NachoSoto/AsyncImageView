@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Nimble
 import CoreFoundation
 import CoreGraphics
@@ -20,6 +20,8 @@ import Foundation/*.TimeInterval*/
 import Swift
 import XCTest
 public let DefaultDelta: Swift.Double
+public func defaultDelta<F>() -> F where F : Swift.FloatingPoint
+public func beCloseTo<Value>(_ expectedValue: Value, within delta: Value = defaultDelta()) -> Nimble.Predicate<Value> where Value : Swift.FloatingPoint
 public func beCloseTo<Value>(_ expectedValue: Value, within delta: Swift.Double = DefaultDelta) -> Nimble.Predicate<Value> where Value : Nimble.NMBDoubleConvertible
 @objc @_hasMissingDesignatedInitializers public class NMBObjCBeCloseToPredicate : Nimble.NMBPredicate {
   @objc public var within: (Swift.CDouble) -> Nimble.NMBObjCBeCloseToPredicate {
@@ -31,34 +33,33 @@ public func beCloseTo<Value>(_ expectedValue: Value, within delta: Swift.Double 
 extension NMBPredicate {
   @objc dynamic public class func beCloseToMatcher(_ expected: Foundation.NSNumber, within: Swift.CDouble) -> Nimble.NMBObjCBeCloseToPredicate
 }
-public func beCloseTo(_ expectedValues: [Swift.Double], within delta: Swift.Double = DefaultDelta) -> Nimble.Predicate<[Swift.Double]>
+public func beCloseTo<Value, Values>(_ expectedValues: Values, within delta: Value = defaultDelta()) -> Nimble.Predicate<Values> where Value : Swift.FloatingPoint, Value == Values.Element, Values : Swift.Collection
 infix operator ≈ : ComparisonPrecedence
-extension Expectation where T == [Swift.Double] {
-  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: [Swift.Double])
+extension Expectation where T : Swift.Collection, T.Element : Swift.FloatingPoint {
+  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: T)
 }
-extension Expectation where T == Nimble.NMBDoubleConvertible {
-  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: Nimble.NMBDoubleConvertible)
-  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: (expected: Nimble.NMBDoubleConvertible, delta: Swift.Double))
-  public static func == (lhs: Nimble.Expectation<T>, rhs: (expected: Nimble.NMBDoubleConvertible, delta: Swift.Double))
+extension Expectation where T : Swift.FloatingPoint {
+  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: T)
+  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: (expected: T, delta: T))
+  public static func == (lhs: Nimble.Expectation<T>, rhs: (expected: T, delta: T))
+}
+extension Expectation where T : Nimble.NMBDoubleConvertible {
+  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: T)
+  public static func ≈ (lhs: Nimble.Expectation<T>, rhs: (expected: T, delta: Swift.Double))
+  public static func == (lhs: Nimble.Expectation<T>, rhs: (expected: T, delta: Swift.Double))
 }
 precedencegroup PlusMinusOperatorPrecedence {
   higherThan: BitwiseShiftPrecedence
 }
 infix operator ± : PlusMinusOperatorPrecedence
-public func ± (lhs: Nimble.NMBDoubleConvertible, rhs: Swift.Double) -> (expected: Nimble.NMBDoubleConvertible, delta: Swift.Double)
+public func ± <Value>(lhs: Value, rhs: Value) -> (expected: Value, delta: Value) where Value : Swift.FloatingPoint
+public func ± <Value>(lhs: Value, rhs: Swift.Double) -> (expected: Value, delta: Swift.Double) where Value : Nimble.NMBDoubleConvertible
+public func beSuccess<Success, Failure>(test: ((Success) -> Swift.Void)? = nil) -> Nimble.Predicate<Swift.Result<Success, Failure>> where Failure : Swift.Error
+public func beFailure<Success, Failure>(test: ((Failure) -> Swift.Void)? = nil) -> Nimble.Predicate<Swift.Result<Success, Failure>> where Failure : Swift.Error
 public struct Expectation<T> {
   public let expression: Nimble.Expression<T>
   public init(expression: Nimble.Expression<T>)
   public func verify(_ pass: Swift.Bool, _ message: Nimble.FailureMessage)
-  @available(*, deprecated, message: "Use Predicate instead")
-  @discardableResult
-  public func to<U>(_ matcher: U, description: Swift.String? = nil) -> Nimble.Expectation<T> where T == U.ValueType, U : Nimble.Matcher
-  @available(*, deprecated, message: "Use Predicate instead")
-  @discardableResult
-  public func toNot<U>(_ matcher: U, description: Swift.String? = nil) -> Nimble.Expectation<T> where T == U.ValueType, U : Nimble.Matcher
-  @available(*, deprecated, message: "Use Predicate instead")
-  @discardableResult
-  public func notTo<U>(_ matcher: U, description: Swift.String? = nil) -> Nimble.Expectation<T> where T == U.ValueType, U : Nimble.Matcher
   @discardableResult
   public func to(_ predicate: Nimble.Predicate<T>, description: Swift.String? = nil) -> Nimble.Expectation<T>
   @discardableResult
@@ -225,40 +226,52 @@ extension NMBPredicate {
   @objc public var withTimeout: (Foundation.TimeInterval) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var to: (Nimble.NMBMatcher) -> Nimble.NMBExpectation {
+  @objc public var to: (Nimble.NMBPredicate) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var toWithDescription: (Nimble.NMBMatcher, Swift.String) -> Nimble.NMBExpectation {
+  @objc public var toWithDescription: (Nimble.NMBPredicate, Swift.String) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var toNot: (Nimble.NMBMatcher) -> Nimble.NMBExpectation {
+  @objc public var toNot: (Nimble.NMBPredicate) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var toNotWithDescription: (Nimble.NMBMatcher, Swift.String) -> Nimble.NMBExpectation {
+  @objc public var toNotWithDescription: (Nimble.NMBPredicate, Swift.String) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var notTo: (Nimble.NMBMatcher) -> Nimble.NMBExpectation {
+  @objc public var notTo: (Nimble.NMBPredicate) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var notToWithDescription: (Nimble.NMBMatcher, Swift.String) -> Nimble.NMBExpectation {
+  @objc public var notToWithDescription: (Nimble.NMBPredicate, Swift.String) -> Nimble.NMBExpectation {
     @objc get
   }
-  @objc public var toEventually: (Nimble.NMBMatcher) -> Swift.Void {
+  @objc public var toEventually: (Nimble.NMBPredicate) -> Swift.Void {
     @objc get
   }
-  @objc public var toEventuallyWithDescription: (Nimble.NMBMatcher, Swift.String) -> Swift.Void {
+  @objc public var toEventuallyWithDescription: (Nimble.NMBPredicate, Swift.String) -> Swift.Void {
     @objc get
   }
-  @objc public var toEventuallyNot: (Nimble.NMBMatcher) -> Swift.Void {
+  @objc public var toEventuallyNot: (Nimble.NMBPredicate) -> Swift.Void {
     @objc get
   }
-  @objc public var toEventuallyNotWithDescription: (Nimble.NMBMatcher, Swift.String) -> Swift.Void {
+  @objc public var toEventuallyNotWithDescription: (Nimble.NMBPredicate, Swift.String) -> Swift.Void {
     @objc get
   }
-  @objc public var toNotEventually: (Nimble.NMBMatcher) -> Swift.Void {
+  @objc public var toNotEventually: (Nimble.NMBPredicate) -> Swift.Void {
     @objc get
   }
-  @objc public var toNotEventuallyWithDescription: (Nimble.NMBMatcher, Swift.String) -> Swift.Void {
+  @objc public var toNotEventuallyWithDescription: (Nimble.NMBPredicate, Swift.String) -> Swift.Void {
+    @objc get
+  }
+  @objc public var toNever: (Nimble.NMBPredicate) -> Swift.Void {
+    @objc get
+  }
+  @objc public var toNeverWithDescription: (Nimble.NMBPredicate, Swift.String) -> Swift.Void {
+    @objc get
+  }
+  @objc public var neverTo: (Nimble.NMBPredicate) -> Swift.Void {
+    @objc get
+  }
+  @objc public var neverToWithDescription: (Nimble.NMBPredicate, Swift.String) -> Swift.Void {
     @objc get
   }
   @objc public class func failWithMessage(_ message: Swift.String, file: Nimble.FileString, line: Swift.UInt)
@@ -266,13 +279,11 @@ extension NMBPredicate {
   @objc override dynamic public init()
 }
 public func waitUntil(timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, file: Nimble.FileString = #file, line: Swift.UInt = #line, action: @escaping (@escaping () -> Swift.Void) -> Swift.Void)
-public func allPass<S>(_ passFunc: @escaping (S.Element?) throws -> Swift.Bool) -> Nimble.Predicate<S> where S : Swift.Sequence
-public func allPass<S>(_ passName: Swift.String, _ passFunc: @escaping (S.Element?) throws -> Swift.Bool) -> Nimble.Predicate<S> where S : Swift.Sequence
-@available(*, deprecated, message: "Use Predicate instead")
-public func allPass<S, M>(_ elementMatcher: M) -> Nimble.Predicate<S> where S : Swift.Sequence, M : Nimble.Matcher, S.Element == M.ValueType
+public func allPass<S>(_ passFunc: @escaping (S.Element) throws -> Swift.Bool) -> Nimble.Predicate<S> where S : Swift.Sequence
+public func allPass<S>(_ passName: Swift.String, _ passFunc: @escaping (S.Element) throws -> Swift.Bool) -> Nimble.Predicate<S> where S : Swift.Sequence
 public func allPass<S>(_ elementPredicate: Nimble.Predicate<S.Element>) -> Nimble.Predicate<S> where S : Swift.Sequence
 extension NMBPredicate {
-  @objc dynamic public class func allPassMatcher(_ matcher: Nimble.NMBMatcher) -> Nimble.NMBPredicate
+  @objc dynamic public class func allPassMatcher(_ predicate: Nimble.NMBPredicate) -> Nimble.NMBPredicate
 }
 public func beAKindOf<T>(_ expectedType: T.Type) -> Nimble.Predicate<Any>
 public func beAKindOf(_ expectedClass: Swift.AnyClass) -> Nimble.Predicate<ObjectiveC.NSObject>
@@ -295,12 +306,6 @@ extension NMBPredicate {
 public func elementsEqual<Seq1, Seq2>(_ expectedValue: Seq2?) -> Nimble.Predicate<Seq1> where Seq1 : Swift.Sequence, Seq2 : Swift.Sequence, Seq1.Element : Swift.Equatable, Seq1.Element == Seq2.Element
 public func elementsEqual<Seq1, Seq2>(_ expectedValue: Seq2?, by areEquivalent: @escaping (Seq1.Element, Seq2.Element) -> Swift.Bool) -> Nimble.Predicate<Seq1> where Seq1 : Swift.Sequence, Seq2 : Swift.Sequence
 public func postNotifications<Out>(_ predicate: Nimble.Predicate<[Foundation.Notification]>, from center: Foundation.NotificationCenter = .default) -> Nimble.Predicate<Out>
-@available(*, deprecated, renamed: "postNotifications(_:from:)")
-public func postNotifications<Out>(_ predicate: Nimble.Predicate<[Foundation.Notification]>, fromNotificationCenter center: Foundation.NotificationCenter) -> Nimble.Predicate<Out>
-@available(*, deprecated, message: "Use Predicate instead")
-public func postNotifications<T>(_ notificationsMatcher: T, from center: Foundation.NotificationCenter = .default) -> Nimble.Predicate<Any> where T : Nimble.Matcher, T.ValueType == [Foundation.Notification]
-@available(*, deprecated, renamed: "postNotifications(_:from:)")
-public func postNotifications<T>(_ notificationsMatcher: T, fromNotificationCenter center: Foundation.NotificationCenter) -> Nimble.Predicate<Any> where T : Nimble.Matcher, T.ValueType == [Foundation.Notification]
 public struct AssertionRecord : Swift.CustomStringConvertible {
   public let success: Swift.Bool
   public let message: Nimble.FailureMessage
@@ -330,39 +335,48 @@ public func equal<T>(_ expectedValue: T?) -> Nimble.Predicate<T> where T : Swift
 public func equal<T>(_ expectedValue: [T?]) -> Nimble.Predicate<[T?]> where T : Swift.Equatable
 public func equal<T>(_ expectedValue: Swift.Set<T>?) -> Nimble.Predicate<Swift.Set<T>> where T : Swift.Hashable
 public func equal<T>(_ expectedValue: Swift.Set<T>?) -> Nimble.Predicate<Swift.Set<T>> where T : Swift.Comparable, T : Swift.Hashable
+public func == <T>(lhs: Nimble.Expectation<T>, rhs: T) where T : Swift.Equatable
 public func == <T>(lhs: Nimble.Expectation<T>, rhs: T?) where T : Swift.Equatable
+public func != <T>(lhs: Nimble.Expectation<T>, rhs: T) where T : Swift.Equatable
 public func != <T>(lhs: Nimble.Expectation<T>, rhs: T?) where T : Swift.Equatable
 public func == <T>(lhs: Nimble.Expectation<[T]>, rhs: [T]?) where T : Swift.Equatable
 public func != <T>(lhs: Nimble.Expectation<[T]>, rhs: [T]?) where T : Swift.Equatable
+public func == <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>) where T : Swift.Hashable
 public func == <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>?) where T : Swift.Hashable
+public func != <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>) where T : Swift.Hashable
 public func != <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>?) where T : Swift.Hashable
+public func == <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>) where T : Swift.Comparable, T : Swift.Hashable
 public func == <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>?) where T : Swift.Comparable, T : Swift.Hashable
+public func != <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>) where T : Swift.Comparable, T : Swift.Hashable
 public func != <T>(lhs: Nimble.Expectation<Swift.Set<T>>, rhs: Swift.Set<T>?) where T : Swift.Comparable, T : Swift.Hashable
 public func == <T, C>(lhs: Nimble.Expectation<[T : C]>, rhs: [T : C]?) where T : Swift.Hashable, C : Swift.Equatable
 public func != <T, C>(lhs: Nimble.Expectation<[T : C]>, rhs: [T : C]?) where T : Swift.Hashable, C : Swift.Equatable
 extension NMBPredicate {
   @objc dynamic public class func equalMatcher(_ expected: ObjectiveC.NSObject) -> Nimble.NMBPredicate
 }
+public func equal<T1, T2>(_ expectedValue: (T1, T2)?) -> Nimble.Predicate<(T1, T2)> where T1 : Swift.Equatable, T2 : Swift.Equatable
+public func == <T1, T2>(lhs: Nimble.Expectation<(T1, T2)>, rhs: (T1, T2)?) where T1 : Swift.Equatable, T2 : Swift.Equatable
+public func != <T1, T2>(lhs: Nimble.Expectation<(T1, T2)>, rhs: (T1, T2)?) where T1 : Swift.Equatable, T2 : Swift.Equatable
+public func equal<T1, T2, T3>(_ expectedValue: (T1, T2, T3)?) -> Nimble.Predicate<(T1, T2, T3)> where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable
+public func == <T1, T2, T3>(lhs: Nimble.Expectation<(T1, T2, T3)>, rhs: (T1, T2, T3)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable
+public func != <T1, T2, T3>(lhs: Nimble.Expectation<(T1, T2, T3)>, rhs: (T1, T2, T3)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable
+public func equal<T1, T2, T3, T4>(_ expectedValue: (T1, T2, T3, T4)?) -> Nimble.Predicate<(T1, T2, T3, T4)> where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable
+public func == <T1, T2, T3, T4>(lhs: Nimble.Expectation<(T1, T2, T3, T4)>, rhs: (T1, T2, T3, T4)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable
+public func != <T1, T2, T3, T4>(lhs: Nimble.Expectation<(T1, T2, T3, T4)>, rhs: (T1, T2, T3, T4)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable
+public func equal<T1, T2, T3, T4, T5>(_ expectedValue: (T1, T2, T3, T4, T5)?) -> Nimble.Predicate<(T1, T2, T3, T4, T5)> where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable, T5 : Swift.Equatable
+public func == <T1, T2, T3, T4, T5>(lhs: Nimble.Expectation<(T1, T2, T3, T4, T5)>, rhs: (T1, T2, T3, T4, T5)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable, T5 : Swift.Equatable
+public func != <T1, T2, T3, T4, T5>(lhs: Nimble.Expectation<(T1, T2, T3, T4, T5)>, rhs: (T1, T2, T3, T4, T5)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable, T5 : Swift.Equatable
+public func equal<T1, T2, T3, T4, T5, T6>(_ expectedValue: (T1, T2, T3, T4, T5, T6)?) -> Nimble.Predicate<(T1, T2, T3, T4, T5, T6)> where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable, T5 : Swift.Equatable, T6 : Swift.Equatable
+public func == <T1, T2, T3, T4, T5, T6>(lhs: Nimble.Expectation<(T1, T2, T3, T4, T5, T6)>, rhs: (T1, T2, T3, T4, T5, T6)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable, T5 : Swift.Equatable, T6 : Swift.Equatable
+public func != <T1, T2, T3, T4, T5, T6>(lhs: Nimble.Expectation<(T1, T2, T3, T4, T5, T6)>, rhs: (T1, T2, T3, T4, T5, T6)?) where T1 : Swift.Equatable, T2 : Swift.Equatable, T3 : Swift.Equatable, T4 : Swift.Equatable, T5 : Swift.Equatable, T6 : Swift.Equatable
+public func beWithin<T>(_ range: Swift.Range<T>) -> Nimble.Predicate<T> where T : Swift.Comparable
+public func beWithin<T>(_ range: Swift.ClosedRange<T>) -> Nimble.Predicate<T> where T : Swift.Comparable
 public func beLessThan<T>(_ expectedValue: T?) -> Nimble.Predicate<T> where T : Swift.Comparable
 public func < <T>(lhs: Nimble.Expectation<T>, rhs: T) where T : Swift.Comparable
 public func beLessThan(_ expectedValue: Nimble.NMBComparable?) -> Nimble.Predicate<Nimble.NMBComparable>
 public func < (lhs: Nimble.Expectation<Nimble.NMBComparable>, rhs: Nimble.NMBComparable?)
 extension NMBPredicate {
   @objc dynamic public class func beLessThanMatcher(_ expected: Nimble.NMBComparable?) -> Nimble.NMBPredicate
-}
-public typealias MatcherBlock = (Nimble.Expression<ObjectiveC.NSObject>, Nimble.FailureMessage) throws -> Swift.Bool
-public typealias FullMatcherBlock = (Nimble.Expression<ObjectiveC.NSObject>, Nimble.FailureMessage, Swift.Bool) throws -> Swift.Bool
-@objc @available(*, deprecated, message: "Use NMBPredicate instead")
-public class NMBObjCMatcher : ObjectiveC.NSObject, Nimble.NMBMatcher {
-  public init(canMatchNil: Swift.Bool, matcher: @escaping Nimble.MatcherBlock, notMatcher: @escaping Nimble.MatcherBlock)
-  convenience public init(matcher: @escaping Nimble.MatcherBlock)
-  convenience public init(canMatchNil: Swift.Bool, matcher: @escaping Nimble.MatcherBlock)
-  convenience public init(matcher: @escaping Nimble.FullMatcherBlock)
-  convenience public init(canMatchNil: Swift.Bool, matcher: @escaping Nimble.FullMatcherBlock)
-  @objc public func matches(_ actualBlock: @escaping () -> ObjectiveC.NSObject?, failureMessage: Nimble.FailureMessage, location: Nimble.SourceLocation) -> Swift.Bool
-  @objc public func doesNotMatch(_ actualBlock: @escaping () -> ObjectiveC.NSObject?, failureMessage: Nimble.FailureMessage, location: Nimble.SourceLocation) -> Swift.Bool
-  @objc deinit
-  @objc override dynamic public init()
 }
 public func beGreaterThan<T>(_ expectedValue: T?) -> Nimble.Predicate<T> where T : Swift.Comparable
 public func > <T>(lhs: Nimble.Expectation<T>, rhs: T) where T : Swift.Comparable
@@ -378,16 +392,6 @@ public var NimbleAssertionHandler: Nimble.AssertionHandler
 public func matchError<T>(_ error: T) -> Nimble.Predicate<Swift.Error> where T : Swift.Error
 public func matchError<T>(_ error: T) -> Nimble.Predicate<Swift.Error> where T : Swift.Equatable, T : Swift.Error
 public func matchError<T>(_ errorType: T.Type) -> Nimble.Predicate<Swift.Error> where T : Swift.Error
-@available(*, deprecated, message: "Use Predicate instead")
-public protocol Matcher {
-  associatedtype ValueType
-  func matches(_ actualExpression: Nimble.Expression<Self.ValueType>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  func doesNotMatch(_ actualExpression: Nimble.Expression<Self.ValueType>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-}
-@objc public protocol NMBMatcher {
-  @objc func matches(_ actualBlock: @escaping () -> ObjectiveC.NSObject?, failureMessage: Nimble.FailureMessage, location: Nimble.SourceLocation) -> Swift.Bool
-  @objc func doesNotMatch(_ actualBlock: @escaping () -> ObjectiveC.NSObject?, failureMessage: Nimble.FailureMessage, location: Nimble.SourceLocation) -> Swift.Bool
-}
 public protocol NMBContainer {
   func contains(_ anObject: Any) -> Swift.Bool
 }
@@ -415,21 +419,6 @@ extension NSArray : Nimble.NMBOrderedCollection {
 }
 public protocol NMBDoubleConvertible {
   var doubleValue: Swift.CDouble { get }
-}
-extension Double : Nimble.NMBDoubleConvertible {
-  public var doubleValue: Swift.CDouble {
-    get
-  }
-}
-extension Float : Nimble.NMBDoubleConvertible {
-  public var doubleValue: Swift.CDouble {
-    get
-  }
-}
-extension CGFloat : Nimble.NMBDoubleConvertible {
-  public var doubleValue: Swift.CDouble {
-    get
-  }
 }
 extension NSNumber : Nimble.NMBDoubleConvertible {
 }
@@ -553,30 +542,6 @@ indirect public enum ExpectationMessage {
   @objc override dynamic public init()
   @objc deinit
 }
-@available(*, deprecated, message: "Use Predicate instead")
-public struct MatcherFunc<T> : Nimble.Matcher {
-  public let matcher: (Nimble.Expression<T>, Nimble.FailureMessage) throws -> Swift.Bool
-  public init(_ matcher: @escaping (Nimble.Expression<T>, Nimble.FailureMessage) throws -> Swift.Bool)
-  public func matches(_ actualExpression: Nimble.Expression<T>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  public func doesNotMatch(_ actualExpression: Nimble.Expression<T>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  @available(*, deprecated, message: "Use Predicate directly instead")
-  public var predicate: Nimble.Predicate<T> {
-    get
-  }
-  public typealias ValueType = T
-}
-@available(*, deprecated, message: "Use Predicate instead")
-public struct NonNilMatcherFunc<T> : Nimble.Matcher {
-  public let matcher: (Nimble.Expression<T>, Nimble.FailureMessage) throws -> Swift.Bool
-  public init(_ matcher: @escaping (Nimble.Expression<T>, Nimble.FailureMessage) throws -> Swift.Bool)
-  public func matches(_ actualExpression: Nimble.Expression<T>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  public func doesNotMatch(_ actualExpression: Nimble.Expression<T>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  @available(*, deprecated, message: "Use Predicate directly instead")
-  public var predicate: Nimble.Predicate<T> {
-    get
-  }
-  public typealias ValueType = T
-}
 public func beEmpty<S>() -> Nimble.Predicate<S> where S : Swift.Sequence
 public func beEmpty<S>() -> Nimble.Predicate<S> where S : Swift.SetAlgebra
 public func beEmpty<S>() -> Nimble.Predicate<S> where S : Swift.Sequence, S : Swift.SetAlgebra
@@ -592,31 +557,27 @@ public struct AsyncDefaults {
   public static var timeout: Dispatch.DispatchTimeInterval
   public static var pollInterval: Dispatch.DispatchTimeInterval
 }
-extension AsyncDefaults {
-  @available(*, unavailable, renamed: "timeout")
-  public static var Timeout: Swift.Double
-  @available(*, unavailable, renamed: "pollInterval")
-  public static var PollInterval: Swift.Double
-}
 extension Expectation {
   public func toEventually(_ predicate: Nimble.Predicate<T>, timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil)
   public func toEventuallyNot(_ predicate: Nimble.Predicate<T>, timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil)
   public func toNotEventually(_ predicate: Nimble.Predicate<T>, timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil)
-}
-@available(*, deprecated, message: "Use Predicate instead")
-extension Expectation {
-  public func toEventually<U>(_ matcher: U, timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil) where T == U.ValueType, U : Nimble.Matcher
-  public func toEventuallyNot<U>(_ matcher: U, timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil) where T == U.ValueType, U : Nimble.Matcher
-  public func toNotEventually<U>(_ matcher: U, timeout: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil) where T == U.ValueType, U : Nimble.Matcher
+  public func toNever(_ predicate: Nimble.Predicate<T>, until: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil)
+  public func neverTo(_ predicate: Nimble.Predicate<T>, until: Dispatch.DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: Dispatch.DispatchTimeInterval = AsyncDefaults.pollInterval, description: Swift.String? = nil)
 }
 public func satisfyAllOf<T>(_ predicates: Nimble.Predicate<T>...) -> Nimble.Predicate<T>
-@available(*, deprecated, message: "Use Predicate instead")
-public func satisfyAllOf<T, U>(_ matchers: U...) -> Nimble.Predicate<T> where T == U.ValueType, U : Nimble.Matcher
+public func satisfyAllOf<T>(_ predicates: [Nimble.Predicate<T>]) -> Nimble.Predicate<T>
 public func && <T>(left: Nimble.Predicate<T>, right: Nimble.Predicate<T>) -> Nimble.Predicate<T>
 extension NMBPredicate {
-  @objc dynamic public class func satisfyAllOfMatcher(_ matchers: [Nimble.NMBMatcher]) -> Nimble.NMBPredicate
+  @objc dynamic public class func satisfyAllOfMatcher(_ predicates: [Nimble.NMBPredicate]) -> Nimble.NMBPredicate
 }
 public func beNil<T>() -> Nimble.Predicate<T>
+extension Expectation {
+  public struct Nil : Swift.ExpressibleByNilLiteral {
+    public init(nilLiteral: ())
+  }
+  public static func == (lhs: Nimble.Expectation<T>, rhs: Nimble.Expectation<T>.Nil)
+  public static func != (lhs: Nimble.Expectation<T>, rhs: Nimble.Expectation<T>.Nil)
+}
 extension NMBPredicate {
   @objc dynamic public class func beNilMatcher() -> Nimble.NMBPredicate
 }
@@ -637,15 +598,10 @@ public func fail(_ message: Swift.String, location: Nimble.SourceLocation)
 public func fail(_ message: Swift.String, file: Nimble.FileString = #file, line: Swift.UInt = #line)
 public func fail(_ file: Nimble.FileString = #file, line: Swift.UInt = #line)
 public func satisfyAnyOf<T>(_ predicates: Nimble.Predicate<T>...) -> Nimble.Predicate<T>
-@available(*, deprecated, message: "Use Predicate instead")
-public func satisfyAnyOf<T, U>(_ matchers: U...) -> Nimble.Predicate<T> where T == U.ValueType, U : Nimble.Matcher
+public func satisfyAnyOf<T>(_ predicates: [Nimble.Predicate<T>]) -> Nimble.Predicate<T>
 public func || <T>(left: Nimble.Predicate<T>, right: Nimble.Predicate<T>) -> Nimble.Predicate<T>
-@available(*, deprecated, message: "Use Predicate instead")
-public func || <T>(left: Nimble.NonNilMatcherFunc<T>, right: Nimble.NonNilMatcherFunc<T>) -> Nimble.Predicate<T>
-@available(*, deprecated, message: "Use Predicate instead")
-public func || <T>(left: Nimble.MatcherFunc<T>, right: Nimble.MatcherFunc<T>) -> Nimble.Predicate<T>
 extension NMBPredicate {
-  @objc dynamic public class func satisfyAnyOfMatcher(_ matchers: [Nimble.NMBMatcher]) -> Nimble.NMBPredicate
+  @objc dynamic public class func satisfyAnyOfMatcher(_ predicates: [Nimble.NMBPredicate]) -> Nimble.NMBPredicate
 }
 public struct Expression<T> {
   public let location: Nimble.SourceLocation
@@ -716,15 +672,6 @@ public enum PredicateStatus {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
-@available(*, deprecated, message: "Use Predicate directly instead")
-extension Predicate : Nimble.Matcher {
-  public static func fromDeprecatedFullClosure(_ matcher: @escaping (Nimble.Expression<T>, Nimble.FailureMessage, Swift.Bool) throws -> Swift.Bool) -> Nimble.Predicate<T>
-  public static func fromDeprecatedClosure(_ matcher: @escaping (Nimble.Expression<T>, Nimble.FailureMessage) throws -> Swift.Bool) -> Nimble.Predicate<T>
-  public static func fromDeprecatedMatcher<M>(_ matcher: M) -> Nimble.Predicate<T> where T == M.ValueType, M : Nimble.Matcher
-  public func matches(_ actualExpression: Nimble.Expression<T>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  public func doesNotMatch(_ actualExpression: Nimble.Expression<T>, failureMessage: Nimble.FailureMessage) throws -> Swift.Bool
-  public typealias ValueType = T
-}
 extension Predicate {
   public var requireNonNil: Nimble.Predicate<T> {
     get
@@ -735,10 +682,6 @@ public typealias PredicateBlock = (Nimble.Expression<ObjectiveC.NSObject>) throw
   public init(predicate: @escaping Nimble.PredicateBlock)
   @objc override dynamic public init()
   @objc deinit
-}
-extension NMBPredicate : Nimble.NMBMatcher {
-  @objc dynamic public func matches(_ actualBlock: @escaping () -> ObjectiveC.NSObject?, failureMessage: Nimble.FailureMessage, location: Nimble.SourceLocation) -> Swift.Bool
-  @objc dynamic public func doesNotMatch(_ actualBlock: @escaping () -> ObjectiveC.NSObject?, failureMessage: Nimble.FailureMessage, location: Nimble.SourceLocation) -> Swift.Bool
 }
 @objc final public class NMBPredicateResult : ObjectiveC.NSObject {
   final public var status: Nimble.NMBPredicateStatus

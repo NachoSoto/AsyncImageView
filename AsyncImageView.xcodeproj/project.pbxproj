@@ -739,6 +739,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nachosoto.AsyncImageViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};

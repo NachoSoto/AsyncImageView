@@ -87,11 +87,19 @@ open class AsyncImageView<
 			self.requestNewImageIfReady()
 		}
 	}
+    
+    open override func didMoveToWindow() {
+        super.didMoveToWindow()
+        
+        if self.window != nil {
+            self.requestNewImageIfReady()
+        }
+    }
 
 	// MARK: -
 
 	private func requestNewImageIfReady() {
-		if self.bounds.size.width > 0 && self.bounds.size.height > 0 {
+        if self.window != nil && self.bounds.size.width > 0 && self.bounds.size.height > 0 {
 			self.requestNewImage(self.bounds.size, data: self.data)
 		}
 	}

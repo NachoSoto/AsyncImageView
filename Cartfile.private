@@ -1,4 +1,4 @@
 github "jspahrsummers/xcconfigs" "master"
-github "Quick/Quick" "master"
-github "Quick/Nimble" "master"
+github "Quick/Quick" "main"
+github "Quick/Nimble" "main"
 

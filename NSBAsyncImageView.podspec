@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.source_files  = "AsyncImageView/*.{swift}", "AsyncImageView/Renderers/*.{swift}"
   s.module_name = 'AsyncImageView'
   
-  s.dependency 'ReactiveSwift', '~> 6.7'
+  s.dependency 'ReactiveSwift', '6.7.0-rc1'
   s.swift_version = '5.0'
 end

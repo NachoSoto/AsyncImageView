@@ -40,7 +40,9 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 
 				if statusCode >= 200 && statusCode < 300 {
 					return SignalProducer(value: data)
-				} else {
+				} else if statusCode == 404 {
+                    return SignalProducer(error: .notFound)
+                } else {
 					return SignalProducer(error: .invalidStatusCode(statusCode: statusCode))
 				}
 			}
@@ -59,6 +61,7 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 public enum RemoteImageRendererError: Error {
 	case loadingError(originalError: Error)
 	case invalidResponse
+    case notFound
 	case invalidStatusCode(statusCode: Int)
 	case decodingError
 }

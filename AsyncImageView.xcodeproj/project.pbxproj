@@ -97,16 +97,13 @@
 		570994041C0903BF0010B340 /* LocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalImageRenderer.swift; path = Renderers/LocalImageRenderer.swift; sourceTree = "<group>"; };
 		570994091C090E050010B340 /* ImageProcessingRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageProcessingRenderer.swift; path = Renderers/ImageProcessingRenderer.swift; sourceTree = "<group>"; };
 		5709940D1C0912D30010B340 /* ContextRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextRenderer.swift; path = Renderers/ContextRenderer.swift; sourceTree = "<group>"; };
-		571095A71DDEC03100781D9C /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewRenderer.swift; path = Renderers/ViewRenderer.swift; sourceTree = "<group>"; };
 		571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteOrLocalImageRenderer.swift; path = Renderers/RemoteOrLocalImageRenderer.swift; sourceTree = "<group>"; };
-		571FB6261E7C4029007E44BD /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/tvOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyRenderer.swift; path = Renderers/EmptyRenderer.swift; sourceTree = "<group>"; };
 		5720ABE726611E18009B2F19 /* ReactiveSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ReactiveSwift.xcframework; path = Carthage/Build/ReactiveSwift.xcframework; sourceTree = "<group>"; };
 		5720ABEA26611E2A009B2F19 /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		5720ABEB26611E2A009B2F19 /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
 		572A4E7B1C0A4CF400FD9D9D /* ImageInflaterRendererSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInflaterRendererSpec.swift; sourceTree = "<group>"; };
-		5742CF551E3152B500EA23A0 /* ShiftOperations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShiftOperations.framework; path = Carthage/Build/iOS/ShiftOperations.framework; sourceTree = "<group>"; };
 		57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorIgnoringRenderer.swift; path = Renderers/ErrorIgnoringRenderer.swift; sourceTree = "<group>"; };
 		57817CB120CF4EAB00C338FF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		57BD68351C02598F0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,10 +133,8 @@
 		57BD68C51C02607F0077A391 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		57BD68CB1C02614B0077A391 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		57BD68CF1C0261880077A391 /* Caching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
-		57BD68E51C0269080077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		57BD68E91C0269130077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		57BD68F01C0269280077A391 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		57BD68F11C0269280077A391 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		57F5C5901C051ABB00753642 /* CachingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingSpec.swift; sourceTree = "<group>"; };
 		57F5C59A1C052A6000753642 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderData.swift; sourceTree = "<group>"; };
@@ -190,7 +185,6 @@
 				5720ABEA26611E2A009B2F19 /* Nimble.xcframework */,
 				5720ABEB26611E2A009B2F19 /* Quick.xcframework */,
 				5720ABE726611E18009B2F19 /* ReactiveSwift.xcframework */,
-				571FB6261E7C4029007E44BD /* ReactiveSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -253,11 +247,7 @@
 		57BD68841C025F410077A391 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				5742CF551E3152B500EA23A0 /* ShiftOperations.framework */,
-				571095A71DDEC03100781D9C /* ReactiveSwift.framework */,
 				57BD68F01C0269280077A391 /* Nimble.framework */,
-				57BD68F11C0269280077A391 /* Quick.framework */,
-				57BD68E51C0269080077A391 /* Result.framework */,
 				57BD688A1C025F650077A391 /* UIKit.framework */,
 			);
 			name = iOS;

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/ReactiveSwift-Swift.h</key>
 		<data>
-		l4mNnKLkrb9pi9P27Diotz75kEA=
+		uTVSLzdS4eO1KfZJWkNZdsAcPi0=
 		</data>
 		<key>Headers/ReactiveSwift.h</key>
 		<data>
@@ -14,55 +14,55 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		N79jnw3szwBnS6FOhLsaIDCQfYk=
-		</data>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
-		<data>
-		vk8vk5wokbu9jl/cDm5csZ+pTzc=
-		</data>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/arm64.swiftsourceinfo</key>
-		<data>
-		vk8vk5wokbu9jl/cDm5csZ+pTzc=
-		</data>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
-		<data>
-		K3EjdsZyeX8RlWU/r4riGYLPDSw=
-		</data>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/x86_64.swiftsourceinfo</key>
-		<data>
-		K3EjdsZyeX8RlWU/r4riGYLPDSw=
+		cVTnc4HHbSitaCcNoPuGesJcziw=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		/06F4CyYIl+qJLpxC2SIHKfi1u0=
+		CYsNJsXRcOfUQektHeiQltxQt0w=
+		</data>
+		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftinterface</key>
+		<data>
+		XxnNwWy766xaTVdvVpl87WgqXj8=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		MItsvCViLToXSu5aCn6L121z2YQ=
+		MarbDyNNi0IrTLGprndHnjsMiwY=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		/06F4CyYIl+qJLpxC2SIHKfi1u0=
+		CYsNJsXRcOfUQektHeiQltxQt0w=
+		</data>
+		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftinterface</key>
+		<data>
+		XxnNwWy766xaTVdvVpl87WgqXj8=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		MItsvCViLToXSu5aCn6L121z2YQ=
+		MarbDyNNi0IrTLGprndHnjsMiwY=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		N1X9KdJKh4B8gsraFiyCTOaUxaI=
+		yD5ovh02LeCPH1LGhpq7qoDhtAc=
+		</data>
+		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
+		<data>
+		WFB65jlF+NWEEjZssoYc/ZkiexA=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		BpCxu7/83+u6m+R0S0NwKrmPLPA=
+		RO75lJn+5hRNQBs85+1GRgKr2PY=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		N1X9KdJKh4B8gsraFiyCTOaUxaI=
+		yD5ovh02LeCPH1LGhpq7qoDhtAc=
+		</data>
+		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftinterface</key>
+		<data>
+		WFB65jlF+NWEEjZssoYc/ZkiexA=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		BpCxu7/83+u6m+R0S0NwKrmPLPA=
+		RO75lJn+5hRNQBs85+1GRgKr2PY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -75,11 +75,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			l4mNnKLkrb9pi9P27Diotz75kEA=
+			uTVSLzdS4eO1KfZJWkNZdsAcPi0=
 			</data>
 			<key>hash2</key>
 			<data>
-			XeUn6MsG8ZNjo0hguvf+DYRyokjvwvKrBpk2G1Ev4QI=
+			K7u+QRna/JTG+O2HLntlB4vF7nOeQh6e9chzxqYHT0k=
 			</data>
 		</dict>
 		<key>Headers/ReactiveSwift.h</key>
@@ -93,136 +93,136 @@
 			79dEjRq1MPxTsntBJwXB+s+J4p0PmHDrvM6UrkOFlh8=
 			</data>
 		</dict>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			vk8vk5wokbu9jl/cDm5csZ+pTzc=
-			</data>
-			<key>hash2</key>
-			<data>
-			FX+urD5cocuimuaknY0NbBSHJD5TxvJRDCcTlwUgq0k=
-			</data>
-		</dict>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/arm64.swiftsourceinfo</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			vk8vk5wokbu9jl/cDm5csZ+pTzc=
-			</data>
-			<key>hash2</key>
-			<data>
-			FX+urD5cocuimuaknY0NbBSHJD5TxvJRDCcTlwUgq0k=
-			</data>
-		</dict>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			K3EjdsZyeX8RlWU/r4riGYLPDSw=
-			</data>
-			<key>hash2</key>
-			<data>
-			aQO4q4SkIJYmR066rIwm2ndFMYTwpLY4YVKqERcYs9g=
-			</data>
-		</dict>
-		<key>Modules/ReactiveSwift.swiftmodule/Project/x86_64.swiftsourceinfo</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			K3EjdsZyeX8RlWU/r4riGYLPDSw=
-			</data>
-			<key>hash2</key>
-			<data>
-			aQO4q4SkIJYmR066rIwm2ndFMYTwpLY4YVKqERcYs9g=
-			</data>
-		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/06F4CyYIl+qJLpxC2SIHKfi1u0=
+			CYsNJsXRcOfUQektHeiQltxQt0w=
 			</data>
 			<key>hash2</key>
 			<data>
-			7dS3YmiFmabPR3Cl8aUKSslVYZ0XyCmb7OUsk7EP91I=
+			/D8reX4XwZuAAhxnnG49Gb6Gxj2L7zpUXKqVkCpl3Pc=
+			</data>
+		</dict>
+		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XxnNwWy766xaTVdvVpl87WgqXj8=
+			</data>
+			<key>hash2</key>
+			<data>
+			lbqUR29wyBKV3Mnh2fkF0g9rWIbPSpGsWPpG5wOu8/Y=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MItsvCViLToXSu5aCn6L121z2YQ=
+			MarbDyNNi0IrTLGprndHnjsMiwY=
 			</data>
 			<key>hash2</key>
 			<data>
-			jde2Ngm0NSmnAfPqpZAHbXg5WsXHBOnAX49dzNF0yt0=
+			DV11oOxDUrzO+QvuxnKjCl+E6KJf4GrgQ4s7aBkjRbc=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/06F4CyYIl+qJLpxC2SIHKfi1u0=
+			CYsNJsXRcOfUQektHeiQltxQt0w=
 			</data>
 			<key>hash2</key>
 			<data>
-			7dS3YmiFmabPR3Cl8aUKSslVYZ0XyCmb7OUsk7EP91I=
+			/D8reX4XwZuAAhxnnG49Gb6Gxj2L7zpUXKqVkCpl3Pc=
+			</data>
+		</dict>
+		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XxnNwWy766xaTVdvVpl87WgqXj8=
+			</data>
+			<key>hash2</key>
+			<data>
+			lbqUR29wyBKV3Mnh2fkF0g9rWIbPSpGsWPpG5wOu8/Y=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MItsvCViLToXSu5aCn6L121z2YQ=
+			MarbDyNNi0IrTLGprndHnjsMiwY=
 			</data>
 			<key>hash2</key>
 			<data>
-			jde2Ngm0NSmnAfPqpZAHbXg5WsXHBOnAX49dzNF0yt0=
+			DV11oOxDUrzO+QvuxnKjCl+E6KJf4GrgQ4s7aBkjRbc=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			N1X9KdJKh4B8gsraFiyCTOaUxaI=
+			yD5ovh02LeCPH1LGhpq7qoDhtAc=
 			</data>
 			<key>hash2</key>
 			<data>
-			q08iS/xGLLGzaIpIY8ZIR5Mnr+wVBhRaiHM8QWbm9kw=
+			t51CwHs26ODBgfRz5caCEZB6fE5GQUJM8sDdC0tsuog=
+			</data>
+		</dict>
+		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WFB65jlF+NWEEjZssoYc/ZkiexA=
+			</data>
+			<key>hash2</key>
+			<data>
+			gnR8+uCQXnNA0OmV+aMAfwYnscAeZPcgzl8RzyTg/0g=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BpCxu7/83+u6m+R0S0NwKrmPLPA=
+			RO75lJn+5hRNQBs85+1GRgKr2PY=
 			</data>
 			<key>hash2</key>
 			<data>
-			B3f9cieNR7sAX4VUrk6C4qf/32jlDB4n6XSbG3n8Pgg=
+			AD0FHw84M02rrWoajFNa2/0Tz4uwGJt3fc9EUap+t58=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			N1X9KdJKh4B8gsraFiyCTOaUxaI=
+			yD5ovh02LeCPH1LGhpq7qoDhtAc=
 			</data>
 			<key>hash2</key>
 			<data>
-			q08iS/xGLLGzaIpIY8ZIR5Mnr+wVBhRaiHM8QWbm9kw=
+			t51CwHs26ODBgfRz5caCEZB6fE5GQUJM8sDdC0tsuog=
+			</data>
+		</dict>
+		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WFB65jlF+NWEEjZssoYc/ZkiexA=
+			</data>
+			<key>hash2</key>
+			<data>
+			gnR8+uCQXnNA0OmV+aMAfwYnscAeZPcgzl8RzyTg/0g=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BpCxu7/83+u6m+R0S0NwKrmPLPA=
+			RO75lJn+5hRNQBs85+1GRgKr2PY=
 			</data>
 			<key>hash2</key>
 			<data>
-			B3f9cieNR7sAX4VUrk6C4qf/32jlDB4n6XSbG3n8Pgg=
+			AD0FHw84M02rrWoajFNa2/0Tz4uwGJt3fc9EUap+t58=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

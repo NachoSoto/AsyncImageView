@@ -35,13 +35,13 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 					failWith: .invalidResponse
 				)
 			}
-			.flatMap(.merge) { (data, response) -> SignalProducer<Foundation.Data, RemoteImageRendererError> in
+			.flatMap(.merge) { (content, response) -> SignalProducer<Foundation.Data, RemoteImageRendererError> in
 				let statusCode = response.statusCode
 
 				if statusCode >= 200 && statusCode < 300 {
-					return SignalProducer(value: data)
+					return SignalProducer(value: content)
 				} else if statusCode == 404 {
-                    return SignalProducer(error: .notFound)
+                    return SignalProducer(error: .notFound(url: data.imageURL))
                 } else {
 					return SignalProducer(error: .invalidStatusCode(statusCode: statusCode))
 				}
@@ -61,7 +61,7 @@ public final class RemoteImageRenderer<T: RemoteRenderDataType>: RendererType {
 public enum RemoteImageRendererError: Error {
 	case loadingError(originalError: Error)
 	case invalidResponse
-    case notFound
+    case notFound(url: URL)
 	case invalidStatusCode(statusCode: Int)
 	case decodingError
 }

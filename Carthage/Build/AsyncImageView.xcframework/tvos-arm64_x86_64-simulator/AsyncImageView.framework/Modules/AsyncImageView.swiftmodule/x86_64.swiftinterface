@@ -1,0 +1,308 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
+// swift-module-flags: -target x86_64-apple-tvos13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AsyncImageView
+@_exported import AsyncImageView
+import Combine
+import CoreGraphics
+import Foundation
+import ReactiveSwift
+import Swift
+import SwiftUI
+import UIKit
+import _Concurrency
+public protocol LocalRenderDataType : AsyncImageView.RenderDataType {
+  var image: UIKit.UIImage { get }
+}
+final public class LocalImageRenderer<T> : AsyncImageView.RendererType where T : AsyncImageView.LocalRenderDataType {
+  public init(scheduler: ReactiveSwift.Scheduler = QueueScheduler())
+  final public func renderImageWithData(_ data: T) -> ReactiveSwift.SignalProducer<UIKit.UIImage, Swift.Never>
+  public typealias Data = T
+  public typealias Error = Swift.Never
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+final public class SimpleImageProcessingRenderer<Renderer> : AsyncImageView.RendererType where Renderer : AsyncImageView.RendererType {
+  public typealias Block = (_ image: UIKit.UIImage, _ data: Renderer.Data) -> UIKit.UIImage
+  public init(renderer: Renderer, renderingBlock: @escaping AsyncImageView.SimpleImageProcessingRenderer<Renderer>.Block, schedulerCreator: @escaping () -> ReactiveSwift.Scheduler = { QueueScheduler() })
+  final public func renderImageWithData(_ data: Renderer.Data) -> ReactiveSwift.SignalProducer<UIKit.UIImage, Renderer.Error>
+  public typealias Data = Renderer.Data
+  public typealias Error = Renderer.Error
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+extension AsyncImageView.RendererType {
+  public func mapImage(function: @escaping AsyncImageView.SimpleImageProcessingRenderer<Self>.Block) -> AsyncImageView.SimpleImageProcessingRenderer<Self>
+}
+public protocol RemoteRenderDataType : AsyncImageView.RenderDataType {
+  var imageURL: Foundation.URL { get }
+}
+final public class RemoteImageRenderer<T> : AsyncImageView.RendererType where T : AsyncImageView.RemoteRenderDataType {
+  public init(session: Foundation.URLSession = URLSession.shared)
+  final public func renderImageWithData(_ data: T) -> ReactiveSwift.SignalProducer<UIKit.UIImage, AsyncImageView.RemoteImageRendererError>
+  public typealias Data = T
+  public typealias Error = AsyncImageView.RemoteImageRendererError
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+public enum RemoteImageRendererError : Swift.Error {
+  case loadingError(originalError: Swift.Error)
+  case invalidResponse
+  case notFound(url: Foundation.URL)
+  case invalidStatusCode(statusCode: Swift.Int)
+  case decodingError
+}
+public protocol ImageViewDataType {
+  associatedtype RenderData : AsyncImageView.RenderDataType
+  func renderDataWithSize(_ size: CoreGraphics.CGSize) -> Self.RenderData
+}
+@_Concurrency.MainActor(unsafe) open class AsyncImageView<Data, ImageViewData, Renderer, PlaceholderRenderer> : UIKit.UIImageView where Data == ImageViewData.RenderData, ImageViewData : AsyncImageView.ImageViewDataType, Renderer : AsyncImageView.RendererType, PlaceholderRenderer : AsyncImageView.RendererType, ImageViewData.RenderData == Renderer.Data, Renderer.Data == PlaceholderRenderer.Data, Renderer.Error == Swift.Never, Renderer.RenderResult == PlaceholderRenderer.RenderResult, PlaceholderRenderer.Error == Swift.Never {
+  @_Concurrency.MainActor(unsafe) public init(initialFrame: CoreGraphics.CGRect, renderer: Renderer, placeholderRenderer: PlaceholderRenderer? = nil, uiScheduler: ReactiveSwift.Scheduler = UIScheduler(), imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler())
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var frame: CoreGraphics.CGRect {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var bounds: CoreGraphics.CGRect {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) final public var data: ImageViewData? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToWindow()
+  @objc deinit
+}
+final public class ErrorIgnoringRenderer<Renderer> : AsyncImageView.RendererType where Renderer : AsyncImageView.RendererType {
+  public init(renderer: Renderer, handler: ((Renderer.Error) -> ())?)
+  final public func renderImageWithData(_ data: Renderer.Data) -> ReactiveSwift.SignalProducer<Renderer.RenderResult, Swift.Never>
+  public typealias Data = Renderer.Data
+  public typealias Error = Swift.Never
+  public typealias RenderResult = Renderer.RenderResult
+  @objc deinit
+}
+extension AsyncImageView.RendererType {
+  public func ignoreErrors() -> AsyncImageView.ErrorIgnoringRenderer<Self>
+  public func logAndIgnoreErrors(handler: @escaping (Self.Error) -> ()) -> AsyncImageView.ErrorIgnoringRenderer<Self>
+}
+public protocol CacheType {
+  associatedtype Key
+  associatedtype Value
+  func valueForKey(_ key: Self.Key) -> Self.Value?
+  func setValue(_ value: Self.Value?, forKey key: Self.Key)
+}
+final public class InMemoryCache<K, V> : AsyncImageView.CacheType where K : Swift.Hashable {
+  public init(cacheName: Swift.String)
+  final public func valueForKey(_ key: K) -> V?
+  final public func setValue(_ value: V?, forKey key: K)
+  public typealias Key = K
+  public typealias Value = V
+  @objc deinit
+}
+public protocol DataFileType {
+  var subdirectory: Swift.String? { get }
+  var uniqueFilename: Swift.String { get }
+}
+public protocol NSDataConvertible {
+  init?(data: Foundation.Data)
+  var data: Foundation.Data? { get }
+}
+public func diskCacheDefaultCacheDirectory() -> Foundation.URL
+final public class DiskCache<K, V> : AsyncImageView.CacheType where K : AsyncImageView.DataFileType, V : AsyncImageView.NSDataConvertible {
+  public static func onCacheSubdirectory(_ directoryName: Swift.String) -> AsyncImageView.DiskCache<K, V>
+  public init(rootDirectory: Foundation.URL)
+  final public func valueForKey(_ key: K) -> V?
+  final public func setValue(_ value: V?, forKey key: K)
+  public typealias Key = K
+  public typealias Value = V
+  @objc deinit
+}
+final public class ImageInflaterRenderer<Data, RenderResult, Error> : AsyncImageView.RendererType where Data : AsyncImageView.RenderDataType, RenderResult : AsyncImageView.RenderResultType, Error : Swift.Error {
+  public typealias ContentMode = AsyncImageView.ImageInflaterRendererContentMode
+  public init<Renderer>(renderer: Renderer, screenScale: CoreGraphics.CGFloat, opaque: Swift.Bool, contentMode: AsyncImageView.ImageInflaterRenderer<Data, RenderResult, Error>.ContentMode = .defaultMode) where Data == Renderer.Data, RenderResult == Renderer.RenderResult, Error == Renderer.Error, Renderer : AsyncImageView.RendererType
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<UIKit.UIImage, Error>
+  @objc deinit
+}
+public enum ImageInflaterRendererContentMode {
+  case aspectFill
+  case aspectFit
+  public static let defaultMode: AsyncImageView.ImageInflaterRendererContentMode
+  public static func == (a: AsyncImageView.ImageInflaterRendererContentMode, b: AsyncImageView.ImageInflaterRendererContentMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension AsyncImageView.RendererType {
+  public func inflatedWithScale(_ screenScale: CoreGraphics.CGFloat, opaque: Swift.Bool, contentMode: AsyncImageView.ImageInflaterRendererContentMode = .defaultMode) -> AsyncImageView.ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error>
+}
+public struct InflaterSizeCalculator {
+  public static func drawingRectForRenderingWithAspectFill(imageSize: CoreGraphics.CGSize, inSize canvasSize: CoreGraphics.CGSize) -> CoreGraphics.CGRect
+  public static func drawingRectForRenderingWithAspectFit(imageSize: CoreGraphics.CGSize, inSize canvasSize: CoreGraphics.CGSize) -> CoreGraphics.CGRect
+}
+final public class EmptyRenderer<Data, RenderResult> : AsyncImageView.RendererType where Data : AsyncImageView.RenderDataType, RenderResult : AsyncImageView.RenderResultType {
+  public init()
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<RenderResult, Swift.Never>
+  public typealias Error = Swift.Never
+  @objc deinit
+}
+@available(iOS 10.0, tvOSApplicationExtension 10.0, *)
+final public class ContextRenderer<Data> : AsyncImageView.SynchronousRendererType where Data : AsyncImageView.RenderDataType {
+  public typealias Block = (_ context: CoreGraphics.CGContext, _ data: Data) -> ()
+  public init(scale: CoreGraphics.CGFloat, opaque: Swift.Bool, imageSize: CoreGraphics.CGSize? = nil, renderingBlock: @escaping AsyncImageView.ContextRenderer<Data>.Block)
+  final public func renderImageWithData(_ data: Data) -> UIKit.UIImage
+  @objc deinit
+}
+@available(iOS 10.0, tvOSApplicationExtension 10.0, *)
+final public class ViewRenderer<Data> : AsyncImageView.RendererType where Data : AsyncImageView.RenderDataType {
+  public typealias Block = (_ data: Data) -> UIKit.UIView
+  public init(opaque: Swift.Bool, viewCreationBlock: @escaping AsyncImageView.ViewRenderer<Data>.Block)
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<UIKit.UIImage, Swift.Never>
+  public typealias Error = Swift.Never
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+final public class OldViewRenderer<Data> : AsyncImageView.RendererType where Data : AsyncImageView.RenderDataType {
+  public typealias Block = (_ data: Data) -> UIKit.UIView
+  public init(opaque: Swift.Bool, viewCreationBlock: @escaping AsyncImageView.OldViewRenderer<Data>.Block)
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<UIKit.UIImage, Swift.Never>
+  public typealias Error = Swift.Never
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+final public class FallbackRenderer<Data, RR1, RR2, E1, E2> : AsyncImageView.RendererType where Data : AsyncImageView.RenderDataType, RR1 : AsyncImageView.RenderResultType, RR2 : AsyncImageView.RenderResultType, E1 : Swift.Error, E2 : Swift.Error {
+  public init<R1, R2>(primaryRenderer: R1, fallbackRenderer: R2) where Data == R1.Data, RR1 == R1.RenderResult, RR2 == R2.RenderResult, E1 == R1.Error, E2 == R2.Error, R1 : AsyncImageView.RendererType, R2 : AsyncImageView.RendererType, R1.Data == R2.Data
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<AsyncImageView.ImageResult, E2>
+  public typealias Error = E2
+  public typealias RenderResult = AsyncImageView.ImageResult
+  @objc deinit
+}
+extension AsyncImageView.RendererType {
+  public func fallback<Other>(_ fallbackRenderer: Other) -> AsyncImageView.FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error> where Other : AsyncImageView.RendererType, Self.Data == Other.Data
+}
+extension UIKit.UIImage : AsyncImageView.NSDataConvertible {
+  public var data: Foundation.Data? {
+    get
+  }
+}
+extension AsyncImageView.ImageResult : AsyncImageView.NSDataConvertible {
+  public init?(data: Foundation.Data)
+  public var data: Foundation.Data? {
+    get
+  }
+}
+final public class CacheRenderer<Renderer, Cache> : AsyncImageView.RendererType where Renderer : AsyncImageView.RendererType, Cache : AsyncImageView.CacheType, Renderer.Data == Cache.Key, Renderer.RenderResult == Cache.Value {
+  public init(renderer: Renderer, cache: Cache)
+  final public func renderImageWithData(_ data: Renderer.Data) -> ReactiveSwift.SignalProducer<AsyncImageView.ImageResult, Renderer.Error>
+  public typealias Data = Renderer.Data
+  public typealias Error = Renderer.Error
+  public typealias RenderResult = AsyncImageView.ImageResult
+  @objc deinit
+}
+extension AsyncImageView.RendererType {
+  public func withCache<Cache>(_ cache: Cache) -> AsyncImageView.CacheRenderer<Self, Cache> where Cache : AsyncImageView.CacheType, Self.Data == Cache.Key, Self.RenderResult == Cache.Value
+}
+extension AsyncImageView.RenderDataType where Self : AsyncImageView.DataFileType {
+  public var subdirectory: Swift.String? {
+    get
+  }
+}
+public func subdirectoryForSize(_ size: CoreGraphics.CGSize) -> Swift.String
+public enum RemoteOrLocalRenderData<Local, Remote> : AsyncImageView.RenderDataType where Local : AsyncImageView.LocalRenderDataType, Remote : AsyncImageView.RemoteRenderDataType {
+  case local(Local)
+  case remote(Remote)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+final public class RemoteOrLocalImageRenderer<Local, Remote> : AsyncImageView.RendererType where Local : AsyncImageView.LocalRenderDataType, Remote : AsyncImageView.RemoteRenderDataType {
+  public typealias Data = AsyncImageView.RemoteOrLocalRenderData<Local, Remote>
+  public init(session: Foundation.URLSession, scheduler: ReactiveSwift.Scheduler = QueueScheduler())
+  final public func renderImageWithData(_ data: AsyncImageView.RemoteOrLocalImageRenderer<Local, Remote>.Data) -> ReactiveSwift.SignalProducer<UIKit.UIImage, AsyncImageView.RemoteImageRendererError>
+  public typealias Error = AsyncImageView.RemoteImageRendererError
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+extension AsyncImageView.RemoteOrLocalRenderData {
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: AsyncImageView.RemoteOrLocalRenderData<Local, Remote>, rhs: AsyncImageView.RemoteOrLocalRenderData<Local, Remote>) -> Swift.Bool
+  public var size: CoreGraphics.CGSize {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class AnyRenderer<Data, RenderResult, Error> : AsyncImageView.RendererType where Data : AsyncImageView.RenderDataType, RenderResult : AsyncImageView.RenderResultType, Error : Swift.Error {
+  convenience public init<R>(_ renderer: R) where Data == R.Data, RenderResult == R.RenderResult, Error == R.Error, R : AsyncImageView.RendererType
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<RenderResult, Error>
+  @objc deinit
+}
+extension AsyncImageView.SynchronousRendererType {
+  public func asyncRenderer(_ scheduler: ReactiveSwift.Scheduler = QueueScheduler()) -> AsyncImageView.AnyRenderer<Self.Data, UIKit.UIImage, Swift.Never>
+}
+extension AsyncImageView.RendererType {
+  public func mapData<NewData>(_ mapper: @escaping (NewData) -> Self.Data) -> AsyncImageView.AnyRenderer<NewData, Self.RenderResult, Self.Error> where NewData : AsyncImageView.RenderDataType
+}
+final public class ImageProcessingRenderer<Renderer> : AsyncImageView.RendererType where Renderer : AsyncImageView.RendererType {
+  public typealias Block = (_ image: UIKit.UIImage, _ context: CoreGraphics.CGContext, _ contextSize: CoreGraphics.CGSize, _ data: Renderer.Data, _ imageDrawingBlock: () -> ()) -> ()
+  public init(renderer: Renderer, scale: CoreGraphics.CGFloat, opaque: Swift.Bool, contentMode: AsyncImageView.ImageInflaterRendererContentMode = .defaultMode, renderingBlock: @escaping AsyncImageView.ImageProcessingRenderer<Renderer>.Block, schedulerCreator: @escaping () -> ReactiveSwift.Scheduler = { QueueScheduler() })
+  final public func renderImageWithData(_ data: Renderer.Data) -> ReactiveSwift.SignalProducer<UIKit.UIImage, Renderer.Error>
+  public typealias Data = Renderer.Data
+  public typealias Error = Renderer.Error
+  public typealias RenderResult = UIKit.UIImage
+  @objc deinit
+}
+extension AsyncImageView.RendererType {
+  public func processedWithScale(scale: CoreGraphics.CGFloat, opaque: Swift.Bool, renderingBlock block: @escaping AsyncImageView.ImageProcessingRenderer<Self>.Block) -> AsyncImageView.ImageProcessingRenderer<Self>
+}
+@_Concurrency.MainActor(unsafe) public struct AsyncSwiftUIImageView<Data, ImageViewData, Renderer, PlaceholderRenderer> : SwiftUI.View where Data == ImageViewData.RenderData, ImageViewData : AsyncImageView.ImageViewDataType, Renderer : AsyncImageView.RendererType, PlaceholderRenderer : AsyncImageView.RendererType, ImageViewData.RenderData == Renderer.Data, Renderer.Data == PlaceholderRenderer.Data, Renderer.Error == Swift.Never, Renderer.RenderResult == PlaceholderRenderer.RenderResult, PlaceholderRenderer.Error == Swift.Never {
+  @_Concurrency.MainActor(unsafe) public init(renderer: Renderer, placeholderRenderer: PlaceholderRenderer? = nil, uiScheduler: ReactiveSwift.Scheduler = UIScheduler(), imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler())
+  @_Concurrency.MainActor(unsafe) public var data: ImageViewData? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14AsyncImageView0a12SwiftUIImageC0V4bodyQrvp", 0) __<Data, ImageViewData, Renderer, PlaceholderRenderer>
+}
+final public class MulticastedRenderer<Renderer, Data> : AsyncImageView.RendererType where Renderer : AsyncImageView.RendererType, Data == Renderer.Data, Renderer.Error == Swift.Never {
+  public init(renderer: Renderer)
+  @objc deinit
+  final public func renderImageWithData(_ data: Data) -> ReactiveSwift.SignalProducer<AsyncImageView.ImageResult, Swift.Never>
+  public typealias Error = Swift.Never
+  public typealias RenderResult = AsyncImageView.ImageResult
+}
+extension AsyncImageView.RendererType where Self.Error == Swift.Never {
+  public func multicasted() -> AsyncImageView.MulticastedRenderer<Self, Self.Data>
+}
+public protocol RenderDataType : Swift.Hashable {
+  var size: CoreGraphics.CGSize { get }
+}
+public protocol RenderResultType {
+  var image: UIKit.UIImage { get }
+  var cacheHit: Swift.Bool { get }
+}
+public struct ImageResult : AsyncImageView.RenderResultType {
+  public let image: UIKit.UIImage
+  public let cacheHit: Swift.Bool
+  public init(image: UIKit.UIImage, cacheHit: Swift.Bool)
+}
+extension UIKit.UIImage : AsyncImageView.RenderResultType {
+  public var image: UIKit.UIImage {
+    get
+  }
+  public var cacheHit: Swift.Bool {
+    get
+  }
+}
+public protocol RendererType {
+  associatedtype Data : AsyncImageView.RenderDataType
+  associatedtype RenderResult : AsyncImageView.RenderResultType
+  associatedtype Error : Swift.Error
+  func renderImageWithData(_ data: Self.Data) -> ReactiveSwift.SignalProducer<Self.RenderResult, Self.Error>
+}
+public protocol SynchronousRendererType {
+  associatedtype Data : AsyncImageView.RenderDataType
+  func renderImageWithData(_ data: Self.Data) -> UIKit.UIImage
+}
+extension AsyncImageView.ImageInflaterRendererContentMode : Swift.Equatable {}
+extension AsyncImageView.ImageInflaterRendererContentMode : Swift.Hashable {}

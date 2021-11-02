@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
 // swift-module-flags: -target x86_64-apple-ios13.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ReactiveSwift
 import Darwin
 import Dispatch
@@ -7,6 +7,7 @@ import Foundation
 import MachO
 @_exported import ReactiveSwift
 import Swift
+import _Concurrency
 import Darwin.POSIX.pthread
 public protocol OptionalProtocol : Swift.ExpressibleByNilLiteral {
   associatedtype Wrapped
@@ -20,7 +21,7 @@ extension Swift.Optional : ReactiveSwift.OptionalProtocol {
   public init(reconstructing value: Wrapped?)
 }
 extension ReactiveSwift.Signal {
-  public enum Event {
+  @frozen public enum Event {
     case value(Value)
     case failed(Error)
     case completed

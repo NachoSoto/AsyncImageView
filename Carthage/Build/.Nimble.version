@@ -2,27 +2,18 @@
   "commitish" : "d2c1301282cab7aa8a07db036acaaf471a5964d4",
   "iOS" : [
     {
-      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)",
-      "hash" : "69e6f2aaca45df60d4395f74ea1dab085e4cd91f7eb5238b9b882a16f89575b5",
+      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
+      "hash" : "9aa16ec435353b62144ac06da398117c16a4e3dc0f1dfd696f6a269f5ec7311b",
       "name" : "Nimble",
       "container" : "Nimble.xcframework",
       "identifier" : "ios-arm64_armv7"
     },
     {
-      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)",
-      "hash" : "bc5b93bd2445869f029537ee4e413db9aa3dcfd74f39ff0141c9df31c6f94e4e",
+      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
+      "hash" : "e0d8723d348e8ff005c108418bd045a49d36322b5148ae8d53ead5d2c78f968e",
       "name" : "Nimble",
       "container" : "Nimble.xcframework",
       "identifier" : "ios-arm64_i386_x86_64-simulator"
-    }
-  ],
-  "tvOS" : [
-    {
-      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)",
-      "hash" : "88dbcf1bfe4af075e5acf4e38ff194cc5c6c6999185ba27fe25a4f71ad8579fc",
-      "name" : "Nimble",
-      "container" : "Nimble.xcframework",
-      "identifier" : "tvos-arm64_x86_64-simulator"
     }
   ]
 }

@@ -38,8 +38,6 @@
 		57BD68401C02598F0077A391 /* AsyncImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; };
 		57BD68451C02598F0077A391 /* AsyncImageViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */; };
 		57BD68781C025DFD0077A391 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688A1C025F650077A391 /* UIKit.framework */; };
-		57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD688E1C025F7B0077A391 /* UIKit.framework */; };
 		57BD68CC1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
 		57BD68CD1C02614B0077A391 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
 		57BD68D21C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
@@ -113,8 +111,6 @@
 		57BD68441C02598F0077A391 /* AsyncImageViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageViewSpec.swift; sourceTree = "<group>"; };
 		57BD68461C02598F0077A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57BD687D1C025DFD0077A391 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		57BD688A1C025F650077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		57BD688E1C025F7B0077A391 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		57BD68951C02607F0077A391 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		57BD68971C02607F0077A391 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		57BD68981C02607F0077A391 /* Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
@@ -133,8 +129,6 @@
 		57BD68C51C02607F0077A391 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		57BD68CB1C02614B0077A391 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		57BD68CF1C0261880077A391 /* Caching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
-		57BD68E91C0269130077A391 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
-		57BD68F01C0269280077A391 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		57F5C5901C051ABB00753642 /* CachingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingSpec.swift; sourceTree = "<group>"; };
 		57F5C59A1C052A6000753642 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderData.swift; sourceTree = "<group>"; };
@@ -152,7 +146,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57BD688B1C025F660077A391 /* UIKit.framework in Frameworks */,
 				5720ABE826611E18009B2F19 /* ReactiveSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +164,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57BD688F1C025F7B0077A391 /* UIKit.framework in Frameworks */,
 				5720ABE926611E22009B2F19 /* ReactiveSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,7 +187,6 @@
 				57BD68371C02598F0077A391 /* AsyncImageView */,
 				57BD68431C02598F0077A391 /* AsyncImageViewTests */,
 				57BD68921C02607F0077A391 /* Configuration */,
-				57BD68831C025F350077A391 /* Dependencies */,
 				57BD68361C02598F0077A391 /* Products */,
 				571FB6251E7C4029007E44BD /* Frameworks */,
 			);
@@ -233,33 +224,6 @@
 				57BD68461C02598F0077A391 /* Info.plist */,
 			);
 			path = AsyncImageViewTests;
-			sourceTree = "<group>";
-		};
-		57BD68831C025F350077A391 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				57BD68841C025F410077A391 /* iOS */,
-				57BD68891C025F520077A391 /* tvOS */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		57BD68841C025F410077A391 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				57BD68F01C0269280077A391 /* Nimble.framework */,
-				57BD688A1C025F650077A391 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		57BD68891C025F520077A391 /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
-				57BD68E91C0269130077A391 /* Result.framework */,
-				57BD688E1C025F7B0077A391 /* UIKit.framework */,
-			);
-			name = tvOS;
 			sourceTree = "<group>";
 		};
 		57BD68921C02607F0077A391 /* Configuration */ = {

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/ReactiveSwift-Swift.h</key>
 		<data>
-		RJ/e+Hsl+fznGOhdGzr3Z/Xhg9c=
+		j2s0Q76lD5MS3UXt3P5u7JuEpUw=
 		</data>
 		<key>Headers/ReactiveSwift.h</key>
 		<data>
@@ -14,79 +14,79 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		8LzP2VbtNPuiJLXwO63eYaxixmo=
+		Mbke6Z6hb9781IXcN+XT/8b4q60=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ff7Px5DFuVGoN9zeCVXuLbULeBc=
+		EHzei8XKmRi2x63K5SH+QpmGwi4=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		/c1TKYv7fFaQms9iOe0zuXpEBCw=
+		R8IsgjfyaG8SKnNHXxGFntnL9js=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		HIyWDhMWwpAR++dVSRCv3aks0BA=
+		ItbzQCSQnUOckqF2J+RXlIi38tk=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		ff7Px5DFuVGoN9zeCVXuLbULeBc=
+		EHzei8XKmRi2x63K5SH+QpmGwi4=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		/c1TKYv7fFaQms9iOe0zuXpEBCw=
+		R8IsgjfyaG8SKnNHXxGFntnL9js=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		HIyWDhMWwpAR++dVSRCv3aks0BA=
+		ItbzQCSQnUOckqF2J+RXlIi38tk=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		PdiyEbCE4YpyUjhjBrERG9COnmk=
+		seff4Gk/tKmZRntM/RcmGx9YDWA=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		WrWTQmz7O5BsvvNuFLJ7cz9L8Qs=
+		5qHUSEtKLtzjPdA1VxX+6uUXTdU=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		nIXh0r5yDidOed2zu2Ag4Gi89nU=
+		OK/tn19G4hFOeG7GB4lvoo1nOE8=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/i386.swiftdoc</key>
 		<data>
-		PdiyEbCE4YpyUjhjBrERG9COnmk=
+		seff4Gk/tKmZRntM/RcmGx9YDWA=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/i386.swiftinterface</key>
 		<data>
-		WrWTQmz7O5BsvvNuFLJ7cz9L8Qs=
+		5qHUSEtKLtzjPdA1VxX+6uUXTdU=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/i386.swiftmodule</key>
 		<data>
-		nIXh0r5yDidOed2zu2Ag4Gi89nU=
+		OK/tn19G4hFOeG7GB4lvoo1nOE8=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		+aLrK6JlyyeSFlJQZfza5NXWxhs=
+		P0+xFl/HnUJzJlBJsRTCnw95NTg=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		Vm30Py0B/Z3MDynr0P9FW1GwT98=
+		p5JGIjymKzkzi8zvZMtwLyuS4kI=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		sEQm60wuHt0XCh4RGVSavVOdZ80=
+		9uIuAJcpKqxhOuzCdMRiehxFMUs=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		+aLrK6JlyyeSFlJQZfza5NXWxhs=
+		P0+xFl/HnUJzJlBJsRTCnw95NTg=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		Vm30Py0B/Z3MDynr0P9FW1GwT98=
+		p5JGIjymKzkzi8zvZMtwLyuS4kI=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		sEQm60wuHt0XCh4RGVSavVOdZ80=
+		9uIuAJcpKqxhOuzCdMRiehxFMUs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -99,11 +99,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RJ/e+Hsl+fznGOhdGzr3Z/Xhg9c=
+			j2s0Q76lD5MS3UXt3P5u7JuEpUw=
 			</data>
 			<key>hash2</key>
 			<data>
-			TmftRih0fJOUTEy/zUOhLb/XIZAistrH2oNj5aWuF6w=
+			cTvqh3dBZQS8l87OfwHocm7wgZCoaO+UcbqjKHzrIYc=
 			</data>
 		</dict>
 		<key>Headers/ReactiveSwift.h</key>
@@ -121,198 +121,198 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ff7Px5DFuVGoN9zeCVXuLbULeBc=
+			EHzei8XKmRi2x63K5SH+QpmGwi4=
 			</data>
 			<key>hash2</key>
 			<data>
-			03B6m6KawfMmThRGG78QfHY8XmuHcQ5Q0Q1YvhF/smw=
+			CoN3TgVVBW0LTqeuN3+Z5AQ8stvPzHlZTiQvDi7Xci4=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/c1TKYv7fFaQms9iOe0zuXpEBCw=
+			R8IsgjfyaG8SKnNHXxGFntnL9js=
 			</data>
 			<key>hash2</key>
 			<data>
-			gYisNFLfDPDHayZY3R0cUH5yTh1k0uE2L1saI8z0Stc=
+			Wi2ACbnXh0omzKffQA2/hCLI1vOXUXPd+sGG/nBFxx0=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HIyWDhMWwpAR++dVSRCv3aks0BA=
+			ItbzQCSQnUOckqF2J+RXlIi38tk=
 			</data>
 			<key>hash2</key>
 			<data>
-			KJu4G6bfC11lBsUU+Uc71oB0ACqDFkhkKc+PyVQxzJc=
+			Um1NmKk0Ijp+xOHkK+n6+a/THvjqWnuj77i8VbNFC0M=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ff7Px5DFuVGoN9zeCVXuLbULeBc=
+			EHzei8XKmRi2x63K5SH+QpmGwi4=
 			</data>
 			<key>hash2</key>
 			<data>
-			03B6m6KawfMmThRGG78QfHY8XmuHcQ5Q0Q1YvhF/smw=
+			CoN3TgVVBW0LTqeuN3+Z5AQ8stvPzHlZTiQvDi7Xci4=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/c1TKYv7fFaQms9iOe0zuXpEBCw=
+			R8IsgjfyaG8SKnNHXxGFntnL9js=
 			</data>
 			<key>hash2</key>
 			<data>
-			gYisNFLfDPDHayZY3R0cUH5yTh1k0uE2L1saI8z0Stc=
+			Wi2ACbnXh0omzKffQA2/hCLI1vOXUXPd+sGG/nBFxx0=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HIyWDhMWwpAR++dVSRCv3aks0BA=
+			ItbzQCSQnUOckqF2J+RXlIi38tk=
 			</data>
 			<key>hash2</key>
 			<data>
-			KJu4G6bfC11lBsUU+Uc71oB0ACqDFkhkKc+PyVQxzJc=
+			Um1NmKk0Ijp+xOHkK+n6+a/THvjqWnuj77i8VbNFC0M=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PdiyEbCE4YpyUjhjBrERG9COnmk=
+			seff4Gk/tKmZRntM/RcmGx9YDWA=
 			</data>
 			<key>hash2</key>
 			<data>
-			g3PGW2xUc+1qF6VtrZ59TihtKB6Ut3E608VPjfSyKfc=
+			GSwb93ZRdvFqk8TsgNsqE8+05Ixc0SeBH/vm8OrlsIA=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WrWTQmz7O5BsvvNuFLJ7cz9L8Qs=
+			5qHUSEtKLtzjPdA1VxX+6uUXTdU=
 			</data>
 			<key>hash2</key>
 			<data>
-			LAvfPTnDRmsn96bWym+QqKpRku+dFBrWyv14AUZajgk=
+			p3PK9bekB7688KjlplEn2PtFFe3Jswu7+DqSSkJ/GjQ=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nIXh0r5yDidOed2zu2Ag4Gi89nU=
+			OK/tn19G4hFOeG7GB4lvoo1nOE8=
 			</data>
 			<key>hash2</key>
 			<data>
-			rMwIuVtMWTlGQ/G69uqa1MfuGrXQdDOVL8DJro4ln/I=
+			sX8VZgODSLQTP8NK0qwHpZ6EeYl3ZEx/qTO5NLB53cc=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PdiyEbCE4YpyUjhjBrERG9COnmk=
+			seff4Gk/tKmZRntM/RcmGx9YDWA=
 			</data>
 			<key>hash2</key>
 			<data>
-			g3PGW2xUc+1qF6VtrZ59TihtKB6Ut3E608VPjfSyKfc=
+			GSwb93ZRdvFqk8TsgNsqE8+05Ixc0SeBH/vm8OrlsIA=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/i386.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WrWTQmz7O5BsvvNuFLJ7cz9L8Qs=
+			5qHUSEtKLtzjPdA1VxX+6uUXTdU=
 			</data>
 			<key>hash2</key>
 			<data>
-			LAvfPTnDRmsn96bWym+QqKpRku+dFBrWyv14AUZajgk=
+			p3PK9bekB7688KjlplEn2PtFFe3Jswu7+DqSSkJ/GjQ=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nIXh0r5yDidOed2zu2Ag4Gi89nU=
+			OK/tn19G4hFOeG7GB4lvoo1nOE8=
 			</data>
 			<key>hash2</key>
 			<data>
-			rMwIuVtMWTlGQ/G69uqa1MfuGrXQdDOVL8DJro4ln/I=
+			sX8VZgODSLQTP8NK0qwHpZ6EeYl3ZEx/qTO5NLB53cc=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+aLrK6JlyyeSFlJQZfza5NXWxhs=
+			P0+xFl/HnUJzJlBJsRTCnw95NTg=
 			</data>
 			<key>hash2</key>
 			<data>
-			KDGF7I6zDQY4GKCdjuzAUwj9lOxDV2jyhb8rJ0VXJG4=
+			DSZP3EgY/DD6UyTk0IMcoaksoyEpQuREbLsxg9yo1O8=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Vm30Py0B/Z3MDynr0P9FW1GwT98=
+			p5JGIjymKzkzi8zvZMtwLyuS4kI=
 			</data>
 			<key>hash2</key>
 			<data>
-			am/QqHZhszSNX/yx1ENUC7fCGewZxV2ExH2b728sQ6g=
+			yuTTvth71UHLH4CuApcGjhyoMXAk7lZztazEqPLEnjo=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sEQm60wuHt0XCh4RGVSavVOdZ80=
+			9uIuAJcpKqxhOuzCdMRiehxFMUs=
 			</data>
 			<key>hash2</key>
 			<data>
-			jxvZd2YM5DzipEebvYafUtGXu/YHpIjbUrVw9QgKp7c=
+			+u9/ryJPFnOQ3uJtxCMIuhbEj7iNcr8Hy8Xk6FB6AEY=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+aLrK6JlyyeSFlJQZfza5NXWxhs=
+			P0+xFl/HnUJzJlBJsRTCnw95NTg=
 			</data>
 			<key>hash2</key>
 			<data>
-			KDGF7I6zDQY4GKCdjuzAUwj9lOxDV2jyhb8rJ0VXJG4=
+			DSZP3EgY/DD6UyTk0IMcoaksoyEpQuREbLsxg9yo1O8=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Vm30Py0B/Z3MDynr0P9FW1GwT98=
+			p5JGIjymKzkzi8zvZMtwLyuS4kI=
 			</data>
 			<key>hash2</key>
 			<data>
-			am/QqHZhszSNX/yx1ENUC7fCGewZxV2ExH2b728sQ6g=
+			yuTTvth71UHLH4CuApcGjhyoMXAk7lZztazEqPLEnjo=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sEQm60wuHt0XCh4RGVSavVOdZ80=
+			9uIuAJcpKqxhOuzCdMRiehxFMUs=
 			</data>
 			<key>hash2</key>
 			<data>
-			jxvZd2YM5DzipEebvYafUtGXu/YHpIjbUrVw9QgKp7c=
+			+u9/ryJPFnOQ3uJtxCMIuhbEj7iNcr8Hy8Xk6FB6AEY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -1,0 +1,11 @@
+framework module AsyncImageView {
+  umbrella header "AsyncImageView.h"
+
+  export *
+  module * { export * }
+}
+
+module AsyncImageView.Swift {
+    header "AsyncImageView-Swift.h"
+    requires objc
+}

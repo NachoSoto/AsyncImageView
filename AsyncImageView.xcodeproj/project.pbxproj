@@ -351,9 +351,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 57BD68491C02598F0077A391 /* Build configuration list for PBXNativeTarget "AsyncImageView-iOS" */;
 			buildPhases = (
+				57BD68321C02598F0077A391 /* Headers */,
 				57BD68301C02598F0077A391 /* Sources */,
 				57BD68311C02598F0077A391 /* Frameworks */,
-				57BD68321C02598F0077A391 /* Headers */,
 				57BD68331C02598F0077A391 /* Resources */,
 			);
 			buildRules = (
@@ -388,9 +388,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 57BD687A1C025DFD0077A391 /* Build configuration list for PBXNativeTarget "AsyncImageView-tvOS" */;
 			buildPhases = (
+				57BD68771C025DFD0077A391 /* Headers */,
 				57BD68751C025DFD0077A391 /* Sources */,
 				57BD68761C025DFD0077A391 /* Frameworks */,
-				57BD68771C025DFD0077A391 /* Headers */,
 				57BD68791C025DFD0077A391 /* Resources */,
 			);
 			buildRules = (

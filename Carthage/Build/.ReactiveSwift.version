@@ -1,26 +1,38 @@
 {
-  "commitish" : "8c5bb1e7a862ba3aa5d763539dd6647d301527d6",
+  "Mac" : [
+
+  ],
+  "tvOS" : [
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "1ec028d053dd161f0206b5aa86a054c928d6ec10079016c7bb745145dec8b7f9",
+      "name" : "ReactiveSwift",
+      "container" : "ReactiveSwift.xcframework",
+      "identifier" : "tvos-arm64_x86_64-simulator"
+    }
+  ],
+  "commitish" : "efb2f0a6f6c8739cce8fb14148a5bd3c83f2f91d",
   "iOS" : [
     {
-      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
-      "hash" : "b1dc0704b3941df59013033b7217d38bd8d31964966805775924f0c888175e4b",
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "f908fdec2e2b060908eab90266641973575a4ccafbc29ca25a7dbd19844d7aa8",
+      "name" : "ReactiveSwift",
+      "container" : "ReactiveSwift.xcframework",
+      "identifier" : "ios-arm64"
+    },
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "eedf0d76e181b31585f772ff4bdaf8828825037ccc0384795720cafd05ce97d8",
       "name" : "ReactiveSwift",
       "container" : "ReactiveSwift.xcframework",
       "identifier" : "ios-arm64_x86_64-maccatalyst"
     },
     {
-      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
-      "hash" : "18b23b86e69a2918f81e592b80658f451d319733c8902bb685a48a17b6defadf",
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "0e6acf7e971297361eb2f64aaff90eb4b5689dea8528dd0b88a387ceb2694e7c",
       "name" : "ReactiveSwift",
       "container" : "ReactiveSwift.xcframework",
-      "identifier" : "ios-arm64_i386_x86_64-simulator"
-    },
-    {
-      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
-      "hash" : "84f3c8484e6e333ec072f807e81e28e84299c55a5750410fbd1308e4750207b2",
-      "name" : "ReactiveSwift",
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "ios-arm64_armv7"
+      "identifier" : "ios-arm64_x86_64-simulator"
     }
   ]
 }

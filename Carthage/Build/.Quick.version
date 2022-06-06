@@ -1,19 +1,28 @@
 {
-  "commitish" : "faf6b382c5c84a20a80a351a0a5b37f66e4ff850",
+  "commitish" : "312be0bb67c7e850c12d262a1287dd5382c37a70",
   "iOS" : [
     {
-      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
-      "hash" : "13dfed8d4d308c4b1b1a37ec35cf030ff4bf207df40de001d29cdfb886c452e3",
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "48bafd85f7e4faf8f88d8535dfdc52f36daad96fe0701d4e8a7229fd30abdeb3",
       "name" : "Quick",
       "container" : "Quick.xcframework",
-      "identifier" : "ios-arm64_armv7"
+      "identifier" : "ios-arm64"
     },
     {
-      "swiftToolchainVersion" : "5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)",
-      "hash" : "8db777a694c8a4f29a1432fbeed644d236940dd3a01f1f9268dafd22e0333a06",
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "a5788c34a31b9f327e2f1fe660c399817a8a2e233d2ea852d79d51ee161d67b2",
       "name" : "Quick",
       "container" : "Quick.xcframework",
-      "identifier" : "ios-arm64_i386_x86_64-simulator"
+      "identifier" : "ios-arm64_x86_64-simulator"
+    }
+  ],
+  "tvOS" : [
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)",
+      "hash" : "98566ea0d4ebd41f693b86e3b530fa77524e1e617277e150e6ab4e4d1b95c415",
+      "name" : "Quick",
+      "container" : "Quick.xcframework",
+      "identifier" : "tvos-arm64_x86_64-simulator"
     }
   ]
 }

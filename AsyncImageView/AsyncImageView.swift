@@ -17,6 +17,8 @@ public protocol ImageViewDataType {
 	func renderDataWithSize(_ size: CGSize) -> RenderData
 }
 
+#if !os(watchOS)
+
 /// A `UIImageView` that can render asynchronously.
 open class AsyncImageView<
     Data: RenderDataType,
@@ -136,6 +138,8 @@ open class AsyncImageView<
         }
 	}
 }
+
+#endif
 
 // MARK: - Constants
 

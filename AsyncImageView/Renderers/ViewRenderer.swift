@@ -11,6 +11,8 @@ import CoreGraphics
 
 import ReactiveSwift
 
+#if !os(watchOS)
+
 /// `RendererType` which generates a `UIImage` from a UIView.
 @available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
 public final class ViewRenderer<Data: RenderDataType>: RendererType {
@@ -104,3 +106,5 @@ fileprivate func createProducer<Data: RenderDataType>(
 fileprivate func draw(view: UIView, inContext context: CGContext) {
     view.layer.render(in: context)
 }
+
+#endif

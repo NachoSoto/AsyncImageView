@@ -9,6 +9,8 @@
 import UIKit
 import CoreGraphics
 
+#if !os(watchOS)
+
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
 @available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
@@ -43,3 +45,5 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
         }
     }
 }
+
+#endif

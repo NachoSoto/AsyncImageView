@@ -25,7 +25,9 @@ internal final class AsyncImageLoader<
 Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     @Published
     private(set) var renderResult: Renderer.RenderResult?
-    
+
+    private var disposable: Disposable?
+
     init(
         requestsSignal: Signal<Data?, Never>,
         renderer: Renderer,
@@ -33,7 +35,7 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         uiScheduler: ReactiveSwift.Scheduler,
         imageCreationScheduler: ReactiveSwift.Scheduler) {
 
-        requestsSignal
+        self.disposable = requestsSignal
             .skipRepeats(==)
             .observe(on: uiScheduler)
             .on(value: { [weak self] in
@@ -65,7 +67,11 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             self?.renderResult = $0
         }
     }
-    
+
+    deinit {
+        self.disposable?.dispose()
+    }
+
     private func resetImage() {
         // Avoid displaying a stale image.
         renderResult = nil

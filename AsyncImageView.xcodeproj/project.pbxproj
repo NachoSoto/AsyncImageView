@@ -20,6 +20,28 @@
 		5709940B1C090E050010B340 /* ImageProcessingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994091C090E050010B340 /* ImageProcessingRenderer.swift */; };
 		5709940E1C0912D30010B340 /* ContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709940D1C0912D30010B340 /* ContextRenderer.swift */; };
 		5709940F1C0912D30010B340 /* ContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709940D1C0912D30010B340 /* ContextRenderer.swift */; };
+		5711067428874C32006479D7 /* AsyncImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BD68381C02598F0077A391 /* AsyncImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5711067628874C32006479D7 /* LocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994041C0903BF0010B340 /* LocalImageRenderer.swift */; };
+		5711067728874C32006479D7 /* SimpleImageProcessingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786FF8BF1DA20260005BB73E /* SimpleImageProcessingRenderer.swift */; };
+		5711067828874C32006479D7 /* RemoteImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B001C0293CE00FAD2F3 /* RemoteImageRenderer.swift */; };
+		5711067928874C32006479D7 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CB1C02614B0077A391 /* AsyncImageView.swift */; };
+		5711067A28874C32006479D7 /* ErrorIgnoringRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57645A731C0AAA1F00EEDCF8 /* ErrorIgnoringRenderer.swift */; };
+		5711067B28874C32006479D7 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
+		5711067C28874C32006479D7 /* ImageInflaterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AFF1C0293CE00FAD2F3 /* ImageInflaterRenderer.swift */; };
+		5711067D28874C32006479D7 /* EmptyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */; };
+		5711067E28874C32006479D7 /* ContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709940D1C0912D30010B340 /* ContextRenderer.swift */; };
+		5711067F28874C32006479D7 /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
+		5711068028874C32006479D7 /* FallbackRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AFE1C0293CE00FAD2F3 /* FallbackRenderer.swift */; };
+		5711068128874C32006479D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
+		5711068228874C32006479D7 /* CacheRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B0C1C0294D400FAD2F3 /* CacheRenderer.swift */; };
+		5711068328874C32006479D7 /* AsyncImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119EE53245CDD6A003CBEB5 /* AsyncImageLoader.swift */; };
+		5711068428874C32006479D7 /* RemoteOrLocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */; };
+		5711068528874C32006479D7 /* AnyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1AFD1C0293CE00FAD2F3 /* AnyRenderer.swift */; };
+		5711068628874C32006479D7 /* ImageProcessingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570994091C090E050010B340 /* ImageProcessingRenderer.swift */; };
+		5711068728874C32006479D7 /* AsyncSwiftUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119EE50245CDBB7003CBEB5 /* AsyncSwiftUIImageView.swift */; };
+		5711068828874C32006479D7 /* MulticastedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570993FD1C08F7C70010B340 /* MulticastedRenderer.swift */; };
+		5711068928874C32006479D7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC1B011C0293CE00FAD2F3 /* Renderer.swift */; };
+		5711068B28874C32006479D7 /* ReactiveSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5720ABE726611E18009B2F19 /* ReactiveSwift.xcframework */; };
 		5715712F1E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
 		571571301E60C8D000D0FB1E /* ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */; };
 		571B6A121E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */; };
@@ -95,6 +117,11 @@
 		570994041C0903BF0010B340 /* LocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalImageRenderer.swift; path = Renderers/LocalImageRenderer.swift; sourceTree = "<group>"; };
 		570994091C090E050010B340 /* ImageProcessingRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageProcessingRenderer.swift; path = Renderers/ImageProcessingRenderer.swift; sourceTree = "<group>"; };
 		5709940D1C0912D30010B340 /* ContextRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextRenderer.swift; path = Renderers/ContextRenderer.swift; sourceTree = "<group>"; };
+		5711069028874C32006479D7 /* AsyncImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5711069328874C67006479D7 /* watchOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Base.xcconfig"; sourceTree = "<group>"; };
+		5711069428874C67006479D7 /* watchOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Application.xcconfig"; sourceTree = "<group>"; };
+		5711069528874C67006479D7 /* watchOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		5711069628874C67006479D7 /* watchOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		5715712E1E60C8D000D0FB1E /* ViewRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewRenderer.swift; path = Renderers/ViewRenderer.swift; sourceTree = "<group>"; };
 		571B6A111E57928000AB82B4 /* RemoteOrLocalImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteOrLocalImageRenderer.swift; path = Renderers/RemoteOrLocalImageRenderer.swift; sourceTree = "<group>"; };
 		571FE6A91C0A6A1000E566D2 /* EmptyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyRenderer.swift; path = Renderers/EmptyRenderer.swift; sourceTree = "<group>"; };
@@ -142,6 +169,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5711068A28874C32006479D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5711068B28874C32006479D7 /* ReactiveSwift.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		57BD68311C02598F0077A391 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +206,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5711069228874C67006479D7 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				5711069328874C67006479D7 /* watchOS-Base.xcconfig */,
+				5711069428874C67006479D7 /* watchOS-Application.xcconfig */,
+				5711069528874C67006479D7 /* watchOS-StaticLibrary.xcconfig */,
+				5711069628874C67006479D7 /* watchOS-Framework.xcconfig */,
+			);
+			path = watchOS;
+			sourceTree = "<group>";
+		};
 		571FB6251E7C4029007E44BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +244,7 @@
 				57BD68351C02598F0077A391 /* AsyncImageView.framework */,
 				57BD683F1C02598F0077A391 /* AsyncImageViewTests.xctest */,
 				57BD687D1C025DFD0077A391 /* AsyncImageView.framework */,
+				5711069028874C32006479D7 /* AsyncImageView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,6 +279,7 @@
 				57BD68941C02607F0077A391 /* Base */,
 				57BD68B51C02607F0077A391 /* iOS */,
 				57BD68C11C02607F0077A391 /* tvOS */,
+				5711069228874C67006479D7 /* watchOS */,
 			);
 			name = Configuration;
 			path = Carthage/Checkouts/xcconfigs;
@@ -328,6 +376,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		5711067328874C32006479D7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5711067428874C32006479D7 /* AsyncImageView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		57BD68321C02598F0077A391 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +403,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		5711067228874C32006479D7 /* AsyncImageView-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5711068D28874C32006479D7 /* Build configuration list for PBXNativeTarget "AsyncImageView-watchOS" */;
+			buildPhases = (
+				5711067328874C32006479D7 /* Headers */,
+				5711067528874C32006479D7 /* Sources */,
+				5711068A28874C32006479D7 /* Frameworks */,
+				5711068C28874C32006479D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AsyncImageView-watchOS";
+			productName = AsyncImageView;
+			productReference = 5711069028874C32006479D7 /* AsyncImageView.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		57BD68341C02598F0077A391 /* AsyncImageView-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 57BD68491C02598F0077A391 /* Build configuration list for PBXNativeTarget "AsyncImageView-iOS" */;
@@ -437,12 +511,20 @@
 			targets = (
 				57BD68341C02598F0077A391 /* AsyncImageView-iOS */,
 				57BD68741C025DFD0077A391 /* AsyncImageView-tvOS */,
+				5711067228874C32006479D7 /* AsyncImageView-watchOS */,
 				57BD683E1C02598F0077A391 /* AsyncImageViewTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5711068C28874C32006479D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		57BD68331C02598F0077A391 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -467,6 +549,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5711067528874C32006479D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5711067628874C32006479D7 /* LocalImageRenderer.swift in Sources */,
+				5711067728874C32006479D7 /* SimpleImageProcessingRenderer.swift in Sources */,
+				5711067828874C32006479D7 /* RemoteImageRenderer.swift in Sources */,
+				5711067928874C32006479D7 /* AsyncImageView.swift in Sources */,
+				5711067A28874C32006479D7 /* ErrorIgnoringRenderer.swift in Sources */,
+				5711067B28874C32006479D7 /* Caching.swift in Sources */,
+				5711067C28874C32006479D7 /* ImageInflaterRenderer.swift in Sources */,
+				5711067D28874C32006479D7 /* EmptyRenderer.swift in Sources */,
+				5711067E28874C32006479D7 /* ContextRenderer.swift in Sources */,
+				5711067F28874C32006479D7 /* ViewRenderer.swift in Sources */,
+				5711068028874C32006479D7 /* FallbackRenderer.swift in Sources */,
+				5711068128874C32006479D7 /* Extensions.swift in Sources */,
+				5711068228874C32006479D7 /* CacheRenderer.swift in Sources */,
+				5711068328874C32006479D7 /* AsyncImageLoader.swift in Sources */,
+				5711068428874C32006479D7 /* RemoteOrLocalImageRenderer.swift in Sources */,
+				5711068528874C32006479D7 /* AnyRenderer.swift in Sources */,
+				5711068628874C32006479D7 /* ImageProcessingRenderer.swift in Sources */,
+				5711068728874C32006479D7 /* AsyncSwiftUIImageView.swift in Sources */,
+				5711068828874C32006479D7 /* MulticastedRenderer.swift in Sources */,
+				5711068928874C32006479D7 /* Renderer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		57BD68301C02598F0077A391 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -545,6 +654,52 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		5711068E28874C32006479D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5711069628874C67006479D7 /* watchOS-Framework.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = AsyncImageView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nachosoto.AsyncImageView;
+				PRODUCT_NAME = AsyncImageView;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5711068F28874C32006479D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5711069628874C67006479D7 /* watchOS-Framework.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = AsyncImageView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nachosoto.AsyncImageView;
+				PRODUCT_NAME = AsyncImageView;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		57BD68471C02598F0077A391 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BD68971C02607F0077A391 /* Debug.xcconfig */;
@@ -734,7 +889,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/tvOS";
 				INFOPLIST_FILE = AsyncImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -757,7 +911,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/tvOS";
 				INFOPLIST_FILE = AsyncImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -773,6 +926,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5711068D28874C32006479D7 /* Build configuration list for PBXNativeTarget "AsyncImageView-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5711068E28874C32006479D7 /* Debug */,
+				5711068F28874C32006479D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		57BD682F1C02598F0077A391 /* Build configuration list for PBXProject "AsyncImageView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

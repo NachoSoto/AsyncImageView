@@ -26,17 +26,23 @@ public final class MulticastedRenderer<
 	private let renderer: Renderer
 	private let cache: Atomic<[Data : ImageProperty]>
 
+    #if !os(watchOS)
 	private let memoryWarningDisposable: Disposable
+    #endif
 
 	public init(renderer: Renderer) {
 		self.renderer = renderer
 		self.cache = Atomic([:])
 
+        #if !os(watchOS)
 		self.memoryWarningDisposable = MulticastedRenderer.clearCacheOnMemoryWarning(self.cache)
+        #endif
 	}
 
 	deinit {
+        #if !os(watchOS)
 		self.memoryWarningDisposable.dispose()
+        #endif
 	}
 
 	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, Never> {
@@ -68,6 +74,7 @@ public final class MulticastedRenderer<
 		return result
 	}
 
+    #if !os(watchOS)
 	private static func clearCacheOnMemoryWarning(_ cache: Atomic<[Data : ImageProperty]>) -> Disposable {
 		return NotificationCenter.default
 			.reactive.notifications(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil)
@@ -76,6 +83,7 @@ public final class MulticastedRenderer<
 				cache.modify { $0 = [:] }
 			}!
 	}
+    #endif
 }
 
 extension RendererType where Error == Never {

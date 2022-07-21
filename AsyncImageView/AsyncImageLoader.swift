@@ -23,57 +23,39 @@ internal final class AsyncImageLoader<
     PlaceholderRenderer.Data == Data,
     PlaceholderRenderer.Error == Never,
 Renderer.RenderResult == PlaceholderRenderer.RenderResult {
-    @Published
-    private(set) var renderResult: Renderer.RenderResult?
-
-    private var disposable: Disposable?
-
-    init(
+    static func createSignal(
         requestsSignal: Signal<Data?, Never>,
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
         uiScheduler: ReactiveSwift.Scheduler,
-        imageCreationScheduler: ReactiveSwift.Scheduler) {
-
-        self.disposable = requestsSignal
-            .skipRepeats(==)
-            .observe(on: uiScheduler)
-            .on(value: { [weak self] in
-                if let self = self,
-                    placeholderRenderer == nil || $0 == nil {
-                    self.resetImage()
-                }
-            })
+        imageCreationScheduler: ReactiveSwift.Scheduler
+    ) -> Signal<Renderer.RenderResult?, Never> {
+        return requestsSignal.skipRepeats(==)
             .observe(on: imageCreationScheduler)
-            .flatMap(.latest) { data -> SignalProducer<Renderer.RenderResult, Never> in
+            .flatMap(.latest) { data -> SignalProducer<Renderer.RenderResult?, Never> in
+                let prefixSignal: SignalProducer<Renderer.RenderResult?, Never> = .init(value: nil)
+
                 if let data = data {
                     if let placeholderRenderer = placeholderRenderer {
                         return placeholderRenderer
                             .renderImageWithData(data)
+                            .observe(on: uiScheduler)
                             .take(
                                 untilReplacement: renderer.renderImageWithData(data)
-                                    // Don't allow a finishing signal to cancel replacement without a value (like if it failed)
+                                // Don't allow a finishing signal to cancel replacement without a value (like if it failed)
                                     .concat(.never)
                             )
+                            .map(Optional.some)
                     } else {
-                        return renderer.renderImageWithData(data)
+                        return renderer
+                            .renderImageWithData(data)
+                            .observe(on: uiScheduler)
+                            .map(Optional.some)
+                            .prefix(prefixSignal)
                     }
                 } else {
-                    return .empty
+                    return prefixSignal
                 }
             }
-        .observe(on: uiScheduler)
-        .observeValues { [weak self] in
-            self?.renderResult = $0
-        }
-    }
-
-    deinit {
-        self.disposable?.dispose()
-    }
-
-    private func resetImage() {
-        // Avoid displaying a stale image.
-        renderResult = nil
     }
 }

@@ -31,13 +31,14 @@ open class AsyncImageView<
 	PlaceholderRenderer.Error == Never,
 	Renderer.RenderResult == PlaceholderRenderer.RenderResult
  {
+     private typealias ImageLoader = AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
+
 	private let requestsSignal: Signal<Data?, Never>
 	private let requestsObserver: Signal<Data?, Never>.Observer
 
     private let imageCreationScheduler: ReactiveSwift.Scheduler
 
-    private let loader: AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
-    private var observation: AnyCancellable?
+    private var disposable: Disposable?
     
 	public init(
 		initialFrame: CGRect,
@@ -46,22 +47,21 @@ open class AsyncImageView<
         uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
         imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler())
 	{
-		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
-		self.imageCreationScheduler = imageCreationScheduler
+        (self.requestsSignal, self.requestsObserver) = Signal.pipe()
+        self.imageCreationScheduler = imageCreationScheduler
 
-        self.loader = AsyncImageLoader(
+        super.init(frame: initialFrame)
+
+        self.backgroundColor = nil
+        
+        self.disposable = ImageLoader.createSignal(
             requestsSignal: self.requestsSignal,
             renderer: renderer,
             placeholderRenderer: placeholderRenderer,
             uiScheduler: uiScheduler,
             imageCreationScheduler: imageCreationScheduler
         )
-        
-		super.init(frame: initialFrame)
-
-		self.backgroundColor = nil
-        
-        self.observation = self.loader.$renderResult.sink { [weak self] result in
+        .observeValues { [weak self] result in
             self?.updateImage(result)
         }
 	}
@@ -69,6 +69,10 @@ open class AsyncImageView<
 	public required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+
+     deinit {
+         self.disposable?.dispose()
+     }
 
 	open override var frame: CGRect {
 		didSet {
@@ -127,8 +131,7 @@ open class AsyncImageView<
                     completion: nil
                 )
             }
-        }
-        else {
+        } else {
             self.image = nil
         }
 	}

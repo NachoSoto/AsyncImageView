@@ -16,6 +16,9 @@ import AsyncImageView
 class AsyncImageViewSpec: QuickSpec {
 	override func spec() {
 		describe("AsyncImageView") {
+            // To ensure that updating UI takes one extra cycle
+            // and we can verify image is reset before that
+            let uiScheduler = QueueScheduler(targeting: DispatchQueue.main)
             var window: UIWindow!
             
             beforeEach {
@@ -34,7 +37,8 @@ class AsyncImageViewSpec: QuickSpec {
 						initialFrame: .zero,
 						renderer: renderer,
 						placeholderRenderer: nil,
-						imageCreationScheduler: ImmediateScheduler()
+                        uiScheduler: uiScheduler,
+                        imageCreationScheduler: ImmediateScheduler()
 					)
                     window.addSubview(view)
 				}
@@ -174,6 +178,7 @@ class AsyncImageViewSpec: QuickSpec {
 						initialFrame: CGRect.zero,
 						renderer: renderer,
 						placeholderRenderer: placeholderRenderer,
+                        uiScheduler: uiScheduler,
 						imageCreationScheduler: ImmediateScheduler()
 					)
                     window.addSubview(view)

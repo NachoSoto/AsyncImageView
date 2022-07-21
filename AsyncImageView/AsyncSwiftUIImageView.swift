@@ -22,6 +22,11 @@ public struct AsyncSwiftUIImageView<
     PlaceholderRenderer.Data == Data,
     PlaceholderRenderer.Error == Never,
 Renderer.RenderResult == PlaceholderRenderer.RenderResult {
+    private typealias ImageLoader = AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
+
+    private let renderer: Renderer
+    private let placeholderRenderer: PlaceholderRenderer?
+    private let uiScheduler: ReactiveSwift.Scheduler
     private let requestsSignal: Signal<Data?, Never>
     private let requestsObserver: Signal<Data?, Never>.Observer
     
@@ -33,64 +38,84 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
         imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler())
     {
-        (self.requestsSignal, self.requestsObserver) = Signal.pipe()
+        self.renderer = renderer
+        self.placeholderRenderer = placeholderRenderer
+        self.uiScheduler = uiScheduler
         self.imageCreationScheduler = imageCreationScheduler
-        
-        self.loader = AsyncImageLoader(
-            requestsSignal: requestsSignal,
-            renderer: renderer,
-            placeholderRenderer: placeholderRenderer,
-            uiScheduler: uiScheduler,
-            imageCreationScheduler: imageCreationScheduler
-        )
+
+        (self.requestsSignal, self.requestsObserver) = Signal.pipe()
     }
-    
-    @ObservedObject
-    private var loader: AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
+
+    @State private var renderResult: Renderer.RenderResult?
+    @State private var disposable: Disposable?
     
     public var data: ImageViewData? {
         didSet {
-            requestImage()
+            self.requestImage()
         }
     }
     
     @State
     private var size: CGSize = .zero {
         didSet {
-            if size != oldValue {
-                requestImage()
+            if self.size != oldValue {
+                self.requestImage()
             }
         }
     }
     
     public var body: some View {
-        Group {
-            if self.loader.renderResult != nil {
-                Image(uiImage: self.loader.renderResult!.image)
-                    .resizable()
-                    .scaledToFit()
-                    .transition(
-                        AnyTransition.opacity.animation(
-                            (self.loader.renderResult?.cacheHit ?? false)
-                                ? nil
-                                : .easeOut(duration: fadeAnimationDuration)
-                        )
-                )
-            } else {
-                Rectangle()
-                    .fill(Color.clear)
+        ZStack {
+            self.imageView
+            
+            Color.clear
+                .modifier(SizeModifier())
+                .onPreferenceChange(ImageSizePreferenceKey.self) { imageSize in
+                    self.size = imageSize
+                }
+        }
+        .onAppear {
+            self.disposable?.dispose()
+            self.disposable = ImageLoader.createSignal(
+                requestsSignal: self.requestsSignal,
+                renderer: self.renderer,
+                placeholderRenderer: self.placeholderRenderer,
+                uiScheduler: self.uiScheduler,
+                imageCreationScheduler: self.imageCreationScheduler
+            )
+            .observeValues {
+                self.renderResult = $0
             }
         }
-        .modifier(SizeModifier())
-        .onPreferenceChange(ImageSizePreferenceKey.self) { imageSize in
-            self.size = imageSize
+        .onDisappear {
+            self.disposable?.dispose()
+        }
+    }
+
+    @ViewBuilder
+    private var imageView: some View {
+        if let result = self.renderResult {
+            Image(uiImage: result.image)
+                .resizable()
+                .scaledToFit()
+                .transition(
+                    AnyTransition.opacity.animation(
+                        result.cacheHit
+                        ? nil
+                        : .easeOut(duration: fadeAnimationDuration)
+                    )
+                )
+        } else {
+            Color.clear
         }
     }
     
     private func requestImage() {
-        guard size.width > 0 && size.height > 0 else { return }
-        
-        imageCreationScheduler.schedule { [data, size, weak observer = self.requestsObserver] in
+        guard self.size.width > 0 && self.size.height > 0 else {
+            return
+        }
+
+        self.imageCreationScheduler.schedule { [data, size, weak observer = self.requestsObserver] in
             observer?.send(value: data?.renderDataWithSize(size))
         }
     }
@@ -116,14 +141,12 @@ private struct ImageSizePreferenceKey: PreferenceKey {
 }
 
 private struct SizeModifier: ViewModifier {
-    private var sizeView: some View {
-        GeometryReader { geometry in
-            Color.clear
-                .preference(key: ImageSizePreferenceKey.self, value: geometry.size)
-        }
-    }
-
     func body(content: Content) -> some View {
-        content.background(sizeView)
+        content.background(
+            GeometryReader { geometry in
+                Color.clear
+                    .preference(key: ImageSizePreferenceKey.self, value: geometry.size)
+            }
+        )
     }
 }

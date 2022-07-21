@@ -96,6 +96,15 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     }
 }
 
+public extension AsyncSwiftUIImageView {
+    func data(_ data: ImageViewData) -> Self {
+        var view = self
+        view.data = data
+
+        return view
+    }
+}
+
 private struct ImageSizePreferenceKey: PreferenceKey {
     typealias Value = CGSize
     

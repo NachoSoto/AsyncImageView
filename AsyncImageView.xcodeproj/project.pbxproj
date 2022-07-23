@@ -65,6 +65,9 @@
 		57BD68D21C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
 		57BD68D31C0261880077A391 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD68CF1C0261880077A391 /* Caching.swift */; };
 		57BD68E31C0268930077A391 /* AsyncImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57BD68351C02598F0077A391 /* AsyncImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57E56F24288CA04000A4381B /* SynchronousUIScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E56F23288CA04000A4381B /* SynchronousUIScheduler.swift */; };
+		57E56F25288CA04000A4381B /* SynchronousUIScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E56F23288CA04000A4381B /* SynchronousUIScheduler.swift */; };
+		57E56F26288CA04000A4381B /* SynchronousUIScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E56F23288CA04000A4381B /* SynchronousUIScheduler.swift */; };
 		57F5C5911C051ABB00753642 /* CachingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C5901C051ABB00753642 /* CachingSpec.swift */; };
 		57F5C59B1C052A6000753642 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
 		57F5C59C1C052A6000753642 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F5C59A1C052A6000753642 /* Extensions.swift */; };
@@ -156,6 +159,7 @@
 		57BD68C51C02607F0077A391 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		57BD68CB1C02614B0077A391 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		57BD68CF1C0261880077A391 /* Caching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
+		57E56F23288CA04000A4381B /* SynchronousUIScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronousUIScheduler.swift; sourceTree = "<group>"; };
 		57F5C5901C051ABB00753642 /* CachingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingSpec.swift; sourceTree = "<group>"; };
 		57F5C59A1C052A6000753642 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		57FC1AE91C0272C100FAD2F3 /* TestRenderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderData.swift; sourceTree = "<group>"; };
@@ -347,6 +351,7 @@
 				57F5C59A1C052A6000753642 /* Extensions.swift */,
 				57FC1AF01C028C5300FAD2F3 /* Renderers */,
 				5119EE53245CDD6A003CBEB5 /* AsyncImageLoader.swift */,
+				57E56F23288CA04000A4381B /* SynchronousUIScheduler.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -561,6 +566,7 @@
 				5711067B28874C32006479D7 /* Caching.swift in Sources */,
 				5711067C28874C32006479D7 /* ImageInflaterRenderer.swift in Sources */,
 				5711067D28874C32006479D7 /* EmptyRenderer.swift in Sources */,
+				57E56F26288CA04000A4381B /* SynchronousUIScheduler.swift in Sources */,
 				5711067E28874C32006479D7 /* ContextRenderer.swift in Sources */,
 				5711067F28874C32006479D7 /* ViewRenderer.swift in Sources */,
 				5711068028874C32006479D7 /* FallbackRenderer.swift in Sources */,
@@ -588,6 +594,7 @@
 				57BD68D21C0261880077A391 /* Caching.swift in Sources */,
 				57FC1B061C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				571FE6AA1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */,
+				57E56F24288CA04000A4381B /* SynchronousUIScheduler.swift in Sources */,
 				5709940E1C0912D30010B340 /* ContextRenderer.swift in Sources */,
 				5715712F1E60C8D000D0FB1E /* ViewRenderer.swift in Sources */,
 				57FC1B041C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,
@@ -628,6 +635,7 @@
 				57BD68D31C0261880077A391 /* Caching.swift in Sources */,
 				57FC1B071C0293CE00FAD2F3 /* ImageInflaterRenderer.swift in Sources */,
 				571FE6AB1C0A6A1000E566D2 /* EmptyRenderer.swift in Sources */,
+				57E56F25288CA04000A4381B /* SynchronousUIScheduler.swift in Sources */,
 				5709940F1C0912D30010B340 /* ContextRenderer.swift in Sources */,
 				571571301E60C8D000D0FB1E /* ViewRenderer.swift in Sources */,
 				57FC1B051C0293CE00FAD2F3 /* FallbackRenderer.swift in Sources */,

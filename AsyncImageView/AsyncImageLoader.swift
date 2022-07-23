@@ -57,5 +57,6 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
                     return prefixSignal
                 }
             }
+            .observe(on: SynchronousUIScheduler())
     }
 }

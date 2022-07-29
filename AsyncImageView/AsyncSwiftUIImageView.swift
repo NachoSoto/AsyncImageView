@@ -86,6 +86,8 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             .observeValues {
                 self.renderResult = $0
             }
+
+            self.requestImage()
         }
         .onDisappear {
             self.disposable?.dispose()

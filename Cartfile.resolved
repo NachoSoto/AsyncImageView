@@ -1,4 +1,4 @@
 github "NachoSoto/ReactiveSwift" "efb2f0a6f6c8739cce8fb14148a5bd3c83f2f91d"
-github "Quick/Nimble" "e313d9a67ec2e4171d416c61282e49fc3aadc7a4"
-github "Quick/Quick" "4cfa4791be84c75e84b41e886a5e4931b97d7572"
+github "Quick/Nimble" "371f7d278ba95a5511c248aaeec84f5dbe770491"
+github "Quick/Quick" "f2ce7e2373106b1b562dc965e1eee2324f9e72e3"
 github "jspahrsummers/xcconfigs" "4ced0ad5a971220917994a4edfa6abf9702e3818"

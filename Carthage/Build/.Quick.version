@@ -1,16 +1,16 @@
 {
-  "commitish" : "4cfa4791be84c75e84b41e886a5e4931b97d7572",
+  "commitish" : "f2ce7e2373106b1b562dc965e1eee2324f9e72e3",
   "iOS" : [
     {
-      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.123.7 clang-1400.0.29.50)",
-      "hash" : "fbaf6734b1593e3649e96580be46d645c4955290509f020670d0cdb9095210c3",
+      "swiftToolchainVersion" : "5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)",
+      "hash" : "9e8c9eedaae56d166cbec74329accf0b950925ad08c0c3913c5e12a0eb4a7da5",
       "name" : "Quick",
       "container" : "Quick.xcframework",
       "identifier" : "ios-arm64"
     },
     {
-      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.123.7 clang-1400.0.29.50)",
-      "hash" : "853e71c2849663509ca3456e3157e2d67f3e1aa664be01cdfc2c06e82cde001a",
+      "swiftToolchainVersion" : "5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)",
+      "hash" : "15512484890a65a1c341ebd9190dd6c61caa02abbde8f3e16e0e9cbc82cb971d",
       "name" : "Quick",
       "container" : "Quick.xcframework",
       "identifier" : "ios-arm64_x86_64-simulator"

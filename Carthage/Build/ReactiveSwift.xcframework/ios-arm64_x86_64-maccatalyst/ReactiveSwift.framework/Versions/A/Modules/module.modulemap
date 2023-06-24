@@ -1,7 +1,7 @@
 framework module ReactiveSwift {
   umbrella header "ReactiveSwift.h"
-
   export *
+
   module * { export * }
 }
 

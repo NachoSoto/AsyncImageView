@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)
-// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ReactiveSwift
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.114.10 clang-1500.0.29.1)
+// swift-module-flags: -target arm64-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ReactiveSwift
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Darwin
 import Dispatch
@@ -10,13 +10,15 @@ import MachO
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
+import os
 import Darwin.POSIX.pthread
 @_hasMissingDesignatedInitializers final public class Signal<Value, Error> where Error : Swift.Error {
   convenience public init(_ generator: (ReactiveSwift.Signal<Value, Error>.Observer, ReactiveSwift.Lifetime) -> Swift.Void)
   public static func unserialized(_ generator: (ReactiveSwift.Signal<Value, Error>.Observer, ReactiveSwift.Lifetime) -> Swift.Void) -> ReactiveSwift.Signal<Value, Error>
   public static func reentrantUnserialized(_ generator: (ReactiveSwift.Signal<Value, Error>.Observer, ReactiveSwift.Lifetime) -> Swift.Void) -> ReactiveSwift.Signal<Value, Error>
   @discardableResult
-  final public func observe(_ observer: ReactiveSwift.Signal<Value, Error>.Observer) -> ReactiveSwift.Disposable?
+  final public func observe(_ observer: ReactiveSwift.Signal<Value, Error>.Observer) -> (any ReactiveSwift.Disposable)?
   @objc deinit
 }
 extension ReactiveSwift.Signal {
@@ -26,9 +28,9 @@ extension ReactiveSwift.Signal {
   public static var empty: ReactiveSwift.Signal<Value, Error> {
     get
   }
-  public static func pipe(disposable: ReactiveSwift.Disposable? = nil) -> (output: ReactiveSwift.Signal<Value, Error>, input: ReactiveSwift.Signal<Value, Error>.Observer)
-  public static func unserializedPipe(disposable: ReactiveSwift.Disposable? = nil) -> (output: ReactiveSwift.Signal<Value, Error>, input: ReactiveSwift.Signal<Value, Error>.Observer)
-  public static func reentrantUnserializedPipe(disposable: ReactiveSwift.Disposable? = nil) -> (output: ReactiveSwift.Signal<Value, Error>, input: ReactiveSwift.Signal<Value, Error>.Observer)
+  public static func pipe(disposable: (any ReactiveSwift.Disposable)? = nil) -> (output: ReactiveSwift.Signal<Value, Error>, input: ReactiveSwift.Signal<Value, Error>.Observer)
+  public static func unserializedPipe(disposable: (any ReactiveSwift.Disposable)? = nil) -> (output: ReactiveSwift.Signal<Value, Error>, input: ReactiveSwift.Signal<Value, Error>.Observer)
+  public static func reentrantUnserializedPipe(disposable: (any ReactiveSwift.Disposable)? = nil) -> (output: ReactiveSwift.Signal<Value, Error>, input: ReactiveSwift.Signal<Value, Error>.Observer)
 }
 public protocol SignalProtocol : AnyObject {
   associatedtype Value
@@ -47,26 +49,26 @@ extension ReactiveSwift.Signal : ReactiveSwift.SignalProducerConvertible {
 }
 extension ReactiveSwift.Signal {
   @discardableResult
-  final public func observe(_ action: @escaping ReactiveSwift.Signal<Value, Error>.Observer.Action) -> ReactiveSwift.Disposable?
+  final public func observe(_ action: @escaping ReactiveSwift.Signal<Value, Error>.Observer.Action) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func observeResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func observeCompleted(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeCompleted(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func observeFailed(_ action: @escaping (Error) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeFailed(_ action: @escaping (Error) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func observeInterrupted(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeInterrupted(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.Signal where Error == Swift.Never {
   @discardableResult
-  final public func observeValues(_ action: @escaping (Value) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeValues(_ action: @escaping (Value) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.Signal {
   final public func map<U>(_ transform: @escaping (Value) -> U) -> ReactiveSwift.Signal<U, Error>
   final public func map<U>(value: U) -> ReactiveSwift.Signal<U, Error>
   final public func map<U>(_ keyPath: Swift.KeyPath<Value, U>) -> ReactiveSwift.Signal<U, Error>
   final public func mapError<F>(_ transform: @escaping (Error) -> F) -> ReactiveSwift.Signal<Value, F> where F : Swift.Error
-  final public func lazyMap<U>(on scheduler: ReactiveSwift.Scheduler, transform: @escaping (Value) -> U) -> ReactiveSwift.Signal<U, Error>
+  final public func lazyMap<U>(on scheduler: any ReactiveSwift.Scheduler, transform: @escaping (Value) -> U) -> ReactiveSwift.Signal<U, Error>
   final public func filter(_ isIncluded: @escaping (Value) -> Swift.Bool) -> ReactiveSwift.Signal<Value, Error>
   final public func compactMap<U>(_ transform: @escaping (Value) -> U?) -> ReactiveSwift.Signal<U, Error>
   @available(*, deprecated, renamed: "compactMap")
@@ -81,13 +83,13 @@ extension ReactiveSwift.Signal {
   final public func collect(count: Swift.Int) -> ReactiveSwift.Signal<[Value], Error>
   final public func collect(_ shouldEmit: @escaping (_ collectedValues: [Value]) -> Swift.Bool) -> ReactiveSwift.Signal<[Value], Error>
   final public func collect(_ shouldEmit: @escaping (_ collected: [Value], _ latest: Value) -> Swift.Bool) -> ReactiveSwift.Signal<[Value], Error>
-  final public func collect(every interval: Dispatch.DispatchTimeInterval, on scheduler: ReactiveSwift.DateScheduler, skipEmpty: Swift.Bool = false, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.Signal<[Value], Error>
-  final public func observe(on scheduler: ReactiveSwift.Scheduler) -> ReactiveSwift.Signal<Value, Error>
+  final public func collect(every interval: Dispatch.DispatchTimeInterval, on scheduler: any ReactiveSwift.DateScheduler, skipEmpty: Swift.Bool = false, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.Signal<[Value], Error>
+  final public func observe(on scheduler: any ReactiveSwift.Scheduler) -> ReactiveSwift.Signal<Value, Error>
 }
 extension ReactiveSwift.Signal {
   final public func combineLatest<U>(with other: ReactiveSwift.Signal<U, Error>) -> ReactiveSwift.Signal<(Value, U), Error>
   final public func merge(with other: ReactiveSwift.Signal<Value, Error>) -> ReactiveSwift.Signal<Value, Error>
-  final public func delay(_ interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, Error>
+  final public func delay(_ interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, Error>
   final public func skip(first count: Swift.Int) -> ReactiveSwift.Signal<Value, Error>
   final public func materialize() -> ReactiveSwift.Signal<ReactiveSwift.Signal<Value, Error>.Event, Swift.Never>
   final public func materializeResults() -> ReactiveSwift.Signal<Swift.Result<Value, Error>, Swift.Never>
@@ -134,9 +136,9 @@ extension ReactiveSwift.Signal {
 }
 extension ReactiveSwift.Signal {
   final public func zip<U>(with other: ReactiveSwift.Signal<U, Error>) -> ReactiveSwift.Signal<(Value, U), Error>
-  final public func throttle(_ interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, Error>
-  final public func throttle<P>(while shouldThrottle: P, on scheduler: ReactiveSwift.Scheduler) -> ReactiveSwift.Signal<Value, Error> where P : ReactiveSwift.PropertyProtocol, P.Value == Swift.Bool
-  final public func debounce(_ interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.Signal<Value, Error>
+  final public func throttle(_ interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, Error>
+  final public func throttle<P>(while shouldThrottle: P, on scheduler: any ReactiveSwift.Scheduler) -> ReactiveSwift.Signal<Value, Error> where P : ReactiveSwift.PropertyProtocol, P.Value == Swift.Bool
+  final public func debounce(_ interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.Signal<Value, Error>
 }
 extension ReactiveSwift.Signal {
   final public func uniqueValues<Identity>(_ transform: @escaping (Value) -> Identity) -> ReactiveSwift.Signal<Value, Error> where Identity : Swift.Hashable
@@ -167,12 +169,12 @@ extension ReactiveSwift.Signal {
   public static func zip<S>(_ signals: S) -> ReactiveSwift.Signal<[Value], Error> where S : Swift.Sequence, S.Element == ReactiveSwift.Signal<Value, Error>
 }
 extension ReactiveSwift.Signal {
-  final public func timeout(after interval: Foundation.TimeInterval, raising error: Error, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, Error>
+  final public func timeout(after interval: Foundation.TimeInterval, raising error: Error, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, Error>
 }
 extension ReactiveSwift.Signal where Error == Swift.Never {
   final public func promoteError<F>(_: F.Type = F.self) -> ReactiveSwift.Signal<Value, F> where F : Swift.Error
   final public func promoteError(_: Error.Type = Error.self) -> ReactiveSwift.Signal<Value, Error>
-  final public func timeout<NewError>(after interval: Foundation.TimeInterval, raising error: NewError, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, NewError> where NewError : Swift.Error
+  final public func timeout<NewError>(after interval: Foundation.TimeInterval, raising error: NewError, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.Signal<Value, NewError> where NewError : Swift.Error
 }
 extension ReactiveSwift.Signal where Value == Swift.Never {
   final public func promoteValue<U>(_: U.Type = U.self) -> ReactiveSwift.Signal<U, Error>
@@ -192,10 +194,10 @@ extension ReactiveSwift.Signal {
   final public func attemptMap<U>(_ transform: @escaping (Value) -> Swift.Result<U, Error>) -> ReactiveSwift.Signal<U, Error>
 }
 extension ReactiveSwift.Signal where Error == Swift.Never {
-  final public func attempt(_ action: @escaping (Value) throws -> Swift.Void) -> ReactiveSwift.Signal<Value, Swift.Error>
-  final public func attemptMap<U>(_ transform: @escaping (Value) throws -> U) -> ReactiveSwift.Signal<U, Swift.Error>
+  final public func attempt(_ action: @escaping (Value) throws -> Swift.Void) -> ReactiveSwift.Signal<Value, any Swift.Error>
+  final public func attemptMap<U>(_ transform: @escaping (Value) throws -> U) -> ReactiveSwift.Signal<U, any Swift.Error>
 }
-extension ReactiveSwift.Signal where Error == Swift.Error {
+extension ReactiveSwift.Signal where Error == any Swift.Error {
   final public func attempt(_ action: @escaping (Value) throws -> Swift.Void) -> ReactiveSwift.Signal<Value, Error>
   final public func attemptMap<U>(_ transform: @escaping (Value) throws -> U) -> ReactiveSwift.Signal<U, Error>
 }
@@ -220,7 +222,7 @@ final public class AnyDisposable : ReactiveSwift.Disposable {
   }
   public init(_ action: @escaping () -> Swift.Void)
   public init()
-  public init(_ disposable: ReactiveSwift.Disposable)
+  public init(_ disposable: any ReactiveSwift.Disposable)
   final public func dispose()
   @objc deinit
 }
@@ -228,19 +230,19 @@ final public class CompositeDisposable : ReactiveSwift.Disposable {
   final public var isDisposed: Swift.Bool {
     get
   }
-  public init<S>(_ disposables: S) where S : Swift.Sequence, S.Element == ReactiveSwift.Disposable
-  convenience public init<S>(_ disposables: S) where S : Swift.Sequence, S.Element == ReactiveSwift.Disposable?
+  public init<S>(_ disposables: S) where S : Swift.Sequence, S.Element == any ReactiveSwift.Disposable
+  convenience public init<S>(_ disposables: S) where S : Swift.Sequence, S.Element == (any ReactiveSwift.Disposable)?
   convenience public init()
   final public func dispose()
   @discardableResult
-  final public func add(_ disposable: ReactiveSwift.Disposable?) -> ReactiveSwift.Disposable?
+  final public func add(_ disposable: (any ReactiveSwift.Disposable)?) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func add(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func add(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @objc deinit
   @discardableResult
-  public static func += (lhs: ReactiveSwift.CompositeDisposable, rhs: ReactiveSwift.Disposable?) -> ReactiveSwift.Disposable?
+  public static func += (lhs: ReactiveSwift.CompositeDisposable, rhs: (any ReactiveSwift.Disposable)?) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  public static func += (lhs: ReactiveSwift.CompositeDisposable, rhs: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  public static func += (lhs: ReactiveSwift.CompositeDisposable, rhs: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 final public class ScopedDisposable<Inner> : ReactiveSwift.Disposable where Inner : ReactiveSwift.Disposable {
   final public let inner: Inner
@@ -252,23 +254,23 @@ final public class ScopedDisposable<Inner> : ReactiveSwift.Disposable where Inne
   final public func dispose()
 }
 extension ReactiveSwift.ScopedDisposable where Inner == ReactiveSwift.AnyDisposable {
-  convenience public init(_ disposable: ReactiveSwift.Disposable)
+  convenience public init(_ disposable: any ReactiveSwift.Disposable)
 }
 extension ReactiveSwift.ScopedDisposable where Inner == ReactiveSwift.CompositeDisposable {
   @discardableResult
-  public static func += (lhs: ReactiveSwift.ScopedDisposable<ReactiveSwift.CompositeDisposable>, rhs: ReactiveSwift.Disposable?) -> ReactiveSwift.Disposable?
+  public static func += (lhs: ReactiveSwift.ScopedDisposable<ReactiveSwift.CompositeDisposable>, rhs: (any ReactiveSwift.Disposable)?) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  public static func += (lhs: ReactiveSwift.ScopedDisposable<ReactiveSwift.CompositeDisposable>, rhs: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  public static func += (lhs: ReactiveSwift.ScopedDisposable<ReactiveSwift.CompositeDisposable>, rhs: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 final public class SerialDisposable : ReactiveSwift.Disposable {
   final public var isDisposed: Swift.Bool {
     get
   }
-  final public var inner: ReactiveSwift.Disposable? {
+  final public var inner: (any ReactiveSwift.Disposable)? {
     get
     set(disposable)
   }
-  public init(_ disposable: ReactiveSwift.Disposable? = nil)
+  public init(_ disposable: (any ReactiveSwift.Disposable)? = nil)
   final public func dispose()
   @objc deinit
 }
@@ -292,26 +294,42 @@ public struct SignalProducer<Value, Error> where Error : Swift.Error {
     get
   }
   @discardableResult
-  public func startWithSignal<Result>(_ setup: (_ signal: ReactiveSwift.Signal<Value, Error>, _ interruptHandle: ReactiveSwift.Disposable) -> Result) -> Result
+  public func startWithSignal<Result>(_ setup: (_ signal: ReactiveSwift.Signal<Value, Error>, _ interruptHandle: any ReactiveSwift.Disposable) -> Result) -> Result
 }
 extension ReactiveSwift.SignalProducer where Error == Swift.Never {
   public init(value: Value)
   public init<S>(_ values: S) where Value == S.Element, S : Swift.Sequence
   public init(values first: Value, _ second: Value, _ tail: Value...)
 }
-extension ReactiveSwift.SignalProducer where Error == Swift.Error {
+extension ReactiveSwift.SignalProducer where Error == any Swift.Error {
   public init(_ action: @escaping () throws -> Value)
 }
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+public protocol SignalProducerConvertible<Value, Error> {
+  associatedtype Value
+  associatedtype Error : Swift.Error
+  var producer: ReactiveSwift.SignalProducer<Self.Value, Self.Error> { get }
+}
+#else
 public protocol SignalProducerConvertible {
   associatedtype Value
   associatedtype Error : Swift.Error
   var producer: ReactiveSwift.SignalProducer<Self.Value, Self.Error> { get }
 }
+#endif
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+public protocol SignalProducerProtocol<Value, Error> {
+  associatedtype Value
+  associatedtype Error : Swift.Error
+  var producer: ReactiveSwift.SignalProducer<Self.Value, Self.Error> { get }
+}
+#else
 public protocol SignalProducerProtocol {
   associatedtype Value
   associatedtype Error : Swift.Error
   var producer: ReactiveSwift.SignalProducer<Self.Value, Self.Error> { get }
 }
+#endif
 extension ReactiveSwift.SignalProducer : ReactiveSwift.SignalProducerConvertible, ReactiveSwift.SignalProducerProtocol {
   public var producer: ReactiveSwift.SignalProducer<Value, Error> {
     get
@@ -319,21 +337,21 @@ extension ReactiveSwift.SignalProducer : ReactiveSwift.SignalProducerConvertible
 }
 extension ReactiveSwift.SignalProducer {
   @discardableResult
-  public func start(_ observer: ReactiveSwift.Signal<Value, Error>.Observer = .init()) -> ReactiveSwift.Disposable
+  public func start(_ observer: ReactiveSwift.Signal<Value, Error>.Observer = .init()) -> any ReactiveSwift.Disposable
   @discardableResult
-  public func start(_ action: @escaping ReactiveSwift.Signal<Value, Error>.Observer.Action) -> ReactiveSwift.Disposable
+  public func start(_ action: @escaping ReactiveSwift.Signal<Value, Error>.Observer.Action) -> any ReactiveSwift.Disposable
   @discardableResult
-  public func startWithResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> any ReactiveSwift.Disposable
   @discardableResult
-  public func startWithCompleted(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithCompleted(_ action: @escaping () -> Swift.Void) -> any ReactiveSwift.Disposable
   @discardableResult
-  public func startWithFailed(_ action: @escaping (Error) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithFailed(_ action: @escaping (Error) -> Swift.Void) -> any ReactiveSwift.Disposable
   @discardableResult
-  public func startWithInterrupted(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithInterrupted(_ action: @escaping () -> Swift.Void) -> any ReactiveSwift.Disposable
 }
 extension ReactiveSwift.SignalProducer where Error == Swift.Never {
   @discardableResult
-  public func startWithValues(_ action: @escaping (Value) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithValues(_ action: @escaping (Value) -> Swift.Void) -> any ReactiveSwift.Disposable
 }
 extension ReactiveSwift.SignalProducer {
   public func lift<U, F>(_ transform: @escaping (ReactiveSwift.Signal<Value, Error>) -> ReactiveSwift.Signal<U, F>) -> ReactiveSwift.SignalProducer<U, F> where F : Swift.Error
@@ -344,7 +362,7 @@ extension ReactiveSwift.SignalProducer {
   public func map<U>(value: U) -> ReactiveSwift.SignalProducer<U, Error>
   public func map<U>(_ keyPath: Swift.KeyPath<Value, U>) -> ReactiveSwift.SignalProducer<U, Error>
   public func mapError<F>(_ transform: @escaping (Error) -> F) -> ReactiveSwift.SignalProducer<Value, F> where F : Swift.Error
-  public func lazyMap<U>(on scheduler: ReactiveSwift.Scheduler, transform: @escaping (Value) -> U) -> ReactiveSwift.SignalProducer<U, Error>
+  public func lazyMap<U>(on scheduler: any ReactiveSwift.Scheduler, transform: @escaping (Value) -> U) -> ReactiveSwift.SignalProducer<U, Error>
   public func filter(_ isIncluded: @escaping (Value) -> Swift.Bool) -> ReactiveSwift.SignalProducer<Value, Error>
   public func compactMap<U>(_ transform: @escaping (Value) -> U?) -> ReactiveSwift.SignalProducer<U, Error>
   @available(*, deprecated, renamed: "compactMap")
@@ -354,13 +372,13 @@ extension ReactiveSwift.SignalProducer {
   public func collect(count: Swift.Int) -> ReactiveSwift.SignalProducer<[Value], Error>
   public func collect(_ shouldEmit: @escaping (_ values: [Value]) -> Swift.Bool) -> ReactiveSwift.SignalProducer<[Value], Error>
   public func collect(_ shouldEmit: @escaping (_ collected: [Value], _ latest: Value) -> Swift.Bool) -> ReactiveSwift.SignalProducer<[Value], Error>
-  public func collect(every interval: Dispatch.DispatchTimeInterval, on scheduler: ReactiveSwift.DateScheduler, skipEmpty: Swift.Bool = false, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.SignalProducer<[Value], Error>
-  public func observe(on scheduler: ReactiveSwift.Scheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func collect(every interval: Dispatch.DispatchTimeInterval, on scheduler: any ReactiveSwift.DateScheduler, skipEmpty: Swift.Bool = false, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.SignalProducer<[Value], Error>
+  public func observe(on scheduler: any ReactiveSwift.Scheduler) -> ReactiveSwift.SignalProducer<Value, Error>
   public func combineLatest<U>(with other: ReactiveSwift.SignalProducer<U, Error>) -> ReactiveSwift.SignalProducer<(Value, U), Error>
   public func combineLatest<Other>(with other: Other) -> ReactiveSwift.SignalProducer<(Value, Other.Value), Error> where Error == Other.Error, Other : ReactiveSwift.SignalProducerConvertible
   public func merge(with other: ReactiveSwift.SignalProducer<Value, Error>) -> ReactiveSwift.SignalProducer<Value, Error>
   public func merge<Other>(with other: Other) -> ReactiveSwift.SignalProducer<Value, Error> where Value == Other.Value, Error == Other.Error, Other : ReactiveSwift.SignalProducerConvertible
-  public func delay(_ interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func delay(_ interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
   public func skip(first count: Swift.Int) -> ReactiveSwift.SignalProducer<Value, Error>
   public func materialize() -> ReactiveSwift.SignalProducer<ReactiveSwift.SignalProducer<Value, Error>.ProducedSignal.Event, Swift.Never>
   public func materializeResults() -> ReactiveSwift.SignalProducer<Swift.Result<Value, Error>, Swift.Never>
@@ -394,10 +412,10 @@ extension ReactiveSwift.SignalProducer {
   public func zip<Other>(with other: Other) -> ReactiveSwift.SignalProducer<(Value, Other.Value), Error> where Error == Other.Error, Other : ReactiveSwift.SignalProducerConvertible
   public func attempt(_ action: @escaping (Value) -> Swift.Result<(), Error>) -> ReactiveSwift.SignalProducer<Value, Error>
   public func attemptMap<U>(_ action: @escaping (Value) -> Swift.Result<U, Error>) -> ReactiveSwift.SignalProducer<U, Error>
-  public func throttle(_ interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
-  public func throttle<P>(while shouldThrottle: P, on scheduler: ReactiveSwift.Scheduler) -> ReactiveSwift.SignalProducer<Value, Error> where P : ReactiveSwift.PropertyProtocol, P.Value == Swift.Bool
-  public func debounce(_ interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.SignalProducer<Value, Error>
-  public func timeout(after interval: Foundation.TimeInterval, raising error: Error, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func throttle(_ interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func throttle<P>(while shouldThrottle: P, on scheduler: any ReactiveSwift.Scheduler) -> ReactiveSwift.SignalProducer<Value, Error> where P : ReactiveSwift.PropertyProtocol, P.Value == Swift.Bool
+  public func debounce(_ interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler, discardWhenCompleted: Swift.Bool = true) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func timeout(after interval: Foundation.TimeInterval, raising error: Error, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
 }
 extension ReactiveSwift.SignalProducer where Value : ReactiveSwift.OptionalProtocol {
   public func skipNil() -> ReactiveSwift.SignalProducer<Value.Wrapped, Error>
@@ -411,11 +429,11 @@ extension ReactiveSwift.SignalProducer where Error == Swift.Never {
 extension ReactiveSwift.SignalProducer where Error == Swift.Never {
   public func promoteError<F>(_: F.Type = F.self) -> ReactiveSwift.SignalProducer<Value, F> where F : Swift.Error
   public func promoteError(_: Error.Type = Error.self) -> ReactiveSwift.SignalProducer<Value, Error>
-  public func timeout<NewError>(after interval: Foundation.TimeInterval, raising error: NewError, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, NewError> where NewError : Swift.Error
-  public func attempt(_ action: @escaping (Value) throws -> Swift.Void) -> ReactiveSwift.SignalProducer<Value, Swift.Error>
-  public func attemptMap<U>(_ action: @escaping (Value) throws -> U) -> ReactiveSwift.SignalProducer<U, Swift.Error>
+  public func timeout<NewError>(after interval: Foundation.TimeInterval, raising error: NewError, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, NewError> where NewError : Swift.Error
+  public func attempt(_ action: @escaping (Value) throws -> Swift.Void) -> ReactiveSwift.SignalProducer<Value, any Swift.Error>
+  public func attemptMap<U>(_ action: @escaping (Value) throws -> U) -> ReactiveSwift.SignalProducer<U, any Swift.Error>
 }
-extension ReactiveSwift.SignalProducer where Error == Swift.Error {
+extension ReactiveSwift.SignalProducer where Error == any Swift.Error {
   public func attempt(_ action: @escaping (Value) throws -> Swift.Void) -> ReactiveSwift.SignalProducer<Value, Error>
   public func attemptMap<U>(_ transform: @escaping (Value) throws -> U) -> ReactiveSwift.SignalProducer<U, Error>
 }
@@ -434,7 +452,7 @@ extension ReactiveSwift.SignalProducer where Value : Swift.Hashable {
 }
 extension ReactiveSwift.SignalProducer {
   public func on(starting: (() -> Swift.Void)? = nil, started: (() -> Swift.Void)? = nil, event: ((ReactiveSwift.SignalProducer<Value, Error>.ProducedSignal.Event) -> Swift.Void)? = nil, failed: ((Error) -> Swift.Void)? = nil, completed: (() -> Swift.Void)? = nil, interrupted: (() -> Swift.Void)? = nil, terminated: (() -> Swift.Void)? = nil, disposed: (() -> Swift.Void)? = nil, value: ((Value) -> Swift.Void)? = nil) -> ReactiveSwift.SignalProducer<Value, Error>
-  public func start(on scheduler: ReactiveSwift.Scheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func start(on scheduler: any ReactiveSwift.Scheduler) -> ReactiveSwift.SignalProducer<Value, Error>
 }
 extension ReactiveSwift.SignalProducer {
   public static func combineLatest<A, B>(_ a: A, _ b: B) -> ReactiveSwift.SignalProducer<(Value, B.Value), Error> where Value == A.Value, Error == A.Error, A : ReactiveSwift.SignalProducerConvertible, B : ReactiveSwift.SignalProducerConvertible, A.Error == B.Error
@@ -463,7 +481,7 @@ extension ReactiveSwift.SignalProducer {
 extension ReactiveSwift.SignalProducer {
   public func `repeat`(_ count: Swift.Int) -> ReactiveSwift.SignalProducer<Value, Error>
   public func retry(upTo count: Swift.Int) -> ReactiveSwift.SignalProducer<Value, Error>
-  public func retry(upTo count: Swift.Int, interval: Foundation.TimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public func retry(upTo count: Swift.Int, interval: Foundation.TimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
   public func then<U>(_ replacement: ReactiveSwift.SignalProducer<U, Swift.Never>) -> ReactiveSwift.SignalProducer<U, Error>
   public func then<Replacement>(_ replacement: Replacement) -> ReactiveSwift.SignalProducer<Replacement.Value, Error> where Replacement : ReactiveSwift.SignalProducerConvertible, Replacement.Error == Swift.Never
   public func then<U>(_ replacement: ReactiveSwift.SignalProducer<U, Error>) -> ReactiveSwift.SignalProducer<U, Error>
@@ -500,14 +518,14 @@ extension ReactiveSwift.SignalProducer where Value == Swift.Bool {
   public static func any<Booleans, BooleansCollection>(_ booleans: BooleansCollection) -> ReactiveSwift.SignalProducer<Value, Error> where Error == Booleans.Error, Booleans : ReactiveSwift.SignalProducerConvertible, Booleans == BooleansCollection.Element, BooleansCollection : Swift.Collection, Booleans.Value == Swift.Bool
 }
 extension ReactiveSwift.SignalProducer where Value == Foundation.Date, Error == Swift.Never {
-  public static func timer(interval: Dispatch.DispatchTimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
-  public static func timer(interval: Dispatch.DispatchTimeInterval, on scheduler: ReactiveSwift.DateScheduler, leeway: Dispatch.DispatchTimeInterval) -> ReactiveSwift.SignalProducer<Value, Error>
+  public static func timer(interval: Dispatch.DispatchTimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public static func timer(interval: Dispatch.DispatchTimeInterval, on scheduler: any ReactiveSwift.DateScheduler, leeway: Dispatch.DispatchTimeInterval) -> ReactiveSwift.SignalProducer<Value, Error>
 }
 extension ReactiveSwift.SignalProducer where Error == Swift.Never {
-  public static func interval<S>(_ values: S, interval: Dispatch.DispatchTimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<S.Element, Error> where Value == S.Element, S : Swift.Sequence
+  public static func interval<S>(_ values: S, interval: Dispatch.DispatchTimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<S.Element, Error> where Value == S.Element, S : Swift.Sequence
 }
 extension ReactiveSwift.SignalProducer where Value == Swift.Int, Error == Swift.Never {
-  public static func interval(_ interval: Dispatch.DispatchTimeInterval, on scheduler: ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
+  public static func interval(_ interval: Dispatch.DispatchTimeInterval, on scheduler: any ReactiveSwift.DateScheduler) -> ReactiveSwift.SignalProducer<Value, Error>
 }
 final public class ValidatingProperty<Value, ValidationError> : ReactiveSwift.MutablePropertyProtocol where ValidationError : Swift.Error {
   final public let result: ReactiveSwift.Property<ReactiveSwift.ValidatingProperty<Value, ValidationError>.Result>
@@ -548,12 +566,12 @@ final public class ValidatingProperty<Value, ValidationError> : ReactiveSwift.Mu
 }
 extension ReactiveSwift.Signal {
   @available(*, unavailable, message: "Use the `Signal.init` that accepts a two-argument generator.")
-  convenience public init(_ generator: (ReactiveSwift.Signal<Value, Error>.Observer) -> ReactiveSwift.Disposable?)
+  convenience public init(_ generator: (ReactiveSwift.Signal<Value, Error>.Observer) -> (any ReactiveSwift.Disposable)?)
 }
 extension ReactiveSwift.Lifetime {
   @discardableResult
   @available(*, unavailable, message: "Use `observeEnded(_:)` with a method reference to `dispose()` instead.")
-  final public func add(_ d: ReactiveSwift.Disposable?) -> ReactiveSwift.Disposable?
+  final public func add(_ d: (any ReactiveSwift.Disposable)?) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.Signal {
   @_hasMissingDesignatedInitializers final public class Observer : ReactiveSwift.Observer<Value, Error> {
@@ -687,48 +705,48 @@ extension ReactiveSwift.SignalProducer {
 extension ReactiveSwift.SignalProducer {
   @available(*, unavailable, message: "Transform the error to `Never` beforehand, or use `startWithResult` instead")
   @discardableResult
-  public func startWithValues(_ action: @escaping (Value) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithValues(_ action: @escaping (Value) -> Swift.Void) -> any ReactiveSwift.Disposable
 }
 extension ReactiveSwift.Signal {
   @available(*, unavailable, message: "Transform the error to `Never` beforehand, or use `observeResult` instead")
   @discardableResult
-  final public func observeValues(_ action: @escaping (Value) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeValues(_ action: @escaping (Value) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.SignalProducer where Value == Swift.Never {
   @discardableResult
   @available(*, deprecated, message: "`Result.success` is never delivered - value type `Never` is uninstantiable (Use at runtime would trap)")
-  public func startWithResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> any ReactiveSwift.Disposable
 }
 extension ReactiveSwift.SignalProducer where Value == Swift.Never, Error == Swift.Never {
   @discardableResult
   @available(*, deprecated, message: "Observer is never called - value type `Never` and error type `Never` are uninstantiable (Use at runtime would trap)")
-  public func startWithResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> any ReactiveSwift.Disposable
   @discardableResult
   @available(*, deprecated, message: "Observer is never called - value type `Never` is uninstantiable (Use at runtime would trap)")
-  public func startWithValues(_ action: @escaping (Value) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithValues(_ action: @escaping (Value) -> Swift.Void) -> any ReactiveSwift.Disposable
 }
 extension ReactiveSwift.SignalProducer where Error == Swift.Never {
   @discardableResult
   @available(*, deprecated, message: "Observer is never called - error type `Never` is uninstantiable (Use at runtime would trap)")
-  public func startWithFailed(_ action: @escaping (Error) -> Swift.Void) -> ReactiveSwift.Disposable
+  public func startWithFailed(_ action: @escaping (Error) -> Swift.Void) -> any ReactiveSwift.Disposable
 }
 extension ReactiveSwift.Signal where Value == Swift.Never {
   @discardableResult
   @available(*, deprecated, message: "`Result.success` is never delivered - value type `Never` is uninstantiable (Use at runtime would trap)")
-  final public func observeResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.Signal where Value == Swift.Never, Error == Swift.Never {
   @discardableResult
   @available(*, deprecated, message: "Observer is never called - value type `Never` and error type `Never` are uninstantiable (Use at runtime would trap)")
-  final public func observeResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeResult(_ action: @escaping (Swift.Result<Value, Error>) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
   @available(*, deprecated, message: "Observer is never called - value type `Never` is uninstantiable (Use at runtime would trap)")
-  final public func observeValues(_ action: @escaping (Value) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeValues(_ action: @escaping (Value) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.Signal where Error == Swift.Never {
   @discardableResult
   @available(*, deprecated, message: "Observer is never invoked - error type `Never` is uninstantiable (Use at runtime would trap)")
-  final public func observeFailed(_ action: @escaping (Error) -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeFailed(_ action: @escaping (Error) -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 extension ReactiveSwift.SignalProducer where Value == Swift.Never {
   @discardableResult
@@ -781,9 +799,9 @@ extension ReactiveSwift.Signal where Error == Swift.Never {
   }
   convenience public init(_ token: ReactiveSwift.Lifetime.Token)
   @discardableResult
-  final public func observeEnded(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func observeEnded(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  public static func += (lifetime: ReactiveSwift.Lifetime, disposable: ReactiveSwift.Disposable?) -> ReactiveSwift.Disposable?
+  public static func += (lifetime: ReactiveSwift.Lifetime, disposable: (any ReactiveSwift.Disposable)?) -> (any ReactiveSwift.Disposable)?
   @objc deinit
 }
 extension ReactiveSwift.Lifetime {
@@ -937,7 +955,7 @@ extension ReactiveSwift.Reactive where Base : Foundation.NotificationCenter {
 extension Foundation.URLSession : ReactiveSwift.ReactiveExtensionsProvider {
 }
 extension ReactiveSwift.Reactive where Base : Foundation.URLSession {
-  public func data(with request: Foundation.URLRequest) -> ReactiveSwift.SignalProducer<(Foundation.Data, Foundation.URLResponse), Swift.Error>
+  public func data(with request: Foundation.URLRequest) -> ReactiveSwift.SignalProducer<(Foundation.Data, Foundation.URLResponse), any Swift.Error>
 }
 extension Swift.Result : ReactiveSwift.SignalProducerConvertible {
   public var producer: ReactiveSwift.SignalProducer<Success, Failure> {
@@ -1057,26 +1075,40 @@ final public class Atomic<Value> {
 }
 public protocol Scheduler : AnyObject {
   @discardableResult
-  func schedule(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  func schedule(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 public protocol DateScheduler : ReactiveSwift.Scheduler {
   var currentDate: Foundation.Date { get }
   @discardableResult
-  func schedule(after date: Foundation.Date, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  func schedule(after date: Foundation.Date, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
+}
+extension ReactiveSwift.DateScheduler {
+  @discardableResult
+  public func schedule(after delay: Dispatch.DispatchTimeInterval, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0), action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
+}
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
+extension ReactiveSwift.DateScheduler {
+  #if compiler(>=5.3) && $AsyncAwait
+  public func sleep(for interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0)) async throws
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  public func sleep(until deadline: Foundation.Date, leeway: Dispatch.DispatchTimeInterval = .seconds(0)) async throws
+  #endif
+  public func timer(interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0)) -> _Concurrency.AsyncStream<Foundation.Date>
 }
 final public class ImmediateScheduler : ReactiveSwift.Scheduler {
   public init()
   @discardableResult
-  final public func schedule(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @objc deinit
 }
 final public class UIScheduler : ReactiveSwift.Scheduler {
   @objc deinit
   public init()
   @discardableResult
-  final public func schedule(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
 }
 @_hasMissingDesignatedInitializers final public class QueueScheduler : ReactiveSwift.DateScheduler {
   public static let main: ReactiveSwift.QueueScheduler
@@ -1087,16 +1119,15 @@ final public class UIScheduler : ReactiveSwift.Scheduler {
   @available(macOS, deprecated: 10.10, obsoleted: 10.11, message: "Use init(qos:name:targeting:) instead")
   @available(iOS, deprecated: 8.0, obsoleted: 9.0, message: "Use init(qos:name:targeting:) instead.")
   convenience public init(queue: Dispatch.DispatchQueue, name: Swift.String = "org.reactivecocoa.ReactiveSwift.QueueScheduler")
-  @available(macOS 10.10, *)
   convenience public init(qos: Dispatch.DispatchQoS = .default, name: Swift.String = "org.reactivecocoa.ReactiveSwift.QueueScheduler", targeting targetQueue: Dispatch.DispatchQueue? = nil)
   @discardableResult
-  final public func schedule(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func schedule(after date: Foundation.Date, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(after date: Foundation.Date, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @objc deinit
 }
 final public class TestScheduler : ReactiveSwift.DateScheduler {
@@ -1105,20 +1136,38 @@ final public class TestScheduler : ReactiveSwift.DateScheduler {
   }
   public init(startDate: Foundation.Date = Date(timeIntervalSinceReferenceDate: 0))
   @discardableResult
-  final public func schedule(_ action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func schedule(after delay: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(after delay: Dispatch.DispatchTimeInterval, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
-  final public func schedule(after date: Foundation.Date, action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
-  @discardableResult
-  final public func schedule(after delay: Dispatch.DispatchTimeInterval, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0), action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
-  final public func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0), action: @escaping () -> Swift.Void) -> ReactiveSwift.Disposable?
+  final public func schedule(after date: Foundation.Date, action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
+  final public func schedule(after date: Foundation.Date, interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0), action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   final public func advance()
   final public func advance(by interval: Dispatch.DispatchTimeInterval)
   final public func advance(by interval: Foundation.TimeInterval)
   final public func advance(to newDate: Foundation.Date)
   final public func run()
   final public func rewind(by interval: Dispatch.DispatchTimeInterval)
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
+  @_Concurrency.MainActor final public func advance() async
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
+  @_Concurrency.MainActor final public func advance(by interval: Dispatch.DispatchTimeInterval) async
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
+  @_Concurrency.MainActor final public func advance(by interval: Foundation.TimeInterval) async
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
+  @_Concurrency.MainActor final public func advance(to newDate: Foundation.Date) async
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
+  @_Concurrency.MainActor final public func run() async
+  #endif
   @objc deinit
 }
 public struct Bag<Element> {
@@ -1205,13 +1254,13 @@ public protocol BindingTargetProvider {
 }
 extension ReactiveSwift.BindingTargetProvider {
   @discardableResult
-  public static func <~ <Source>(provider: Self, source: Source) -> ReactiveSwift.Disposable? where Source : ReactiveSwift.BindingSource, Self.Value == Source.Value
+  public static func <~ <Source>(provider: Self, source: Source) -> (any ReactiveSwift.Disposable)? where Source : ReactiveSwift.BindingSource, Self.Value == Source.Value
   @discardableResult
-  public static func <~ <Source>(provider: Self, source: Source) -> ReactiveSwift.Disposable? where Source : ReactiveSwift.BindingSource, Self.Value == Source.Value?
+  public static func <~ <Source>(provider: Self, source: Source) -> (any ReactiveSwift.Disposable)? where Source : ReactiveSwift.BindingSource, Self.Value == Source.Value?
 }
 extension ReactiveSwift.Signal.Observer {
   @discardableResult
-  public static func <~ <Source>(observer: ReactiveSwift.Signal<Value, Error>.Observer, source: Source) -> ReactiveSwift.Disposable where Value == Source.Value, Source : ReactiveSwift.BindingSource
+  public static func <~ <Source>(observer: ReactiveSwift.Signal<Value, Error>.Observer, source: Source) -> any ReactiveSwift.Disposable where Value == Source.Value, Source : ReactiveSwift.BindingSource
 }
 public struct BindingTarget<Value> : ReactiveSwift.BindingTargetProvider {
   public let lifetime: ReactiveSwift.Lifetime
@@ -1219,8 +1268,8 @@ public struct BindingTarget<Value> : ReactiveSwift.BindingTargetProvider {
   public var bindingTarget: ReactiveSwift.BindingTarget<Value> {
     get
   }
-  public init(on scheduler: ReactiveSwift.Scheduler = ImmediateScheduler(), lifetime: ReactiveSwift.Lifetime, action: @escaping (Value) -> Swift.Void)
-  public init<Object>(on scheduler: ReactiveSwift.Scheduler = ImmediateScheduler(), lifetime: ReactiveSwift.Lifetime, object: Object, keyPath: Swift.WritableKeyPath<Object, Value>) where Object : AnyObject
+  public init(on scheduler: any ReactiveSwift.Scheduler = ImmediateScheduler(), lifetime: ReactiveSwift.Lifetime, action: @escaping (Value) -> Swift.Void)
+  public init<Object>(on scheduler: any ReactiveSwift.Scheduler = ImmediateScheduler(), lifetime: ReactiveSwift.Lifetime, object: Object, keyPath: Swift.WritableKeyPath<Object, Value>) where Object : AnyObject
 }
 extension Swift.Optional : ReactiveSwift.BindingTargetProvider where Wrapped : ReactiveSwift.BindingTargetProvider {
   public typealias Value = Wrapped.Value

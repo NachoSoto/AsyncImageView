@@ -1,58 +1,26 @@
 {
+  "commitish" : "6b65a4a085c101c5668e1f93d86cc9c591ebed23",
   "Mac" : [
 
   ],
-  "watchOS" : [
-    {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "03c80ffe5dd6b2e77950549f41aeabec2275b584f6c955a28e5de8a28809aff3",
-      "name" : "ReactiveSwift",
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "watchos-arm64_arm64_32_armv7k"
-    },
-    {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "a245e5f128100d303e08c0b698d79638e26a702bd746b9c1f4ecb7bb3ce95cac",
-      "name" : "ReactiveSwift",
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "watchos-arm64_i386_x86_64-simulator"
-    }
-  ],
-  "tvOS" : [
-    {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "33330d7101bffdd24a61888491280b86f9be8e85f236e3049b79476592f32b9d",
-      "name" : "ReactiveSwift",
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "tvos-arm64"
-    },
-    {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "727af9a9a766d5af523f1d7c602bbf138c58ba7a5dd5e86cfd5f989756d668e2",
-      "name" : "ReactiveSwift",
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "tvos-arm64_x86_64-simulator"
-    }
-  ],
-  "commitish" : "efb2f0a6f6c8739cce8fb14148a5bd3c83f2f91d",
   "iOS" : [
     {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "716913be0502f3e4e6d227a4305c514538e9b4c121b5b953db3541d6897df60e",
+      "swiftToolchainVersion" : "5.9 (swiftlang-5.9.0.114.10 clang-1500.0.29.1)",
+      "hash" : "a014a85433020079cadbf3444f76dfa04e9dd3e6c9a3a4b3f3917b24d0c7df57",
       "name" : "ReactiveSwift",
       "container" : "ReactiveSwift.xcframework",
       "identifier" : "ios-arm64"
     },
     {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "63035a1d7bbd84eee5029e9ecded558916147c372e620a999f638077a6e49c20",
+      "swiftToolchainVersion" : "5.9 (swiftlang-5.9.0.114.10 clang-1500.0.29.1)",
+      "hash" : "0b2d4436ae0881d014e5aa5c69efafdfdca1571c46171c46d7ecf049072ed188",
       "name" : "ReactiveSwift",
       "container" : "ReactiveSwift.xcframework",
       "identifier" : "ios-arm64_x86_64-maccatalyst"
     },
     {
-      "swiftToolchainVersion" : "5.7.1 (swiftlang-5.7.1.135.2 clang-1400.0.29.51)",
-      "hash" : "e9afa1d8f782e4110acba0e5269eed472278e529dafd2e4232476fcf560405aa",
+      "swiftToolchainVersion" : "5.9 (swiftlang-5.9.0.114.10 clang-1500.0.29.1)",
+      "hash" : "2f8697901c23456deb6aefed50aa7d44164a424f2110c4e66b08f4f5450f3b0a",
       "name" : "ReactiveSwift",
       "container" : "ReactiveSwift.xcframework",
       "identifier" : "ios-arm64_x86_64-simulator"

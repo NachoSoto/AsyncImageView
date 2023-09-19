@@ -6,6 +6,8 @@
 //  Copyright © 2022 Nacho Soto. All rights reserved.
 //
 
+import Foundation
+
 import ReactiveSwift
 
 /// A scheduler that performs all work on the main thread, as soon as possible.

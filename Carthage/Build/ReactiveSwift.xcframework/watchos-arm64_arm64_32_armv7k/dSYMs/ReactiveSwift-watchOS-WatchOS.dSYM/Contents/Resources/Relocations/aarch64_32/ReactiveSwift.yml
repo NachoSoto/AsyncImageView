@@ -1,0 +1,5 @@
+---
+triple:          'arm64_32-apple-darwin'
+binary-path:     '/var/folders/wc/zf_ws3kn4w31s3g6jzhjsvlm0000gn/T/ReactiveSwift/ReactiveSwift-watchOS-WatchOS.xcarchive/Products/@rpath/ReactiveSwift.framework/ReactiveSwift'
+relocations:     []
+...

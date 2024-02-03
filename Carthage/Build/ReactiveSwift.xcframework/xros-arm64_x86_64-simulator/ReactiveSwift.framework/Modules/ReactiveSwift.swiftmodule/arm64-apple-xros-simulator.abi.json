@@ -34414,20 +34414,6 @@
         ]
       },
       {
-        "kind": "Import",
-        "name": "os",
-        "printedName": "os",
-        "declKind": "Import",
-        "moduleName": "ReactiveSwift"
-      },
-      {
-        "kind": "Import",
-        "name": "MachO",
-        "printedName": "MachO",
-        "declKind": "Import",
-        "moduleName": "ReactiveSwift"
-      },
-      {
         "kind": "TypeDecl",
         "name": "Atomic",
         "printedName": "Atomic",
@@ -35513,45 +35499,6 @@
                 "accessorKind": "get"
               }
             ]
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(queue:name:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "QueueScheduler",
-                "printedName": "ReactiveSwift.QueueScheduler",
-                "usr": "s:13ReactiveSwift14QueueSchedulerC"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "DispatchQueue",
-                "printedName": "Dispatch.DispatchQueue",
-                "usr": "c:objc(cs)OS_dispatch_queue"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "hasDefaultArg": true,
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "s:13ReactiveSwift14QueueSchedulerC5queue4nameACSo012OS_dispatch_E0C_SStcfc",
-            "mangledName": "$s13ReactiveSwift14QueueSchedulerC5queue4nameACSo012OS_dispatch_E0C_SStcfc",
-            "moduleName": "ReactiveSwift",
-            "deprecated": true,
-            "declAttributes": [
-              "Convenience",
-              "AccessControl",
-              "Available",
-              "Available",
-              "RawDocComment"
-            ],
-            "init_kind": "Convenience"
           },
           {
             "kind": "Constructor",
@@ -41847,70 +41794,70 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 3549,
+      "offset": 3565,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 22189,
+      "offset": 22205,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 23540,
+      "offset": 23556,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 29097,
+      "offset": 29113,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "StringLiteral",
-      "offset": 30840,
+      "offset": 30856,
       "length": 66,
       "value": "\"The producer promised to send at least one value. Received none.\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "StringLiteral",
-      "offset": 36321,
+      "offset": 36337,
       "length": 53,
       "value": "\"Nested modifications violate exclusivity of access.\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 36398,
+      "offset": 36414,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 36431,
+      "offset": 36447,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 36903,
+      "offset": 36919,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 37077,
+      "offset": 37093,
       "length": 4,
       "value": "true"
     },
@@ -42217,31 +42164,17 @@
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 873,
-      "length": 1,
-      "value": "1"
+      "kind": "BooleanLiteral",
+      "offset": 2909,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1025,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3303,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3612,
-      "length": 1,
-      "value": "1"
+      "kind": "BooleanLiteral",
+      "offset": 2929,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",

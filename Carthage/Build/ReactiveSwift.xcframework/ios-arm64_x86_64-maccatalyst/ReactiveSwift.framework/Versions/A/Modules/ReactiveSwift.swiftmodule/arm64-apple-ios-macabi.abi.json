@@ -42118,70 +42118,70 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 3549,
+      "offset": 3565,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 22189,
+      "offset": 22205,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 23540,
+      "offset": 23556,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 29097,
+      "offset": 29113,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "StringLiteral",
-      "offset": 30840,
+      "offset": 30856,
       "length": 66,
       "value": "\"The producer promised to send at least one value. Received none.\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "StringLiteral",
-      "offset": 36321,
+      "offset": 36337,
       "length": 53,
       "value": "\"Nested modifications violate exclusivity of access.\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 36398,
+      "offset": 36414,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 36431,
+      "offset": 36447,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 36903,
+      "offset": 36919,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
-      "offset": 37077,
+      "offset": 37093,
       "length": 4,
       "value": "true"
     },

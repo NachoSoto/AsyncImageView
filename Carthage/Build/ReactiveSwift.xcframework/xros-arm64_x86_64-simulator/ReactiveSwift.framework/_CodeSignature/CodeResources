@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/ReactiveSwift-Swift.h</key>
 		<data>
-		uzje1KbGf4q5Dj4ROkcHmvgRwYQ=
+		gAMfkfwB3sU8njZwB2VuIarv1nE=
 		</data>
 		<key>Headers/ReactiveSwift.h</key>
 		<data>
@@ -14,47 +14,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		DQ0XOMM6dhipI8WIkoDuUrFRwQw=
+		EKSdzwqdqc3vv0QRQmOL61A7iFY=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.abi.json</key>
 		<data>
-		64Ybv+S0pbn9XzMzTcxJdEVgVjg=
+		OTyff2UZQ9Nv3knClpko8oOvrR0=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
-		yr/7CT5fREEmqvIrJlW5wR8s9gk=
+		R6qH9Zg8JDBEorW8tohYENh4K6M=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.swiftdoc</key>
 		<data>
-		d13MyXUwFoXqdD8UXKkBgIQwfc8=
+		4YCoV6T0q8+UxQUQOTuOZMgKKIU=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.swiftinterface</key>
 		<data>
-		yr/7CT5fREEmqvIrJlW5wR8s9gk=
+		R6qH9Zg8JDBEorW8tohYENh4K6M=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.swiftmodule</key>
 		<data>
-		4iytGuDUzQ4LuIE6Sq027oMzcI4=
+		yvypvt8PXlUtaYQiqWMBr4GX9vs=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<data>
-		64Ybv+S0pbn9XzMzTcxJdEVgVjg=
+		OTyff2UZQ9Nv3knClpko8oOvrR0=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
-		YVXtNjVgTVhaW8xVqPA1p2hnVhY=
+		AghfDGLcO83bdxdZtR6c8m9L1nk=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.swiftdoc</key>
 		<data>
-		p5SccH5hp0iq1hJuDsCwVOQJMts=
+		i2WGQzKRl8pQLgPG1uhZADBYYA0=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.swiftinterface</key>
 		<data>
-		YVXtNjVgTVhaW8xVqPA1p2hnVhY=
+		AghfDGLcO83bdxdZtR6c8m9L1nk=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.swiftmodule</key>
 		<data>
-		JM0dkq8Bta6ct33V5VMZ/qPzwqI=
+		qrgClY95BmvHh86UnCzRbGGHluc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -67,7 +67,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			k9d0k15RqCmZMbBH3C5k0r4nuxJwo7c/MYbJqZNoduw=
+			0I3QTu4hC8sXF1THJqq/z1iwoDYJZ7sHmjkgVLtMyMg=
 			</data>
 		</dict>
 		<key>Headers/ReactiveSwift.h</key>
@@ -81,70 +81,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YT8sataqu09RNdVYYNC7JeQw7f7ucIK9aICk8WpUs+Y=
+			7GKgqNTtgKcTfJY/C82pV8UioCn4sowxa3HlUuGylbU=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cb5tYgo+5gnfT4us10X/wnPl3U8MucmGyPMsMIPWyw0=
+			Z7raV3j0UZAifBgLuHnOBAqsc50uvBhNm32+HzyRJSQ=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vI7gSGMTu34e2/2bUlJcQ0AOWT0pOwRkLcN9TkG0hbk=
+			bwEfcKv6pmvPVz3S8H8QdopAVGQuidvwNl2aB+3SvJI=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cb5tYgo+5gnfT4us10X/wnPl3U8MucmGyPMsMIPWyw0=
+			Z7raV3j0UZAifBgLuHnOBAqsc50uvBhNm32+HzyRJSQ=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-xros-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fbo0CvqOjbcuK2WZnn5HHLjK/xfmxKA94sfEM4wEwJ8=
+			FRBrit/bb7WIHY1oYLEKZSS9GfIVSUqaxooEyOFzf6w=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YT8sataqu09RNdVYYNC7JeQw7f7ucIK9aICk8WpUs+Y=
+			7GKgqNTtgKcTfJY/C82pV8UioCn4sowxa3HlUuGylbU=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GbSqjUyJ0plW8uQsCRFUcAEso5n6Zx/MOmjDeJhGDHA=
+			hgXoRTmuayvvoq++WNom3JiEzych0pj8xufonH2Wwxc=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dqq20GW9c3BELlgtXNX2e8Ixc1a50LP1VAoYZmygP20=
+			lyycqb4JPTilLGCcWq654nkE90hysr7qmlj3Z+xuxog=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GbSqjUyJ0plW8uQsCRFUcAEso5n6Zx/MOmjDeJhGDHA=
+			hgXoRTmuayvvoq++WNom3JiEzych0pj8xufonH2Wwxc=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-xros-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			M6o68s6nTT6lb9ESaUJxZz+MMnT3IzICSC6qHHkqioQ=
+			X8tDTlljIN0U+6kZnD0HVIVQ9cBBtJNuPFrT18iEafg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

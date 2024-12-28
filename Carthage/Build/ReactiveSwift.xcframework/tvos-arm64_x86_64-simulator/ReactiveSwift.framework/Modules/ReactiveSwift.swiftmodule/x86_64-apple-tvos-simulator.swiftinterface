@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
-// swift-module-flags: -target x86_64-apple-tvos10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ReactiveSwift
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-tvos12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name ReactiveSwift
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import Darwin
 import Dispatch
 import Foundation
@@ -18,12 +18,21 @@ public protocol OptionalProtocol : Swift.ExpressibleByNilLiteral {
   init(reconstructing value: Self.Wrapped?)
   var optional: Self.Wrapped? { get }
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.Optional : ReactiveSwift.OptionalProtocol {
   public var optional: Wrapped? {
     get
   }
   public init(reconstructing value: Wrapped?)
 }
+#else
+extension Swift.Optional : ReactiveSwift.OptionalProtocol {
+  public var optional: Wrapped? {
+    get
+  }
+  public init(reconstructing value: Wrapped?)
+}
+#endif
 public protocol Disposable : AnyObject {
   var isDisposed: Swift.Bool { get }
   func dispose()
@@ -86,6 +95,12 @@ final public class SerialDisposable : ReactiveSwift.Disposable {
   final public func dispose()
   @objc deinit
 }
+extension ReactiveSwift.ScopedDisposable where Inner == ReactiveSwift.SerialDisposable {
+  final public var inner: (any ReactiveSwift.Disposable)? {
+    get
+    set
+  }
+}
 extension ReactiveSwift.Signal {
   @frozen public enum Event {
     case value(Value)
@@ -145,12 +160,8 @@ extension ReactiveSwift.DateScheduler {
 }
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
 extension ReactiveSwift.DateScheduler {
-  #if compiler(>=5.3) && $AsyncAwait
   public func sleep(for interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0)) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public func sleep(until deadline: Foundation.Date, leeway: Dispatch.DispatchTimeInterval = .seconds(0)) async throws
-  #endif
   public func timer(interval: Dispatch.DispatchTimeInterval, leeway: Dispatch.DispatchTimeInterval = .seconds(0)) -> _Concurrency.AsyncStream<Foundation.Date>
 }
 final public class ImmediateScheduler : ReactiveSwift.Scheduler {
@@ -174,7 +185,7 @@ final public class UIScheduler : ReactiveSwift.Scheduler {
   @available(macOS, deprecated: 10.10, obsoleted: 10.11, message: "Use init(qos:name:targeting:) instead")
   @available(iOS, deprecated: 8.0, obsoleted: 9.0, message: "Use init(qos:name:targeting:) instead.")
   convenience public init(queue: Dispatch.DispatchQueue, name: Swift.String = "org.reactivecocoa.ReactiveSwift.QueueScheduler")
-  convenience public init(qos: Dispatch.DispatchQoS = .default, name: Swift.String = "org.reactivecocoa.ReactiveSwift.QueueScheduler", targeting targetQueue: Dispatch.DispatchQueue? = nil)
+  convenience public init(qos: Dispatch.DispatchQoS = .unspecified, name: Swift.String = "org.reactivecocoa.ReactiveSwift.QueueScheduler", targeting targetQueue: Dispatch.DispatchQueue? = nil)
   @discardableResult
   final public func schedule(_ action: @escaping () -> Swift.Void) -> (any ReactiveSwift.Disposable)?
   @discardableResult
@@ -203,26 +214,16 @@ final public class TestScheduler : ReactiveSwift.DateScheduler {
   final public func advance(to newDate: Foundation.Date)
   final public func run()
   final public func rewind(by interval: Dispatch.DispatchTimeInterval)
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
   @_Concurrency.MainActor final public func advance() async
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
   @_Concurrency.MainActor final public func advance(by interval: Dispatch.DispatchTimeInterval) async
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
   @_Concurrency.MainActor final public func advance(by interval: Foundation.TimeInterval) async
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
   @_Concurrency.MainActor final public func advance(to newDate: Foundation.Date) async
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, macCatalyst 13, *)
   @_Concurrency.MainActor final public func run() async
-  #endif
   @objc deinit
 }
 final public class ValidatingProperty<Value, ValidationError> : ReactiveSwift.MutablePropertyProtocol where ValidationError : Swift.Error {
@@ -1017,6 +1018,7 @@ extension ReactiveSwift.Bag : Swift.RandomAccessCollection {
   public typealias Indices = Swift.Range<Swift.Int>
   public typealias SubSequence = Swift.Slice<ReactiveSwift.Bag<Element>>
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.Result : ReactiveSwift.SignalProducerConvertible {
   public var producer: ReactiveSwift.SignalProducer<Success, Failure> {
     get
@@ -1024,6 +1026,15 @@ extension Swift.Result : ReactiveSwift.SignalProducerConvertible {
   public typealias Error = Failure
   public typealias Value = Success
 }
+#else
+extension Swift.Result : ReactiveSwift.SignalProducerConvertible {
+  public var producer: ReactiveSwift.SignalProducer<Success, Failure> {
+    get
+  }
+  public typealias Error = Failure
+  public typealias Value = Success
+}
+#endif
 extension Foundation.NotificationCenter : ReactiveSwift.ReactiveExtensionsProvider {
 }
 extension ReactiveSwift.Reactive where Base : Foundation.NotificationCenter {
@@ -1180,7 +1191,7 @@ public enum LoggingEvent {
     public init?(rawValue: Swift.String)
     public typealias AllCases = [ReactiveSwift.LoggingEvent.Signal]
     public typealias RawValue = Swift.String
-    public static var allCases: [ReactiveSwift.LoggingEvent.Signal] {
+    nonisolated public static var allCases: [ReactiveSwift.LoggingEvent.Signal] {
       get
     }
     public var rawValue: Swift.String {
@@ -1196,7 +1207,7 @@ public enum LoggingEvent {
     public init?(rawValue: Swift.String)
     public typealias AllCases = [ReactiveSwift.LoggingEvent.SignalProducer]
     public typealias RawValue = Swift.String
-    public static var allCases: [ReactiveSwift.LoggingEvent.SignalProducer] {
+    nonisolated public static var allCases: [ReactiveSwift.LoggingEvent.SignalProducer] {
       get
     }
     public var rawValue: Swift.String {
@@ -1271,12 +1282,21 @@ public struct BindingTarget<Value> : ReactiveSwift.BindingTargetProvider {
   public init(on scheduler: any ReactiveSwift.Scheduler = ImmediateScheduler(), lifetime: ReactiveSwift.Lifetime, action: @escaping (Value) -> Swift.Void)
   public init<Object>(on scheduler: any ReactiveSwift.Scheduler = ImmediateScheduler(), lifetime: ReactiveSwift.Lifetime, object: Object, keyPath: Swift.WritableKeyPath<Object, Value>) where Object : AnyObject
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.Optional : ReactiveSwift.BindingTargetProvider where Wrapped : ReactiveSwift.BindingTargetProvider {
   public typealias Value = Wrapped.Value
   public var bindingTarget: ReactiveSwift.BindingTarget<Wrapped.Value> {
     get
   }
 }
+#else
+extension Swift.Optional : ReactiveSwift.BindingTargetProvider where Wrapped : ReactiveSwift.BindingTargetProvider {
+  public typealias Value = Wrapped.Value
+  public var bindingTarget: ReactiveSwift.BindingTarget<Wrapped.Value> {
+    get
+  }
+}
+#endif
 extension ReactiveSwift.LoggingEvent.Signal : Swift.Equatable {}
 extension ReactiveSwift.LoggingEvent.Signal : Swift.Hashable {}
 extension ReactiveSwift.LoggingEvent.Signal : Swift.RawRepresentable {}

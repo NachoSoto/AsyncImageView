@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/ReactiveSwift-Swift.h</key>
 		<data>
-		gAMfkfwB3sU8njZwB2VuIarv1nE=
+		A2623gJMVI+rRzdCLikmiyvJKBk=
 		</data>
 		<key>Headers/ReactiveSwift.h</key>
 		<data>
@@ -14,47 +14,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		pEXxhRr+QzdqfsQKMmOKO8rK6uM=
+		SmBLVZYMdUOZQONzNzvSp9YijRM=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.abi.json</key>
 		<data>
-		Ws55C8pDygiD5D8BxMg9COHRP/c=
+		ry7c/tRATeKXees4FXenLboZu+8=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.private.swiftinterface</key>
 		<data>
-		txtd+AwoW1JuN6GiMCrCS5ptIjw=
+		Xp3i7ivuMvNdPQi/g42BQGQf6YY=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		k9laQgm75xQMZ16gile+4kPjHYo=
+		jseu4Tsequ3bOit0W/YkveBPCpA=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftinterface</key>
 		<data>
-		txtd+AwoW1JuN6GiMCrCS5ptIjw=
+		Xp3i7ivuMvNdPQi/g42BQGQf6YY=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		AOzRqoPzZ8b1FS55dqlPTtRhbsA=
+		n1LMAUpBTrEak56a3VAF5mamyMQ=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.abi.json</key>
 		<data>
-		Ws55C8pDygiD5D8BxMg9COHRP/c=
+		ry7c/tRATeKXees4FXenLboZu+8=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.private.swiftinterface</key>
 		<data>
-		TLYR9JgKbEzI0Vd1rFSFZdsYqT8=
+		Sesd3RzW5GE9joX45RctZPkVoIg=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		zUnOam4T6ipx+mVHXoKORF7EDkQ=
+		NDIzXC/zJsRQOCDsBzHJyw9YVT4=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
 		<data>
-		TLYR9JgKbEzI0Vd1rFSFZdsYqT8=
+		Sesd3RzW5GE9joX45RctZPkVoIg=
 		</data>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		953i/6GxCb9fNWPQhdHdWrdv0sA=
+		OPTIeTO31/6yC5qLZoV2o+pVdkA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -65,21 +65,13 @@
 	<dict>
 		<key>Headers/ReactiveSwift-Swift.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			gAMfkfwB3sU8njZwB2VuIarv1nE=
-			</data>
 			<key>hash2</key>
 			<data>
-			0I3QTu4hC8sXF1THJqq/z1iwoDYJZ7sHmjkgVLtMyMg=
+			818R72j/lQesnCAwn5CyjXErUlo/aoW0sXNYvOqWyEc=
 			</data>
 		</dict>
 		<key>Headers/ReactiveSwift.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			1mcp0/FOGFk7lsvHXXjTshns0w8=
-			</data>
 			<key>hash2</key>
 			<data>
 			79dEjRq1MPxTsntBJwXB+s+J4p0PmHDrvM6UrkOFlh8=
@@ -87,120 +79,76 @@
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.abi.json</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Ws55C8pDygiD5D8BxMg9COHRP/c=
-			</data>
 			<key>hash2</key>
 			<data>
-			5ssG1BQM5y3RvtSpTEY6Hixg/Ea8XJIiRaAvf5pz8Xg=
+			gANp0ZtDsLAAAW7auzoHV9tPkS8xzfZNd4iH10dHAr0=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.private.swiftinterface</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			txtd+AwoW1JuN6GiMCrCS5ptIjw=
-			</data>
 			<key>hash2</key>
 			<data>
-			+o7jCtDYBN51Ds9h5Kvf414zwBVgsUNaQgRTjU3LOLo=
+			o8CJz1FuObdH3eW07E92RH7dc4NovP+kCU1tEW+7pR8=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			k9laQgm75xQMZ16gile+4kPjHYo=
-			</data>
 			<key>hash2</key>
 			<data>
-			rFadFqQHvuPazNSQ+caaNSkdDH6AbmdM9zk2cLMWJ5o=
+			mFA2lR04RHbrwDdWBpSTumlbhg3cyvG//LB+HS4IBSU=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftinterface</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			txtd+AwoW1JuN6GiMCrCS5ptIjw=
-			</data>
 			<key>hash2</key>
 			<data>
-			+o7jCtDYBN51Ds9h5Kvf414zwBVgsUNaQgRTjU3LOLo=
+			o8CJz1FuObdH3eW07E92RH7dc4NovP+kCU1tEW+7pR8=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			AOzRqoPzZ8b1FS55dqlPTtRhbsA=
-			</data>
 			<key>hash2</key>
 			<data>
-			qdhsEBlt1xmuAajnVG420lpbnfaWPeS0tWuhe6FncNs=
+			Q3X6S9coLyV8eaFFtIYenSlw+BYwZmaTgcp6MGHKohA=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.abi.json</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Ws55C8pDygiD5D8BxMg9COHRP/c=
-			</data>
 			<key>hash2</key>
 			<data>
-			5ssG1BQM5y3RvtSpTEY6Hixg/Ea8XJIiRaAvf5pz8Xg=
+			gANp0ZtDsLAAAW7auzoHV9tPkS8xzfZNd4iH10dHAr0=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.private.swiftinterface</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			TLYR9JgKbEzI0Vd1rFSFZdsYqT8=
-			</data>
 			<key>hash2</key>
 			<data>
-			W8TsKujkkCnc6Ykhn0StQsEiKrWBYVHLoKAORKCVXK0=
+			gv4xQc165mrMcVzZ5GSifhzyeeY4PDr8FcfXEk2z6jI=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			zUnOam4T6ipx+mVHXoKORF7EDkQ=
-			</data>
 			<key>hash2</key>
 			<data>
-			c/nIQdetdFSaNU8ba9Dwtqe6rW+OoATtw+WOf076oes=
+			5cM+7Teanuge5azMH4ahS9qtYF5gUWTaArUu6WxHMWg=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			TLYR9JgKbEzI0Vd1rFSFZdsYqT8=
-			</data>
 			<key>hash2</key>
 			<data>
-			W8TsKujkkCnc6Ykhn0StQsEiKrWBYVHLoKAORKCVXK0=
+			gv4xQc165mrMcVzZ5GSifhzyeeY4PDr8FcfXEk2z6jI=
 			</data>
 		</dict>
 		<key>Modules/ReactiveSwift.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			953i/6GxCb9fNWPQhdHdWrdv0sA=
-			</data>
 			<key>hash2</key>
 			<data>
-			t0spvxVCiSOJ+5JsdO9Y8OIvJF/WZ6tEmLhNp+k0ra0=
+			zQkOjZLN5HYcMnQsXzxiNd2rx5l/71ulX092rl4Ffzw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			mTCNP1LEnJFk+Z5U8Seye2G/oLk=
-			</data>
 			<key>hash2</key>
 			<data>
 			0SvVhy9XBj8uGqdo1SIknuD2WPDer8lsTFT/iJ1IzqA=

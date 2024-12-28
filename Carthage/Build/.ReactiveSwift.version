@@ -1,61 +1,61 @@
 {
-  "Mac" : [
-
-  ],
-  "commitish" : "1908030377bf861e6419e42f39854ee559b5eb13",
-  "watchOS" : [
-    {
-      "name" : "ReactiveSwift",
-      "hash" : "80eca5bc7675b83dbc0f92db4ce56286f902b492d413d3b21b53dc02f42bcab6",
-      "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)",
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "watchos-arm64_arm64_32_armv7k"
-    },
-    {
-      "container" : "ReactiveSwift.xcframework",
-      "name" : "ReactiveSwift",
-      "hash" : "597b318fa0940ec600e859e225eb8ab3b1895097e39ee626327c09fe7cf179df",
-      "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)",
-      "identifier" : "watchos-arm64_i386_x86_64-simulator"
-    }
-  ],
+  "commitish" : "8581f24e9944521975a1b2177a7bb9b95ab803ed",
   "tvOS" : [
     {
-      "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)",
-      "hash" : "7bf47a6658c9bf107ae965a11dc4c31424f7d16fd35789ab05340e9bb8096003",
+      "name" : "ReactiveSwift",
+      "hash" : "2be2b5cd4cef8e75efd1927ccc1759f423c22357a1b1f63e9eca3f5817dc8a21",
       "identifier" : "tvos-arm64",
       "container" : "ReactiveSwift.xcframework",
-      "name" : "ReactiveSwift"
+      "swiftToolchainVersion" : "6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)"
     },
     {
-      "container" : "ReactiveSwift.xcframework",
-      "identifier" : "tvos-arm64_x86_64-simulator",
       "name" : "ReactiveSwift",
-      "hash" : "08907d26ddcb8d8d2f0af7ec067f2406229e3f9fec9ea1f4ceac801c38983232",
-      "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)"
+      "container" : "ReactiveSwift.xcframework",
+      "hash" : "593c98428248d1909354e7c1d840983e6c93a1dfca3f6cce5f8b6b29f1dab683",
+      "identifier" : "tvos-arm64_x86_64-simulator",
+      "swiftToolchainVersion" : "6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)"
     }
+  ],
+  "Mac" : [
+
   ],
   "iOS" : [
     {
       "name" : "ReactiveSwift",
-      "hash" : "4e82944dc7a73d708efd1779b01dc3e8704c54a735a252d24c9b7675be19ed1d",
       "identifier" : "ios-arm64",
-      "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)",
-      "container" : "ReactiveSwift.xcframework"
-    },
-    {
       "container" : "ReactiveSwift.xcframework",
-      "hash" : "bab8393bd55bab738c61083d030a0153fe9c1ccb917b40206fa7396d7e818beb",
-      "name" : "ReactiveSwift",
-      "identifier" : "ios-arm64_x86_64-maccatalyst",
+      "hash" : "4e82944dc7a73d708efd1779b01dc3e8704c54a735a252d24c9b7675be19ed1d",
       "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)"
     },
     {
-      "container" : "ReactiveSwift.xcframework",
       "identifier" : "ios-arm64_x86_64-simulator",
-      "hash" : "8e66159623498b6cfe07dd718326ec8aad4dce239c8b0a91ee276e3e77470170",
+      "container" : "ReactiveSwift.xcframework",
       "name" : "ReactiveSwift",
+      "hash" : "8e66159623498b6cfe07dd718326ec8aad4dce239c8b0a91ee276e3e77470170",
       "swiftToolchainVersion" : "5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)"
+    },
+    {
+      "identifier" : "ios-arm64_x86_64-maccatalyst",
+      "swiftToolchainVersion" : "6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)",
+      "container" : "ReactiveSwift.xcframework",
+      "hash" : "df0be08af784c54a6f66ec880683846a6f3972ac42c76e8075f510ce138ebe13",
+      "name" : "ReactiveSwift"
+    }
+  ],
+  "watchOS" : [
+    {
+      "hash" : "8ac794f2406248f132765c56c5dad1332cd59f171a82bf01c19ecc3ee46efd47",
+      "swiftToolchainVersion" : "6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)",
+      "identifier" : "watchos-arm64_i386_x86_64-simulator",
+      "container" : "ReactiveSwift.xcframework",
+      "name" : "ReactiveSwift"
+    },
+    {
+      "name" : "ReactiveSwift",
+      "swiftToolchainVersion" : "6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)",
+      "identifier" : "watchos-arm64_arm64_32_armv7k",
+      "hash" : "f55faf029ea668f00efa6e83fb65cf6ce5a7fc74956fbe463025bb45e385aa72",
+      "container" : "ReactiveSwift.xcframework"
     }
   ]
 }

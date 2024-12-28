@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "ReactiveSwift",
+    "printedName": "ReactiveSwift",
     "children": [
       {
         "kind": "TypeDecl",
@@ -129,6 +129,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "ExpressibleByNilLiteral",
             "printedName": "ExpressibleByNilLiteral",
             "usr": "s:s23ExpressibleByNilLiteralP",
@@ -220,6 +234,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -346,7 +376,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               }
             ],
@@ -392,6 +422,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Disposable",
@@ -471,8 +515,8 @@
             "usr": "s:13ReactiveSwift19CompositeDisposableCyACxcSTRzAA0D0_p7ElementRtzlufc",
             "mangledName": "$s13ReactiveSwift19CompositeDisposableCyACxcSTRzAA0D0_p7ElementRtzlufc",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Sequence, τ_0_0.Element == ReactiveSwift.Disposable>",
-            "sugared_genericSig": "<S where S : Swift.Sequence, S.Element == ReactiveSwift.Disposable>",
+            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Sequence, τ_0_0.Element == any ReactiveSwift.Disposable>",
+            "sugared_genericSig": "<S where S : Swift.Sequence, S.Element == any ReactiveSwift.Disposable>",
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
@@ -500,8 +544,8 @@
             "usr": "s:13ReactiveSwift19CompositeDisposableCyACxcSTRzAA0D0_pSg7ElementRtzlufc",
             "mangledName": "$s13ReactiveSwift19CompositeDisposableCyACxcSTRzAA0D0_pSg7ElementRtzlufc",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Sequence, τ_0_0.Element == ReactiveSwift.Disposable?>",
-            "sugared_genericSig": "<S where S : Swift.Sequence, S.Element == ReactiveSwift.Disposable?>",
+            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Sequence, τ_0_0.Element == (any ReactiveSwift.Disposable)?>",
+            "sugared_genericSig": "<S where S : Swift.Sequence, S.Element == (any ReactiveSwift.Disposable)?>",
             "declAttributes": [
               "Convenience",
               "AccessControl",
@@ -561,12 +605,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -575,12 +619,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -607,12 +651,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -656,12 +700,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -676,12 +720,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -709,12 +753,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -768,6 +812,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Disposable",
@@ -957,7 +1015,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               }
             ],
@@ -983,12 +1041,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1011,12 +1069,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1047,12 +1105,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1105,6 +1163,132 @@
             ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "inner",
+            "printedName": "inner",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any ReactiveSwift.Disposable)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
+                    "usr": "s:13ReactiveSwift10DisposableP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvp",
+            "mangledName": "$s13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvp",
+            "moduleName": "ReactiveSwift",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any ReactiveSwift.Disposable)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Disposable",
+                        "printedName": "any ReactiveSwift.Disposable",
+                        "usr": "s:13ReactiveSwift10DisposableP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvg",
+                "mangledName": "$s13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvg",
+                "moduleName": "ReactiveSwift",
+                "genericSig": "<τ_0_0 where τ_0_0 == ReactiveSwift.SerialDisposable>",
+                "sugared_genericSig": "<Inner where Inner == ReactiveSwift.SerialDisposable>",
+                "declAttributes": [
+                  "Final"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any ReactiveSwift.Disposable)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Disposable",
+                        "printedName": "any ReactiveSwift.Disposable",
+                        "usr": "s:13ReactiveSwift10DisposableP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvs",
+                "mangledName": "$s13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvs",
+                "moduleName": "ReactiveSwift",
+                "genericSig": "<τ_0_0 where τ_0_0 == ReactiveSwift.SerialDisposable>",
+                "sugared_genericSig": "<Inner where Inner == ReactiveSwift.SerialDisposable>",
+                "declAttributes": [
+                  "Final"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvM",
+                "mangledName": "$s13ReactiveSwift16ScopedDisposableCA2A06SerialD0CRszrlE5innerAA0D0_pSgvM",
+                "moduleName": "ReactiveSwift",
+                "genericSig": "<τ_0_0 where τ_0_0 == ReactiveSwift.SerialDisposable>",
+                "sugared_genericSig": "<Inner where Inner == ReactiveSwift.SerialDisposable>",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "_modify"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -1119,6 +1303,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Disposable",
@@ -1185,12 +1383,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1215,12 +1413,12 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "ReactiveSwift.Disposable?",
+                    "printedName": "(any ReactiveSwift.Disposable)?",
                     "children": [
                       {
                         "kind": "TypeNominal",
                         "name": "Disposable",
-                        "printedName": "ReactiveSwift.Disposable",
+                        "printedName": "any ReactiveSwift.Disposable",
                         "usr": "s:13ReactiveSwift10DisposableP"
                       }
                     ],
@@ -1249,12 +1447,12 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "ReactiveSwift.Disposable?",
+                    "printedName": "(any ReactiveSwift.Disposable)?",
                     "children": [
                       {
                         "kind": "TypeNominal",
                         "name": "Disposable",
-                        "printedName": "ReactiveSwift.Disposable",
+                        "printedName": "any ReactiveSwift.Disposable",
                         "usr": "s:13ReactiveSwift10DisposableP"
                       }
                     ],
@@ -1307,12 +1505,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1362,6 +1560,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Disposable",
@@ -1471,6 +1683,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -1510,12 +1738,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1563,6 +1791,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -1623,12 +1867,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1680,12 +1924,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1749,12 +1993,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -1947,6 +2191,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Scheduler",
             "printedName": "Scheduler",
             "usr": "s:13ReactiveSwift9SchedulerP",
@@ -1988,12 +2246,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2042,6 +2300,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Scheduler",
             "printedName": "Scheduler",
             "usr": "s:13ReactiveSwift9SchedulerP",
@@ -2084,12 +2356,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2136,6 +2408,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Scheduler",
@@ -2392,12 +2678,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2441,12 +2727,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2496,12 +2782,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2557,12 +2843,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2628,6 +2914,20 @@
         ],
         "hasMissingDesignatedInitializers": true,
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DateScheduler",
@@ -2731,12 +3031,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2780,12 +3080,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2835,12 +3135,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -2890,12 +3190,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -3293,6 +3593,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DateScheduler",
@@ -4329,6 +4643,22 @@
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
             ]
           },
           {
@@ -4696,6 +5026,22 @@
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
             ]
           }
         ],
@@ -4711,6 +5057,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "MutablePropertyProtocol",
@@ -6335,6 +6695,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "BindingTargetProvider",
             "printedName": "BindingTargetProvider",
             "children": [
@@ -6544,6 +6918,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Error",
@@ -9595,6 +9983,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "BindingSource",
             "printedName": "BindingSource",
             "usr": "s:13ReactiveSwift13BindingSourceP",
@@ -9823,6 +10225,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "BindingTargetProvider",
             "printedName": "BindingTargetProvider",
             "usr": "s:13ReactiveSwift21BindingTargetProviderP",
@@ -9960,6 +10376,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
           {
             "kind": "Conformance",
             "name": "MutablePropertyProtocol",
@@ -10629,6 +11059,20 @@
         ],
         "hasMissingDesignatedInitializers": true,
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "PropertyProtocol",
@@ -11349,6 +11793,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "ComposableMutablePropertyProtocol",
             "printedName": "ComposableMutablePropertyProtocol",
             "usr": "s:13ReactiveSwift33ComposableMutablePropertyProtocolP",
@@ -11579,6 +12037,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -11706,7 +12180,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "SignalProducer",
-                "printedName": "ReactiveSwift.SignalProducer<(Foundation.Data, Foundation.URLResponse), Swift.Error>",
+                "printedName": "ReactiveSwift.SignalProducer<(Foundation.Data, Foundation.URLResponse), any Swift.Error>",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -11730,7 +12204,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Error",
-                    "printedName": "Swift.Error",
+                    "printedName": "any Swift.Error",
                     "usr": "s:s5ErrorP"
                   }
                 ],
@@ -11766,6 +12240,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -12017,12 +12507,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -12672,6 +13162,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -12908,12 +13412,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -12975,12 +13479,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13042,12 +13546,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13222,12 +13726,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13275,12 +13779,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13340,12 +13844,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13392,12 +13896,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13444,12 +13948,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13496,12 +14000,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -13775,7 +14279,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               },
               {
@@ -14370,7 +14874,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               },
               {
@@ -14428,7 +14932,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               }
             ],
@@ -14602,7 +15106,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -16553,7 +17057,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -16602,7 +17106,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               }
             ],
@@ -16652,7 +17156,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               },
               {
@@ -20133,7 +20637,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -20290,7 +20794,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -20922,7 +21426,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Signal",
-                "printedName": "ReactiveSwift.Signal<τ_0_0, Swift.Error>",
+                "printedName": "ReactiveSwift.Signal<τ_0_0, any Swift.Error>",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -20932,7 +21436,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Error",
-                    "printedName": "Swift.Error",
+                    "printedName": "any Swift.Error",
                     "usr": "s:s5ErrorP"
                   }
                 ],
@@ -20978,7 +21482,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Signal",
-                "printedName": "ReactiveSwift.Signal<τ_1_0, Swift.Error>",
+                "printedName": "ReactiveSwift.Signal<τ_1_0, any Swift.Error>",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -20988,7 +21492,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Error",
-                    "printedName": "Swift.Error",
+                    "printedName": "any Swift.Error",
                     "usr": "s:s5ErrorP"
                   }
                 ],
@@ -21071,8 +21575,8 @@
             "usr": "s:13ReactiveSwift6SignalCAAs5Error_pRs_rlE7attemptyACyxsAD_pGyxKcF",
             "mangledName": "$s13ReactiveSwift6SignalCAAs5Error_pRs_rlE7attemptyACyxsAD_pGyxKcF",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 == Swift.Error>",
-            "sugared_genericSig": "<Value, Error where Error == Swift.Error>",
+            "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 == any Swift.Error>",
+            "sugared_genericSig": "<Value, Error where Error == any Swift.Error>",
             "declAttributes": [
               "Final",
               "AccessControl",
@@ -21126,8 +21630,8 @@
             "usr": "s:13ReactiveSwift6SignalCAAs5Error_pRs_rlE10attemptMapyACyqd__sAD_pGqd__xKclF",
             "mangledName": "$s13ReactiveSwift6SignalCAAs5Error_pRs_rlE10attemptMapyACyqd__sAD_pGqd__xKclF",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0, τ_0_1, τ_1_0 where τ_0_1 == Swift.Error>",
-            "sugared_genericSig": "<Value, Error, U where Error == Swift.Error>",
+            "genericSig": "<τ_0_0, τ_0_1, τ_1_0 where τ_0_1 == any Swift.Error>",
+            "sugared_genericSig": "<Value, Error, U where Error == any Swift.Error>",
             "declAttributes": [
               "Final",
               "AccessControl",
@@ -21144,12 +21648,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -21210,12 +21714,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -21276,12 +21780,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -21329,12 +21833,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -23099,7 +23603,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   },
                   {
@@ -23147,6 +23651,22 @@
             "hasMissingDesignatedInitializers": true,
             "superclassNames": [
               "ReactiveSwift.Observer<τ_0_0, τ_0_1>"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
             ]
           },
           {
@@ -23294,6 +23814,20 @@
         ],
         "hasMissingDesignatedInitializers": true,
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "SignalProtocol",
@@ -23478,6 +24012,22 @@
         "sugared_genericSig": "<Self : AnyObject, Self.Error : Swift.Error>",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -24249,7 +24799,7 @@
               {
                 "kind": "TypeFunc",
                 "name": "Function",
-                "printedName": "(ReactiveSwift.Signal<τ_0_0, τ_0_1>, ReactiveSwift.Disposable) -> τ_1_0",
+                "printedName": "(ReactiveSwift.Signal<τ_0_0, τ_0_1>, any ReactiveSwift.Disposable) -> τ_1_0",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -24259,7 +24809,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Tuple",
-                    "printedName": "(ReactiveSwift.Signal<τ_0_0, τ_0_1>, ReactiveSwift.Disposable)",
+                    "printedName": "(ReactiveSwift.Signal<τ_0_0, τ_0_1>, any ReactiveSwift.Disposable)",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -24282,7 +24832,7 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Disposable",
-                        "printedName": "ReactiveSwift.Disposable",
+                        "printedName": "any ReactiveSwift.Disposable",
                         "usr": "s:13ReactiveSwift10DisposableP"
                       }
                     ]
@@ -24314,7 +24864,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -24371,7 +24921,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -24428,7 +24978,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -24472,7 +25022,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25014,8 +25564,8 @@
             "usr": "s:13ReactiveSwift14SignalProducerVAAs5Error_pRs_rlEyACyxsAD_pGxyKccfc",
             "mangledName": "$s13ReactiveSwift14SignalProducerVAAs5Error_pRs_rlEyACyxsAD_pGxyKccfc",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 == Swift.Error>",
-            "sugared_genericSig": "<Value, Error where Error == Swift.Error>",
+            "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 == any Swift.Error>",
+            "sugared_genericSig": "<Value, Error where Error == any Swift.Error>",
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
@@ -25099,7 +25649,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25132,7 +25682,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25176,7 +25726,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25232,7 +25782,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25275,7 +25825,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25318,7 +25868,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25361,7 +25911,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Disposable",
-                "printedName": "ReactiveSwift.Disposable",
+                "printedName": "any ReactiveSwift.Disposable",
                 "usr": "s:13ReactiveSwift10DisposableP"
               },
               {
@@ -25837,7 +26387,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               },
               {
@@ -26385,7 +26935,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               },
               {
@@ -26442,7 +26992,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               }
             ],
@@ -26709,7 +27259,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -28640,7 +29190,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -28688,7 +29238,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               }
             ],
@@ -28737,7 +29287,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               },
               {
@@ -28798,7 +29348,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -29063,7 +29613,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -29088,7 +29638,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "SignalProducer",
-                "printedName": "ReactiveSwift.SignalProducer<τ_0_0, Swift.Error>",
+                "printedName": "ReactiveSwift.SignalProducer<τ_0_0, any Swift.Error>",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -29098,7 +29648,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Error",
-                    "printedName": "Swift.Error",
+                    "printedName": "any Swift.Error",
                     "usr": "s:s5ErrorP"
                   }
                 ],
@@ -29143,7 +29693,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "SignalProducer",
-                "printedName": "ReactiveSwift.SignalProducer<τ_1_0, Swift.Error>",
+                "printedName": "ReactiveSwift.SignalProducer<τ_1_0, any Swift.Error>",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -29153,7 +29703,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Error",
-                    "printedName": "Swift.Error",
+                    "printedName": "any Swift.Error",
                     "usr": "s:s5ErrorP"
                   }
                 ],
@@ -29235,8 +29785,8 @@
             "usr": "s:13ReactiveSwift14SignalProducerVAAs5Error_pRs_rlE7attemptyACyxsAD_pGyxKcF",
             "mangledName": "$s13ReactiveSwift14SignalProducerVAAs5Error_pRs_rlE7attemptyACyxsAD_pGyxKcF",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 == Swift.Error>",
-            "sugared_genericSig": "<Value, Error where Error == Swift.Error>",
+            "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 == any Swift.Error>",
+            "sugared_genericSig": "<Value, Error where Error == any Swift.Error>",
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
@@ -29289,8 +29839,8 @@
             "usr": "s:13ReactiveSwift14SignalProducerVAAs5Error_pRs_rlE10attemptMapyACyqd__sAD_pGqd__xKclF",
             "mangledName": "$s13ReactiveSwift14SignalProducerVAAs5Error_pRs_rlE10attemptMapyACyqd__sAD_pGqd__xKclF",
             "moduleName": "ReactiveSwift",
-            "genericSig": "<τ_0_0, τ_0_1, τ_1_0 where τ_0_1 == Swift.Error>",
-            "sugared_genericSig": "<Value, Error, U where Error == Swift.Error>",
+            "genericSig": "<τ_0_0, τ_0_1, τ_1_0 where τ_0_1 == any Swift.Error>",
+            "sugared_genericSig": "<Value, Error, U where Error == any Swift.Error>",
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
@@ -29824,7 +30374,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "usr": "s:13ReactiveSwift9SchedulerP"
               }
             ],
@@ -31995,7 +32545,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -33379,7 +33929,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -33429,7 +33979,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               },
               {
@@ -33490,7 +34040,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -33540,7 +34090,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "DateScheduler",
-                "printedName": "ReactiveSwift.DateScheduler",
+                "printedName": "any ReactiveSwift.DateScheduler",
                 "usr": "s:13ReactiveSwift13DateSchedulerP"
               }
             ],
@@ -35540,6 +36090,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "SignalProducerConvertible",
             "printedName": "SignalProducerConvertible",
             "children": [
@@ -35723,6 +36287,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -35835,6 +36415,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -36132,6 +36728,22 @@
           "Final",
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -36152,6 +36764,22 @@
             "declAttributes": [
               "AccessControl",
               "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
             ]
           },
           {
@@ -36508,6 +37136,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "IteratorProtocol",
                 "printedName": "IteratorProtocol",
                 "children": [
@@ -36541,6 +37183,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "RandomAccessCollection",
@@ -36970,6 +37626,22 @@
         "isOpen": true,
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -37151,6 +37823,22 @@
         "sugared_genericSig": "<Error where Error : Swift.Error>",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -37435,6 +38123,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -37851,6 +38555,9 @@
                 "moduleName": "ReactiveSwift",
                 "static": true,
                 "implicit": true,
+                "declAttributes": [
+                  "Nonisolated"
+                ],
                 "accessors": [
                   {
                     "kind": "Accessor",
@@ -37892,6 +38599,20 @@
             ],
             "enumRawTypeName": "String",
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Equatable",
@@ -38419,6 +39140,9 @@
                 "moduleName": "ReactiveSwift",
                 "static": true,
                 "implicit": true,
+                "declAttributes": [
+                  "Nonisolated"
+                ],
                 "accessors": [
                   {
                     "kind": "Accessor",
@@ -38460,6 +39184,20 @@
             ],
             "enumRawTypeName": "String",
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Equatable",
@@ -38536,6 +39274,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -38755,12 +39509,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -38804,12 +39558,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -38824,12 +39578,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -38998,7 +39752,23 @@
               "AccessControl",
               "RawDocComment"
             ],
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -39010,7 +39780,23 @@
           "AccessControl",
           "RawDocComment"
         ],
-        "hasMissingDesignatedInitializers": true
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -39051,6 +39837,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
           {
             "kind": "Conformance",
             "name": "SignalProducerConvertible",
@@ -39139,12 +39939,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -39184,12 +39984,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "ReactiveSwift.Disposable?",
+                "printedName": "(any ReactiveSwift.Disposable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Disposable",
-                    "printedName": "ReactiveSwift.Disposable",
+                    "printedName": "any ReactiveSwift.Disposable",
                     "usr": "s:13ReactiveSwift10DisposableP"
                   }
                 ],
@@ -39229,6 +40029,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -39427,7 +40243,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "hasDefaultArg": true,
                 "usr": "s:13ReactiveSwift9SchedulerP"
               },
@@ -39488,7 +40304,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Scheduler",
-                "printedName": "ReactiveSwift.Scheduler",
+                "printedName": "any ReactiveSwift.Scheduler",
                 "hasDefaultArg": true,
                 "usr": "s:13ReactiveSwift9SchedulerP"
               },
@@ -39546,6 +40362,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "BindingTargetProvider",
@@ -39739,8 +40569,8 @@
         "usr": "s:Sq",
         "mangledName": "$sSq",
         "moduleName": "Swift",
-        "genericSig": "<τ_0_0>",
-        "sugared_genericSig": "<Wrapped>",
+        "genericSig": "<τ_0_0 where τ_0_0 : ~Copyable>",
+        "sugared_genericSig": "<Wrapped where Wrapped : ~Copyable>",
         "declAttributes": [
           "Frozen"
         ],
@@ -39749,10 +40579,10 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "ExpressibleByNilLiteral",
-            "printedName": "ExpressibleByNilLiteral",
-            "usr": "s:s23ExpressibleByNilLiteralP",
-            "mangledName": "$ss23ExpressibleByNilLiteralP"
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -39812,6 +40642,34 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByNilLiteral",
+            "printedName": "ExpressibleByNilLiteral",
+            "usr": "s:s23ExpressibleByNilLiteralP",
+            "mangledName": "$ss23ExpressibleByNilLiteralP"
+          },
+          {
+            "kind": "Conformance",
             "name": "CustomDebugStringConvertible",
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
@@ -39858,13 +40716,6 @@
             ],
             "usr": "s:s21_ObjectiveCBridgeableP",
             "mangledName": "$ss21_ObjectiveCBridgeableP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Sendable",
-            "printedName": "Sendable",
-            "usr": "s:s8SendableP",
-            "mangledName": "$ss8SendableP"
           },
           {
             "kind": "Conformance",
@@ -39988,14 +40839,21 @@
         "usr": "s:s6ResultO",
         "mangledName": "$ss6ResultO",
         "moduleName": "Swift",
-        "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 : Swift.Error>",
-        "sugared_genericSig": "<Success, Failure where Failure : Swift.Error>",
+        "genericSig": "<τ_0_0, τ_0_1 where τ_0_1 : Swift.Error, τ_0_0 : ~Copyable>",
+        "sugared_genericSig": "<Success, Failure where Failure : Swift.Error, Success : ~Copyable>",
         "declAttributes": [
           "Frozen"
         ],
         "isExternal": true,
         "isEnumExhaustive": true,
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "SignalProducerConvertible",
@@ -40038,10 +40896,10 @@
           },
           {
             "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
           },
           {
             "kind": "Conformance",
@@ -40049,6 +40907,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
           }
         ]
       },
@@ -40077,10 +40942,38 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -40167,10 +41060,38 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -40243,164 +41164,10 @@
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Disposable.swift",
-      "kind": "IntegerLiteral",
-      "offset": 766,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Disposable.swift",
-      "kind": "IntegerLiteral",
-      "offset": 766,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Disposable.swift",
       "kind": "BooleanLiteral",
       "offset": 1563,
       "length": 4,
       "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 853,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 909,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1113,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1174,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3215,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3268,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3295,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 3526,
-      "length": 16,
-      "value": "\"VALUE \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 3541,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 3581,
-      "length": 17,
-      "value": "\"FAILED \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 3597,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 3629,
-      "length": 11,
-      "value": "\"COMPLETED\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 3673,
-      "length": 13,
-      "value": "\"INTERRUPTED\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9183,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9296,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 14453,
-      "length": 34,
-      "value": "\"Never is impossible to construct\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Event.swift",
-      "kind": "StringLiteral",
-      "offset": 15012,
-      "length": 34,
-      "value": "\"Never is impossible to construct\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/CollectEvery.swift",
-      "kind": "FloatLiteral",
-      "offset": 1063,
-      "length": 3,
-      "value": "0.1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/CollectEvery.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1620,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/CollectEvery.swift",
-      "kind": "StringLiteral",
-      "offset": 61,
-      "length": 12,
-      "value": "\"ReactiveSwift.CollectEvery\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/CollectEvery.swift",
@@ -40433,27 +41200,6 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "IntegerLiteral",
-      "offset": 3954,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3995,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4110,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
       "offset": 4879,
       "length": 1,
       "value": "0"
@@ -40461,28 +41207,7 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "IntegerLiteral",
-      "offset": 4936,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
       "offset": 5982,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 6049,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 6090,
       "length": 1,
       "value": "0"
     },
@@ -40502,20 +41227,6 @@
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 7963,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9046,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "StringLiteral",
       "offset": 11817,
       "length": 48,
@@ -40524,294 +41235,42 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "StringLiteral",
-      "offset": 12350,
+      "offset": 12354,
       "length": 48,
       "value": "\"org.reactivecocoa.ReactiveSwift.QueueScheduler\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "FloatLiteral",
-      "offset": 14812,
-      "length": 3,
-      "value": "0.1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 15629,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 15670,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 15771,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "Array",
-      "offset": 17148,
+      "offset": 17152,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "IntegerLiteral",
-      "offset": 17357,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "StringLiteral",
-      "offset": 17377,
-      "length": 47,
-      "value": "\"org.reactivecocoa.ReactiveSwift.TestScheduler\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 20153,
+      "offset": 17361,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "IntegerLiteral",
-      "offset": 20929,
+      "offset": 20933,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
       "kind": "IntegerLiteral",
-      "offset": 21425,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 23756,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "BooleanLiteral",
-      "offset": 25292,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "BooleanLiteral",
-      "offset": 25397,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 26086,
+      "offset": 26088,
       "length": 2,
       "value": "10"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Scheduler.swift",
-      "kind": "IntegerLiteral",
-      "offset": 26109,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/ValidatingProperty.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2484,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/ValidatingProperty.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3150,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/ValidatingProperty.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3209,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/ValidatingProperty.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9159,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/ValidatingProperty.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9187,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipRepeats.swift",
-      "kind": "BooleanLiteral",
-      "offset": 497,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipRepeats.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 11,
-      "value": "\"ReactiveSwift.SkipRepeats\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeUntil.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 9,
-      "value": "\"ReactiveSwift.TakeUntil\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeWhile.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 9,
-      "value": "\"ReactiveSwift.TakeWhile\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4702,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4721,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5001,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6082,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6548,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 7227,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 10325,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 14810,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Action.swift",
-      "kind": "BooleanLiteral",
-      "offset": 14922,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3565,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "BooleanLiteral",
-      "offset": 22205,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "BooleanLiteral",
-      "offset": 23556,
-      "length": 5,
-      "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
       "kind": "BooleanLiteral",
       "offset": 29113,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "StringLiteral",
-      "offset": 30856,
-      "length": 66,
-      "value": "\"The producer promised to send at least one value. Received none.\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "StringLiteral",
-      "offset": 36337,
-      "length": 53,
-      "value": "\"Nested modifications violate exclusivity of access.\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "BooleanLiteral",
-      "offset": 36414,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "BooleanLiteral",
-      "offset": 36447,
       "length": 5,
       "value": "false"
     },
@@ -40823,143 +41282,10 @@
       "value": "false"
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Property.swift",
-      "kind": "BooleanLiteral",
-      "offset": 37093,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Materialize.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 11,
-      "value": "\"ReactiveSwift.Materialize\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/UnaryAsyncOperator.swift",
-      "kind": "StringLiteral",
-      "offset": 15,
-      "length": 18,
-      "value": "\"ReactiveSwift.UnaryAsyncOperator\""
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/UnaryAsyncOperator.swift",
       "kind": "IntegerLiteral",
       "offset": 2364,
       "length": 10,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/UnaryAsyncOperator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2364,
-      "length": 10,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/UnaryAsyncOperator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2364,
-      "length": 10,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Delay.swift",
-      "kind": "IntegerLiteral",
-      "offset": 372,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Delay.swift",
-      "kind": "StringLiteral",
-      "offset": 63,
-      "length": 5,
-      "value": "\"ReactiveSwift.Delay\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3476,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3714,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "StringLiteral",
-      "offset": 9436,
-      "length": 67,
-      "value": "\"Calling `unconditionallyTerminate` without acquiring `stateLock`.\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 10235,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "StringLiteral",
-      "offset": 2755,
-      "length": 4,
-      "value": "\"ReactiveSwift.Core\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "Array",
-      "offset": 13606,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 13627,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 13719,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 13868,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13926,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 29064,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 29084,
-      "length": 1,
       "value": "1"
     },
     {
@@ -40978,13 +41304,6 @@
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 37062,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
       "kind": "BooleanLiteral",
       "offset": 40715,
       "length": 5,
@@ -41000,590 +41319,9 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
       "kind": "BooleanLiteral",
-      "offset": 41929,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 42406,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
       "offset": 65267,
       "length": 4,
       "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 66754,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 66798,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 68162,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 68799,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 69143,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 69177,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 69431,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 69765,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 70604,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 70840,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "Array",
-      "offset": 70995,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 71048,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 71103,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "Array",
-      "offset": 71475,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73038,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73051,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73341,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73354,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73367,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73693,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73706,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73719,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73732,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74094,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74107,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74120,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74133,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74146,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74544,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74557,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74570,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74583,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74596,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 74609,
-      "length": 1,
-      "value": "5"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75043,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75056,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75069,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75082,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75095,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75108,
-      "length": 1,
-      "value": "5"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75121,
-      "length": 1,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75591,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75604,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75617,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75630,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75643,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75656,
-      "length": 1,
-      "value": "5"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75669,
-      "length": 1,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 75682,
-      "length": 1,
-      "value": "7"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76188,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76201,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76214,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76227,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76240,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76253,
-      "length": 1,
-      "value": "5"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76266,
-      "length": 1,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76279,
-      "length": 1,
-      "value": "7"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76292,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76834,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76847,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76860,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76873,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76886,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76899,
-      "length": 1,
-      "value": "5"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76912,
-      "length": 1,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76925,
-      "length": 1,
-      "value": "7"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76938,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 76951,
-      "length": 1,
-      "value": "9"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "IntegerLiteral",
-      "offset": 85598,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 90166,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.swift",
-      "kind": "BooleanLiteral",
-      "offset": 91403,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/ScanMap.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 7,
-      "value": "\"ReactiveSwift.ScanMap\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/CombinePrevious.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 15,
-      "value": "\"ReactiveSwift.CombinePrevious\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/UninhabitedTypeGuards.swift",
-      "kind": "StringLiteral",
-      "offset": 7253,
-      "length": 227,
-      "value": "\"Detected an attempt to observe (or create streams to transform) uninstantiable events. This is considered a logical error, and appropriate operators should be used instead. Please refer to the warnings raised by the compiler.\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Reduce.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 6,
-      "value": "\"ReactiveSwift.Reduce\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Throttle.swift",
-      "kind": "IntegerLiteral",
-      "offset": 507,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Throttle.swift",
-      "kind": "StringLiteral",
-      "offset": 63,
-      "length": 8,
-      "value": "\"ReactiveSwift.Throttle\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Debounce.swift",
-      "kind": "IntegerLiteral",
-      "offset": 571,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Debounce.swift",
-      "kind": "StringLiteral",
-      "offset": 63,
-      "length": 8,
-      "value": "\"ReactiveSwift.Debounce\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Map.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 3,
-      "value": "\"ReactiveSwift.Map\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/LazyMap.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 7,
-      "value": "\"ReactiveSwift.LazyMap\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/UniqueValues.swift",
@@ -41591,34 +41329,6 @@
       "offset": 245,
       "length": 2,
       "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/UniqueValues.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 12,
-      "value": "\"ReactiveSwift.UniqueValues\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/MaterializeAsResult.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 19,
-      "value": "\"ReactiveSwift.MaterializeAsResult\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Dematerialize.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 13,
-      "value": "\"ReactiveSwift.Dematerialize\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Filter.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 6,
-      "value": "\"ReactiveSwift.Filter\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Collect.swift",
@@ -41635,95 +41345,11 @@
       "value": "false"
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Collect.swift",
-      "kind": "BooleanLiteral",
-      "offset": 946,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Collect.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1380,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Collect.swift",
-      "kind": "Array",
-      "offset": 1636,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/Collect.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 7,
-      "value": "\"ReactiveSwift.Collect\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 8075,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "StringLiteral",
-      "offset": 12316,
-      "length": 10,
-      "value": "\"ReactiveSwift.SignalCore\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 14657,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 15161,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "StringLiteral",
-      "offset": 13750,
-      "length": 15,
-      "value": "\"ReactiveSwift.TransformerCore\""
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
       "kind": "BooleanLiteral",
       "offset": 17484,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "StringLiteral",
-      "offset": 17271,
-      "length": 13,
-      "value": "\"ReactiveSwift.GeneratorCore\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 19193,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 41633,
-      "length": 1,
-      "value": "1"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
@@ -41741,185 +41367,10 @@
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 51188,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
       "kind": "BooleanLiteral",
       "offset": 77715,
       "length": 4,
       "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 107844,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 107862,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 107904,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 108299,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 108328,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 108851,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 108869,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 108962,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 109498,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 109516,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 109834,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 109959,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 119084,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 119626,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 119680,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 120510,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 122380,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "StringLiteral",
-      "offset": 122383,
-      "length": 31,
-      "value": "\"Invalid capacity: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "StringLiteral",
-      "offset": 122413,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 123339,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "Array",
-      "offset": 125675,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 125695,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "Array",
-      "offset": 128345,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 128365,
-      "length": 5,
-      "value": "false"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
@@ -41936,298 +41387,11 @@
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "Array",
-      "offset": 131827,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "Array",
-      "offset": 132109,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 132948,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 133038,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 133162,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "FloatLiteral",
-      "offset": 134768,
-      "length": 3,
-      "value": "0.1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 135704,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 135745,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "FloatLiteral",
-      "offset": 137334,
-      "length": 3,
-      "value": "0.1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/SignalProducer.swift",
-      "kind": "IntegerLiteral",
-      "offset": 138255,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 873,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1025,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3303,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3612,
-      "length": 1,
-      "value": "1"
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
       "kind": "BooleanLiteral",
       "offset": 4297,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4337,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4459,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4617,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4823,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 4826,
-      "length": 48,
-      "value": "\"Unexpected pthread mutex error code: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 4873,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4985,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 4988,
-      "length": 48,
-      "value": "\"Unexpected pthread mutex error code: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5035,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5134,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5137,
-      "length": 48,
-      "value": "\"Unexpected pthread mutex error code: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5184,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5298,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5312,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5360,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5399,
-      "length": 48,
-      "value": "\"Unexpected pthread mutex error code: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5446,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5460,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5552,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5555,
-      "length": 48,
-      "value": "\"Unexpected pthread mutex error code: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 5602,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5635,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "StringLiteral",
-      "offset": 4192,
-      "length": 11,
-      "value": "\"ReactiveSwift.PthreadLock\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Atomic.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6414,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Bag.swift",
-      "kind": "IntegerLiteral",
-      "offset": 629,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Bag.swift",
-      "kind": "IntegerLiteral",
-      "offset": 852,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Bag.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1355,
-      "length": 1,
-      "value": "1"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
@@ -42244,55 +41408,6 @@
       "value": "1"
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "FloatLiteral",
-      "offset": 3041,
-      "length": 6,
-      "value": "1000.0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4246,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4253,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4260,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4387,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4394,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/FoundationExtensions.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4522,
-      "length": 4,
-      "value": "1000"
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipFirst.swift",
       "kind": "IntegerLiteral",
       "offset": 186,
@@ -42300,74 +41415,11 @@
       "value": "0"
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipFirst.swift",
-      "kind": "IntegerLiteral",
-      "offset": 271,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipFirst.swift",
-      "kind": "IntegerLiteral",
-      "offset": 415,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipFirst.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 9,
-      "value": "\"ReactiveSwift.SkipFirst\""
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
       "kind": "IntegerLiteral",
       "offset": 1812,
       "length": 1,
       "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
-      "offset": 11664,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "StringLiteral",
-      "offset": 11667,
-      "length": 49,
-      "value": "\"The concurrent limit must be greater than zero.\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12607,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 13343,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13710,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "StringLiteral",
-      "offset": 13713,
-      "length": 49,
-      "value": "\"The concurrent limit must be greater than zero.\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
@@ -42393,86 +41445,9 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
       "kind": "IntegerLiteral",
-      "offset": 17350,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
-      "offset": 17672,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
       "offset": 17796,
       "length": 7,
       "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
-      "offset": 17796,
-      "length": 7,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "IntegerLiteral",
-      "offset": 17796,
-      "length": 7,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "StringLiteral",
-      "offset": 17960,
-      "length": 41,
-      "value": "\"The transition is not supposed to fail.\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 26951,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 27068,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 27105,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 27470,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 27742,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 28100,
-      "length": 4,
-      "value": "true"
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
@@ -42498,55 +41473,6 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
       "kind": "BooleanLiteral",
-      "offset": 30628,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 30734,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 30910,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 30955,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 30975,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 31413,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 31800,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
       "offset": 32902,
       "length": 5,
       "value": "false"
@@ -42568,41 +41494,6 @@
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
       "kind": "BooleanLiteral",
-      "offset": 34225,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 34274,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 34291,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 34728,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
-      "offset": 35116,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Flatten.swift",
-      "kind": "BooleanLiteral",
       "offset": 36348,
       "length": 5,
       "value": "false"
@@ -42613,69 +41504,6 @@
       "offset": 36383,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.Observer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1277,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Signal.Observer.swift",
-      "kind": "StringLiteral",
-      "offset": 291,
-      "length": 8,
-      "value": "\"ReactiveSwift.Observer\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/AttemptMap.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 10,
-      "value": "\"ReactiveSwift.AttemptMap\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 874,
-      "length": 106,
-      "value": "\"[\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 889,
-      "length": 1,
-      "value": "\"] \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 899,
-      "length": 8,
-      "value": "\" fileName: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 921,
-      "length": 1,
-      "value": "\", functionName: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 952,
-      "length": 1,
-      "value": "\", lineNumber: \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 979,
-      "length": 2,
-      "value": "\"\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
@@ -42692,74 +41520,11 @@
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 6053,
-      "length": 18,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 6070,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 6096,
-      "length": 27,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 6113,
-      "length": 1,
-      "value": "\" \""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/EventLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 6122,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeFirst.swift",
       "kind": "IntegerLiteral",
       "offset": 184,
       "length": 1,
       "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeFirst.swift",
-      "kind": "IntegerLiteral",
-      "offset": 269,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeFirst.swift",
-      "kind": "IntegerLiteral",
-      "offset": 409,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeFirst.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 9,
-      "value": "\"ReactiveSwift.TakeFirst\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/CompactMap.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 10,
-      "value": "\"ReactiveSwift.CompactMap\""
     },
     {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeLast.swift",
@@ -42769,67 +41534,11 @@
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeLast.swift",
-      "kind": "IntegerLiteral",
-      "offset": 274,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeLast.swift",
-      "kind": "IntegerLiteral",
-      "offset": 584,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeLast.swift",
-      "kind": "IntegerLiteral",
-      "offset": 619,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeLast.swift",
-      "kind": "Array",
-      "offset": 810,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/TakeLast.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 8,
-      "value": "\"ReactiveSwift.TakeLast\""
-    },
-    {
       "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipWhile.swift",
       "kind": "BooleanLiteral",
       "offset": 211,
       "length": 4,
       "value": "true"
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/SkipWhile.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 9,
-      "value": "\"ReactiveSwift.SkipWhile\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/DematerializeResults.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 20,
-      "value": "\"ReactiveSwift.DematerializeResults\""
-    },
-    {
-      "filePath": "\/Users\/nachosoto\/dev\/AsyncImageView\/Carthage\/Checkouts\/ReactiveSwift\/Sources\/Observers\/MapError.swift",
-      "kind": "StringLiteral",
-      "offset": 44,
-      "length": 8,
-      "value": "\"ReactiveSwift.MapError\""
     }
   ]
 }

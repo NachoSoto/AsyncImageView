@@ -152,7 +152,7 @@ class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
 	}
 }
 
-@retroactive extension String: NSDataConvertible {
+extension String: @retroactive NSDataConvertible {
 	public init?(data: Data) {
 		self.init(data: data, encoding: String.encoding)
 	}

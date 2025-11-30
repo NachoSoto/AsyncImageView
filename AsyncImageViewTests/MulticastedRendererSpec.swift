@@ -34,7 +34,7 @@ class MulticastedRendererSpec: QuickSpec {
 				}
 
 				func getImageForData(_ data: TestData, _ size: CGSize) -> ImageResult? {
-					return try? getProducerForData(data, size)
+					return getProducerForData(data, size)
 						.single()?
                         .get()
 				}
@@ -56,8 +56,8 @@ class MulticastedRendererSpec: QuickSpec {
 					let result2 = getProducerForData(data, size)
 
 					// Starting the producers should yield the same image.
-					guard let image1 = try? result1.single()?.get().image else { XCTFail("Failed to produce image"); return }
-					guard let image2 = try? result2.single()?.get().image else { XCTFail("Failed to produce image"); return }
+					guard let image1 = result1.single()?.get().image else { XCTFail("Failed to produce image"); return }
+					guard let image2 = result2.single()?.get().image else { XCTFail("Failed to produce image"); return }
 
 					expect(image1) === image2
 				}
@@ -82,7 +82,7 @@ class MulticastedRendererSpec: QuickSpec {
 				}
 
 				func getImageForData(_ data: TestData, _ size: CGSize) -> ImageResult? {
-					return try? getProducerForData(data, size)
+					return getProducerForData(data, size)
 						.single()?
 						.get()
 				}

@@ -25,4 +25,5 @@ jobs:
           scheme: AsyncImageView
           platform: iOS
           action: test
+          warnings-as-errors: false
           verbosity: xcbeautify

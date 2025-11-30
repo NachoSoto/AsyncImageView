@@ -142,7 +142,7 @@ class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
 	}
 }
 
-extension String: DataFileType {
+@retroactive extension String: DataFileType {
 	public var subdirectory: String? {
 		return "\(self.count)"
 	}
@@ -152,7 +152,7 @@ extension String: DataFileType {
 	}
 }
 
-extension String: NSDataConvertible {
+@retroactive extension String: NSDataConvertible {
 	public init?(data: Data) {
 		self.init(data: data, encoding: String.encoding)
 	}

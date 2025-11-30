@@ -25,7 +25,7 @@ jobs:
         uses: mxcl/xcodebuild@v3
         with:
           xcode: '26.0'
-          scheme: AsyncImageView
+          scheme: AsyncImageView-AsyncImageView
           platform: iOS
           action: test
           verbosity: xcbeautify

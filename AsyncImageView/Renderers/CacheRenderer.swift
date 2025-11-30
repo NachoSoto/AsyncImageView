@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 import ReactiveSwift
 
@@ -67,8 +68,20 @@ extension RenderDataType where Self: DataFileType {
 	}
 }
 
+private let renderDataSubdirectoryLocale = Locale(identifier: "en_US_POSIX")
+private let renderDataSubdirectoryFormat = "%.2fx%.2f"
+
+internal func subdirectoryForSize(_ size: CGSize, locale: Locale) -> String {
+	return String(
+        format: renderDataSubdirectoryFormat,
+        locale: locale,
+        size.width,
+        size.height
+    )
+}
+
 public func subdirectoryForSize(_ size: CGSize) -> String {
-	return String(format: "%.2fx%.2f", size.width, size.height)
+    return subdirectoryForSize(size, locale: renderDataSubdirectoryLocale)
 }
 
 private enum CacheRendererError: Error {
@@ -90,4 +103,3 @@ private extension UIImage {
 		)
 	}
 }
-

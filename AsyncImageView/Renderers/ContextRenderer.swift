@@ -12,14 +12,14 @@ import CoreGraphics
 #if !os(watchOS)
 
 /// `SynchronousRendererType` which generates a `UIImage` by rendering into a context.
-@available(iOS 10.0, tvOSApplicationExtension 10.0,  *)
+@available(iOS 10.0, tvOSApplicationExtension 10.0, *)
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
-    public typealias Block = (_ context: CGContext, _ data: Data) -> ()
-    
+    public typealias Block = (_ context: CGContext, _ data: Data) -> Void
+
     private let format: UIGraphicsImageRendererFormat
     private let imageSize: CGSize?
     private let renderingBlock: Block
-    
+
     /// - opaque: A Boolean flag indicating whether the bitmap is opaque.
     /// If you know the bitmap is fully opaque, specify YES to ignore the
     /// alpha channel and optimize the bitmap’s storage.
@@ -33,13 +33,13 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
         self.imageSize = imageSize
         self.renderingBlock = renderingBlock
     }
-    
+
     public func renderImageWithData(_ data: Data) -> UIImage {
         let renderer = UIGraphicsImageRenderer(
             size: self.imageSize ?? data.size,
             format: self.format
         )
-        
+
         return renderer.image { context in
             self.renderingBlock(context.cgContext, data)
         }

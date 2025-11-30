@@ -36,9 +36,7 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
 
 	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderer.renderImageWithData(data)
-			.map { [screenScale = self.screenScale,
-			       opaque = self.opaque,
-			       contentMode = self.contentMode] result in
+			.map { [screenScale = self.screenScale, opaque = self.opaque, contentMode = self.contentMode] result in
                 let inflatedImage = result.image.inflate(
                     withSize: data.size,
                     scale: screenScale,
@@ -55,10 +53,10 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
 public enum ImageInflaterRendererContentMode {
     case aspectFill
     case aspectFit
-    
+
     // For backwards compatibility
     public static let defaultMode: ImageInflaterRendererContentMode = .aspectFill
-    
+
     fileprivate func drawingRectForRendering(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
         switch self {
         case .aspectFill:
@@ -94,9 +92,8 @@ extension UIImage {
 		scale: CGFloat,
 		opaque: Bool,
 		contentMode: ImageInflaterRendererContentMode,
-		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> ()) -> ())
-		-> UIImage
-	{
+		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> Void) -> Void)
+		-> UIImage {
 		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -150,8 +147,8 @@ extension RendererType {
 
 public struct InflaterSizeCalculator {
 	public static func drawingRectForRenderingWithAspectFill(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
-		if (imageSize == canvasSize ||
-			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne) {
+		if imageSize == canvasSize ||
+			abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne {
 				return CGRect(origin: .zero, size: canvasSize)
 		} else {
 			let destScale = max(
@@ -168,24 +165,24 @@ public struct InflaterSizeCalculator {
 			return CGRect(x: dWidth, y: dHeight, width: newWidth, height: newHeight)
 		}
 	}
-    
+
     // TODO: write tests for this
     public static func drawingRectForRenderingWithAspectFit(imageSize: CGSize, inSize canvasSize: CGSize) -> CGRect {
-        if (imageSize == canvasSize ||
-            abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne) {
+        if imageSize == canvasSize ||
+            abs(imageSize.aspectRatio - canvasSize.aspectRatio) < CGFloat.ulpOfOne {
             return CGRect(origin: .zero, size: canvasSize)
         } else {
             let destScale = min(
                 canvasSize.width / imageSize.width,
                 canvasSize.height / imageSize.height
             )
-            
+
             let newWidth = imageSize.width * destScale
             let newHeight = imageSize.height * destScale
-            
+
             let dWidth = ((canvasSize.width - newWidth) / 2.0)
             let dHeight = ((canvasSize.height - newHeight) / 2.0)
-            
+
             return CGRect(x: dWidth, y: dHeight, width: newWidth, height: newHeight)
         }
     }
@@ -197,7 +194,7 @@ private extension CGSize {
 	}
 }
 
-private func *(lhs: CGSize, rhs: CGFloat) -> CGSize {
+private func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
 	return CGSize(
 		width: lhs.width * rhs,
 		height: lhs.height * rhs

@@ -28,8 +28,7 @@ public final class FallbackRenderer<
 		R1.RenderResult == RR1,
 		R2.RenderResult == RR2,
 		R1.Error == E1,
-		R2.Error == E2
-	{
+		R2.Error == E2 {
 		self.primaryRenderer = AnyRenderer(primaryRenderer)
 		self.fallbackRenderer = AnyRenderer(fallbackRenderer)
 	}
@@ -52,8 +51,7 @@ extension RendererType {
 	/// Uses the given `RendererType` whenever `self` produces an error.
 	public func fallback<Other: RendererType>
 		(_ fallbackRenderer: Other) -> FallbackRenderer<Self.Data, Self.RenderResult, Other.RenderResult, Self.Error, Other.Error>
-		where Self.Data == Other.Data
-	{
+		where Self.Data == Other.Data {
 		return FallbackRenderer(primaryRenderer: self, fallbackRenderer: fallbackRenderer)
 	}
 }

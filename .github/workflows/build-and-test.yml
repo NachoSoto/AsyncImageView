@@ -1,9 +1,7 @@
 name: Build and Test
 
 on:
-  pull_request:
-    branches:
-      - master
+  pull_request
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

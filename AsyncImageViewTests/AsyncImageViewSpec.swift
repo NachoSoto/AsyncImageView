@@ -8,13 +8,15 @@
 
 import Quick
 import Nimble
+import UIKit
+import XCTest
 
 import ReactiveSwift
 
 import AsyncImageView
 
 class AsyncImageViewSpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		describe("AsyncImageView") {
             // To ensure that updating UI takes one extra cycle
             // and we can verify image is reset before that

@@ -8,86 +8,108 @@
 
 import Quick
 import Nimble
+import Foundation
+import CoreGraphics
 
 import AsyncImageView
 
-private func testCache<T: CacheType>(
-	cacheCreator: @escaping () -> T,
-	keyCreator: @escaping () -> T.Key,
-	valueCreator: @escaping () -> T.Value
-)
-	where T.Value: Equatable
-{
-	var cache: T!
-
-	beforeEach {
-		cache = cacheCreator()
-	}
-
-	it("returns nil when not cached") {
-		expect(cache.valueForKey(keyCreator())).to(beNil())
-	}
-
-	it("recovers value after saving it") {
-		let key = keyCreator()
-		let value = valueCreator()
-
-		cache.setValue(value, forKey: key)
-
-		expect(cache.valueForKey(key)) == value
-	}
-
-	it("values don't override") {
-		let key1 = keyCreator()
-		let key2 = keyCreator()
-		let value1 = valueCreator()
-		let value2 = valueCreator()
-
-		cache.setValue(value1, forKey: key1)
-		cache.setValue(value2, forKey: key2)
-
-		expect(cache.valueForKey(key1)) == value1
-		expect(cache.valueForKey(key2)) == value2
-	}
-
-	it("can remove a value") {
-		let key = keyCreator()
-		let value = valueCreator()
-
-		cache.setValue(value, forKey: key)
-		cache.setValue(nil, forKey: key)
-
-		expect(cache.valueForKey(key)).to(beNil())
-	}
-}
-
 class InMemoryCacheSpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		describe("InMemoryCache") {
-			testCache(
-				cacheCreator: { InMemoryCache<String, String>(cacheName: "test") },
-				keyCreator: String.randomReadableString,
-				valueCreator: String.randomReadableString
-			)
+			var cache: InMemoryCache<String, String>!
+
+			beforeEach {
+				cache = InMemoryCache(cacheName: "test")
+			}
+
+			it("returns nil when not cached") {
+				expect(cache.valueForKey(UUID().uuidString)).to(beNil())
+			}
+
+			it("recovers value after saving it") {
+				let key = UUID().uuidString
+				let value = String.randomReadableString()
+
+				cache.setValue(value, forKey: key)
+
+				expect(cache.valueForKey(key)) == value
+			}
+
+			it("values don't override") {
+				let key1 = UUID().uuidString
+				let key2 = UUID().uuidString
+				let value1 = String.randomReadableString()
+				let value2 = String.randomReadableString()
+
+				cache.setValue(value1, forKey: key1)
+				cache.setValue(value2, forKey: key2)
+
+				expect(cache.valueForKey(key1)) == value1
+				expect(cache.valueForKey(key2)) == value2
+			}
+
+			it("can remove a value") {
+				let key = UUID().uuidString
+				let value = String.randomReadableString()
+
+				cache.setValue(value, forKey: key)
+				cache.setValue(nil, forKey: key)
+
+				expect(cache.valueForKey(key)).to(beNil())
+			}
 		}
 	}
 }
 
 class DiskCacheSpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		describe("DiskCache") {
 			let directoryCreator = {
 				return URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 					.appendingPathComponent(ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
 			}
 
-			testCache(
-				cacheCreator: { () -> DiskCache<String, String> in
-					return DiskCache(rootDirectory: directoryCreator())
-				},
-				keyCreator: String.randomReadableString,
-				valueCreator: String.randomReadableString
-			)
+			var cache: DiskCache<String, String>!
+
+			beforeEach {
+				cache = DiskCache(rootDirectory: directoryCreator())
+			}
+
+			it("returns nil when not cached") {
+				expect(cache.valueForKey(UUID().uuidString)).to(beNil())
+			}
+
+			it("recovers value after saving it") {
+				let key = UUID().uuidString
+				let value = String.randomReadableString()
+
+				cache.setValue(value, forKey: key)
+
+				expect(cache.valueForKey(key)) == value
+			}
+
+			it("values don't override") {
+				let key1 = UUID().uuidString
+				let key2 = UUID().uuidString
+				let value1 = String.randomReadableString()
+				let value2 = String.randomReadableString()
+
+				cache.setValue(value1, forKey: key1)
+				cache.setValue(value2, forKey: key2)
+
+				expect(cache.valueForKey(key1)) == value1
+				expect(cache.valueForKey(key2)) == value2
+			}
+
+			it("can remove a value") {
+				let key = UUID().uuidString
+				let value = String.randomReadableString()
+
+				cache.setValue(value, forKey: key)
+				cache.setValue(nil, forKey: key)
+
+				expect(cache.valueForKey(key)).to(beNil())
+			}
 
 			it("saves files in subdirectory") {
 				func readFile(_ url: URL) -> String? {
@@ -109,7 +131,7 @@ class DiskCacheSpec: QuickSpec {
 }
 
 class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		it("works with integer sizes") {
 			expect(subdirectoryForSize(CGSize(width: 15.0, height: 10.0))) == "15.00x10.00"
 		}

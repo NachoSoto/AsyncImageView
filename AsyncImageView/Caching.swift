@@ -102,9 +102,14 @@ public protocol NSDataConvertible {
 /// Returns the directory where all `DiskCache` caches are stored
 /// by default.
 public func diskCacheDefaultCacheDirectory() -> URL {
-	return try! FileManager()
-		.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-		.appendingPathComponent("AsyncImageView", isDirectory: true)
+	do {
+		return try FileManager()
+			.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+			.appendingPathComponent("AsyncImageView", isDirectory: true)
+	} catch {
+		assertionFailure("Failed to resolve caches directory: \(error)")
+		return FileManager.default.temporaryDirectory.appendingPathComponent("AsyncImageView", isDirectory: true)
+	}
 }
 
 /// `CacheType` backed by files on disk.
@@ -138,9 +143,17 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 			self.guaranteeDirectoryExists(url.deletingLastPathComponent())
 
 			if let data = value.flatMap({ $0.data }) {
-				try! data.write(to: url, options: .atomicWrite)
+				do {
+					try data.write(to: url, options: .atomicWrite)
+				} catch {
+					assertionFailure("Failed to persist cache entry at \(url): \(error)")
+				}
 			} else if self.fileManager.fileExists(atPath: url.path) {
-				try! self.fileManager.removeItem(at: url)
+				do {
+					try self.fileManager.removeItem(at: url)
+				} catch {
+					assertionFailure("Failed to delete cache entry at \(url): \(error)")
+				}
 			}
 		}
 	}
@@ -165,6 +178,10 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	}
 
 	private func guaranteeDirectoryExists(_ url: URL) {
-		try! self.fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+		do {
+			try self.fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+		} catch {
+			assertionFailure("Failed to create cache directory at \(url): \(error)")
+		}
 	}
 }

@@ -11,35 +11,42 @@ import UIKit
 import ReactiveSwift
 
 /// `RendererType` decorator that inflates images.
-public final class ImageInflaterRenderer<
-	Data: RenderDataType, RenderResult: RenderResultType, Error: Swift.Error
->: RendererType {
+public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
     public typealias ContentMode = ImageInflaterRendererContentMode
-    
+    public typealias Data = Renderer.Data
+    public typealias Error = Renderer.Error
+    public typealias RenderResult = ImageResult
+
+    private let renderer: Renderer
     private let screenScale: CGFloat
 	private let opaque: Bool
-	private let renderBlock: (Data) -> SignalProducer<RenderResult, Error>
     private let contentMode: ContentMode
 
-    public init<Renderer: RendererType>(
+    public init(
         renderer: Renderer,
         screenScale: CGFloat,
         opaque: Bool,
         contentMode: ContentMode = .defaultMode
-    ) where Renderer.Data == Data, Renderer.RenderResult == RenderResult, Renderer.Error == Error {
+    ) {
+        self.renderer = renderer
 		self.screenScale = screenScale
 		self.opaque = opaque
-		self.renderBlock = renderer.renderImageWithData
         self.contentMode = contentMode
 	}
 
-	public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, Error> {
-		return self.renderBlock(data)
-			.map { [scale = self.screenScale] result in
-                return result.image.inflate(withSize: data.size,
-                                            scale: scale,
-                                            opaque: self.opaque,
-                                            contentMode: self.contentMode)
+	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, Error> {
+		return self.renderer.renderImageWithData(data)
+			.map { [screenScale = self.screenScale,
+			       opaque = self.opaque,
+			       contentMode = self.contentMode] result in
+                let inflatedImage = result.image.inflate(
+                    withSize: data.size,
+                    scale: screenScale,
+                    opaque: opaque,
+                    contentMode: contentMode
+                )
+
+                return ImageResult(image: inflatedImage, cacheHit: result.cacheHit)
 			}
 			.start(on: QueueScheduler())
 	}
@@ -133,7 +140,7 @@ extension RendererType {
         _ screenScale: CGFloat,
         opaque: Bool,
         contentMode: ImageInflaterRendererContentMode = .defaultMode
-    ) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
+    ) -> ImageInflaterRenderer<Self> {
 		return ImageInflaterRenderer(renderer: self,
                                      screenScale: screenScale,
                                      opaque: opaque,

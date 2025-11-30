@@ -142,7 +142,7 @@ class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
 	}
 }
 
-@retroactive extension String: DataFileType {
+extension String: @retroactive DataFileType {
 	public var subdirectory: String? {
 		return "\(self.count)"
 	}

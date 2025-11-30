@@ -8,11 +8,12 @@
 
 import Quick
 import Nimble
+import CoreGraphics
 
 import AsyncImageView
 
 class ImageInflaterRendererSpec: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("ImageInflaterRenderer") {
             context("Aspect Fit") {
                 it("returns identity frame if sizes match") {

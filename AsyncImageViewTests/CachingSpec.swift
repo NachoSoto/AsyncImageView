@@ -8,6 +8,8 @@
 
 import Quick
 import Nimble
+import Foundation
+import CoreGraphics
 
 import AsyncImageView
 
@@ -62,7 +64,7 @@ private func testCache<T: CacheType>(
 }
 
 class InMemoryCacheSpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		describe("InMemoryCache") {
 			testCache(
 				cacheCreator: { InMemoryCache<String, String>(cacheName: "test") },
@@ -74,7 +76,7 @@ class InMemoryCacheSpec: QuickSpec {
 }
 
 class DiskCacheSpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		describe("DiskCache") {
 			let directoryCreator = {
 				return URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
@@ -109,7 +111,7 @@ class DiskCacheSpec: QuickSpec {
 }
 
 class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		it("works with integer sizes") {
 			expect(subdirectoryForSize(CGSize(width: 15.0, height: 10.0))) == "15.00x10.00"
 		}

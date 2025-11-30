@@ -11,7 +11,7 @@ import Nimble
 import Foundation
 import CoreGraphics
 
-import AsyncImageView
+@testable import AsyncImageView
 
 class InMemoryCacheSpec: QuickSpec {
 	override class func spec() {
@@ -137,6 +137,12 @@ class RenderDataTypeCacheSubdirectorySpec: QuickSpec {
 		}
 
 		it("has limited precision") {
+			expect(subdirectoryForSize(CGSize(width: 15.1245, height: 10.6123))) == "15.12x10.61"
+		}
+
+		it("does not depend on the current locale's decimal separator") {
+			let locale = Locale(identifier: "fr_FR")
+			expect(subdirectoryForSize(CGSize(width: 15.1245, height: 10.6123), locale: locale)) == "15,12x10,61"
 			expect(subdirectoryForSize(CGSize(width: 15.1245, height: 10.6123))) == "15.12x10.61"
 		}
 	}

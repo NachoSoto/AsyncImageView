@@ -8,13 +8,16 @@
 
 import Quick
 import Nimble
+import UIKit
+import Foundation
+import XCTest
 
 import ReactiveSwift
 
 import AsyncImageView
 
 class MulticastedRendererSpec: QuickSpec {
-	override func spec() {
+	override class func spec() {
 		describe("MulticastedRenderer") {
 			let data: TestData = .a
 			let size = CGSize(width: 1, height: 1)

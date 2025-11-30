@@ -8,6 +8,8 @@
 
 import Quick
 import Nimble
+import UIKit
+import ReactiveSwift
 
 import AsyncImageView
 
@@ -335,6 +337,58 @@ class ImageInflaterRendererSpec: QuickSpec {
                     }
                 }
             }
+
+            describe("cache hit preservation") {
+                let size = CGSize(width: 10, height: 10)
+                var data: TestRenderData!
+                var baseRenderer: CacheAwareRenderer!
+
+                beforeEach {
+                    data = TestRenderData(data: .a, size: size)
+                    baseRenderer = CacheAwareRenderer()
+                }
+
+                it("keeps cache hit information after inflating") {
+                    let renderer = ImageInflaterRenderer(
+                        renderer: baseRenderer,
+                        screenScale: 2,
+                        opaque: true,
+                        contentMode: .aspectFit
+                    )
+
+                    let result = try? renderer.renderImageWithData(data).single()?.get()
+
+                    expect(result?.cacheHit) == true
+                }
+
+                it("keeps cache hit information when using mapImage") {
+                    let processor = baseRenderer
+                        .mapImage { image, _ in
+                            image
+                        }
+
+                    let result = try? processor.renderImageWithData(data).single()?.get()
+
+                    expect(result?.cacheHit) == true
+                }
+            }
         }
+    }
+}
+
+private final class CacheAwareRenderer: RendererType {
+    func renderImageWithData(_ data: TestRenderData) -> SignalProducer<ImageResult, Never> {
+        let image = CacheAwareRenderer.makeImage(size: data.size)
+        return SignalProducer(value: ImageResult(image: image, cacheHit: true))
+    }
+
+    private static func makeImage(size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, true, 1)
+        defer { UIGraphicsEndImageContext() }
+
+        UIColor.red.setFill()
+        UIRectFill(CGRect(origin: .zero, size: size))
+
+        return UIGraphicsGetImageFromCurrentImageContext()!
     }
 }

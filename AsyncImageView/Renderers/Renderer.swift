@@ -20,7 +20,14 @@ public protocol RenderResultType {
 	var cacheHit: Bool { get }
 }
 
-public struct ImageResult: RenderResultType {
+/// Render results that can produce a new instance by replacing their underlying image
+/// should conform to this protocol so that decorators that transform images can
+/// preserve metadata such as `cacheHit`.
+public protocol ImageReplacingRenderResultType: RenderResultType {
+	func replacingImage(_ image: UIImage) -> Self
+}
+
+public struct ImageResult: RenderResultType, ImageReplacingRenderResultType {
 	public let image: UIImage
 	public let cacheHit: Bool
 
@@ -30,7 +37,7 @@ public struct ImageResult: RenderResultType {
 	}
 }
 
-extension UIImage: RenderResultType {
+extension UIImage: RenderResultType, ImageReplacingRenderResultType {
 	public var image: UIImage {
 		return self
 	}
@@ -38,6 +45,10 @@ extension UIImage: RenderResultType {
 	public var cacheHit: Bool {
 		// A raw UIImage created by a `RendererType` is implicitly not cached.
 		return false
+	}
+
+	public func replacingImage(_ image: UIImage) -> UIImage {
+		return image
 	}
 }
 

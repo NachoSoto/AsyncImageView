@@ -12,7 +12,7 @@ import ReactiveSwift
 
 /// `RendererType` decorator that inflates images.
 public final class ImageInflaterRenderer<
-	Data: RenderDataType, RenderResult: RenderResultType, Error: Swift.Error
+	Data: RenderDataType, RenderResult: ImageReplacingRenderResultType, Error: Swift.Error
 >: RendererType {
     public typealias ContentMode = ImageInflaterRendererContentMode
     
@@ -33,13 +33,15 @@ public final class ImageInflaterRenderer<
         self.contentMode = contentMode
 	}
 
-	public func renderImageWithData(_ data: Data) -> SignalProducer<UIImage, Error> {
+	public func renderImageWithData(_ data: Data) -> SignalProducer<RenderResult, Error> {
 		return self.renderBlock(data)
 			.map { [scale = self.screenScale] result in
-                return result.image.inflate(withSize: data.size,
-                                            scale: scale,
-                                            opaque: self.opaque,
-                                            contentMode: self.contentMode)
+                let inflatedImage = result.image.inflate(withSize: data.size,
+                                                         scale: scale,
+                                                         opaque: self.opaque,
+                                                         contentMode: self.contentMode)
+
+                return result.replacingImage(inflatedImage)
 			}
 			.start(on: QueueScheduler())
 	}
@@ -133,7 +135,9 @@ extension RendererType {
         _ screenScale: CGFloat,
         opaque: Bool,
         contentMode: ImageInflaterRendererContentMode = .defaultMode
-    ) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error> {
+    ) -> ImageInflaterRenderer<Self.Data, Self.RenderResult, Self.Error>
+    where Self.RenderResult: ImageReplacingRenderResultType
+    {
 		return ImageInflaterRenderer(renderer: self,
                                      screenScale: screenScale,
                                      opaque: opaque,

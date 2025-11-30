@@ -12,7 +12,8 @@ import ReactiveSwift
 
 /// `RendererType` decorator that applies processing to every emitted image.
 /// This allows, for example, to apply `UIImage.resizableImage(withCapInsets:)` on every image.
-public final class SimpleImageProcessingRenderer<Renderer: RendererType>: RendererType {
+public final class SimpleImageProcessingRenderer<Renderer: RendererType>: RendererType
+where Renderer.RenderResult: ImageReplacingRenderResultType {
     public typealias Block = (_ image: UIImage, _ data: Renderer.Data) -> UIImage
 
 	private let renderer: Renderer
@@ -31,19 +32,21 @@ public final class SimpleImageProcessingRenderer<Renderer: RendererType>: Render
         self.schedulerCreator = schedulerCreator
     }
 
-	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<UIImage, Renderer.Error> {
+	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<Renderer.RenderResult, Renderer.Error> {
 		return self.renderer.renderImageWithData(data)
 			.observe(on: self.schedulerCreator())
-			.map { $0.image }
-			.map { [block = self.renderingBlock] image in
-                block(image, data)
+			.map { [block = self.renderingBlock] result in
+                let processedImage = block(result.image, data)
+                return result.replacingImage(processedImage)
 			}
 	}
 }
 
 extension RendererType {
 	/// Decorates this `RendererType` by applying the given block to every generated image.
-	public func mapImage(function: @escaping SimpleImageProcessingRenderer<Self>.Block) -> SimpleImageProcessingRenderer<Self> {
+	public func mapImage(function: @escaping SimpleImageProcessingRenderer<Self>.Block) -> SimpleImageProcessingRenderer<Self>
+    where Self.RenderResult: ImageReplacingRenderResultType
+    {
         return SimpleImageProcessingRenderer(renderer: self, renderingBlock: function)
 	}
 }

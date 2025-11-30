@@ -15,9 +15,9 @@ import ReactiveSwift
 /// if you're already providing a placeholder renderer.
 public final class ErrorIgnoringRenderer<Renderer: RendererType>: RendererType {
 	private let renderer: Renderer
-    private let handler: ((Renderer.Error) -> ())?
+    private let handler: ((Renderer.Error) -> Void)?
 
-	public init(renderer: Renderer, handler: ((Renderer.Error) -> ())?) {
+	public init(renderer: Renderer, handler: ((Renderer.Error) -> Void)?) {
 		self.renderer = renderer
         self.handler = handler
 	}
@@ -27,7 +27,7 @@ public final class ErrorIgnoringRenderer<Renderer: RendererType>: RendererType {
 			.renderImageWithData(data)
 			.flatMapError { [handler = self.handler] error in
                 handler?(error)
-                
+
 				return .empty
 			}
 	}
@@ -38,9 +38,9 @@ extension RendererType {
 	public func ignoreErrors() -> ErrorIgnoringRenderer<Self> {
         return ErrorIgnoringRenderer(renderer: self, handler: nil)
 	}
-    
+
     /// Returns a new `RendererType` that will ignore any errors emitted by the receiver.
-    public func logAndIgnoreErrors(handler: @escaping (Self.Error) -> ()) -> ErrorIgnoringRenderer<Self> {
+    public func logAndIgnoreErrors(handler: @escaping (Self.Error) -> Void) -> ErrorIgnoringRenderer<Self> {
         return ErrorIgnoringRenderer(renderer: self, handler: handler)
     }
 }

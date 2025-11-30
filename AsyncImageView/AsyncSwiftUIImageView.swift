@@ -29,15 +29,14 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private let uiScheduler: ReactiveSwift.Scheduler
     private let requestsSignal: Signal<Data?, Never>
     private let requestsObserver: Signal<Data?, Never>.Observer
-    
+
     private let imageCreationScheduler: ReactiveSwift.Scheduler
-    
+
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
         uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
-        imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler())
-    {
+        imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler()) {
         self.renderer = renderer
         self.placeholderRenderer = placeholderRenderer
         self.uiScheduler = uiScheduler
@@ -48,13 +47,13 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
 
     @State private var renderResult: Renderer.RenderResult?
     @State private var disposable: Disposable?
-    
+
     public var data: ImageViewData? {
         didSet {
             self.requestImage()
         }
     }
-    
+
     @State
     private var size: CGSize = .zero {
         didSet {
@@ -63,11 +62,11 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             }
         }
     }
-    
+
     public var body: some View {
         ZStack {
             self.imageView
-            
+
             Color.clear
                 .modifier(SizeModifier())
                 .onPreferenceChange(ImageSizePreferenceKey.self) { imageSize in
@@ -111,7 +110,7 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             Color.clear
         }
     }
-    
+
     private func requestImage() {
         guard self.size.width > 0 && self.size.height > 0 else {
             return
@@ -134,9 +133,9 @@ public extension AsyncSwiftUIImageView {
 
 private struct ImageSizePreferenceKey: PreferenceKey {
     typealias Value = CGSize
-    
+
     static var defaultValue: CGSize = .zero
-    
+
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
         value = nextValue()
     }

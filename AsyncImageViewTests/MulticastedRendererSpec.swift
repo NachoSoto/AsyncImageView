@@ -76,7 +76,6 @@ class MulticastedRendererSpec: QuickSpec {
 
 				var cacheHitRenderer: CacheHitRenderer!
 
-
 				func getProducerForData(_ data: TestData, _ size: CGSize) -> SignalProducer<ImageResult, Never> {
 					return renderer.renderImageWithData(data.renderDataWithSize(size))
 				}
@@ -150,7 +149,7 @@ private final class CacheHitRenderer: RendererType {
 
 	private let testRenderer = TestRenderer()
 
-	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<ImageResult, Never> {
+	func renderImageWithData(_ data: TestRenderData) -> SignalProducer<ImageResult, Never> {
 		return testRenderer.renderImageWithData(data)
 			.map {
 				return RenderResult(

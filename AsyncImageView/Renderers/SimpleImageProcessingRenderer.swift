@@ -27,7 +27,7 @@ public final class SimpleImageProcessingRenderer<Renderer: RendererType>: Render
     ) {
         self.renderer = renderer
         self.renderingBlock = renderingBlock
-        
+
         self.schedulerCreator = schedulerCreator
     }
 

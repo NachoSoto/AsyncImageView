@@ -20,8 +20,7 @@ public final class AnyRenderer<
 
 	/// Creates an `AnyRenderer` based on another `RendererType`.
 	public convenience init<R: RendererType>(_ renderer: R)
-		where R.Data == Data, R.RenderResult == RenderResult, R.Error == Error
-	{
+		where R.Data == Data, R.RenderResult == RenderResult, R.Error == Error {
 		self.init(renderBlock: renderer.renderImageWithData)
 	}
 

@@ -1,0 +1,30 @@
+included:
+  - AsyncImageView
+  - AsyncImageViewTests
+  - Package.swift
+
+excluded:
+  - .build
+  - .swiftpm
+  - Docs
+
+opt_in_rules:
+  - empty_count
+  - explicit_init
+  - overridden_super_call
+  - redundant_nil_coalescing
+
+analyzer_rules:
+  - unused_import
+  - unused_optional_binding
+
+disabled_rules:
+  - force_cast
+  - function_body_length
+  - function_name_whitespace
+  - identifier_name
+  - line_length
+  - nesting
+  - private_over_fileprivate
+  - todo
+  - type_body_length

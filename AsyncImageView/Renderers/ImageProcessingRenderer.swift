@@ -12,7 +12,7 @@ import ReactiveSwift
 
 /// `RendererType` decorator that allows rendering a new image derived from the original one.
 public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType {
-	public typealias Block = (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ data: Renderer.Data, _ imageDrawingBlock: () -> ()) -> ()
+	public typealias Block = (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ data: Renderer.Data, _ imageDrawingBlock: () -> Void) -> Void
 
 	private let renderer: Renderer
 	private let scale: CGFloat
@@ -42,15 +42,10 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 		return self.renderer.renderImageWithData(data)
 			.observe(on: self.schedulerCreator())
 			.map { $0.image }
-			.map { [
-                scale = self.scale,
-                opaque = self.opaque,
-                block = self.renderingBlock,
-                contentMode = self.contentMode
-            ] image in
-				image.processImageWithBitmapContext(
-					withSize: data.size,
-					scale: scale,
+				.map { [scale = self.scale, opaque = self.opaque, block = self.renderingBlock, contentMode = self.contentMode] image in
+					image.processImageWithBitmapContext(
+						withSize: data.size,
+						scale: scale,
 					opaque: opaque,
 					contentMode: contentMode,
                     renderingBlock: { image, context, contextSize, imageDrawingBlock in

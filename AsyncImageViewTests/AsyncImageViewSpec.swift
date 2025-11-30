@@ -22,11 +22,11 @@ class AsyncImageViewSpec: QuickSpec {
             // and we can verify image is reset before that
             let uiScheduler = QueueScheduler(targeting: DispatchQueue.main)
             var window: UIWindow!
-            
+
             beforeEach {
                 window = UIWindow()
             }
-            
+
 			context("No placeholder") {
 				typealias ViewType = AsyncImageView<TestRenderData, TestData, TestRenderer, TestRenderer>
 
@@ -45,14 +45,18 @@ class AsyncImageViewSpec: QuickSpec {
                     window.addSubview(view)
 				}
 
-				func verifyView(file: FileString = #file,
-                                line: UInt = #line) {
-					verifyImage(view.image,
-                                withSize: view.frame.size,
-                                data: view.data,
-                                file: file,
-                                line: line)
-				}
+					func verifyView(
+						file: FileString = #file,
+						line: UInt = #line
+					) {
+						verifyImage(
+							view.image,
+							withSize: view.frame.size,
+							data: view.data,
+							file: file,
+							line: line
+						)
+					}
 
 				it("has no image initially") {
 					expect(view.image).to(beNil())
@@ -186,22 +190,31 @@ class AsyncImageViewSpec: QuickSpec {
                     window.addSubview(view)
 				}
 
-				func verifyRealImage(file: FileString = #file,
-                                     line: UInt = #line) {
-					verifyImage(view.image,
-                                withSize: view.frame.size,
-                                data: view.data!,
-                                file: file, line: line)
-				}
+					func verifyRealImage(
+						file: FileString = #file,
+						line: UInt = #line
+					) {
+						verifyImage(
+							view.image,
+							withSize: view.frame.size,
+							data: view.data!,
+							file: file,
+							line: line
+						)
+					}
 
-				func verifyPlaceholder(file: FileString = #file,
-                                       line: UInt = #line) {
-					verifyImage(view.image,
-                                withSize: view.frame.size,
-                                expectedScale: view.data!.placeholderScale,
-                                file: file,
-                                line: line)
-				}
+					func verifyPlaceholder(
+						file: FileString = #file,
+						line: UInt = #line
+					) {
+						verifyImage(
+							view.image,
+							withSize: view.frame.size,
+							expectedScale: view.data!.placeholderScale,
+							file: file,
+							line: line
+						)
+					}
 
 				it("has no image initially") {
 					expect(view.image).to(beNil())
@@ -291,7 +304,7 @@ class AsyncImageViewSpec: QuickSpec {
 					view.data = nil
 					expect(view.image).to(beNil()) // image should be reset immediately
 				}
-                
+
                 it("shows placeholder if renderer fails first") {
                     view.frame.size = CGSize(width: 1, height: 1)
 
@@ -304,11 +317,11 @@ class AsyncImageViewSpec: QuickSpec {
                     view.data = data
 
                     renderer.failAndComplete(renderData)
-                    
+
                     placeholderRenderer.emitImageForData(renderData, scale: data.placeholderScale)
                     verifyPlaceholder()
                 }
-                
+
                 it("does not reset placeholder if renderer fails after") {
                     view.frame.size = CGSize(width: 1, height: 1)
 
@@ -332,12 +345,12 @@ class AsyncImageViewSpec: QuickSpec {
 }
 
 private final class ManualRenderer: RendererType {
-	var signals: [TestRenderData : (output: Signal<UIImage, Never>, input: Signal<UIImage, Never>.Observer)] = [:]
+	var signals: [TestRenderData: (output: Signal<UIImage, Never>, input: Signal<UIImage, Never>.Observer)] = [:]
 
 	func addRenderSignal(_ data: TestRenderData) {
 		signals[data] = Signal<UIImage, Never>.pipe()
 	}
-    
+
     private func observer(forData data: TestRenderData) -> Signal<UIImage, Never>.Observer {
         return signals[data]!.input
     }
@@ -351,14 +364,14 @@ private final class ManualRenderer: RendererType {
 		observer.send(value: image)
 		observer.sendCompleted()
 	}
-    
+
     func failAndComplete(_ data: TestRenderData) {
         // Errors aren't allowed in AsyncImageView (they must be handled prior),
         // so they instead simply cause the signal to complete.
         self.observer(forData: data).sendCompleted()
     }
-    
-	func renderImageWithData(_ data: TestRenderData) ->  SignalProducer<UIImage, Never> {
+
+	func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, Never> {
 		guard let signal = signals[data]?.output else {
 			XCTFail("Signal not created for \(data)")
 			return .empty

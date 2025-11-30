@@ -1,13 +1,11 @@
 included:
   - AsyncImageView
   - AsyncImageViewTests
-  - Example
   - Package.swift
 
 excluded:
   - .build
   - .swiftpm
-  - Carthage
   - Example/Carthage
   - Example/Pods
   - Docs
@@ -23,25 +21,11 @@ analyzer_rules:
   - unused_optional_binding
 
 disabled_rules:
-  - closure_parameter_position
-  - comma
-  - colon
-  - control_statement
   - force_cast
   - function_body_length
-  - function_name_whitespace
   - identifier_name
   - line_length
   - nesting
-  - opening_brace
   - private_over_fileprivate
-  - return_arrow_whitespace
   - todo
-  - trailing_comma
-  - trailing_newline
-  - trailing_whitespace
   - type_body_length
-  - unneeded_synthesized_initializer
-  - vertical_parameter_alignment
-  - vertical_whitespace
-  - void_return

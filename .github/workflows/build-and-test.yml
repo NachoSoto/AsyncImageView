@@ -20,6 +20,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: List schemes
+        run: xcodebuild -list
+
       - name: Run test suite
         uses: mxcl/xcodebuild@v3
         with:

@@ -102,6 +102,7 @@ public protocol NSDataConvertible {
 /// Returns the directory where all `DiskCache` caches are stored
 /// by default.
 public func diskCacheDefaultCacheDirectory() -> URL {
+	// swiftlint:disable:next force_try
 	return try! FileManager()
 		.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 		.appendingPathComponent("AsyncImageView", isDirectory: true)
@@ -138,8 +139,10 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 			self.guaranteeDirectoryExists(url.deletingLastPathComponent())
 
 			if let data = value.flatMap({ $0.data }) {
+				// swiftlint:disable:next force_try
 				try! data.write(to: url, options: .atomicWrite)
 			} else if self.fileManager.fileExists(atPath: url.path) {
+				// swiftlint:disable:next force_try
 				try! self.fileManager.removeItem(at: url)
 			}
 		}
@@ -165,6 +168,7 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 	}
 
 	private func guaranteeDirectoryExists(_ url: URL) {
+		// swiftlint:disable:next force_try
 		try! self.fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
 	}
 }

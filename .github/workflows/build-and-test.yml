@@ -1,9 +1,7 @@
 name: Build and Test
 
 on:
-  pull_request:
-    branches:
-      - master
+  pull_request
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,9 +17,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
-      - name: List schemes
-        run: xcodebuild -list
 
       - name: Run test suite
         uses: mxcl/xcodebuild@v3

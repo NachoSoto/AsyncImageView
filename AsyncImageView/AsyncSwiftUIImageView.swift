@@ -23,14 +23,14 @@ public struct AsyncSwiftUIImageView<
     PlaceholderRenderer.Error == Never,
 Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private typealias ImageLoader = AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
+    private typealias RequestPipe = (signal: Signal<Data?, Never>, observer: Signal<Data?, Never>.Observer)
 
     private let renderer: Renderer
     private let placeholderRenderer: PlaceholderRenderer?
     private let uiScheduler: ReactiveSwift.Scheduler
-    private let requestsSignal: Signal<Data?, Never>
-    private let requestsObserver: Signal<Data?, Never>.Observer
-    
     private let imageCreationScheduler: ReactiveSwift.Scheduler
+    @State private var requestPipe: RequestPipe = Signal.pipe()
+    private var requestsSignal: Signal<Data?, Never> { self.requestPipe.signal }
     
     public init(
         renderer: Renderer,
@@ -42,8 +42,6 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         self.placeholderRenderer = placeholderRenderer
         self.uiScheduler = uiScheduler
         self.imageCreationScheduler = imageCreationScheduler
-
-        (self.requestsSignal, self.requestsObserver) = Signal.pipe()
     }
 
     @State private var renderResult: Renderer.RenderResult?
@@ -117,8 +115,9 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             return
         }
 
-        self.imageCreationScheduler.schedule { [data, size, weak observer = self.requestsObserver] in
-            observer?.send(value: data?.renderDataWithSize(size))
+        let renderData = self.data?.renderDataWithSize(self.size)
+        self.imageCreationScheduler.schedule { [renderData, weak observer = self.requestPipe.observer] in
+            observer?.send(value: renderData)
         }
     }
 }

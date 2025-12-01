@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Observation
 import ReactiveSwift
 
 public struct AsyncSwiftUIImageView<

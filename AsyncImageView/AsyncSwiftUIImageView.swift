@@ -24,24 +24,22 @@ public struct AsyncSwiftUIImageView<
 Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private typealias ViewModel = AsyncSwiftUIImageViewModel<Data, ImageViewData, Renderer, PlaceholderRenderer>
 
-    private let renderer: Renderer
-    private let placeholderRenderer: PlaceholderRenderer?
-    private let uiScheduler: ReactiveSwift.Scheduler
-
-    private let imageCreationScheduler: ReactiveSwift.Scheduler
+    @StateObject private var viewModel: ViewModel
 
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
         uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
         imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler()) {
-        self.renderer = renderer
-        self.placeholderRenderer = placeholderRenderer
-        self.uiScheduler = uiScheduler
-        self.imageCreationScheduler = imageCreationScheduler
+        _viewModel = StateObject(
+            wrappedValue: ViewModel(
+                renderer: renderer,
+                placeholderRenderer: placeholderRenderer,
+                uiScheduler: uiScheduler,
+                imageCreationScheduler: imageCreationScheduler
+            )
+        )
     }
-
-    @StateObject private var viewModel = ViewModel()
 
     public var data: ImageViewData? {
         didSet {
@@ -69,12 +67,7 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
                 }
         }
         .onAppear {
-            self.viewModel.start(
-                renderer: self.renderer,
-                placeholderRenderer: self.placeholderRenderer,
-                uiScheduler: self.uiScheduler,
-                imageCreationScheduler: self.imageCreationScheduler
-            )
+            self.viewModel.start()
             self.requestImage()
         }
         .onDisappear {
@@ -105,9 +98,7 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             return
         }
 
-        self.imageCreationScheduler.schedule { [data, size, viewModel = self.viewModel] in
-            viewModel.requestImage(data?.renderDataWithSize(size))
-        }
+        self.viewModel.requestImage(self.data, size: self.size)
     }
 }
 
@@ -158,26 +149,36 @@ private final class AsyncSwiftUIImageViewModel<
 
     @Published private(set) var renderResult: Renderer.RenderResult?
 
+    private let renderer: Renderer
+    private let placeholderRenderer: PlaceholderRenderer?
+    private let uiScheduler: ReactiveSwift.Scheduler
+    private let imageCreationScheduler: ReactiveSwift.Scheduler
+
     private let requestsSignal: Signal<Data?, Never>
     private let requestsObserver: Signal<Data?, Never>.Observer
     private var disposable: Disposable?
 
-    init() {
-        (self.requestsSignal, self.requestsObserver) = Signal.pipe()
-    }
-
-    func start(
+    init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
         uiScheduler: ReactiveSwift.Scheduler,
         imageCreationScheduler: ReactiveSwift.Scheduler) {
+        self.renderer = renderer
+        self.placeholderRenderer = placeholderRenderer
+        self.uiScheduler = uiScheduler
+        self.imageCreationScheduler = imageCreationScheduler
+
+        (self.requestsSignal, self.requestsObserver) = Signal.pipe()
+    }
+
+    func start() {
         self.disposable?.dispose()
         self.disposable = ImageLoader.createSignal(
             requestsSignal: self.requestsSignal,
-            renderer: renderer,
-            placeholderRenderer: placeholderRenderer,
-            uiScheduler: uiScheduler,
-            imageCreationScheduler: imageCreationScheduler
+            renderer: self.renderer,
+            placeholderRenderer: self.placeholderRenderer,
+            uiScheduler: self.uiScheduler,
+            imageCreationScheduler: self.imageCreationScheduler
         )
         .observeValues { [weak self] result in
             self?.renderResult = result
@@ -189,7 +190,9 @@ private final class AsyncSwiftUIImageViewModel<
         self.disposable = nil
     }
 
-    func requestImage(_ data: Data?) {
-        self.requestsObserver.send(value: data)
+    func requestImage(_ data: ImageViewData?, size: CGSize) {
+        self.imageCreationScheduler.schedule { [data, size, observer = self.requestsObserver] in
+            observer.send(value: data?.renderDataWithSize(size))
+        }
     }
 }

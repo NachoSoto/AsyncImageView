@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 import ReactiveSwift
 
 public struct AsyncSwiftUIImageView<
@@ -24,15 +24,15 @@ public struct AsyncSwiftUIImageView<
 Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private typealias ViewModel = AsyncSwiftUIImageViewModel<Data, ImageViewData, Renderer, PlaceholderRenderer>
 
-    @StateObject private var viewModel: ViewModel
+    @State private var viewModel: ViewModel
 
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
         uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
         imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler()) {
-        _viewModel = StateObject(
-            wrappedValue: ViewModel(
+        _viewModel = State(
+            initialValue: ViewModel(
                 renderer: renderer,
                 placeholderRenderer: placeholderRenderer,
                 uiScheduler: uiScheduler,
@@ -132,12 +132,13 @@ private struct SizeModifier: ViewModifier {
     }
 }
 
+@Observable
 private final class AsyncSwiftUIImageViewModel<
     Data: RenderDataType,
     ImageViewData: ImageViewDataType,
     Renderer: RendererType,
     PlaceholderRenderer: RendererType
->: ObservableObject
+>
     where
     ImageViewData.RenderData == Data,
     Renderer.Data == Data,
@@ -147,15 +148,22 @@ private final class AsyncSwiftUIImageViewModel<
     Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private typealias ImageLoader = AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
 
-    @Published private(set) var renderResult: Renderer.RenderResult?
+    var renderResult: Renderer.RenderResult?
 
+    @ObservationIgnored
     private let renderer: Renderer
+    @ObservationIgnored
     private let placeholderRenderer: PlaceholderRenderer?
+    @ObservationIgnored
     private let uiScheduler: ReactiveSwift.Scheduler
+    @ObservationIgnored
     private let imageCreationScheduler: ReactiveSwift.Scheduler
 
+    @ObservationIgnored
     private let requestsSignal: Signal<Data?, Never>
+    @ObservationIgnored
     private let requestsObserver: Signal<Data?, Never>.Observer
+    @ObservationIgnored
     private var disposable: Disposable?
 
     init(

@@ -1,13 +1,13 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
     name: "AsyncImageView",
     platforms: [
-        .iOS(.init(18, 0, 0)),
-        .macOS(.init(15, 0, 0)),
-        .tvOS(.init(18, 0, 0)),
-        .watchOS(.init(11, 0, 0))
+        .iOS(.v18),
+        .macOS(.v15),
+        .tvOS(.v18),
+        .watchOS(.v11)
     ],
     products: [
         .library(name: "AsyncImageView", targets: ["AsyncImageView"])

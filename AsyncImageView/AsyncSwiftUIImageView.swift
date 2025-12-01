@@ -150,18 +150,12 @@ private final class AsyncSwiftUIImageViewModel<
 
     var renderResult: Renderer.RenderResult?
 
-    @ObservationIgnored
     private let renderer: Renderer
-    @ObservationIgnored
     private let placeholderRenderer: PlaceholderRenderer?
-    @ObservationIgnored
     private let uiScheduler: ReactiveSwift.Scheduler
-    @ObservationIgnored
     private let imageCreationScheduler: ReactiveSwift.Scheduler
 
-    @ObservationIgnored
     private let requestsSignal: Signal<Data?, Never>
-    @ObservationIgnored
     private let requestsObserver: Signal<Data?, Never>.Observer
     @ObservationIgnored
     private var disposable: Disposable?

@@ -3,7 +3,12 @@ import PackageDescription
 
 let package = Package(
     name: "AsyncImageView",
-    platforms: [.iOS(.v13), .tvOS(.v13), .watchOS(.v9)],
+    platforms: [
+        .iOS(.init(18, 0, 0)),
+        .macOS(.init(15, 0, 0)),
+        .tvOS(.init(18, 0, 0)),
+        .watchOS(.init(11, 0, 0))
+    ],
     products: [
         .library(name: "AsyncImageView", targets: ["AsyncImageView"])
     ],

@@ -147,7 +147,7 @@ private final class AsyncSwiftUIImageViewModel<
     Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private typealias ImageLoader = AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
 
-    var renderResult: Renderer.RenderResult?
+    private(set) var renderResult: Renderer.RenderResult?
 
     private let renderer: Renderer
     private let placeholderRenderer: PlaceholderRenderer?

@@ -60,10 +60,11 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
             self.imageView
 
             Color.clear
-                .modifier(SizeModifier())
-                .onPreferenceChange(ImageSizePreferenceKey.self) { imageSize in
-                    self.size = imageSize
-                }
+        }
+        .onGeometryChange(for: CGSize.self) { geometry in
+            geometry.size
+        } action: { imageSize in
+            self.size = imageSize
         }
         .onAppear {
             self.viewModel.start()
@@ -107,27 +108,6 @@ public extension AsyncSwiftUIImageView {
         view.data = data
 
         return view
-    }
-}
-
-private struct ImageSizePreferenceKey: PreferenceKey {
-    typealias Value = CGSize
-
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        value = nextValue()
-    }
-}
-
-private struct SizeModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content.background(
-            GeometryReader { geometry in
-                Color.clear
-                    .preference(key: ImageSizePreferenceKey.self, value: geometry.size)
-            }
-        )
     }
 }
 

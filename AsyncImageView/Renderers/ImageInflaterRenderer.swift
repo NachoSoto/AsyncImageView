@@ -21,30 +21,53 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
     private let screenScale: CGFloat
 	private let opaque: Bool
     private let contentMode: ContentMode
+	private let bitmapContextFactory: UIImage.BitmapContextFactory
 
-    public init(
+    public convenience init(
         renderer: Renderer,
         screenScale: CGFloat,
         opaque: Bool,
         contentMode: ContentMode = .defaultMode
     ) {
+		self.init(
+			renderer: renderer,
+			screenScale: screenScale,
+			opaque: opaque,
+			contentMode: contentMode,
+			bitmapContextFactory: UIImage.makeBitmapContext
+		)
+	}
+
+	internal init(
+		renderer: Renderer,
+		screenScale: CGFloat,
+		opaque: Bool,
+		contentMode: ContentMode = .defaultMode,
+		bitmapContextFactory: @escaping UIImage.BitmapContextFactory
+	) {
         self.renderer = renderer
 		self.screenScale = screenScale
 		self.opaque = opaque
         self.contentMode = contentMode
+		self.bitmapContextFactory = bitmapContextFactory
 	}
 
 	public func renderImageWithData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderer.renderImageWithData(data)
-			.map { [screenScale = self.screenScale, opaque = self.opaque, contentMode = self.contentMode] result in
-                let inflatedImage = result.image.inflate(
+			.map { [screenScale = self.screenScale, opaque = self.opaque, contentMode = self.contentMode, bitmapContextFactory = self.bitmapContextFactory] result in
+				let inflationResult = result.image.inflate(
                     withSize: data.size,
                     scale: screenScale,
                     opaque: opaque,
-                    contentMode: contentMode
+					contentMode: contentMode,
+					bitmapContextFactory: bitmapContextFactory
                 )
 
-                return ImageResult(image: inflatedImage, cacheHit: result.cacheHit)
+				return ImageResult(
+					image: inflationResult.image,
+					cacheHit: result.cacheHit,
+					shouldCache: result.shouldCache && inflationResult.didProcess
+				)
 			}
 			.start(on: QueueScheduler())
 	}
@@ -77,18 +100,43 @@ extension UIImage {
 		_ colorSpace: CGColorSpace,
 		_ bitmapInfo: UInt32
 	) -> CGContext?
+	internal typealias BitmapImageFactory = (_ context: CGContext) -> CGImage?
 
-    internal func inflate(
-        withSize size: CGSize,
-        scale: CGFloat,
-        opaque: Bool,
-        contentMode: ImageInflaterRendererContentMode
-    ) -> UIImage {
+	internal static func makeBitmapContext(
+		width: Int,
+		height: Int,
+		bytesPerRow: Int,
+		colorSpace: CGColorSpace,
+		bitmapInfo: UInt32
+	) -> CGContext? {
+		return CGContext(
+			data: nil,
+			width: width,
+			height: height,
+			bitsPerComponent: 8,
+			bytesPerRow: bytesPerRow,
+			space: colorSpace,
+			bitmapInfo: bitmapInfo
+		)
+	}
+
+	internal static func makeBitmapImage(_ context: CGContext) -> CGImage? {
+		return context.makeImage()
+	}
+
+	internal func inflate(
+		withSize size: CGSize,
+		scale: CGFloat,
+		opaque: Bool,
+		contentMode: ImageInflaterRendererContentMode,
+		bitmapContextFactory: BitmapContextFactory = UIImage.makeBitmapContext
+	) -> BitmapContextProcessingResult {
 		return self.processImageWithBitmapContext(
 			withSize: size,
 			scale: scale,
 			opaque: opaque,
 			contentMode: contentMode,
+			bitmapContextFactory: bitmapContextFactory,
 			renderingBlock: { _, _, _, imageDrawing in
 				imageDrawing()
 			}
@@ -100,19 +148,10 @@ extension UIImage {
 		scale: CGFloat,
 		opaque: Bool,
 		contentMode: ImageInflaterRendererContentMode,
-		bitmapContextFactory: BitmapContextFactory = { width, height, bytesPerRow, colorSpace, bitmapInfo in
-			CGContext(
-				data: nil,
-				width: width,
-				height: height,
-				bitsPerComponent: 8,
-				bytesPerRow: bytesPerRow,
-				space: colorSpace,
-				bitmapInfo: bitmapInfo
-			)
-		},
+		bitmapContextFactory: BitmapContextFactory = UIImage.makeBitmapContext,
+		bitmapImageFactory: BitmapImageFactory = UIImage.makeBitmapImage,
 		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> Void) -> Void)
-		-> UIImage {
+		-> BitmapContextProcessingResult {
 		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
 
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -131,7 +170,7 @@ extension UIImage {
 			colorSpace,
 			bitmapInfo
 		) else {
-			return self
+			return BitmapContextProcessingResult(image: self, didProcess: false)
 		}
 
 		renderingBlock(
@@ -149,12 +188,24 @@ extension UIImage {
 			}
 		)
 
-		return UIImage(
-			cgImage: bitmapContext.makeImage()!,
-			scale: scale,
-			orientation: self.imageOrientation
+		guard let processedImage = bitmapImageFactory(bitmapContext) else {
+			return BitmapContextProcessingResult(image: self, didProcess: false)
+		}
+
+		return BitmapContextProcessingResult(
+			image: UIImage(
+				cgImage: processedImage,
+				scale: scale,
+				orientation: self.imageOrientation
+			),
+			didProcess: true
 		)
 	}
+}
+
+internal struct BitmapContextProcessingResult {
+	let image: UIImage
+	let didProcess: Bool
 }
 
 extension RendererType {

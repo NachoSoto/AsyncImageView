@@ -96,9 +96,9 @@ extension RendererType {
 	fileprivate func createProducerForRenderingData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderImageWithData(data)
 			.flatMap(.concat) { result in
-                return SignalProducer([
-					ImageResult(image: result.image, cacheHit: false),
-					ImageResult(image: result.image, cacheHit: true)
+				return SignalProducer([
+					ImageResult(image: result.image, cacheHit: false, shouldCache: result.shouldCache),
+					ImageResult(image: result.image, cacheHit: true, shouldCache: result.shouldCache)
 				])
 		}
 	}

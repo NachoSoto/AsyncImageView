@@ -32,7 +32,7 @@ public final class CacheRenderer<
 	public func renderImageWithData(_ data: Renderer.Data) -> SignalProducer<ImageResult, Renderer.Error> {
         return SignalProducer { [cache = self.cache] in
             Result(
-                cache.valueForKey(data)?.image.asCacheHit,
+                cache.valueForKey(data)?.asCacheHit,
                 failWith: CacheRendererError.imageNotFound
             )
         }
@@ -41,9 +41,11 @@ public final class CacheRenderer<
 				return renderer
 					.renderImageWithData(data)
 					.on(value: { [cache = self.cache] result in
-						cache.setValue(result, forKey: data)
+						if result.shouldCache {
+							cache.setValue(result, forKey: data)
+						}
 					})
-					.map { $0.image.asCacheMiss }
+					.map { $0.asCacheMiss }
 			}
 	}
 }
@@ -86,18 +88,20 @@ private enum CacheRendererError: Error {
 	case imageNotFound
 }
 
-private extension UIImage {
+private extension RenderResultType {
 	var asCacheHit: ImageResult {
 		return ImageResult(
-			image: self,
-			cacheHit: true
+			image: self.image,
+			cacheHit: true,
+			shouldCache: self.shouldCache
 		)
 	}
 
 	var asCacheMiss: ImageResult {
 		return ImageResult(
-			image: self,
-			cacheHit: false
+			image: self.image,
+			cacheHit: false,
+			shouldCache: self.shouldCache
 		)
 	}
 }

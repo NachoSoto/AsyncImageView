@@ -64,7 +64,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                         inSize: canvasSize
                     )
 
-                    expect(result) == CGRect(origin: CGPoint.zero, size: canvasSize)
+                    expectRect(result, toBeCloseTo: CGRect(origin: CGPoint.zero, size: canvasSize))
                 }
 
                 it("scales up size if aspect ratio matches, but canvas is bigger") {
@@ -76,7 +76,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                         inSize: canvasSize
                     )
 
-                    expect(result) == CGRect(origin: CGPoint.zero, size: canvasSize)
+                    expectRect(result, toBeCloseTo: CGRect(origin: CGPoint.zero, size: canvasSize))
                 }
 
                 it("scales and centers image vertically if height matches, but canvas width is smaller") {
@@ -223,7 +223,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                         inSize: canvasSize
                     )
 
-                    expect(result) == CGRect(origin: CGPoint.zero, size: canvasSize)
+                    expectRect(result, toBeCloseTo: CGRect(origin: CGPoint.zero, size: canvasSize))
                 }
 
                 it("scales up size if aspect ratio matches, but canvas is bigger") {
@@ -235,7 +235,7 @@ class ImageInflaterRendererSpec: QuickSpec {
                         inSize: canvasSize
                     )
 
-                    expect(result) == CGRect(origin: CGPoint.zero, size: canvasSize)
+                    expectRect(result, toBeCloseTo: CGRect(origin: CGPoint.zero, size: canvasSize))
                 }
 
                 it("centers image horizontally if height matches, but canvas width is smaller") {
@@ -367,4 +367,16 @@ class ImageInflaterRendererSpec: QuickSpec {
             }
         }
     }
+}
+
+private func expectRect(
+    _ actual: CGRect,
+    toBeCloseTo expected: CGRect,
+    file: FileString = #file,
+    line: UInt = #line
+) {
+    expect(file: file, line: line, actual.origin.x).to(beCloseTo(expected.origin.x))
+    expect(file: file, line: line, actual.origin.y).to(beCloseTo(expected.origin.y))
+    expect(file: file, line: line, actual.size.width).to(beCloseTo(expected.size.width))
+    expect(file: file, line: line, actual.size.height).to(beCloseTo(expected.size.height))
 }

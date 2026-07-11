@@ -127,15 +127,14 @@ class MulticastedRendererSpec: QuickSpec {
 					expect(getCacheHitValue()) == false
 				}
 
-				it("is a cache hit the second time the producer is fetched") {
-					let producer = getProducerForData(data, size)
+				it("is a cache hit after the initial producer completes") {
+					var initialResult: ImageResult?
+					getProducerForData(data, size).startWithValues { initialResult = $0 }
 					scheduler.advance(by: interval)
+					expect(initialResult).toEventuallyNot(beNil())
 
-					var result: ImageResult?
-					producer.startWithValues { result = $0 }
-
-					expect(result).toEventuallyNot(beNil())
-					expect(result?.cacheHit) == true
+					expect(initialResult?.cacheHit) == false
+					expect(getImageForData(data, size)?.cacheHit) == true
 				}
 			}
 		}

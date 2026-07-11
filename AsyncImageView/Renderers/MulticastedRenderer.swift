@@ -14,11 +14,29 @@ private final class InFlightImage {
 	let result: Property<ImageResult?>
 	let observer: Signal<ImageResult, Never>.Observer
 	let disposable = SerialDisposable()
+	private let hasStarted = Atomic(false)
 
 	init() {
 		let (signal, observer) = Signal<ImageResult, Never>.pipe()
 		self.result = Property(initial: nil, then: signal)
 		self.observer = observer
+	}
+
+	deinit {
+		self.disposable.dispose()
+	}
+
+	func startIfNeeded(_ action: () -> Void) {
+		let shouldStart = self.hasStarted.modify { hasStarted in
+			guard !hasStarted else { return false }
+			hasStarted = true
+
+			return true
+		}
+
+		if shouldStart {
+			action()
+		}
 	}
 }
 
@@ -28,7 +46,7 @@ private enum CachedImage {
 }
 
 private enum CachedImageLookup {
-	case rendering(InFlightImage, shouldStart: Bool)
+	case rendering(InFlightImage)
 	case completed(ImageResult)
 }
 
@@ -68,11 +86,7 @@ public final class MulticastedRenderer<
 		case let .completed(result):
 			return SignalProducer(value: result)
 
-		case let .rendering(entry, shouldStart):
-			if shouldStart {
-				self.startRendering(data, into: entry)
-			}
-
+		case let .rendering(entry):
 			return self.producer(for: data, entry: entry)
 		}
 	}
@@ -84,13 +98,13 @@ public final class MulticastedRenderer<
 				return .completed(result)
 
 			case let .rendering(entry, latest: nil):
-				return .rendering(entry, shouldStart: false)
+				return .rendering(entry)
 
 			case nil:
 				let entry = InFlightImage()
 				cache[data] = .rendering(entry, latest: nil)
 
-				return .rendering(entry, shouldStart: true)
+				return .rendering(entry)
 			}
 		}
 	}
@@ -117,8 +131,8 @@ public final class MulticastedRenderer<
 		)
 
 		guard result.shouldCache else {
-			entry.observer.send(value: cacheMiss)
 			self.remove(entry, for: data)
+			entry.observer.send(value: cacheMiss)
 
 			return
 		}
@@ -150,8 +164,13 @@ public final class MulticastedRenderer<
 	}
 
 	private func producer(for data: Data, entry: InFlightImage) -> SignalProducer<ImageResult, Never> {
-		return SignalProducer { [weak self, entry] observer, lifetime in
-			let cachedResult = self?.cache.withValue { cache -> ImageResult? in
+		return SignalProducer { [self, entry] observer, lifetime in
+			lifetime.observeEnded {
+				_ = self
+				_ = entry
+			}
+
+			let cachedResult = self.cache.withValue { cache -> ImageResult? in
 				switch cache[data] {
 				case let .completed(result), let .rendering(_, latest: result?):
 					return result
@@ -161,9 +180,17 @@ public final class MulticastedRenderer<
 				}
 			}
 
-			let producer = cachedResult.map(SignalProducer.init(value:))
-				?? entry.result.producer.compactMap { $0 }.take(first: 1)
-			lifetime += producer.start(observer)
+			if let cachedResult {
+				lifetime += SignalProducer(value: cachedResult).start(observer)
+			} else {
+				lifetime += entry.result.producer
+					.compactMap { $0 }
+					.take(first: 1)
+					.start(observer)
+				entry.startIfNeeded {
+					self.startRendering(data, into: entry)
+				}
+			}
 		}
 	}
 

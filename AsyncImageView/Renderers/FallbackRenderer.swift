@@ -60,7 +60,8 @@ extension RenderResultType {
 	fileprivate var asResult: ImageResult {
 		return ImageResult(
 			image: self.image,
-			cacheHit: self.cacheHit
+			cacheHit: self.cacheHit,
+			shouldCache: self.shouldCache
 		)
 	}
 }

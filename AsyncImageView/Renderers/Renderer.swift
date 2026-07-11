@@ -20,15 +20,33 @@ public protocol RenderResultType {
 	var cacheHit: Bool { get }
 }
 
+internal extension RenderResultType {
+	var shouldCache: Bool {
+		return (self as? CachePolicyProviding)?.shouldCache ?? true
+	}
+}
+
 public struct ImageResult: RenderResultType {
 	public let image: UIImage
 	public let cacheHit: Bool
+	internal let shouldCache: Bool
 
 	public init(image: UIImage, cacheHit: Bool) {
+		self.init(image: image, cacheHit: cacheHit, shouldCache: true)
+	}
+
+	internal init(image: UIImage, cacheHit: Bool, shouldCache: Bool) {
 		self.image = image
 		self.cacheHit = cacheHit
+		self.shouldCache = shouldCache
 	}
 }
+
+private protocol CachePolicyProviding {
+	var shouldCache: Bool { get }
+}
+
+extension ImageResult: CachePolicyProviding {}
 
 extension UIImage: RenderResultType {
 	public var image: UIImage {

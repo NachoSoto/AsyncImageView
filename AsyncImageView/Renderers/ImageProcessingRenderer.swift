@@ -46,8 +46,8 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
 					image.processImageWithBitmapContext(
 						withSize: data.size,
 						scale: scale,
-					opaque: opaque,
-					contentMode: contentMode,
+						opaque: opaque,
+						contentMode: contentMode,
                     renderingBlock: { image, context, contextSize, imageDrawingBlock in
                         block(
                             image,
@@ -57,7 +57,7 @@ public final class ImageProcessingRenderer<Renderer: RendererType>: RendererType
                             imageDrawingBlock
                         )
                     }
-				)
+				).image
 			}
 	}
 }

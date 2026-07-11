@@ -13,6 +13,15 @@ import ReactiveSwift
 // The initial value is `nil`.
 private typealias ImageProperty = Property<ImageResult?>
 
+private final class WeakImagePropertyReference {
+	weak var value: ImageProperty?
+}
+
+private struct ImagePropertyEvictionState {
+	let propertyReference = WeakImagePropertyReference()
+	var shouldEvict = false
+}
+
 /// `RendererType` decorator which guarantees that images for a given `RenderDataType`
 /// are only rendered once, and multicasted to every observer.
 public final class MulticastedRenderer<
@@ -60,13 +69,43 @@ public final class MulticastedRenderer<
 			if let property = cache[data] {
 				result = property
 			} else {
+				let evictionState = Atomic(ImagePropertyEvictionState())
+				let producer = renderer.createProducerForRenderingData(data)
+					.on(value: { [propertyCache = self.cache] result in
+						guard !result.shouldCache else { return }
+
+						var property: ImageProperty?
+
+						evictionState.modify { state in
+							state.shouldEvict = true
+							property = state.propertyReference.value
+						}
+
+						guard let property = property else { return }
+
+						propertyCache.modify { cache in
+							if cache[data] === property {
+								cache.removeValue(forKey: data)
+							}
+						}
+					})
+
 				result = ImageProperty(
 					initial: nil,
-					then: renderer.createProducerForRenderingData(data)
-						.map(Optional.init)
+					then: producer.map(Optional.init)
 				)
 
 				cache[data] = result
+
+				let shouldEvict = evictionState.modify { state -> Bool in
+					state.propertyReference.value = result
+
+					return state.shouldEvict
+				}
+
+				if shouldEvict {
+					cache.removeValue(forKey: data)
+				}
 			}
 		}
 
@@ -96,9 +135,17 @@ extension RendererType {
 	fileprivate func createProducerForRenderingData(_ data: Data) -> SignalProducer<ImageResult, Error> {
 		return self.renderImageWithData(data)
 			.flatMap(.concat) { result in
-                return SignalProducer([
-					ImageResult(image: result.image, cacheHit: false),
-					ImageResult(image: result.image, cacheHit: true)
+				let cacheMiss = ImageResult(
+					image: result.image,
+					cacheHit: false,
+					shouldCache: result.shouldCache
+				)
+
+				guard result.shouldCache else { return SignalProducer(value: cacheMiss) }
+
+				return SignalProducer([
+					cacheMiss,
+					ImageResult(image: result.image, cacheHit: true, shouldCache: true)
 				])
 		}
 	}

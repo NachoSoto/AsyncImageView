@@ -39,7 +39,8 @@ class ImageInflaterRendererSpec: QuickSpec {
 
                     expect(didAttemptContextCreation) == true
                     expect(didRender) == false
-                    expect(result).to(beIdenticalTo(image))
+                    expect(result.image).to(beIdenticalTo(image))
+                    expect(result.didProcess) == false
                 }
             }
 

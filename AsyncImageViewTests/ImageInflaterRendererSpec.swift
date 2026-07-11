@@ -9,12 +9,40 @@
 import Quick
 import Nimble
 import CoreGraphics
+import UIKit
 
-import AsyncImageView
+@testable import AsyncImageView
 
 class ImageInflaterRendererSpec: QuickSpec {
     override class func spec() {
         describe("ImageInflaterRenderer") {
+            context("bitmap context creation") {
+                it("returns the original image if context creation fails") {
+                    let image = UIImage()
+                    var didAttemptContextCreation = false
+                    var didRender = false
+
+                    let result = image.processImageWithBitmapContext(
+                        withSize: CGSize(width: 20, height: 30),
+                        scale: 2,
+                        opaque: false,
+                        contentMode: .aspectFill,
+                        bitmapContextFactory: { _, _, _, _, _ in
+                            didAttemptContextCreation = true
+
+                            return nil
+                        },
+                        renderingBlock: { _, _, _, _ in
+                            didRender = true
+                        }
+                    )
+
+                    expect(didAttemptContextCreation) == true
+                    expect(didRender) == false
+                    expect(result).to(beIdenticalTo(image))
+                }
+            }
+
             context("Aspect Fit") {
                 it("returns identity frame if sizes match") {
                     let size = CGSize.random()

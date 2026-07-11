@@ -21,7 +21,7 @@ jobs:
       - name: Run test suite
         uses: mxcl/xcodebuild@v3
         with:
-          xcode: '26.1'
+          xcode: '26.5'
           scheme: AsyncImageView
           platform: iOS
           action: test

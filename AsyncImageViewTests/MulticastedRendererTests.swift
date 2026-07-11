@@ -14,7 +14,7 @@ import ReactiveSwift
 
 @testable import AsyncImageView
 
-@Suite
+@Suite(.serialized)
 struct MulticastedRendererTests {
 	@Test
 	func rendersDifferentKeysConcurrently() {
@@ -75,6 +75,22 @@ struct MulticastedRendererTests {
 	}
 
 	@Test
+	func preservesTheInitialCacheMissFromASynchronousRenderer() throws {
+		let source = SynchronousRenderer()
+		let renderer = source.multicasted()
+		let data = MulticastRenderData(identifier: 1)
+
+		let initial = try #require(renderer.renderImageWithData(data).single()?.get())
+		let cached = try #require(renderer.renderImageWithData(data).single()?.get())
+
+		#expect(source.renderCount == 1)
+		#expect(initial.image === source.image)
+		#expect(initial.cacheHit == false)
+		#expect(cached.image === source.image)
+		#expect(cached.cacheHit == true)
+	}
+
+	@Test
 	func sharesOneUpstreamRenderBetweenConcurrentWaiters() throws {
 		let image = makeImage()
 		let source = MultiValueRenderer()
@@ -101,6 +117,73 @@ struct MulticastedRendererTests {
 		#expect(secondResult.image === image)
 		#expect(firstResult.cacheHit == false)
 		#expect(secondResult.cacheHit == false)
+	}
+
+	@Test
+	func producerOutlivesATemporaryMulticastedRenderer() throws {
+		let image = makeImage()
+		let source = MultiValueRenderer()
+		let data = MulticastRenderData(identifier: 1)
+		let producer = source.multicasted().renderImageWithData(data)
+		var result: ImageResult?
+		let disposable = producer.startWithValues { result = $0 }
+		defer { disposable.dispose() }
+
+		source.observer.send(value: image)
+		source.observer.sendCompleted()
+
+		let rendered = try #require(result)
+		#expect(source.renderCount == 1)
+		#expect(rendered.image === image)
+		#expect(rendered.cacheHit == false)
+	}
+
+	@Test
+	func preservesInFlightDeliveryAcrossAMemoryWarning() throws {
+		let image = makeImage()
+		let source = MultiValueRenderer()
+		let renderer = source.multicasted()
+		let data = MulticastRenderData(identifier: 1)
+		var first: ImageResult?
+		let firstDisposable = renderer.renderImageWithData(data).startWithValues { first = $0 }
+		var secondDisposable: Disposable?
+		defer {
+			firstDisposable.dispose()
+			secondDisposable?.dispose()
+		}
+
+		#expect(source.renderCount == 1)
+		NotificationCenter.default.post(name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+
+		for _ in 0..<100 where source.renderCount < 2 {
+			secondDisposable?.dispose()
+			secondDisposable = renderer.renderImageWithData(data).start()
+			if source.renderCount < 2 {
+				Thread.sleep(forTimeInterval: 0.01)
+			}
+		}
+
+		#expect(source.renderCount == 2)
+		source.observer.send(value: image)
+		source.observer.sendCompleted()
+
+		let rendered = try #require(first)
+		#expect(rendered.image === image)
+		#expect(rendered.cacheHit == false)
+	}
+
+	@Test
+	func cancelsInFlightWorkWhenTheRendererIsReleased() {
+		let source = CancellableRenderer()
+		var renderer: MulticastedRenderer<CancellableRenderer, MulticastRenderData>? = source.multicasted()
+		let disposable = renderer?.renderImageWithData(MulticastRenderData(identifier: 1)).start()
+
+		#expect(source.started.value == true)
+		#expect(source.cancelled.value == false)
+		disposable?.dispose()
+		renderer = nil
+
+		#expect(source.cancelled.value == true)
 	}
 
 	@Test
@@ -183,6 +266,31 @@ private final class MultiValueRenderer: RendererType {
 		self.renderCount += 1
 
 		return self.signal.producer
+	}
+}
+
+private final class SynchronousRenderer: RendererType {
+	let image = makeImage()
+	private(set) var renderCount = 0
+
+	func renderImageWithData(_ data: MulticastRenderData) -> SignalProducer<UIImage, Never> {
+		self.renderCount += 1
+
+		return SignalProducer(value: self.image)
+	}
+}
+
+private final class CancellableRenderer: RendererType {
+	let started = Atomic(false)
+	let cancelled = Atomic(false)
+
+	func renderImageWithData(_ data: MulticastRenderData) -> SignalProducer<UIImage, Never> {
+		return SignalProducer { [cancelled = self.cancelled, started = self.started] _, lifetime in
+			started.modify { $0 = true }
+			lifetime.observeEnded {
+				cancelled.modify { $0 = true }
+			}
+		}
 	}
 }
 

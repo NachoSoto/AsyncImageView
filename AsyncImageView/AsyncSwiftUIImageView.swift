@@ -178,8 +178,7 @@ private final class AsyncSwiftUIImageViewModel<
             requestsSignal: self.requestsSignal,
             renderer: self.renderer,
             placeholderRenderer: self.placeholderRenderer,
-            uiScheduler: self.uiScheduler,
-            imageCreationScheduler: self.imageCreationScheduler
+            uiScheduler: self.uiScheduler
         )
         .observeValues { [weak self] result in
             self?.renderResult = result

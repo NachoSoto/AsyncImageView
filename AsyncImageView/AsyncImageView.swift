@@ -77,13 +77,17 @@ open class AsyncImageView<
 
 	open override var frame: CGRect {
 		didSet {
-			self.requestNewImageIfReady()
+			if self.frame.size != oldValue.size {
+				self.requestNewImageIfReady()
+			}
 		}
 	}
 
 	open override var bounds: CGRect {
 		didSet {
-			self.requestNewImageIfReady()
+			if self.bounds.size != oldValue.size {
+				self.requestNewImageIfReady()
+			}
 		}
 	}
 

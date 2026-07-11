@@ -97,6 +97,22 @@ public protocol NSDataConvertible {
 
 	/// Encodes the receiver in `NSData`. Returns `nil` if failed.
 	var data: Data? { get }
+
+	/// Creates an instance from its disk-cache representation.
+	static func valueFromCacheData(_ data: Data) -> Self?
+
+	/// Encodes the receiver for storage in `DiskCache`. Returns `nil` if failed.
+	var cacheData: Data? { get }
+}
+
+public extension NSDataConvertible {
+	static func valueFromCacheData(_ data: Data) -> Self? {
+		Self(data: data)
+	}
+
+	var cacheData: Data? {
+		self.data
+	}
 }
 
 /// Returns the directory where all `DiskCache` caches are stored
@@ -129,7 +145,7 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 
 	public func valueForKey(_ key: K) -> V? {
 		return withLock { (try? Data(contentsOf: self.filePathForKey(key))) }
-			.flatMap(V.init)
+			.flatMap(V.valueFromCacheData)
 	}
 
 	public func setValue(_ value: V?, forKey key: K) {
@@ -138,7 +154,7 @@ public final class DiskCache<K: DataFileType, V: NSDataConvertible>: CacheType {
 		self.withLock {
 			self.guaranteeDirectoryExists(url.deletingLastPathComponent())
 
-			if let data = value.flatMap({ $0.data }) {
+			if let data = value.flatMap({ $0.cacheData }) {
 				// swiftlint:disable:next force_try
 				try! data.write(to: url, options: .atomicWrite)
 			} else if self.fileManager.fileExists(atPath: url.path) {

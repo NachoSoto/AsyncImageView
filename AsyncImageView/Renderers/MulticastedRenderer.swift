@@ -165,6 +165,8 @@ public final class MulticastedRenderer<
 
 	private func producer(for data: Data, entry: InFlightImage) -> SignalProducer<ImageResult, Never> {
 		return SignalProducer { [self, entry] observer, lifetime in
+			// Keep async callbacks deliverable after cache eviction or a temporary wrapper.
+			// `Lifetime` releases this action on completion or cancellation.
 			lifetime.observeEnded {
 				_ = self
 				_ = entry

@@ -176,14 +176,39 @@ struct MulticastedRendererTests {
 	func cancelsInFlightWorkWhenTheRendererIsReleased() {
 		let source = CancellableRenderer()
 		var renderer: MulticastedRenderer<CancellableRenderer, MulticastRenderData>? = source.multicasted()
+		weak var weakRenderer = renderer
 		let disposable = renderer?.renderImageWithData(MulticastRenderData(identifier: 1)).start()
 
 		#expect(source.started.value == true)
 		#expect(source.cancelled.value == false)
-		disposable?.dispose()
 		renderer = nil
+		#expect(weakRenderer != nil)
+		disposable?.dispose()
 
 		#expect(source.cancelled.value == true)
+		#expect(weakRenderer == nil)
+	}
+
+	@Test
+	func releasesTheRendererWhenAnActiveProducerCompletes() throws {
+		let image = makeImage()
+		let source = MultiValueRenderer()
+		var renderer: MulticastedRenderer<MultiValueRenderer, MulticastRenderData>? = source.multicasted()
+		weak var weakRenderer = renderer
+		var result: ImageResult?
+		let disposable = renderer?
+			.renderImageWithData(MulticastRenderData(identifier: 1))
+			.startWithValues { result = $0 }
+		defer { disposable?.dispose() }
+
+		renderer = nil
+		#expect(weakRenderer != nil)
+		source.observer.send(value: image)
+
+		let rendered = try #require(result)
+		#expect(rendered.image === image)
+		#expect(weakRenderer == nil)
+		source.observer.sendCompleted()
 	}
 
 	@Test

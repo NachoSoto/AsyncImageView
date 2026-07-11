@@ -27,11 +27,9 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         requestsSignal: Signal<Data?, Never>,
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
-        uiScheduler: ReactiveSwift.Scheduler,
-        imageCreationScheduler: ReactiveSwift.Scheduler
+        uiScheduler: ReactiveSwift.Scheduler
     ) -> Signal<Renderer.RenderResult?, Never> {
         return requestsSignal.skipRepeats(==)
-            .observe(on: imageCreationScheduler)
             .flatMap(.latest) { data -> SignalProducer<Renderer.RenderResult?, Never> in
                 let prefixSignal: SignalProducer<Renderer.RenderResult?, Never> = .init(value: nil)
 

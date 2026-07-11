@@ -59,8 +59,7 @@ open class AsyncImageView<
 			requestsSignal: self.requestsSignal,
 			renderer: renderer,
 			placeholderRenderer: placeholderRenderer,
-			uiScheduler: uiScheduler,
-			imageCreationScheduler: imageCreationScheduler
+			uiScheduler: uiScheduler
 		)
 		.observeValues { [weak self] result in
 			self?.updateImage(result)

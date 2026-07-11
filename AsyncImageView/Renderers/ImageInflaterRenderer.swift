@@ -100,6 +100,7 @@ extension UIImage {
 		_ colorSpace: CGColorSpace,
 		_ bitmapInfo: UInt32
 	) -> CGContext?
+	internal typealias BitmapImageFactory = (_ context: CGContext) -> CGImage?
 
 	internal static func makeBitmapContext(
 		width: Int,
@@ -117,6 +118,10 @@ extension UIImage {
 			space: colorSpace,
 			bitmapInfo: bitmapInfo
 		)
+	}
+
+	internal static func makeBitmapImage(_ context: CGContext) -> CGImage? {
+		return context.makeImage()
 	}
 
 	internal func inflate(
@@ -144,6 +149,7 @@ extension UIImage {
 		opaque: Bool,
 		contentMode: ImageInflaterRendererContentMode,
 		bitmapContextFactory: BitmapContextFactory = UIImage.makeBitmapContext,
+		bitmapImageFactory: BitmapImageFactory = UIImage.makeBitmapImage,
 		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> Void) -> Void)
 		-> BitmapContextProcessingResult {
 		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
@@ -182,7 +188,7 @@ extension UIImage {
 			}
 		)
 
-		guard let processedImage = bitmapContext.makeImage() else {
+		guard let processedImage = bitmapImageFactory(bitmapContext) else {
 			return BitmapContextProcessingResult(image: self, didProcess: false)
 		}
 

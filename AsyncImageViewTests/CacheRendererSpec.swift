@@ -63,6 +63,52 @@ class CacheRendererSpec: QuickSpec {
 				expect(cachedResult?.cacheHit) == true
 				expect(sourceRenderer.renderedImages.value.count) == 2
 			}
+
+			it("does not cache the original image after processing output creation fails") {
+				let data = TestRenderData(
+					data: .a,
+					size: CGSize(width: 20, height: 30)
+				)
+				let sourceRenderer = TestRenderer()
+				let cache = InMemoryCache<TestRenderData, ImageResult>(cacheName: #function)
+				var shouldFailImageCreation = true
+
+				let renderer = ImageProcessingRenderer(
+					renderer: sourceRenderer,
+					scale: 2,
+					opaque: false,
+					renderingBlock: { _, _, _, _, imageDrawing in
+						imageDrawing()
+					},
+					bitmapImageFactory: { context in
+						guard !shouldFailImageCreation else { return nil }
+
+						return context.makeImage()
+					}
+				)
+				.withCache(cache)
+
+				let fallbackResult = renderer.renderImageWithData(data).single()?.get()
+
+				expect(fallbackResult?.image.scale) == data.data.rawValue
+				expect(fallbackResult?.shouldCache) == false
+				expect(cache.valueForKey(data)).to(beNil())
+				expect(sourceRenderer.renderedImages.value.count) == 1
+
+				shouldFailImageCreation = false
+
+				let processedResult = renderer.renderImageWithData(data).single()?.get()
+
+				expect(processedResult?.image.scale) == 2
+				expect(processedResult?.shouldCache) == true
+				expect(cache.valueForKey(data)).toNot(beNil())
+				expect(sourceRenderer.renderedImages.value.count) == 2
+
+				let cachedResult = renderer.renderImageWithData(data).single()?.get()
+
+				expect(cachedResult?.cacheHit) == true
+				expect(sourceRenderer.renderedImages.value.count) == 2
+			}
 		}
 	}
 }

@@ -41,7 +41,6 @@ class CacheRendererSpec: QuickSpec {
 					}
 				)
 				.withCache(cache)
-				.multicasted()
 
 				let fallbackResult = renderer.renderImageWithData(data).single()?.get()
 

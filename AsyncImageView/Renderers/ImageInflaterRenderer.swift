@@ -70,6 +70,14 @@ public enum ImageInflaterRendererContentMode {
 }
 
 extension UIImage {
+	internal typealias BitmapContextFactory = (
+		_ width: Int,
+		_ height: Int,
+		_ bytesPerRow: Int,
+		_ colorSpace: CGColorSpace,
+		_ bitmapInfo: UInt32
+	) -> CGContext?
+
     internal func inflate(
         withSize size: CGSize,
         scale: CGFloat,
@@ -92,6 +100,17 @@ extension UIImage {
 		scale: CGFloat,
 		opaque: Bool,
 		contentMode: ImageInflaterRendererContentMode,
+		bitmapContextFactory: BitmapContextFactory = { width, height, bytesPerRow, colorSpace, bitmapInfo in
+			CGContext(
+				data: nil,
+				width: width,
+				height: height,
+				bitsPerComponent: 8,
+				bytesPerRow: bytesPerRow,
+				space: colorSpace,
+				bitmapInfo: bitmapInfo
+			)
+		},
 		renderingBlock: (_ image: UIImage, _ context: CGContext, _ contextSize: CGSize, _ imageDrawing: () -> Void) -> Void)
 		-> UIImage {
 		precondition(size.width > 0 && size.height > 0, "Invalid size: \(size.width)x\(size.height)")
@@ -105,8 +124,14 @@ extension UIImage {
 		let imageWidth = Int(contextSize.width)
 		let imageHeight = Int(contextSize.height)
 
-		guard let bitmapContext = CGContext(data: nil, width: imageWidth, height: imageHeight, bitsPerComponent: 8, bytesPerRow: imageWidth * 4, space: colorSpace, bitmapInfo: bitmapInfo) else {
-			fatalError("Error creating bitmap context")
+		guard let bitmapContext = bitmapContextFactory(
+			imageWidth,
+			imageHeight,
+			imageWidth * 4,
+			colorSpace,
+			bitmapInfo
+		) else {
+			return self
 		}
 
 		renderingBlock(

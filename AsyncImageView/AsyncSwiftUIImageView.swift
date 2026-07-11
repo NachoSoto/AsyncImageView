@@ -20,23 +20,82 @@ public struct AsyncSwiftUIImageView<
     Renderer.Error == Never,
     PlaceholderRenderer.Data == Data,
     PlaceholderRenderer.Error == Never,
-Renderer.RenderResult == PlaceholderRenderer.RenderResult {
+    Renderer.RenderResult == PlaceholderRenderer.RenderResult {
     private typealias ViewModel = AsyncSwiftUIImageViewModel<Data, ImageViewData, Renderer, PlaceholderRenderer>
 
-    @State private var viewModel: ViewModel
+    @State private var viewModelReference: LazyReference<ViewModel>
+
+    private var viewModel: ViewModel {
+        self.viewModelReference.value
+    }
+
+    public init(
+        renderer: Renderer,
+        placeholderRenderer: PlaceholderRenderer? = nil
+    ) {
+        self.init(
+            renderer: renderer,
+            placeholderRenderer: placeholderRenderer,
+            uiSchedulerFactory: { UIScheduler() },
+            imageCreationSchedulerFactory: { QueueScheduler() }
+        )
+    }
 
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
-        uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
-        imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler()) {
-        _viewModel = State(
-            initialValue: ViewModel(
-                renderer: renderer,
-                placeholderRenderer: placeholderRenderer,
-                uiScheduler: uiScheduler,
-                imageCreationScheduler: imageCreationScheduler
-            )
+        uiScheduler: ReactiveSwift.Scheduler
+    ) {
+        self.init(
+            renderer: renderer,
+            placeholderRenderer: placeholderRenderer,
+            uiSchedulerFactory: { uiScheduler },
+            imageCreationSchedulerFactory: { QueueScheduler() }
+        )
+    }
+
+    public init(
+        renderer: Renderer,
+        placeholderRenderer: PlaceholderRenderer? = nil,
+        imageCreationScheduler: ReactiveSwift.Scheduler
+    ) {
+        self.init(
+            renderer: renderer,
+            placeholderRenderer: placeholderRenderer,
+            uiSchedulerFactory: { UIScheduler() },
+            imageCreationSchedulerFactory: { imageCreationScheduler }
+        )
+    }
+
+    public init(
+        renderer: Renderer,
+        placeholderRenderer: PlaceholderRenderer? = nil,
+        uiScheduler: ReactiveSwift.Scheduler,
+        imageCreationScheduler: ReactiveSwift.Scheduler
+    ) {
+        self.init(
+            renderer: renderer,
+            placeholderRenderer: placeholderRenderer,
+            uiSchedulerFactory: { uiScheduler },
+            imageCreationSchedulerFactory: { imageCreationScheduler }
+        )
+    }
+
+    internal init(
+        renderer: Renderer,
+        placeholderRenderer: PlaceholderRenderer?,
+        uiSchedulerFactory: @escaping () -> ReactiveSwift.Scheduler,
+        imageCreationSchedulerFactory: @escaping () -> ReactiveSwift.Scheduler
+    ) {
+        _viewModelReference = State(
+            initialValue: LazyReference {
+                ViewModel(
+                    renderer: renderer,
+                    placeholderRenderer: placeholderRenderer,
+                    uiScheduler: uiSchedulerFactory(),
+                    imageCreationScheduler: imageCreationSchedulerFactory()
+                )
+            }
         )
     }
 
@@ -98,6 +157,19 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         }
 
         self.viewModel.requestImage(self.data, size: self.size)
+    }
+}
+
+private final class LazyReference<Value> {
+    private let factory: () -> Value
+    private lazy var storedValue = self.factory()
+
+    var value: Value {
+        self.storedValue
+    }
+
+    init(factory: @escaping () -> Value) {
+        self.factory = factory
     }
 }
 

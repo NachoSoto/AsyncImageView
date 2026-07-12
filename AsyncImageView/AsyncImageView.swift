@@ -59,8 +59,7 @@ open class AsyncImageView<
 			requestsSignal: self.requestsSignal,
 			renderer: renderer,
 			placeholderRenderer: placeholderRenderer,
-			uiScheduler: uiScheduler,
-			imageCreationScheduler: imageCreationScheduler
+			uiScheduler: uiScheduler
 		)
 		.observeValues { [weak self] result in
 			self?.updateImage(result)
@@ -77,13 +76,17 @@ open class AsyncImageView<
 
 	open override var frame: CGRect {
 		didSet {
-			self.requestNewImageIfReady()
+			if self.frame.size != oldValue.size {
+				self.requestNewImageIfReady()
+			}
 		}
 	}
 
 	open override var bounds: CGRect {
 		didSet {
-			self.requestNewImageIfReady()
+			if self.bounds.size != oldValue.size {
+				self.requestNewImageIfReady()
+			}
 		}
 	}
 

@@ -117,8 +117,6 @@ public struct AsyncSwiftUIImageView<
     public var body: some View {
         ZStack {
             self.imageView
-
-            Color.clear
         }
         .onGeometryChange(for: CGSize.self) { geometry in
             geometry.size

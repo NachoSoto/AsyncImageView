@@ -11,12 +11,12 @@ class AsyncSwiftUIImageViewSpec: QuickSpec {
     override class func spec() {
         describe("AsyncSwiftUIImageView") {
             it("requests the full proposed size") {
-                let renderer = TestRenderer()
+                let renderer = SquareImageRenderer()
                 typealias ViewType = AsyncSwiftUIImageView<
                     TestRenderData,
                     TestData,
-                    TestRenderer,
-                    TestRenderer
+                    SquareImageRenderer,
+                    SquareImageRenderer
                 >
                 let view = ViewType(
                     renderer: renderer,
@@ -33,10 +33,27 @@ class AsyncSwiftUIImageViewSpec: QuickSpec {
                 viewController.view.frame = window.bounds
                 viewController.view.layoutIfNeeded()
 
-                expect(renderer.renderedImages.value).toEventually(
-                    contain(TestRenderData(data: .a, size: window.bounds.size))
-                )
+                let expectedRequest = TestRenderData(data: .a, size: window.bounds.size)
+                expect(renderer.renderedImages.value).toEventually(equal([expectedRequest]))
+
+                RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+                viewController.view.layoutIfNeeded()
+
+                expect(renderer.renderedImages.value) == [expectedRequest]
             }
         }
+    }
+}
+
+private final class SquareImageRenderer: RendererType {
+    let renderedImages = Atomic<[TestRenderData]>([])
+
+    func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, Never> {
+        TestRenderer.rendererForSize(CGSize(width: 100, height: 100), scale: 1)
+            .asyncRenderer(ImmediateScheduler())
+            .renderImageWithData(data)
+            .on(started: {
+                self.renderedImages.modify { $0.append(data) }
+            })
     }
 }

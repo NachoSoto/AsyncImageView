@@ -9,9 +9,7 @@
 import UIKit
 
 import ReactiveSwift
-
-import Quick
-import Nimble
+import Testing
 
 import AsyncImageView
 
@@ -23,11 +21,11 @@ internal enum TestData: CGFloat, Hashable {
 
 extension TestData: ImageViewDataType {
 	var data: TestData {
-		return self
+		self
 	}
 
 	func renderDataWithSize(_ size: CGSize) -> TestRenderData {
-		return RenderData(data: self.data, size: size)
+		RenderData(data: self.data, size: size)
 	}
 }
 
@@ -51,7 +49,7 @@ internal final class TestRenderer: RendererType {
 	var renderedImages: Atomic<[TestRenderData]> = Atomic([])
 
     func renderImageWithData(_ data: TestRenderData) -> SignalProducer<UIImage, Never> {
-        return TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
+        TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
             .asyncRenderer(ImmediateScheduler())
             .renderImageWithData(data)
             .on(started: {
@@ -69,27 +67,25 @@ internal final class TestRenderer: RendererType {
 	}
 }
 
+@MainActor
 internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?,
                           withSize size: CGSize,
-                          data: TestData?,
-                          file: FileString = #file,
-                          line: UInt = #line) {
+                          data: TestData?) async {
 	if let data = data {
-		verifyImage(image(),
-                    withSize: size,
-                    expectedScale: data.rawValue,
-                    file: file,
-                    line: line)
+		await verifyImage(
+			image(),
+			withSize: size,
+			expectedScale: data.rawValue
+		)
 	} else {
-        expect(file: file, line: line, image()).toEventually(beNil())
+        #expect(await eventuallyOnMainActor { image() == nil })
 	}
 }
 
+@MainActor
 internal func verifyImage(_ image: @autoclosure @escaping () -> UIImage?,
                           withSize size: CGSize,
-                          expectedScale: CGFloat,
-                          file: FileString = #file,
-                          line: UInt = #line) {
-    expect(file: file, line: line, image()?.size).toEventually(equal(size))
-	expect(file: file, line: line, image()?.scale).toEventually(equal(expectedScale))
+                          expectedScale: CGFloat) async {
+    #expect(await eventuallyOnMainActor { image()?.size == size })
+	#expect(await eventuallyOnMainActor { image()?.scale == expectedScale })
 }

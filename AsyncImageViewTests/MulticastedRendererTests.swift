@@ -91,6 +91,20 @@ struct MulticastedRendererTests {
 	}
 
 	@Test
+	func reportsInitialCacheMissEvenWhenUpstreamReportsAHit() throws {
+		let source = UpstreamCacheHitRenderer()
+		let renderer = source.multicasted()
+		let data = MulticastRenderData(identifier: 1)
+
+		let initial = try #require(renderer.renderImageWithData(data).single()?.get())
+		let cached = try #require(renderer.renderImageWithData(data).single()?.get())
+
+		#expect(source.renderCount == 1)
+		#expect(initial.cacheHit == false)
+		#expect(cached.cacheHit == true)
+	}
+
+	@Test
 	func sharesOneUpstreamRenderBetweenConcurrentWaiters() throws {
 		let image = makeImage()
 		let source = MultiValueRenderer()
@@ -176,7 +190,7 @@ struct MulticastedRendererTests {
 	func cancelsInFlightWorkWhenTheRendererIsReleased() {
 		let source = CancellableRenderer()
 		var renderer: MulticastedRenderer<CancellableRenderer, MulticastRenderData>? = source.multicasted()
-		weak var weakRenderer = renderer
+		weak let weakRenderer = renderer
 		let disposable = renderer?.renderImageWithData(MulticastRenderData(identifier: 1)).start()
 
 		#expect(source.started.value == true)
@@ -194,7 +208,7 @@ struct MulticastedRendererTests {
 		let image = makeImage()
 		let source = MultiValueRenderer()
 		var renderer: MulticastedRenderer<MultiValueRenderer, MulticastRenderData>? = source.multicasted()
-		weak var weakRenderer = renderer
+		weak let weakRenderer = renderer
 		var result: ImageResult?
 		let disposable = renderer?
 			.renderImageWithData(MulticastRenderData(identifier: 1))
@@ -302,6 +316,17 @@ private final class SynchronousRenderer: RendererType {
 		self.renderCount += 1
 
 		return SignalProducer(value: self.image)
+	}
+}
+
+private final class UpstreamCacheHitRenderer: RendererType {
+	private let image = makeImage()
+	private(set) var renderCount = 0
+
+	func renderImageWithData(_ data: MulticastRenderData) -> SignalProducer<ImageResult, Never> {
+		self.renderCount += 1
+
+		return SignalProducer(value: ImageResult(image: self.image, cacheHit: true))
 	}
 }
 

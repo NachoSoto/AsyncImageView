@@ -8,23 +8,49 @@
 
 import UIKit
 
-internal extension CGSize {
-    static func random() -> CGSize {
-        return CGSize(
-            width: Double.random(in: 1...200),
-            height: Double.random(in: 1...200)
-        )
-    }
+@discardableResult
+internal func eventually(
+    timeout: TimeInterval = 1,
+    pollInterval: TimeInterval = 0.01,
+    _ condition: () -> Bool
+) -> Bool {
+    let deadline = Date(timeIntervalSinceNow: timeout)
+
+    repeat {
+        if condition() {
+            return true
+        }
+
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: pollInterval))
+    } while Date() < deadline
+
+    return condition()
 }
 
-fileprivate let alphabet = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+@MainActor
+internal func eventuallyOnMainActor(
+    timeout: TimeInterval = 1,
+    pollInterval: TimeInterval = 0.01,
+    _ condition: () -> Bool
+) async -> Bool {
+    let deadline = Date(timeIntervalSinceNow: timeout)
 
-internal extension String {
-    static func randomReadableString() -> String {
-        let length = Int.random(in: 1...15)
-        return String(
-            (1..<length)
-                .map { _ in alphabet.randomElement()! }
-        )
+    repeat {
+        if condition() {
+            return true
+        }
+
+        try? await Task.sleep(for: .seconds(pollInterval))
+    } while Date() < deadline
+
+    return condition()
+}
+
+internal extension CGRect {
+    func isApproximatelyEqual(to other: CGRect, tolerance: CGFloat = 0.001) -> Bool {
+        abs(self.origin.x - other.origin.x) <= tolerance &&
+            abs(self.origin.y - other.origin.y) <= tolerance &&
+            abs(self.size.width - other.size.width) <= tolerance &&
+            abs(self.size.height - other.size.height) <= tolerance
     }
 }

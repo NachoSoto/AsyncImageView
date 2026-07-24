@@ -39,7 +39,7 @@ open class AsyncImageView<
 
 	private let imageCreationScheduler: ReactiveSwift.Scheduler
 
-	private var disposable: Disposable?
+	nonisolated(unsafe) private var disposable: Disposable?
 
 	public init(
 		initialFrame: CGRect,

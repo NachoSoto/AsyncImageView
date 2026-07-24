@@ -15,12 +15,13 @@ import Testing
 
 @Suite
 struct CacheRendererTests {
+	private let fixture = CacheFailureFixture()
+
 	@Test
 	func failedInflationIsNotCached() {
-		let fixture = CacheFailureFixture()
 		var shouldFail = true
 		let renderer = ImageInflaterRenderer(
-			renderer: fixture.sourceRenderer,
+			renderer: self.fixture.sourceRenderer,
 			screenScale: 2,
 			opaque: false,
 			bitmapContextFactory: { width, height, bytesPerRow, colorSpace, bitmapInfo in
@@ -35,19 +36,18 @@ struct CacheRendererTests {
 				)
 			}
 		)
-		.withCache(fixture.cache)
+		.withCache(self.fixture.cache)
 
-		fixture.verifyFailureThenSuccess(renderer: renderer) {
+		self.fixture.verifyFailureThenSuccess(renderer: renderer) {
 			shouldFail = false
 		}
 	}
 
 	@Test
 	func failedProcessingOutputIsNotCached() {
-		let fixture = CacheFailureFixture()
 		var shouldFail = true
 		let renderer = ImageProcessingRenderer(
-			renderer: fixture.sourceRenderer,
+			renderer: self.fixture.sourceRenderer,
 			scale: 2,
 			opaque: false,
 			renderingBlock: { _, _, _, _, imageDrawing in
@@ -59,9 +59,9 @@ struct CacheRendererTests {
 				return context.makeImage()
 			}
 		)
-		.withCache(fixture.cache)
+		.withCache(self.fixture.cache)
 
-		fixture.verifyFailureThenSuccess(renderer: renderer) {
+		self.fixture.verifyFailureThenSuccess(renderer: renderer) {
 			shouldFail = false
 		}
 	}

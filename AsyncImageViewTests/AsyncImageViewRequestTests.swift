@@ -7,36 +7,32 @@ import AsyncImageView
 
 @Suite @MainActor
 struct AsyncImageViewRequestTests {
+	private let fixture = RequestFixture()
+
 	@Test
 	func frameOriginChangesDoNotCreateRenderData() {
-		let fixture = RequestFixture()
-
 		for offset in 1...10 {
-			fixture.view.frame.origin.x = CGFloat(offset)
+			self.fixture.view.frame.origin.x = CGFloat(offset)
 		}
 
-		#expect(fixture.requestCount == 1)
+		#expect(self.fixture.requestCount == 1)
 	}
 
 	@Test
 	func boundsOriginChangesDoNotCreateRenderData() {
-		let fixture = RequestFixture()
-
 		for offset in 1...10 {
-			fixture.view.bounds.origin.x = CGFloat(offset)
+			self.fixture.view.bounds.origin.x = CGFloat(offset)
 		}
 
-		#expect(fixture.requestCount == 1)
+		#expect(self.fixture.requestCount == 1)
 	}
 
 	@Test
 	func sizeChangesCreateRenderData() {
-		let fixture = RequestFixture()
+		self.fixture.view.frame.size = CGSize(width: 20, height: 20)
+		self.fixture.view.bounds.size = CGSize(width: 30, height: 30)
 
-		fixture.view.frame.size = CGSize(width: 20, height: 20)
-		fixture.view.bounds.size = CGSize(width: 30, height: 30)
-
-		#expect(fixture.requestCount == 3)
+		#expect(self.fixture.requestCount == 3)
 	}
 }
 

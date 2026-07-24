@@ -88,6 +88,9 @@ fileprivate func createProducer<Data: RenderDataType>(
     renderBlock: @escaping @MainActor (UIView) -> UIImage
 ) -> SignalProducer<UIImage, Never> {
     return SignalProducer { observer, lifetime in
+        let observer = UncheckedSendableBox(value: observer)
+        let lifetime = UncheckedSendableBox(value: lifetime)
+
         MainActor.assumeIsolated {
             let view = viewCreationBlock(data)
             view.frame.origin = .zero
@@ -98,9 +101,9 @@ fileprivate func createProducer<Data: RenderDataType>(
             // We can't take a snapshot right away because the view has not been commited to the render server yet.
             UIScheduler().schedule {
                 MainActor.assumeIsolated {
-                    if !lifetime.hasEnded {
-                        observer.send(value: renderBlock(view))
-                        observer.sendCompleted()
+                    if !lifetime.value.hasEnded {
+                        observer.value.send(value: renderBlock(view))
+                        observer.value.sendCompleted()
                     }
                 }
             }
@@ -112,6 +115,10 @@ fileprivate func createProducer<Data: RenderDataType>(
 @MainActor
 fileprivate func draw(view: UIView, inContext context: CGContext) {
     view.layer.render(in: context)
+}
+
+fileprivate struct UncheckedSendableBox<Value>: @unchecked Sendable {
+    let value: Value
 }
 
 #endif

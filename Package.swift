@@ -21,6 +21,7 @@ let package = Package(
             dependencies: ["ReactiveSwift"],
             path: "AsyncImageView",
             swiftSettings: [
+                // Work around https://github.com/swiftlang/swift/issues/75453.
                 .unsafeFlags(["-disable-dynamic-actor-isolation"])
             ]
         ),
@@ -31,6 +32,7 @@ let package = Package(
             ],
             path: "AsyncImageViewTests",
             swiftSettings: [
+                // Work around https://github.com/swiftlang/swift/issues/75453.
                 .unsafeFlags(["-disable-dynamic-actor-isolation"])
             ]
         )

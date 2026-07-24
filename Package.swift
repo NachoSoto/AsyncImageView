@@ -21,7 +21,10 @@ let package = Package(
         .target(
             name: "AsyncImageView",
             dependencies: ["ReactiveSwift"],
-            path: "AsyncImageView"
+            path: "AsyncImageView",
+            swiftSettings: [
+                .unsafeFlags(["-disable-dynamic-actor-isolation"])
+            ]
         ),
         .testTarget(
             name: "AsyncImageViewTests",
@@ -30,8 +33,11 @@ let package = Package(
                 "Quick",
                 "Nimble"
             ],
-            path: "AsyncImageViewTests"
+            path: "AsyncImageViewTests",
+            swiftSettings: [
+                .unsafeFlags(["-disable-dynamic-actor-isolation"])
+            ]
         )
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6]
 )

@@ -22,7 +22,7 @@ internal final class SynchronousUIScheduler: Scheduler {
         if Thread.isMainThread {
             action()
         } else {
-            DispatchQueue.main.async {
+            UIScheduler().schedule {
                 if !disposable.isDisposed {
                     action()
                 }

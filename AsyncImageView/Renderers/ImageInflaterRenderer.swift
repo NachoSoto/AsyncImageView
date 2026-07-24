@@ -73,7 +73,7 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
 	}
 }
 
-public enum ImageInflaterRendererContentMode {
+public enum ImageInflaterRendererContentMode: Sendable {
     case aspectFill
     case aspectFit
 

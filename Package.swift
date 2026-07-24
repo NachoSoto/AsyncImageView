@@ -19,15 +19,23 @@ let package = Package(
         .target(
             name: "AsyncImageView",
             dependencies: ["ReactiveSwift"],
-            path: "AsyncImageView"
+            path: "AsyncImageView",
+            swiftSettings: [
+                // Work around https://github.com/swiftlang/swift/issues/75453.
+                .unsafeFlags(["-disable-dynamic-actor-isolation"])
+            ]
         ),
         .testTarget(
             name: "AsyncImageViewTests",
             dependencies: [
                 "AsyncImageView"
             ],
-            path: "AsyncImageViewTests"
+            path: "AsyncImageViewTests",
+            swiftSettings: [
+                // Work around https://github.com/swiftlang/swift/issues/75453.
+                .unsafeFlags(["-disable-dynamic-actor-isolation"])
+            ]
         )
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6]
 )

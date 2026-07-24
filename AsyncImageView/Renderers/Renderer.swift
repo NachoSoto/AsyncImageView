@@ -11,7 +11,7 @@ import UIKit
 import ReactiveSwift
 
 /// Information required to produce an image
-public protocol RenderDataType: Hashable {
+public protocol RenderDataType: Hashable, Sendable {
 	var size: CGSize { get }
 }
 

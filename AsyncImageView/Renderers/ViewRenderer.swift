@@ -9,14 +9,15 @@
 import UIKit
 import CoreGraphics
 
-import ReactiveSwift
+@preconcurrency import ReactiveSwift
 
 #if !os(watchOS)
 
 /// `RendererType` which generates a `UIImage` from a UIView.
 @available(iOS 10.0, tvOSApplicationExtension 10.0, *)
-public final class ViewRenderer<Data: RenderDataType>: RendererType {
-    public typealias Block = (_ data: Data) -> UIView
+@MainActor
+public final class ViewRenderer<Data: RenderDataType>: @MainActor RendererType {
+    public typealias Block = @MainActor (_ data: Data) -> UIView
 
     private let format: UIGraphicsImageRendererFormat
     private let viewCreationBlock: Block
@@ -49,8 +50,9 @@ public final class ViewRenderer<Data: RenderDataType>: RendererType {
 }
 
 /// `RendererType` which generates a `UIImage` from a UIView.
-public final class OldViewRenderer<Data: RenderDataType>: RendererType {
-    public typealias Block = (_ data: Data) -> UIView
+@MainActor
+public final class OldViewRenderer<Data: RenderDataType>: @MainActor RendererType {
+    public typealias Block = @MainActor (_ data: Data) -> UIView
 
     private let opaque: Bool
     private let viewCreationBlock: Block
@@ -82,27 +84,32 @@ public final class OldViewRenderer<Data: RenderDataType>: RendererType {
 
 fileprivate func createProducer<Data: RenderDataType>(
     _ data: Data,
-    viewCreationBlock: @escaping (_ data: Data) -> UIView,
-    renderBlock: @escaping (UIView) -> UIImage
+    viewCreationBlock: @escaping @MainActor (_ data: Data) -> UIView,
+    renderBlock: @escaping @MainActor (UIView) -> UIImage
 ) -> SignalProducer<UIImage, Never> {
     return SignalProducer { observer, lifetime in
-        let view = viewCreationBlock(data)
-        view.frame.origin = .zero
-        view.bounds.size = data.size
-        view.layoutIfNeeded()
+        MainActor.assumeIsolated {
+            let view = viewCreationBlock(data)
+            view.frame.origin = .zero
+            view.bounds.size = data.size
+            view.layoutIfNeeded()
 
-        // Make the CA renderer wait "until all the post-commit triggers fire".
-        // We can't take a snapshot right away because the view has not been commited to the render server yet.
-        DispatchQueue.main.async {
-            if !lifetime.hasEnded {
-                observer.send(value: renderBlock(view))
-                observer.sendCompleted()
+            // Make the CA renderer wait "until all the post-commit triggers fire".
+            // We can't take a snapshot right away because the view has not been commited to the render server yet.
+            UIScheduler().schedule {
+                MainActor.assumeIsolated {
+                    if !lifetime.hasEnded {
+                        observer.send(value: renderBlock(view))
+                        observer.sendCompleted()
+                    }
+                }
             }
         }
     }
         .start(on: UIScheduler())
 }
 
+@MainActor
 fileprivate func draw(view: UIView, inContext context: CGContext) {
     view.layer.render(in: context)
 }

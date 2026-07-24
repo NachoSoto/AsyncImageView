@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-import ReactiveSwift
+@preconcurrency import ReactiveSwift
 
 public protocol ImageViewDataType {
 	associatedtype RenderData: RenderDataType

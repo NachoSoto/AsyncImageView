@@ -8,6 +8,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  swift-6-build:
+    runs-on: macos-26
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: mxcl/xcodebuild@v3
+        with:
+          xcode: '26.6'
+          action: none
+
+      - name: Build library in Swift 6 mode
+        run: |
+          swift build \
+            --target AsyncImageView \
+            --triple arm64-apple-ios18.0-simulator \
+            --sdk "$(xcrun --sdk iphonesimulator --show-sdk-path)"
+
   test:
     runs-on: macos-26
     timeout-minutes: 30

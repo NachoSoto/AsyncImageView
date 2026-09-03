@@ -9,12 +9,6 @@
 import SwiftUI
 import ReactiveSwift
 
-public enum AsyncSwiftUIImageContentMode: Sendable {
-    case scaleToFill
-    case scaleAspectFit
-    case scaleAspectFill
-}
-
 public struct AsyncSwiftUIImageView<
     Data: RenderDataType,
     ImageViewData: ImageViewDataType,
@@ -31,7 +25,7 @@ public struct AsyncSwiftUIImageView<
 
     @State private var viewModelReference: LazyReference<ViewModel>
 
-    private let contentMode: AsyncSwiftUIImageContentMode
+    private let contentMode: ContentMode
 
     private var viewModel: ViewModel {
         self.viewModelReference.value
@@ -40,7 +34,7 @@ public struct AsyncSwiftUIImageView<
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
-        contentMode: AsyncSwiftUIImageContentMode = .scaleAspectFit
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
@@ -55,7 +49,7 @@ public struct AsyncSwiftUIImageView<
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
         uiScheduler: ReactiveSwift.Scheduler,
-        contentMode: AsyncSwiftUIImageContentMode = .scaleAspectFit
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
@@ -70,7 +64,7 @@ public struct AsyncSwiftUIImageView<
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
         imageCreationScheduler: ReactiveSwift.Scheduler,
-        contentMode: AsyncSwiftUIImageContentMode = .scaleAspectFit
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
@@ -86,7 +80,7 @@ public struct AsyncSwiftUIImageView<
         placeholderRenderer: PlaceholderRenderer? = nil,
         uiScheduler: ReactiveSwift.Scheduler,
         imageCreationScheduler: ReactiveSwift.Scheduler,
-        contentMode: AsyncSwiftUIImageContentMode = .scaleAspectFit
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
@@ -100,7 +94,7 @@ public struct AsyncSwiftUIImageView<
     internal init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
-        contentMode: AsyncSwiftUIImageContentMode = .scaleAspectFit,
+        contentMode: ContentMode = .fit,
         uiSchedulerFactory: @escaping () -> ReactiveSwift.Scheduler,
         imageCreationSchedulerFactory: @escaping () -> ReactiveSwift.Scheduler
     ) {
@@ -153,7 +147,9 @@ public struct AsyncSwiftUIImageView<
     @ViewBuilder
     private var imageView: some View {
         if let result = self.viewModel.renderResult {
-            self.image(result.image)
+            Image(uiImage: result.image)
+                .resizable()
+                .aspectRatio(nil, contentMode: self.contentMode)
                 .id(ObjectIdentifier(result.image))
                 .transition(
                     AnyTransition.opacity.animation(
@@ -164,20 +160,6 @@ public struct AsyncSwiftUIImageView<
                 )
         } else {
             Color.clear
-        }
-    }
-
-    @ViewBuilder
-    private func image(_ image: UIImage) -> some View {
-        let image = Image(uiImage: image).resizable()
-
-        switch self.contentMode {
-        case .scaleToFill:
-            image
-        case .scaleAspectFit:
-            image.scaledToFit()
-        case .scaleAspectFill:
-            image.scaledToFill()
         }
     }
 

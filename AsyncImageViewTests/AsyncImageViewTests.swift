@@ -42,6 +42,19 @@ struct AsyncImageViewBehaviorTests {
 	}
 
 	@Test
+	func canDisableImageChangeAnimations() async {
+		let fixture = ImageViewFixture(
+			size: CGSize(width: 10, height: 10),
+			animatesImageChanges: false
+		)
+
+		fixture.view.data = .a
+
+		await fixture.verifyRenderedImage()
+		#expect(fixture.view.layer.animationKeys()?.isEmpty != false)
+	}
+
+	@Test
 	func updatingDataUpdatesImage() async {
 		let fixture = ImageViewFixture(size: CGSize(width: 10, height: 10))
 
@@ -237,13 +250,18 @@ private final class ImageViewFixture {
 	let view: ViewType
 	private let window = UIWindow()
 
-	init(size: CGSize = .zero, data: TestData? = nil) {
+	init(
+		size: CGSize = .zero,
+		data: TestData? = nil,
+		animatesImageChanges: Bool = true
+	) {
 		self.view = ViewType(
 			initialFrame: CGRect(origin: .zero, size: size),
 			renderer: self.renderer,
 			placeholderRenderer: nil,
 			uiScheduler: QueueScheduler(targeting: DispatchQueue.main),
-			imageCreationScheduler: ImmediateScheduler()
+			imageCreationScheduler: ImmediateScheduler(),
+			animatesImageChanges: animatesImageChanges
 		)
 		self.window.addSubview(self.view)
 		self.view.data = data

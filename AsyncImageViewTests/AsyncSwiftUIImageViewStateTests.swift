@@ -13,6 +13,7 @@ struct AsyncSwiftUIImageViewStateTests {
         let renderer = StateTestRenderer()
 
         _ = StateTestImageView(renderer: renderer)
+        _ = StateTestImageView(renderer: renderer, contentMode: .fill)
         _ = StateTestImageView(renderer: renderer, uiScheduler: ImmediateScheduler())
         _ = StateTestImageView(renderer: renderer, imageCreationScheduler: ImmediateScheduler())
         _ = StateTestImageView(

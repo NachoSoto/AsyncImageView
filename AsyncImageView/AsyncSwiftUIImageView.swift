@@ -25,17 +25,21 @@ public struct AsyncSwiftUIImageView<
 
     @State private var viewModelReference: LazyReference<ViewModel>
 
+    private let contentMode: ContentMode
+
     private var viewModel: ViewModel {
         self.viewModelReference.value
     }
 
     public init(
         renderer: Renderer,
-        placeholderRenderer: PlaceholderRenderer? = nil
+        placeholderRenderer: PlaceholderRenderer? = nil,
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
             placeholderRenderer: placeholderRenderer,
+            contentMode: contentMode,
             uiSchedulerFactory: { UIScheduler() },
             imageCreationSchedulerFactory: { QueueScheduler() }
         )
@@ -44,11 +48,13 @@ public struct AsyncSwiftUIImageView<
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
-        uiScheduler: ReactiveSwift.Scheduler
+        uiScheduler: ReactiveSwift.Scheduler,
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
             placeholderRenderer: placeholderRenderer,
+            contentMode: contentMode,
             uiSchedulerFactory: { uiScheduler },
             imageCreationSchedulerFactory: { QueueScheduler() }
         )
@@ -57,11 +63,13 @@ public struct AsyncSwiftUIImageView<
     public init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
-        imageCreationScheduler: ReactiveSwift.Scheduler
+        imageCreationScheduler: ReactiveSwift.Scheduler,
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
             placeholderRenderer: placeholderRenderer,
+            contentMode: contentMode,
             uiSchedulerFactory: { UIScheduler() },
             imageCreationSchedulerFactory: { imageCreationScheduler }
         )
@@ -71,11 +79,13 @@ public struct AsyncSwiftUIImageView<
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer? = nil,
         uiScheduler: ReactiveSwift.Scheduler,
-        imageCreationScheduler: ReactiveSwift.Scheduler
+        imageCreationScheduler: ReactiveSwift.Scheduler,
+        contentMode: ContentMode = .fit
     ) {
         self.init(
             renderer: renderer,
             placeholderRenderer: placeholderRenderer,
+            contentMode: contentMode,
             uiSchedulerFactory: { uiScheduler },
             imageCreationSchedulerFactory: { imageCreationScheduler }
         )
@@ -84,9 +94,11 @@ public struct AsyncSwiftUIImageView<
     internal init(
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
+        contentMode: ContentMode = .fit,
         uiSchedulerFactory: @escaping () -> ReactiveSwift.Scheduler,
         imageCreationSchedulerFactory: @escaping () -> ReactiveSwift.Scheduler
     ) {
+        self.contentMode = contentMode
         _viewModelReference = State(
             initialValue: LazyReference {
                 ViewModel(
@@ -137,7 +149,8 @@ public struct AsyncSwiftUIImageView<
         if let result = self.viewModel.renderResult {
             Image(uiImage: result.image)
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(nil, contentMode: self.contentMode)
+                .id(ObjectIdentifier(result.image))
                 .transition(
                     AnyTransition.opacity.animation(
                         result.cacheHit

@@ -128,8 +128,10 @@ public struct AsyncSwiftUIImageView<
 
     public var body: some View {
         ZStack {
+            Color.clear
             self.imageView
         }
+        .animation(self.imageReplacementAnimation, value: self.renderResultIdentity)
         .onGeometryChange(for: CGSize.self) { geometry in
             geometry.size
         } action: { imageSize in
@@ -151,16 +153,18 @@ public struct AsyncSwiftUIImageView<
                 .resizable()
                 .aspectRatio(nil, contentMode: self.contentMode)
                 .id(ObjectIdentifier(result.image))
-                .transition(
-                    AnyTransition.opacity.animation(
-                        result.cacheHit
-                        ? nil
-                        : .easeOut(duration: fadeAnimationDuration)
-                    )
-                )
-        } else {
-            Color.clear
+                .transition(.opacity)
         }
+    }
+
+    private var renderResultIdentity: ObjectIdentifier? {
+        self.viewModel.renderResult.map { ObjectIdentifier($0.image) }
+    }
+
+    private var imageReplacementAnimation: Animation? {
+        self.viewModel.renderResult?.cacheHit == false
+            ? .easeOut(duration: fadeAnimationDuration)
+            : nil
     }
 
     private func requestImage() {

@@ -1,0 +1,15 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+package(default_visibility = ["//visibility:public"])
+
+swift_library(
+    name = "AsyncImageView",
+    copts = [
+        "-disable-dynamic-actor-isolation",
+        "-suppress-warnings",
+    ],
+    features = ["swift.enable_v6"],
+    module_name = "AsyncImageView",
+    srcs = glob(["AsyncImageView/**/*.swift"]),
+    deps = ["@reactiveswift//:ReactiveSwift"],
+)

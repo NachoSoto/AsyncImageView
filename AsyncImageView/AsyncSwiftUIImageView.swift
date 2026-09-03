@@ -131,7 +131,6 @@ public struct AsyncSwiftUIImageView<
             Color.clear
             self.imageView
         }
-        .animation(self.imageReplacementAnimation, value: self.renderResultIdentity)
         .onGeometryChange(for: CGSize.self) { geometry in
             geometry.size
         } action: { imageSize in
@@ -155,16 +154,6 @@ public struct AsyncSwiftUIImageView<
                 .id(ObjectIdentifier(result.image))
                 .transition(.opacity)
         }
-    }
-
-    private var renderResultIdentity: ObjectIdentifier? {
-        self.viewModel.renderResult.map { ObjectIdentifier($0.image) }
-    }
-
-    private var imageReplacementAnimation: Animation? {
-        self.viewModel.renderResult?.cacheHit == false
-            ? .easeOut(duration: fadeAnimationDuration)
-            : nil
     }
 
     private func requestImage() {
@@ -248,7 +237,13 @@ private final class AsyncSwiftUIImageViewModel<
             uiScheduler: self.uiScheduler
         )
         .observeValues { [weak self] result in
-            self?.renderResult = result
+            if result?.cacheHit != false {
+                self?.renderResult = result
+            } else {
+                withAnimation(.easeOut(duration: fadeAnimationDuration)) {
+                    self?.renderResult = result
+                }
+            }
         }
     }
 

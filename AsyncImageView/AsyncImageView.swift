@@ -38,7 +38,6 @@ open class AsyncImageView<
 	private let requestsObserver: Signal<Data?, Never>.Observer
 
 	private let imageCreationScheduler: ReactiveSwift.Scheduler
-	private let animatesImageChanges: Bool
 
 	private var disposable: Disposable?
 
@@ -47,12 +46,10 @@ open class AsyncImageView<
 		renderer: Renderer,
 		placeholderRenderer: PlaceholderRenderer? = nil,
 		uiScheduler: ReactiveSwift.Scheduler = UIScheduler(),
-		imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler(),
-		animatesImageChanges: Bool = true
+		imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler()
 	) {
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
 		self.imageCreationScheduler = imageCreationScheduler
-		self.animatesImageChanges = animatesImageChanges
 
 		super.init(frame: initialFrame)
 
@@ -127,7 +124,7 @@ open class AsyncImageView<
 
 	private func updateImage(_ result: Renderer.RenderResult?) {
 		if let result = result {
-			if result.cacheHit || !self.animatesImageChanges {
+			if result.cacheHit {
 				self.image = result.image
 			} else {
 				UIView.transition(

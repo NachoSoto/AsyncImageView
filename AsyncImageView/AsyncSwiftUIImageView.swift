@@ -128,7 +128,6 @@ public struct AsyncSwiftUIImageView<
 
     public var body: some View {
         ZStack {
-            Color.clear
             self.imageView
         }
         .onGeometryChange(for: CGSize.self) { geometry in
@@ -153,6 +152,8 @@ public struct AsyncSwiftUIImageView<
                 .aspectRatio(nil, contentMode: self.contentMode)
                 .id(ObjectIdentifier(result.image))
                 .transition(.opacity)
+        } else {
+            Color.clear
         }
     }
 

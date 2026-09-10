@@ -182,30 +182,3 @@ If you need any help, feel free to send me a DM on [Twitter](https://twitter.com
 
 [Carthage]: https://github.com/Carthage/Carthage/#readme
 [GitHub issue]: https://github.com/NachoSoto/AsyncImageView/issues
-
-### UIKit image replacements
-
-Use `setData` to choose the presentation behavior for an individual update:
-
-```swift
-imageView.setData(
-    newData,
-    transition: .crossfade(duration: 0.3),
-    placeholderPolicy: .keepCurrentImage
-)
-```
-
-The crossfade applies to cache hits as well as newly rendered images. Use `.none`
-for an immediate replacement (for example, when Reduce Motion is enabled).
-`.automatic`, the default, preserves the existing behavior: cache hits appear
-immediately and uncached images fade in over 0.3 seconds.
-
-`.keepCurrentImage` skips the placeholder while retaining the displayed image.
-If there is no image yet, the normal placeholder behavior applies. If rendering
-finishes without an image, the current image stays visible. Passing `nil` clears
-the image and cancels the pending replacement.
-
-Options belong to the request, not to the renderer or its cache key. Reassigning
-identical render data does not restart a request or change its captured options.
-Assigning `imageView.data` continues to use the default behavior. As with data
-assignment, updates wait until the view has a window and nonzero size.

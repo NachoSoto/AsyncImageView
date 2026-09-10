@@ -73,20 +73,23 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         uiScheduler: ReactiveSwift.Scheduler
     ) -> SignalProducer<Renderer.RenderResult?, Never> {
         guard let data = request.data else { return SignalProducer(value: nil) }
-        let image = renderer.renderImageWithData(data).observe(on: uiScheduler)
-
-        if request.placeholderPolicy == .keepCurrentImage {
-            return image.map(Optional.some)
-        } else if let placeholderRenderer {
-            return placeholderRenderer.renderImageWithData(data)
+        if let placeholderRenderer {
+            let placeholder = request.placeholderPolicy == .keepCurrentImage
+                ? SignalProducer<Renderer.RenderResult, Never>.empty
+                : placeholderRenderer.renderImageWithData(data)
+            return placeholder
                 .observe(on: uiScheduler)
                 .take(
+                    // Preserve the source's delivery timing; only the placeholder uses uiScheduler here.
                     // Keep listening if rendering completes without a value (for example, on failure).
-                    untilReplacement: image.concat(.never)
+                    untilReplacement: renderer.renderImageWithData(data).concat(.never)
                 )
                 .map(Optional.some)
         } else {
-            return image.map(Optional.some).prefix(value: nil)
+            let image = renderer.renderImageWithData(data)
+                .observe(on: uiScheduler)
+                .map(Optional.some)
+            return request.placeholderPolicy == .keepCurrentImage ? image : image.prefix(value: nil)
         }
     }
 }

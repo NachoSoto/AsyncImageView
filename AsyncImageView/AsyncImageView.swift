@@ -133,7 +133,9 @@ open class AsyncImageView<
 
 	private func requestNewImage(_ size: CGSize, data: ImageViewData?) {
 		let transition = self.transition
-		let placeholderPolicy: ImagePlaceholderPolicy = self.image == nil ? .standard : self.placeholderPolicy
+		let placeholderPolicy: ImagePlaceholderPolicy = self.placeholderPolicy == .keepCurrentImage && self.image == nil
+			? .standard
+			: self.placeholderPolicy
 		self.imageCreationScheduler.schedule { [weak self, observer = self.requestsObserver] in
 			if self != nil {
 				observer.send(value: ImageLoader.Request(
@@ -153,7 +155,7 @@ open class AsyncImageView<
 				UIView.transition(
 					with: self,
 					duration: duration,
-					options: [.curveEaseOut, .transitionCrossDissolve, .beginFromCurrentState],
+					options: [.curveEaseOut, .transitionCrossDissolve],
 					animations: { self.image = result.image },
 					completion: nil
 				)

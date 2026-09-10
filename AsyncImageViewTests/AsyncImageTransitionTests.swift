@@ -7,31 +7,30 @@ import AsyncImageView
 
 @Suite @MainActor
 struct AsyncImageTransitionTests {
+    private let fixture = TransitionFixture()
+
     @Test(arguments: [true, false])
     func explicitCrossfadeAnimatesRegardlessOfCacheStatus(cacheHit: Bool) {
-        let fixture = TransitionFixture()
-        fixture.view.setData(.a, transition: .crossfade(duration: 0.6))
-        fixture.renderer.emit(.a, cacheHit: cacheHit)
+        self.fixture.view.setData(.a, transition: .crossfade(duration: 0.6))
+        self.fixture.renderer.emit(.a, cacheHit: cacheHit)
 
-        #expect(fixture.view.animationDurations.last == 0.6)
+        #expect(self.fixture.view.animationDurations.last == 0.6)
     }
 
     @Test(arguments: [true, false])
     func explicitNoneNeverAnimates(cacheHit: Bool) {
-        let fixture = TransitionFixture()
-        fixture.view.setData(.a, transition: .none)
-        fixture.renderer.emit(.a, cacheHit: cacheHit)
+        self.fixture.view.setData(.a, transition: .none)
+        self.fixture.renderer.emit(.a, cacheHit: cacheHit)
 
-        #expect(fixture.view.animationDurations.last == 0)
+        #expect(self.fixture.view.animationDurations.last == 0)
     }
 
     @Test(arguments: [true, false])
     func dataAssignmentPreservesCacheDependentAnimation(cacheHit: Bool) {
-        let fixture = TransitionFixture()
-        fixture.view.data = .a
-        fixture.renderer.emit(.a, cacheHit: cacheHit)
+        self.fixture.view.data = .a
+        self.fixture.renderer.emit(.a, cacheHit: cacheHit)
 
-        #expect(fixture.view.animationDurations.last == (cacheHit ? 0 : 0.3))
+        #expect(self.fixture.view.animationDurations.last == (cacheHit ? 0 : 0.3))
     }
 
     @Test(arguments: [true, false])
@@ -50,62 +49,57 @@ struct AsyncImageTransitionTests {
 
     @Test
     func usesPlaceholderWhenThereIsNoCurrentImage() {
-        let fixture = TransitionFixture()
-        fixture.view.setData(.a, placeholderPolicy: .keepCurrentImage)
-        let placeholder = fixture.placeholder.emit(.a)
+        self.fixture.view.setData(.a, placeholderPolicy: .keepCurrentImage)
+        let placeholder = self.fixture.placeholder.emit(.a)
 
-        #expect(fixture.view.image === placeholder)
-        let replacement = fixture.renderer.emit(.a)
-        #expect(fixture.view.image === replacement)
+        #expect(self.fixture.view.image === placeholder)
+        let replacement = self.fixture.renderer.emit(.a)
+        #expect(self.fixture.view.image === replacement)
     }
 
     @Test
     func duplicateDataUpdateDoesNotChangePendingTransition() {
-        let fixture = TransitionFixture()
-        _ = fixture.loadOriginal()
-        fixture.view.setData(.b, transition: .crossfade(duration: 0.6), placeholderPolicy: .keepCurrentImage)
-        fixture.view.data = .b
-        fixture.renderer.emit(.b, cacheHit: true)
+        _ = self.fixture.loadOriginal()
+        self.fixture.view.setData(.b, transition: .crossfade(duration: 0.6), placeholderPolicy: .keepCurrentImage)
+        self.fixture.view.data = .b
+        self.fixture.renderer.emit(.b, cacheHit: true)
 
-        #expect(fixture.renderer.requests == [.a, .b])
-        #expect(fixture.view.animationDurations.last == 0.6)
+        #expect(self.fixture.renderer.requests == [.a, .b])
+        #expect(self.fixture.view.animationDurations.last == 0.6)
     }
 
     @Test
     func staleReplacementCannotOverwriteNewerRequest() {
-        let fixture = TransitionFixture()
-        _ = fixture.loadOriginal()
-        fixture.view.setData(.b, transition: .crossfade(), placeholderPolicy: .keepCurrentImage)
-        fixture.view.setData(.c, transition: .none, placeholderPolicy: .keepCurrentImage)
-        let latest = fixture.renderer.emit(.c)
-        fixture.renderer.emit(.b)
+        _ = self.fixture.loadOriginal()
+        self.fixture.view.setData(.b, transition: .crossfade(), placeholderPolicy: .keepCurrentImage)
+        self.fixture.view.setData(.c, transition: .none, placeholderPolicy: .keepCurrentImage)
+        let latest = self.fixture.renderer.emit(.c)
+        self.fixture.renderer.emit(.b)
 
-        #expect(fixture.view.image === latest)
-        #expect(fixture.view.animationDurations.last == 0)
+        #expect(self.fixture.view.image === latest)
+        #expect(self.fixture.view.animationDurations.last == 0)
     }
 
     @Test
     func nilClearsImageAndCancelsRetainedReplacement() {
-        let fixture = TransitionFixture()
-        _ = fixture.loadOriginal()
-        fixture.view.setData(.b, placeholderPolicy: .keepCurrentImage)
-        fixture.view.setData(nil, transition: .crossfade(), placeholderPolicy: .keepCurrentImage)
-        fixture.renderer.emit(.b)
+        _ = self.fixture.loadOriginal()
+        self.fixture.view.setData(.b, placeholderPolicy: .keepCurrentImage)
+        self.fixture.view.setData(nil, transition: .crossfade(), placeholderPolicy: .keepCurrentImage)
+        self.fixture.renderer.emit(.b)
 
-        #expect(fixture.view.image == nil)
+        #expect(self.fixture.view.image == nil)
     }
 
     @Test
     func emptyReplacementPreservesCurrentImage() {
-        let fixture = TransitionFixture()
-        let original = fixture.loadOriginal()
-        fixture.view.setData(.b, placeholderPolicy: .keepCurrentImage)
-        fixture.renderer.complete(.b)
+        let original = self.fixture.loadOriginal()
+        self.fixture.view.setData(.b, placeholderPolicy: .keepCurrentImage)
+        self.fixture.renderer.complete(.b)
 
-        #expect(fixture.view.image === original)
-        fixture.view.setData(.c, placeholderPolicy: .keepCurrentImage)
-        let replacement = fixture.renderer.emit(.c)
-        #expect(fixture.view.image === replacement)
+        #expect(self.fixture.view.image === original)
+        self.fixture.view.setData(.c, placeholderPolicy: .keepCurrentImage)
+        let replacement = self.fixture.renderer.emit(.c)
+        #expect(self.fixture.view.image === replacement)
     }
 
     @Test

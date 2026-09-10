@@ -34,8 +34,8 @@ open class AsyncImageView<
 		Renderer.RenderResult == PlaceholderRenderer.RenderResult {
 	private typealias ImageLoader = AsyncImageLoader<Data, ImageViewData, Renderer, PlaceholderRenderer>
 
-	private let requestsSignal: Signal<Data?, Never>
-	private let requestsObserver: Signal<Data?, Never>.Observer
+	private let requestsSignal: Signal<ImageLoader.Request, Never>
+	private let requestsObserver: Signal<ImageLoader.Request, Never>.Observer
 
 	private let imageCreationScheduler: ReactiveSwift.Scheduler
 
@@ -90,11 +90,30 @@ open class AsyncImageView<
 		}
 	}
 
+	/// Assigning data uses the default transition and placeholder behavior.
 	public final var data: ImageViewData? {
-		didSet {
-			self.requestNewImageIfReady()
-		}
+		get { self.viewData }
+		set { self.setData(newValue) }
 	}
+
+	/// Update the image with presentation options captured by this request.
+	/// Identical render data is still deduplicated, regardless of presentation options.
+	/// Updates wait until the view has a window and nonzero size.
+	/// Passing nil clears the image and cancels the previous request.
+	public final func setData(
+		_ data: ImageViewData?,
+		transition: ImageTransition = .automatic,
+		placeholderPolicy: ImagePlaceholderPolicy = .standard
+	) {
+		self.viewData = data
+		self.transition = transition
+		self.placeholderPolicy = placeholderPolicy
+		self.requestNewImageIfReady()
+	}
+
+	private var viewData: ImageViewData?
+	private var transition: ImageTransition = .automatic
+	private var placeholderPolicy: ImagePlaceholderPolicy = .standard
 
 	open override func didMoveToWindow() {
 		super.didMoveToWindow()
@@ -113,27 +132,35 @@ open class AsyncImageView<
 	}
 
 	private func requestNewImage(_ size: CGSize, data: ImageViewData?) {
+		let transition = self.transition
+		let placeholderPolicy: ImagePlaceholderPolicy = self.placeholderPolicy == .keepCurrentImage && self.image == nil
+			? .standard
+			: self.placeholderPolicy
 		self.imageCreationScheduler.schedule { [weak self, observer = self.requestsObserver] in
 			if self != nil {
-				observer.send(value: data?.renderDataWithSize(size))
+				observer.send(value: ImageLoader.Request(
+					data: data?.renderDataWithSize(size),
+					transition: transition,
+					placeholderPolicy: placeholderPolicy
+				))
 			}
 		}
 	}
 
 	// MARK: -
 
-	private func updateImage(_ result: Renderer.RenderResult?) {
-		if let result = result {
-			if result.cacheHit {
-				self.image = result.image
-			} else {
+	private func updateImage(_ update: ImageLoader.Update) {
+		if let result = update.result {
+			if let duration = update.transition.duration(cacheHit: result.cacheHit), duration > 0 {
 				UIView.transition(
 					with: self,
-					duration: fadeAnimationDuration,
+					duration: duration,
 					options: [.curveEaseOut, .transitionCrossDissolve],
 					animations: { self.image = result.image },
 					completion: nil
 				)
+			} else {
+				self.image = result.image
 			}
 		} else {
 			self.image = nil

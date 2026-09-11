@@ -263,6 +263,7 @@ struct MulticastedRendererTests {
 private struct MulticastRenderData: RenderDataType, Sendable {
 	let identifier: Int
 	let size = CGSize(width: 8, height: 8)
+	let displayScale: CGFloat = 1
 }
 
 private struct UncheckedSendable<Value>: @unchecked Sendable {

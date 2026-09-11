@@ -36,8 +36,8 @@ public struct Photos {
             self.imageData = imageData
         }
         
-        func renderDataWithSize(_ size: CGSize) -> Renderer.RasterizedRenderData {
-            return RenderData(imageData: self.imageData, size: size)
+        func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> Renderer.RasterizedRenderData {
+            return Renderer.RasterizedRenderData(imageData: self.imageData, size: size, displayScale: displayScale)
         }
     }
     
@@ -47,20 +47,20 @@ public struct Photos {
         let aspectFitRenderer: RendererType
         
         static let singleton: Renderer = {
-            return Renderer(screenScale: UIScreen.main.scale)
+            return Renderer()
         }()
         
-        init(screenScale: CGFloat) {
+        init() {
             self.remoteRenderer = AnyRenderer(
                 RemoteImageRenderer<RemoteRenderData>(session: URLSession(configuration: URLSessionConfiguration.default))
                     .logAndIgnoreErrors { print("Error downloading image: \($0)") }
-                    .mapData { RemoteRenderData(imageData: $0.imageData, size: $0.size) }
+                    .mapData { RemoteRenderData(imageData: $0.imageData, size: $0.size, displayScale: $0.displayScale) }
                     .multicasted()
                 )
             
             self.aspectFillRenderer = AnyRenderer(
                 remoteRenderer
-                    .inflatedWithScale(screenScale, opaque: true, contentMode: .aspectFill)
+                    .inflated(opaque: true, contentMode: .aspectFill)
                     // Cache rasterized images. Not that important for this, but it can be useful
                     // if there is extra processing done to remote images (using RendererType.processedWithScale)
                     .withCache(DiskCache.onCacheSubdirectory("aspect_fill"))
@@ -69,7 +69,7 @@ public struct Photos {
             
             self.aspectFitRenderer = AnyRenderer(
                 remoteRenderer
-                    .inflatedWithScale(screenScale, opaque: true, contentMode: .aspectFit)
+                    .inflated(opaque: true, contentMode: .aspectFit)
                     .withCache(DiskCache.onCacheSubdirectory("aspect_fit"))
                     .multicasted()
             )
@@ -80,15 +80,17 @@ public struct Photos {
 public struct RasterizedRenderData: RenderDataType, DataFileType {
     public let imageData: FlickrImageData
     public let size: CGSize
+    public let displayScale: CGFloat
     
     public var uniqueFilename: String {
-        return self.imageData.uniqueFilename
+        return "\(self.imageData.uniqueFilename)@\(self.displayScale)x"
     }
 }
         
         public struct RemoteRenderData: RemoteRenderDataType, DataFileType {
             public let imageData: FlickrImageData
             public let size: CGSize
+    public let displayScale: CGFloat
             
             public var imageURL: URL {
                 return self.imageData.url
@@ -131,6 +133,7 @@ extension Photos.Renderer.RemoteRenderData: Hashable {
 extension Photos.Renderer.RasterizedRenderData: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.imageData)
+        hasher.combine(self.displayScale)
         hasher.combine(self.size.width)
         hasher.combine(self.size.height)
     }

@@ -39,8 +39,8 @@ struct ImageViews {
             self.image = image
         }
         
-        func renderDataWithSize(_ size: CGSize) -> Renderer.RenderData {
-            return RenderData(imageData: image, size: size)
+        func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> Renderer.RenderData {
+            return Renderer.RenderData(image: image, size: size, displayScale: displayScale)
         }
     }
     
@@ -53,7 +53,7 @@ struct ImageViews {
         
         init() {
             self.renderer = AnyRenderer(
-                RemoteImageRenderer<RemoteRenderData>()
+                RemoteImageRenderer<RenderData>()
                     // AsyncImageView ensures that errors are handled explicitly.
                     // See "fallbacks" below for an alternative to this.
                     .logAndIgnoreErrors  { print("Error downloading image: \($0)") }
@@ -64,6 +64,7 @@ struct ImageViews {
         public struct RenderData: RemoteRenderDataType {
             public let image: Image
             public let size: CGSize
+            public let displayScale: CGFloat
             
             public var imageURL: URL {
                 return self.image.url
@@ -91,6 +92,12 @@ view.data = Image(url: yourUrl)
 
 ![Autocompletion](/Docs/autocompletion.png?raw=true)
 
+### Display scale
+
+`ImageViewDataType.renderDataWithSize(_:displayScale:)` receives the requesting view's scale from UIKit traits or the SwiftUI environment. Store it in `RenderDataType.displayScale` and include it in equality and cache keys for rasterized images. There is no fallback scale or size-only overload.
+
+Use `.inflated(opaque:)` or `ContextRenderer(opaque:)` to render at each request's scale. Explicit fixed-scale renderer initializers remain available. A source-only download cache can continue to key by URL because its bytes are independent of the destination display.
+
 ### Memory cache
 
 This provides an easy way to cache processed or downloaded images in memory:
@@ -108,6 +115,7 @@ First you need to conform your `RenderDataType` to `DataFileType`:
 public struct RenderData: RenderDataType, DataFileType {
     public let image: Image
     public let size: CGSize
+    public let displayScale: CGFloat
     
     public var uniqueFilename: String {
         return (self.image.url as NSURL)

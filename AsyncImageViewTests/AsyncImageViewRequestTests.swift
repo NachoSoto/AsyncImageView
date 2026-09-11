@@ -69,15 +69,16 @@ private final class RequestFixture {
 private struct RequestTestViewData: ImageViewDataType {
 	let counter: Atomic<Int>
 
-	func renderDataWithSize(_ size: CGSize) -> RequestTestRenderData {
+	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> RequestTestRenderData {
 		self.counter.modify { $0 += 1 }
 
-		return RequestTestRenderData(size: size)
+		return RequestTestRenderData(size: size, displayScale: displayScale)
 	}
 }
 
 private struct RequestTestRenderData: RenderDataType {
 	let size: CGSize
+    let displayScale: CGFloat
 }
 
 private final class RequestTestRenderer: RendererType {

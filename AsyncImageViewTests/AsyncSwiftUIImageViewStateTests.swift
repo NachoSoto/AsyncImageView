@@ -93,13 +93,14 @@ private final class SchedulerFactory {
 }
 
 private struct StateTestViewData: ImageViewDataType {
-    func renderDataWithSize(_ size: CGSize) -> StateTestRenderData {
-        StateTestRenderData(size: size)
+    func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> StateTestRenderData {
+        StateTestRenderData(size: size, displayScale: displayScale)
     }
 }
 
 private struct StateTestRenderData: RenderDataType {
     let size: CGSize
+    let displayScale: CGFloat
 }
 
 private final class StateTestRenderer: RendererType {

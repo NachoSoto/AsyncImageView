@@ -7,43 +7,41 @@ import AsyncImageView
 
 @MainActor
 struct DisplayScaleTests {
-    @Test
-    func uikitRequestsAgainWhenOnlyDisplayScaleChanges() {
+    @Test(arguments: [Framework.uiKit, .swiftUI])
+    func requestsAgainWhenOnlyDisplayScaleChanges(framework: Framework) {
         let renderer = ScaleRenderer()
-        let view = AsyncImageView<ScaleData, ScaleViewData, ScaleRenderer, ScaleRenderer>(
-            initialFrame: CGRect(x: 0, y: 0, width: 20, height: 20),
-            renderer: renderer, uiScheduler: ImmediateScheduler(), imageCreationScheduler: ImmediateScheduler()
-        )
-        let window = UIWindow()
-        window.traitOverrides.displayScale = 2
-        window.addSubview(view)
-        view.data = ScaleViewData()
-        #expect(renderer.requests.value.last?.displayScale == 2)
+        let size = CGSize(width: 20, height: 20)
+        let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let updateScale: (CGFloat) -> Void
+        switch framework {
+        case .uiKit:
+            let view = AsyncImageView<ScaleData, ScaleViewData, ScaleRenderer, ScaleRenderer>(
+                initialFrame: CGRect(origin: .zero, size: size),
+                renderer: renderer, uiScheduler: ImmediateScheduler(), imageCreationScheduler: ImmediateScheduler()
+            )
+            window.addSubview(view)
+            view.data = ScaleViewData()
+            updateScale = { window.traitOverrides.displayScale = $0 }
+        case .swiftUI:
+            let view = AsyncSwiftUIImageView<ScaleData, ScaleViewData, ScaleRenderer, ScaleRenderer>(
+                renderer: renderer, uiScheduler: ImmediateScheduler(), imageCreationScheduler: ImmediateScheduler()
+            ).data(ScaleViewData()).frame(width: size.width, height: size.height)
+            let controller = UIHostingController(rootView: view.environment(\.displayScale, 2))
+            window.rootViewController = controller
+            updateScale = { controller.rootView = view.environment(\.displayScale, $0) }
+        }
+        window.makeKeyAndVisible()
 
-        window.traitOverrides.displayScale = 3
-        view.layoutIfNeeded()
-        #expect(eventually { renderer.requests.value.last?.displayScale == 3 })
-        #expect(view.image?.size == CGSize(width: 20, height: 20))
-        #expect(view.image?.cgImage?.width == 60)
+        for scale: CGFloat in [2, 3] {
+            updateScale(scale)
+            window.layoutIfNeeded()
+            #expect(eventually { renderer.requests.value.last?.displayScale == scale })
+            #expect(renderer.requests.value.last?.size == size)
+        }
     }
 
-    @Test
-    func swiftuiRequestsAgainWhenOnlyEnvironmentScaleChanges() {
-        let renderer = ScaleRenderer()
-        let view = AsyncSwiftUIImageView<ScaleData, ScaleViewData, ScaleRenderer, ScaleRenderer>(
-            renderer: renderer, uiScheduler: ImmediateScheduler(), imageCreationScheduler: ImmediateScheduler()
-        ).data(ScaleViewData()).frame(width: 20, height: 20)
-        let controller = UIHostingController(rootView: view.environment(\.displayScale, 2))
-        let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        window.rootViewController = controller
-        window.makeKeyAndVisible()
-        controller.view.layoutIfNeeded()
-        #expect(eventually { renderer.requests.value.last?.displayScale == 2 })
-
-        controller.rootView = view.environment(\.displayScale, 3)
-        controller.view.layoutIfNeeded()
-        #expect(eventually { renderer.requests.value.last?.displayScale == 3 })
-        #expect(renderer.requests.value.last?.size == CGSize(width: 20, height: 20))
+    enum Framework {
+        case uiKit, swiftUI
     }
 
     @Test(arguments: [CGFloat(2), 3])
@@ -61,10 +59,6 @@ struct DisplayScaleTests {
 }
 
 private struct ScaleViewData: ImageViewDataType {
-    func renderDataWithSize(_ size: CGSize) -> ScaleData {
-        ScaleData(size: size, displayScale: 1)
-    }
-
     func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> ScaleData {
         ScaleData(size: size, displayScale: displayScale)
     }

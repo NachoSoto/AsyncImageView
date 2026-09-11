@@ -14,16 +14,8 @@ import Combine
 public protocol ImageViewDataType {
 	associatedtype RenderData: RenderDataType
 
-	func renderDataWithSize(_ size: CGSize) -> RenderData
-
 	/// Capture the requesting view's display scale as part of its render data and cache key.
 	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> RenderData
-}
-
-public extension ImageViewDataType {
-	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> RenderData {
-		self.renderDataWithSize(size)
-	}
 }
 
 #if !os(watchOS)

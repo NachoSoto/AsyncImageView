@@ -256,7 +256,7 @@ private final class AsyncSwiftUIImageViewModel<
         self.disposable = nil
     }
 
-    func requestImage(_ data: ImageViewData?, size: CGSize, displayScale: CGFloat = 1) {
+    func requestImage(_ data: ImageViewData?, size: CGSize, displayScale: CGFloat) {
         self.imageCreationScheduler.schedule { [data, size, observer = self.requestsObserver] in
             observer.send(value: data?.renderDataWithSize(size, displayScale: displayScale))
         }

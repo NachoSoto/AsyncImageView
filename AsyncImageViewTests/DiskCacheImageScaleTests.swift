@@ -12,7 +12,7 @@ struct DiskCacheImageScaleTests {
 	func preservesImageScaleAndDimensions() throws {
 		let cache = DiskCache<ImageCacheKey, UIImage>(rootDirectory: temporaryDirectory())
 		let image = makeImage(size: CGSize(width: 44, height: 44), scale: 2)
-		let key = ImageCacheKey(uniqueFilename: "image", size: image.size)
+		let key = ImageCacheKey(uniqueFilename: "image", size: image.size, displayScale: image.scale)
 
 		cache.setValue(image, forKey: key)
 		let restored = try #require(cache.valueForKey(key))
@@ -27,7 +27,7 @@ struct DiskCacheImageScaleTests {
 	func preservesScaleThroughACachedRendererHit() throws {
 		let cache = DiskCache<ImageCacheKey, ImageResult>(rootDirectory: temporaryDirectory())
 		let image = makeImage(size: CGSize(width: 52, height: 52), scale: 3)
-		let key = ImageCacheKey(uniqueFilename: "result", size: image.size)
+		let key = ImageCacheKey(uniqueFilename: "result", size: image.size, displayScale: image.scale)
 		let source = ScaleImageRenderer(image: image)
 		let renderer = source.withCache(cache)
 
@@ -47,7 +47,7 @@ struct DiskCacheImageScaleTests {
 	func regeneratesLegacyRawPNGEntries() throws {
 		let directory = temporaryDirectory()
 		let cache = DiskCache<ImageCacheKey, ImageResult>(rootDirectory: directory)
-		let key = ImageCacheKey(uniqueFilename: "legacy", size: CGSize(width: 44, height: 44))
+		let key = ImageCacheKey(uniqueFilename: "legacy", size: CGSize(width: 44, height: 44), displayScale: 2)
 		let image = makeImage(size: CGSize(width: 44, height: 44), scale: 2)
 		let source = ScaleImageRenderer(image: image)
 		let renderer = source.withCache(cache)
@@ -84,6 +84,7 @@ struct DiskCacheImageScaleTests {
 private struct ImageCacheKey: DataFileType {
 	let uniqueFilename: String
 	let size: CGSize
+	let displayScale: CGFloat
 	let subdirectory: String? = nil
 }
 

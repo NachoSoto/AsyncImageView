@@ -16,10 +16,6 @@ public protocol RenderDataType: Hashable, Sendable {
 	var displayScale: CGFloat { get }
 }
 
-public extension RenderDataType {
-	var displayScale: CGFloat { 1 }
-}
-
 public protocol RenderResultType {
 	var image: UIImage { get }
 	var cacheHit: Bool { get }

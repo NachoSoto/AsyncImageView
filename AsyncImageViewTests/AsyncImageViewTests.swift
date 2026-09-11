@@ -288,7 +288,7 @@ private final class PlaceholderFixture {
 	}
 
 	func prepare(_ data: TestData) -> TestRenderData {
-		let renderData = data.renderDataWithSize(self.view.frame.size)
+		let renderData = data.renderDataWithSize(self.view.frame.size, displayScale: self.view.traitCollection.displayScale)
 		self.placeholderRenderer.addSignal(for: renderData)
 		self.renderer.addSignal(for: renderData)
 		return renderData

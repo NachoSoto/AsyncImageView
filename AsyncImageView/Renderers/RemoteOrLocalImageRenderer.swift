@@ -61,6 +61,13 @@ extension RemoteOrLocalRenderData {
         }
     }
 
+    public var displayScale: CGFloat {
+        switch self {
+        case let .local(data): data.displayScale
+        case let .remote(data): data.displayScale
+        }
+    }
+
     public var size: CGSize {
         switch self {
         case let .local(data): return data.size

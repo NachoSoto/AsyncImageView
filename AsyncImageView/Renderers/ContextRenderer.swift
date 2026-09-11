@@ -16,7 +16,8 @@ import CoreGraphics
 public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererType {
     public typealias Block = (_ context: CGContext, _ data: Data) -> Void
 
-    private let format: UIGraphicsImageRendererFormat
+    private let scale: CGFloat?
+    private let opaque: Bool
     private let imageSize: CGSize?
     private let renderingBlock: Block
 
@@ -26,18 +27,20 @@ public final class ContextRenderer<Data: RenderDataType>: SynchronousRendererTyp
     ///
     /// - imageSize: Optionally allows this Renderer to always create contexts of a constant size.
     ///              Useful for creating images that are going to be stretchable.
-    public init(scale: CGFloat, opaque: Bool, imageSize: CGSize? = nil, renderingBlock: @escaping Block) {
-        self.format = UIGraphicsImageRendererFormat()
-        self.format.opaque = opaque
-        self.format.scale = scale
+    public init(scale: CGFloat? = nil, opaque: Bool, imageSize: CGSize? = nil, renderingBlock: @escaping Block) {
+        self.opaque = opaque
+        self.scale = scale
         self.imageSize = imageSize
         self.renderingBlock = renderingBlock
     }
 
     public func renderImageWithData(_ data: Data) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.opaque = self.opaque
+        format.scale = self.scale ?? data.displayScale
         let renderer = UIGraphicsImageRenderer(
             size: self.imageSize ?? data.size,
-            format: self.format
+            format: format
         )
 
         return renderer.image { context in

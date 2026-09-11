@@ -117,6 +117,8 @@ public struct AsyncSwiftUIImageView<
         }
     }
 
+    @Environment(\.displayScale) private var displayScale
+
     @State
     private var size: CGSize = .zero {
         didSet {
@@ -135,6 +137,7 @@ public struct AsyncSwiftUIImageView<
         } action: { imageSize in
             self.size = imageSize
         }
+        .onChange(of: self.displayScale) { _, _ in self.requestImage() }
         .onAppear {
             self.viewModel.start()
             self.requestImage()
@@ -168,7 +171,7 @@ public struct AsyncSwiftUIImageView<
             return
         }
 
-        self.viewModel.requestImage(self.data, size: self.size)
+        self.viewModel.requestImage(self.data, size: self.size, displayScale: self.displayScale)
     }
 }
 
@@ -253,9 +256,9 @@ private final class AsyncSwiftUIImageViewModel<
         self.disposable = nil
     }
 
-    func requestImage(_ data: ImageViewData?, size: CGSize) {
+    func requestImage(_ data: ImageViewData?, size: CGSize, displayScale: CGFloat) {
         self.imageCreationScheduler.schedule { [data, size, observer = self.requestsObserver] in
-            observer.send(value: data?.renderDataWithSize(size))
+            observer.send(value: data?.renderDataWithSize(size, displayScale: displayScale))
         }
     }
 }

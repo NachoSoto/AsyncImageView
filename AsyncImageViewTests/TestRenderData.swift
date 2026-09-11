@@ -24,7 +24,7 @@ extension TestData: ImageViewDataType {
 		self
 	}
 
-	func renderDataWithSize(_ size: CGSize) -> TestRenderData {
+	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> TestRenderData {
 		RenderData(data: self.data, size: size)
 	}
 }
@@ -32,6 +32,8 @@ extension TestData: ImageViewDataType {
 internal struct TestRenderData: RenderDataType {
 	let data: TestData
 	let size: CGSize
+	// These fixtures render at the scale encoded by their test identity.
+	var displayScale: CGFloat { self.data.rawValue }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(data)
@@ -52,7 +54,7 @@ internal final class TestRenderer: RendererType {
         TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
             .asyncRenderer(ImmediateScheduler())
             .renderImageWithData(data)
-            .on(started: {
+            .on(starting: {
                 self.renderedImages.modify { $0.append(data) }
             })
 	}

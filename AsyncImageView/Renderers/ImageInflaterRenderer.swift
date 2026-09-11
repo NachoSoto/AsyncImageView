@@ -18,7 +18,7 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
     public typealias RenderResult = ImageResult
 
     private let renderer: Renderer
-    private let screenScale: CGFloat
+    private let screenScale: CGFloat?
 	private let opaque: Bool
     private let contentMode: ContentMode
 	private let bitmapContextFactory: UIImage.BitmapContextFactory
@@ -38,9 +38,15 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
 		)
 	}
 
+	/// Inflates at the scale supplied by each render request.
+	public convenience init(renderer: Renderer, opaque: Bool, contentMode: ContentMode = .defaultMode) {
+		self.init(renderer: renderer, screenScale: nil, opaque: opaque, contentMode: contentMode,
+			bitmapContextFactory: UIImage.makeBitmapContext)
+	}
+
 	internal init(
 		renderer: Renderer,
-		screenScale: CGFloat,
+		screenScale: CGFloat?,
 		opaque: Bool,
 		contentMode: ContentMode = .defaultMode,
 		bitmapContextFactory: @escaping UIImage.BitmapContextFactory
@@ -57,7 +63,7 @@ public final class ImageInflaterRenderer<Renderer: RendererType>: RendererType {
 			.map { [screenScale = self.screenScale, opaque = self.opaque, contentMode = self.contentMode, bitmapContextFactory = self.bitmapContextFactory] result in
 				let inflationResult = result.image.inflate(
                     withSize: data.size,
-                    scale: screenScale,
+                    scale: screenScale ?? data.displayScale,
                     opaque: opaque,
 					contentMode: contentMode,
 					bitmapContextFactory: bitmapContextFactory
@@ -209,6 +215,10 @@ internal struct BitmapContextProcessingResult {
 }
 
 extension RendererType {
+	public func inflated(opaque: Bool, contentMode: ImageInflaterRendererContentMode = .defaultMode) -> ImageInflaterRenderer<Self> {
+		ImageInflaterRenderer(renderer: self, opaque: opaque, contentMode: contentMode)
+	}
+
 	public func inflatedWithScale(
         _ screenScale: CGFloat,
         opaque: Bool,

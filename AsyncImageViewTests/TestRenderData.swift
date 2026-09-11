@@ -52,7 +52,7 @@ internal final class TestRenderer: RendererType {
         TestRenderer.rendererForSize(data.size, scale: data.data.rawValue)
             .asyncRenderer(ImmediateScheduler())
             .renderImageWithData(data)
-            .on(started: {
+            .on(starting: {
                 self.renderedImages.modify { $0.append(data) }
             })
 	}

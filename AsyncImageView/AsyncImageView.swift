@@ -15,6 +15,15 @@ public protocol ImageViewDataType {
 	associatedtype RenderData: RenderDataType
 
 	func renderDataWithSize(_ size: CGSize) -> RenderData
+
+	/// Capture the requesting view's display scale as part of its render data and cache key.
+	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> RenderData
+}
+
+public extension ImageViewDataType {
+	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> RenderData {
+		self.renderDataWithSize(size)
+	}
 }
 
 #if !os(watchOS)
@@ -54,6 +63,9 @@ open class AsyncImageView<
 		super.init(frame: initialFrame)
 
 		self.backgroundColor = nil
+		self.registerForTraitChanges([UITraitDisplayScale.self]) { (view: AsyncImageView, _: UITraitCollection) in
+			view.requestNewImageIfReady()
+		}
 
 		self.disposable = ImageLoader.createSignal(
 			requestsSignal: self.requestsSignal,
@@ -133,13 +145,14 @@ open class AsyncImageView<
 
 	private func requestNewImage(_ size: CGSize, data: ImageViewData?) {
 		let transition = self.transition
+		let displayScale = self.traitCollection.displayScale
 		let placeholderPolicy: ImagePlaceholderPolicy = self.placeholderPolicy == .keepCurrentImage && self.image == nil
 			? .standard
 			: self.placeholderPolicy
 		self.imageCreationScheduler.schedule { [weak self, observer = self.requestsObserver] in
 			if self != nil {
 				observer.send(value: ImageLoader.Request(
-					data: data?.renderDataWithSize(size),
+					data: data?.renderDataWithSize(size, displayScale: displayScale),
 					transition: transition,
 					placeholderPolicy: placeholderPolicy
 				))

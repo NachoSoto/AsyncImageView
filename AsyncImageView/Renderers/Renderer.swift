@@ -13,6 +13,11 @@ import ReactiveSwift
 /// Information required to produce an image
 public protocol RenderDataType: Hashable, Sendable {
 	var size: CGSize { get }
+	var displayScale: CGFloat { get }
+}
+
+public extension RenderDataType {
+	var displayScale: CGFloat { 1 }
 }
 
 public protocol RenderResultType {

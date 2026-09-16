@@ -38,13 +38,15 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         requestsSignal: Signal<Data?, Never>,
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
-        uiScheduler: ReactiveSwift.Scheduler
+        uiScheduler: ReactiveSwift.Scheduler,
+        imageCreationScheduler: ReactiveSwift.Scheduler = ImmediateScheduler()
     ) -> Signal<Renderer.RenderResult?, Never> {
         self.createSignal(
             requestsSignal: requestsSignal.map { Request(data: $0) },
             renderer: renderer,
             placeholderRenderer: placeholderRenderer,
-            uiScheduler: uiScheduler
+            uiScheduler: uiScheduler,
+            imageCreationScheduler: imageCreationScheduler
         ).map(\.result)
     }
 
@@ -52,17 +54,26 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
         requestsSignal: Signal<Request, Never>,
         renderer: Renderer,
         placeholderRenderer: PlaceholderRenderer?,
-        uiScheduler: ReactiveSwift.Scheduler
+        uiScheduler: ReactiveSwift.Scheduler,
+        imageCreationScheduler: ReactiveSwift.Scheduler = ImmediateScheduler()
     ) -> Signal<Update, Never> {
         requestsSignal.skipRepeats { $0.data == $1.data }
             .flatMap(.latest) { request -> SignalProducer<Update, Never> in
-                self.render(
-                    request,
-                    renderer: renderer,
-                    placeholderRenderer: placeholderRenderer,
-                    uiScheduler: uiScheduler
-                )
-                .map { Update(result: $0, transition: request.transition) }
+                guard request.data != nil else {
+                    return SignalProducer(value: Update(result: nil, transition: request.transition))
+                }
+                // Switch requests synchronously; only rendering waits for the creation scheduler.
+                return SignalProducer { observer, lifetime in
+                    lifetime += self.render(
+                        request,
+                        renderer: renderer,
+                        placeholderRenderer: placeholderRenderer,
+                        uiScheduler: uiScheduler
+                    )
+                    .map { Update(result: $0, transition: request.transition) }
+                    .start(observer)
+                }
+                .start(on: imageCreationScheduler)
                 // A replaced request must also cancel results waiting for the main thread.
                 .observe(on: SynchronousUIScheduler())
             }

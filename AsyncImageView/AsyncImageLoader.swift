@@ -61,9 +61,11 @@ Renderer.RenderResult == PlaceholderRenderer.RenderResult {
                     renderer: renderer,
                     placeholderRenderer: placeholderRenderer,
                     uiScheduler: uiScheduler
-                ).map { Update(result: $0, transition: request.transition) }
+                )
+                .map { Update(result: $0, transition: request.transition) }
+                // A replaced request must also cancel results waiting for the main thread.
+                .observe(on: SynchronousUIScheduler())
             }
-            .observe(on: SynchronousUIScheduler())
     }
 
     private static func render(

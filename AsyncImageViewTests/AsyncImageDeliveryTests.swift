@@ -8,116 +8,97 @@ import AsyncImageView
 struct AsyncImageDeliveryTests {
     @Test
     func currentBackgroundResultIsDelivered() async {
-        let renderer = DeliveryRenderer()
         let scheduler = TestScheduler()
-        let view = DeliveryRecordingView(
-            initialFrame: CGRect(x: 0, y: 0, width: 10, height: 10),
-            renderer: renderer,
-            placeholderRenderer: nil,
-            uiScheduler: ImmediateScheduler(),
-            imageCreationScheduler: scheduler
-        )
-        let window = UIWindow()
-        window.addSubview(view)
-        view.setData(.a, transition: .none)
+        let fixture = DeliveryFixture(imageCreationScheduler: scheduler)
+        fixture.view.setData(.a, transition: .none)
         self.advance(scheduler)
-        let image = renderer.enqueueResult()
-        await withCheckedContinuation { continuation in
-            DispatchQueue.main.async { continuation.resume() }
-        }
-        #expect(view.image === image)
-        _ = window
+        let image = fixture.renderer.enqueueResult()
+
+        await self.drainMainQueue()
+
+        #expect(fixture.view.image === image)
     }
 
     @Test
     func supersededCreationIsCancelledAndDuplicateDataIsDeduplicated() {
         let scheduler = TestScheduler()
-        let renderer = DeliveryRenderer()
-        let view = DeliveryRecordingView(
-            initialFrame: CGRect(x: 0, y: 0, width: 10, height: 10),
-            renderer: renderer,
-            placeholderRenderer: nil,
-            uiScheduler: ImmediateScheduler(),
-            imageCreationScheduler: scheduler
-        )
-        let window = UIWindow()
-        window.addSubview(view)
-        view.setData(.a)
-        view.setData(.c)
-        view.setData(.c, transition: .crossfade())
+        let fixture = DeliveryFixture(imageCreationScheduler: scheduler)
+        fixture.view.setData(.a)
+        fixture.view.setData(.c)
+        fixture.view.setData(.c, transition: .crossfade())
         scheduler.advance()
 
-        #expect(renderer.requests.value == [.c])
-        _ = window
+        #expect(fixture.renderer.requests.value == [.c])
     }
 
     @Test(arguments: [TestData?.none, .c])
     func replacementCancelsDeliveryBeforeCreationSchedulerRuns(replacementData: TestData?) async {
         let scheduler = TestScheduler()
-        let renderer = DeliveryRenderer()
-        let view = DeliveryRecordingView(
-            initialFrame: CGRect(x: 0, y: 0, width: 10, height: 10),
-            renderer: renderer,
-            placeholderRenderer: DeliveryRenderer(),
-            uiScheduler: ImmediateScheduler(),
-            imageCreationScheduler: scheduler
-        )
-        let window = UIWindow()
-        window.addSubview(view)
-        view.setData(.b, transition: .none)
+        let fixture = DeliveryFixture(hasPlaceholder: true, imageCreationScheduler: scheduler)
+        fixture.view.setData(.b, transition: .none)
         self.advance(scheduler)
-        let original = view.image
+        let original = fixture.view.image
         #expect(original != nil)
-        view.setData(.a, transition: .none, placeholderPolicy: .keepCurrentImage)
+        fixture.view.setData(.a, transition: .none, placeholderPolicy: .keepCurrentImage)
         self.advance(scheduler)
-        let staleImage = renderer.enqueueResult()
+        let staleImage = fixture.renderer.enqueueResult()
 
-        view.setData(replacementData, transition: .none, placeholderPolicy: .keepCurrentImage)
+        fixture.view.setData(replacementData, transition: .none, placeholderPolicy: .keepCurrentImage)
         // Do not advance creation: cancellation must happen at the request boundary.
-        await withCheckedContinuation { continuation in
-            DispatchQueue.main.async { continuation.resume() }
-        }
-        #expect(!view.displayedImages.contains { $0 === staleImage })
-        #expect(view.image === (replacementData == nil ? nil : original))
+        await self.drainMainQueue()
+
+        #expect(!fixture.view.displayedImages.contains { $0 === staleImage })
+        #expect(fixture.view.image === (replacementData == nil ? nil : original))
         self.advance(scheduler)
-        #expect(view.image === (replacementData == nil ? nil : original))
-        _ = window
+        #expect(fixture.view.image === (replacementData == nil ? nil : original))
+    }
+
+    @Test(arguments: [TestData?.none, .b, .c], [true, false])
+    func replacementCancelsImageAlreadyQueuedForDisplay(replacementData: TestData?, hasPlaceholder: Bool) async {
+        let fixture = DeliveryFixture(hasPlaceholder: hasPlaceholder)
+        fixture.view.setData(.a, transition: .none)
+
+        // Finish rendering off-main while main is occupied, just as during snapshotting.
+        // The image has left the renderer but has not reached the UIImageView yet.
+        let staleImage = fixture.renderer.enqueueResult()
+        fixture.view.setData(replacementData, transition: .none)
+        let replacement = fixture.view.image
+
+        await self.drainMainQueue()
+
+        #expect(fixture.view.image === replacement)
+        #expect(!fixture.view.displayedImages.contains { $0 === staleImage })
+        if replacementData == nil {
+            #expect(fixture.view.image == nil)
+        }
     }
 
     private func advance(_ scheduler: TestScheduler) {
         scheduler.advance()
     }
 
-    @Test(arguments: [TestData?.none, .b, .c], [true, false])
-    func replacementCancelsImageAlreadyQueuedForDisplay(replacementData: TestData?, hasPlaceholder: Bool) async {
-        let renderer = DeliveryRenderer()
-        let view = DeliveryRecordingView(
-            initialFrame: CGRect(x: 0, y: 0, width: 10, height: 10),
-            renderer: renderer,
-            placeholderRenderer: hasPlaceholder ? DeliveryRenderer() : nil,
-            uiScheduler: ImmediateScheduler(),
-            imageCreationScheduler: ImmediateScheduler()
-        )
-        let window = UIWindow()
-        window.addSubview(view)
-        view.setData(.a, transition: .none)
-
-        // Finish rendering off-main while main is occupied, just as during snapshotting.
-        // The image has left the renderer but has not reached the UIImageView yet.
-        let staleImage = renderer.enqueueResult()
-        view.setData(replacementData, transition: .none)
-        let replacement = view.image
-
+    private func drainMainQueue() async {
         await withCheckedContinuation { continuation in
             DispatchQueue.main.async { continuation.resume() }
         }
+    }
+}
 
-        #expect(view.image === replacement)
-        #expect(!view.displayedImages.contains { $0 === staleImage })
-        if replacementData == nil {
-            #expect(view.image == nil)
-        }
-        _ = window
+@MainActor
+private final class DeliveryFixture {
+    let renderer = DeliveryRenderer()
+    let view: DeliveryRecordingView
+    private let window = UIWindow()
+
+    init(hasPlaceholder: Bool = false, imageCreationScheduler: ReactiveSwift.Scheduler = ImmediateScheduler()) {
+        self.view = DeliveryRecordingView(
+            initialFrame: CGRect(x: 0, y: 0, width: 10, height: 10),
+            renderer: self.renderer,
+            placeholderRenderer: hasPlaceholder ? DeliveryRenderer() : nil,
+            uiScheduler: ImmediateScheduler(),
+            imageCreationScheduler: imageCreationScheduler
+        )
+        self.window.addSubview(self.view)
     }
 }
 

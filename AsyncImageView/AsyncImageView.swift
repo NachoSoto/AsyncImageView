@@ -15,6 +15,7 @@ public protocol ImageViewDataType {
 	associatedtype RenderData: RenderDataType
 
 	/// Capture the requesting view's display scale as part of its render data and cache key.
+	/// Called synchronously when a view requests an image; keep this descriptor construction lightweight.
 	func renderDataWithSize(_ size: CGSize, displayScale: CGFloat) -> RenderData
 }
 
@@ -38,8 +39,6 @@ open class AsyncImageView<
 	private let requestsSignal: Signal<ImageLoader.Request, Never>
 	private let requestsObserver: Signal<ImageLoader.Request, Never>.Observer
 
-	private let imageCreationScheduler: ReactiveSwift.Scheduler
-
 	private var disposable: Disposable?
 
 	public init(
@@ -50,7 +49,6 @@ open class AsyncImageView<
 		imageCreationScheduler: ReactiveSwift.Scheduler = QueueScheduler()
 	) {
 		(self.requestsSignal, self.requestsObserver) = Signal.pipe()
-		self.imageCreationScheduler = imageCreationScheduler
 
 		super.init(frame: initialFrame)
 
@@ -63,7 +61,8 @@ open class AsyncImageView<
 			requestsSignal: self.requestsSignal,
 			renderer: renderer,
 			placeholderRenderer: placeholderRenderer,
-			uiScheduler: uiScheduler
+			uiScheduler: uiScheduler,
+			imageCreationScheduler: imageCreationScheduler
 		)
 		.observeValues { [weak self] result in
 			self?.updateImage(result)
@@ -141,15 +140,11 @@ open class AsyncImageView<
 		let placeholderPolicy: ImagePlaceholderPolicy = self.placeholderPolicy == .keepCurrentImage && self.image == nil
 			? .standard
 			: self.placeholderPolicy
-		self.imageCreationScheduler.schedule { [weak self, observer = self.requestsObserver] in
-			if self != nil {
-				observer.send(value: ImageLoader.Request(
-					data: data?.renderDataWithSize(size, displayScale: displayScale),
-					transition: transition,
-					placeholderPolicy: placeholderPolicy
-				))
-			}
-		}
+		self.requestsObserver.send(value: ImageLoader.Request(
+			data: data?.renderDataWithSize(size, displayScale: displayScale),
+			transition: transition,
+			placeholderPolicy: placeholderPolicy
+		))
 	}
 
 	// MARK: -

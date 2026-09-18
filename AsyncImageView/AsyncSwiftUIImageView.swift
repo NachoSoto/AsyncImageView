@@ -244,7 +244,8 @@ private final class AsyncSwiftUIImageViewModel<
             requestsSignal: self.requestsSignal,
             renderer: self.renderer,
             placeholderRenderer: self.placeholderRenderer,
-            uiScheduler: self.uiScheduler
+            uiScheduler: self.uiScheduler,
+            imageCreationScheduler: self.imageCreationScheduler
         )
         .observeValues { [weak self] result in
             self?.renderResult = result
@@ -257,8 +258,6 @@ private final class AsyncSwiftUIImageViewModel<
     }
 
     func requestImage(_ data: ImageViewData?, size: CGSize, displayScale: CGFloat) {
-        self.imageCreationScheduler.schedule { [data, size, observer = self.requestsObserver] in
-            observer.send(value: data?.renderDataWithSize(size, displayScale: displayScale))
-        }
+        self.requestsObserver.send(value: data?.renderDataWithSize(size, displayScale: displayScale))
     }
 }
